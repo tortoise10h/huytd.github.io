@@ -20,8 +20,15 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  if (err)
 			    throw err;
 			  if (data) {
-			  	postContent = marked(data.toString('utf8'));
+			  	var markdownPost = data.toString('utf8');
+			  	var lines = markdownPost.split('\n');
+			  	var title = '';
+			  	if (lines.length > 0) {
+			  		title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '');
+			  	}
+			  	postContent = marked(markdownPost);
 			  	htmlContent = templateHtml.replace('{%content%}', postContent);
+			  	htmlContent = htmlContent.replace('{%title%}', title);
 			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
 				     if (err)
 				       throw err;
