@@ -12,6 +12,8 @@ Các bài viết tiếng Anh thì sẽ được đăng trên blog [The Full Snac
 
 Rất mong các bạn quan tâm và ủng hộ.
 
+<meta property="og:site_name" content="Huy's Blog"/>
+<meta property="og:url" content="http://huytd.github.io/posts/nhuc-driven-development" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Nhục Driven Development" />
 <meta property="og:description" content="Mình là một người thích ăn gạch... :v" />
