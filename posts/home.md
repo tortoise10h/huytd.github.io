@@ -1,5 +1,10 @@
 # Các bài mới đăng 
 ---
+[Lập trình và toán học](/posts/lap-trinh-va-toan-hoc.html)
+
+Tui và Toán đã từng là hai kẻ thù không đội trời chung trong suốt hơn mười lăm năm ròng rã. Ngay từ ánh nhìn đầu tiên đã ghét nhau rồi...
+
+---
 [Nhục Driven Development](/posts/nhuc-driven-development.html)
 
 Một quan điểm thách thức dư luận về việc phát triển bản thân =))
