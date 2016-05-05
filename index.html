@@ -43,6 +43,7 @@
             var body = document.querySelector(".main");
             var file = window.location.hash.replace(/#/g, '') + '.md';
             if (body != undefined) {
+                if (file == '.md') return;
                 open('./posts/' + file).then(function(data){
                     if (data != '') {
                         var lines = data.split('\n');
