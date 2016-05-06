@@ -1,0 +1,287 @@
+<html>
+    <head>
+        <title> Tự viết Emulator: CHIP-8 Interpreter | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="t-vi-t-emulator-chip-8-interpreter">Tự viết Emulator: CHIP-8 Interpreter</h1>
+<p>Nhắc đến game giả lập, chắc không ai lạ gì và ai cũng từng chơi qua (giả lập NES, Gameboy, PS1, PS2,...)</p>
+<p>Và chắc hẳn, cũng có không ít bạn nung nấu ý định tự viết một bộ emulator cho riêng mình nhưng không biết bắt đầu từ đâu.</p>
+<p>Mình cũng vậy, luôn mơ có một ngày sẽ tự viết được một bộ giả lập cho NES, Gameboy hay thậm chí là Play Station :)) nhưng vẫn dậm chân tại chỗ trong nhiều năm trời chỉ vì không biết phải bắt đầu như thế nào.</p>
+<p>Những tài liệu, bài viết nói về giả lập NES hay Gameboy tràn lan trên mạng rất nhiều, nhưng đa số đều bị mình vứt qua một bên vì đọc không hiểu gì cả :sweat_smile: thế nên mình quyết định sẽ tạm gác ý định giả lập máy NES hay Gameboy sang một bên và bắt đầu với một loại đơn giản hơn - đó là <strong>CHIP-8</strong>.</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/pong.png_d4gokk7w44" alt="alt text"></p>
+<p>Loạt bài này sẽ có 3 phần:</p>
+<ol>
+<li><strong>Phần 1:</strong> Giới thiệu CHIP-8 và các khái niệm cơ bản</li>
+<li><strong>Phần 2:</strong> Tập lệnh của CHIP-8</li>
+<li><strong>Phần 3:</strong> Implement</li>
+</ol>
+<p>Các bạn chỉ thực sự đụng đến code từ phần 3, dục tốc bất đạt, vậy nên, cứ bình tĩnh và từ từ mà nuốt trôi hết cái đống khái niệm này. Không thừa đâu :D</p>
+<hr>
+<p>Vậy CHIP-8 là cái gì? tại sao không phải NES, Gameboy mà lại là CHIP-8?</p>
+<h1 id="ph-n-1-m-t-s-kh-i-ni-m-c-b-n">Phần 1: Một số khái niệm cơ bản</h1>
+<h2 id="gi-l-p-l-g-">Giả lập là gì?</h2>
+<p>Thực ra chắc không ai thắc mắc cái này đâu, nhưng đề phòng lỡ có ai thắc mắc thì: Giả lập là một phần mềm mô phỏng lại hoạt động của một cái gì đó. Trong trường hợp này, chúng ta đang chuẩn bị viết phần mềm mô phỏng hoạt động của trình thông dịch CHIP-8 (CHIP-8 interpreter)</p>
+<h2 id="chip-8-l-g-">CHIP-8 là gì?</h2>
+<p>CHIP-8 là một ngôn ngữ thông dịch (interpreted programming language), thiết kế bởi Joseph Weisbecker, được dùng cho các máy tính 8-bit COSMAC VIP và Telmac 1800 vào những năm 1970.</p>
+<p><img src="http://www.chip8.com/telmac1800/telmac1800_1.jpg" alt="Máy tính Telmac 1800"></p>
+<p>Các máy tính này có đầy đủ các thành phần như màn hình (2 màu đen trắng), âm thanh và bàn phím (nhưng không phải bàn phím QWERTY như bây giờ).</p>
+<p><img src="http://www.chip8.com/cosmacvip/CosmacVip4.jpg" alt="COSMAC VIP 4 và quả bàn phím khác người của nó"></p>
+<p>Ngày nay, CHIP-8 vẫn còn được sử dụng trong cộng đồng hobby, với sự đơn giản về cấu trúc cũng như tập lệnh nhỏ (chỉ có 36 lệnh), CHIP-8 Interpreter (thường bị nhầm lẫn là CHIP-8 Emulator) đã trở thành ứng dụng được đa số các lập trình viên lựa chọn khi muốn bắt đầu con đường lập trình emulator của mình.</p>
+<h2 id="t-i-sao-l-i-ch-n-chip-8-">Tại sao lại chọn CHIP-8?</h2>
+<p>Sở dĩ chọn CHIP-8 thay vì NES hay Gameboy là vì cấu trúc đơn giản của nó. Cấu trúc chỉ có một bộ xử lý và số tập lệnh cực kì ít, chưa kể đến khi làm việc với các hệ máy khác, bạn còn phải đau đầu với việc giả lập những module khác, không hề thích hợp cho người mới bắt đầu.</p>
+<p>Ngược lại, sau khi hoàn thành được một bản CHIP-8 emulator cho riêng mình, bạn sẽ có đủ kiến thức <strong>cơ bản</strong> để tiếp tục nghiên cứu các hệ máy khác như NES hay Gameboy.</p>
+<h2 id="chu-n-b-ki-n-th-c">Chuẩn bị kiến thức</h2>
+<p>Để bắt đầu con đường lập trình Emulator, bạn chắc chắn cần phải có các kiến thức về:</p>
+<ul>
+<li>Các phép toán thao tác bit (bitwise operation)</li>
+<li>Mã máy (Assembly)</li>
+</ul>
+<p>Nếu đọc đến đây mà bạn đã bắt đầu thấy ngại vì không có những kiến thức này thì cũng không sao. Cứ đọc tiếp, trong bài mình sẽ cố gắng giải thích thật kĩ các khái niệm cần thiết. :trollface:</p>
+<h2 id="rom-v-nguy-n-l-ho-t-ng-c-a-chip-8">ROM và nguyên lý hoạt động của CHIP-8</h2>
+<h3 id="rom-l-g-">ROM là gì?</h3>
+<p>Khi sử dụng bất cứ một phần mềm giả lập cho bất kì hệ mày gì, chúng ta đều nhắc đến khái niệm ROM.</p>
+<p>Hiểu đơn giản, ROM là một tập hợp các lệnh thực thi, còn gọi là <strong>opcode</strong> (operation code). Các opcode này là các lệnh được hỗ trợ bởi bộ xử lý.</p>
+<p>Ví dụ, đối với CHIP-8, opcode có mã hex là <em>0x00E0</em> làm nhiệm vụ xoá toàn bộ màn hình, opcode có mã hex <em>0xD123</em> có nhiệm vụ vẽ cái gì đó ra màn hình.</p>
+<h3 id="nguy-n-l-ho-t-ng-c-a-chip-8">Nguyên lý hoạt động của CHIP-8</h3>
+<p>Khi hoạt động, trình thông dịch (intepreter) CHIP-8 sẽ đọc các opcode từ ROM, đưa vào bộ nhớ (RAM) rồi CPU sẽ chạy qua từng opcode đã đọc được và thực thi chúng. Dữ liệu nếu cần sẽ được ghi trở lại vào RAM.</p>
+<p>Tóm tắt có thể xem trong hình sau:</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/fetchexecute.png_zf61jmls9a" alt=""></p>
+<p>Giả lập mà chúng ta sắp viết, sẽ mô phỏng đúng y quá trình này.</p>
+<h2 id="c-c-th-nh-ph-n-c-b-n-c-a-m-t-thi-t-b-chip-8">Các thành phần cơ bản của một thiết bị CHIP-8</h2>
+<p>Một thiết bị sử dụng CHIP-8 có các thành phần cơ bản sau:</p>
+<ul>
+<li>Bộ nhớ (memory)</li>
+<li>Các thanh ghi (registers)</li>
+<li>Màn hình hiển thị</li>
+<li>Bàn phím, Timers.</li>
+</ul>
+<p>Và nhiệm vụ của chúng ta là mô phỏng các thành phần này. Vì thế, chúng ta phải biết cấu trúc, nhiệm vụ, chức năng của mỗi phần.</p>
+<h3 id="memory">Memory</h3>
+<p>Bộ nhớ cần dùng của một thiết bị CHIP-8 là 4KB (4096 bytes). Được đánh số từ 0x000 (0) đến 0xFFF (4095).</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/memoryMap.png_wonyqqhp6c" alt="alt text"></p>
+<p>512 bytes đầu tiên (từ 0x000 đến 0x1FF) là vị trí của trình thông dịch (interpreter) và chương trình của chúng ta không thể truy xuất đến các địa chỉ này.</p>
+<p>Bắt đầu từ vị trí 0x200 cho đến 0xFFF là nơi mà chương trình của chúng ta được nạp vào.</p>
+<p>Và interpreter sẽ bắt đầu chạy chương trình từ vị trí 0x200 (trên các máy ETI 660 thì điểm bắt đầu sẽ là 0x600)</p>
+<h3 id="registers">Registers</h3>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/REGISTERS.png_4bexqwfunq" alt=""></p>
+<p>CHIP-8 có 16 thanh ghi đa dụng (general purpose registers) 8 bit, thường được đánh số  là Vx, với x là các số hexa từ 0 đến F.</p>
+<p>Thanh ghi VF mặc dù tồn tại nhưng chương trình không thể sử dụng vì nó được dùng làm cờ (flag) cho một số lệnh. Cái này mình sẽ giải thích ở bài sau, khi đi vào chi tiết các lệnh.</p>
+<p>Tiếp đến là thanh ghi <strong>I</strong>, được dùng để lưu các địa chỉ trong bộ nhớ. Ở phần sau chúng ta sẽ hiểu rõ cơ chế hoạt động của thanh ghi này hơn.</p>
+<p>Ngoài ra còn có 2 timer đặc biệt là Delay Timer và Sound Timer, sẽ nói ở bên dưới. Các register này chứa một giá trị 8 bit.</p>
+<h3 id="keyboard">Keyboard</h3>
+<p>Bàn phím của máy tính sử dụng CHIP-8 thường có dạng 16 phím hexa. Khi viết emulator, chúng ta nên map các phím này vào bàn phím máy tính bây giờ. Như hình sau:</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/keymapping.png_5tx79z88xo" alt="Bên trái là bàn phím hexa, bên phải là bàn phím máy tính thời bây giờ">
+<em>(Bên trái là bàn phím hexa thời cổ đại, bên phải là bàn phím máy tính thời bây giờ)</em></p>
+<p>Việc map phím như thế nào là tuỳ ý các bạn, nhưng trong bài viết này sẽ map như vậy, nên code cũng sẽ theo layout này.</p>
+<h2 id="display">Display</h2>
+<p>Màn hình trên các thiết bị CHIP-8 là màn hình đơn sắc (monochrome), có độ phân giải 64x32 pixel.</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/display.png_ac5l516r70" alt="alt text"></p>
+<p>Một số máy ETI 660 có độ phân giải 64x48 hoặc 64x64 pixel.</p>
+<p>CHIP-8 vẽ các hình ảnh lên màn hình thông qua các sprites. Sprite là một tập hợp nhiều bytes chuyển từ dữ liệu binary tương ứng với hình ảnh mà chúng ta cần vẽ. Mỗi byte có 8 bit, như vậy một sprite sẽ có kích thước 8x<strong>N</strong> (trong đó N là tuỳ ý, từ 1 đến 15)</p>
+<p>Các CHIP-8 interpreter thường có một bộ font cài đặt sẵn (built-in), được lưu trong memory (ở vùng 0x000 - 0x1FF) mỗi kí tự trong bộ font này thực chất là các sprite có kích thước 8x5 (tức là có 5 bytes).</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/hexfont.png_kaigppiffk" alt="alt text"></p>
+<h2 id="timers-v-sound">Timers và Sound</h2>
+<p>Timer, đúng theo tên gọi của nó, thì là một cái bộ đếm (bên điện tử nhiều người gọi là <strong>bộ định thời</strong>). Chức năng của nó đơn giản là: khi được kích hoạt, nó sẽ bắt đầu đếm ngược theo một chu kì thời gian nào đó, đến một lúc nào đó nó sẽ ngừng.</p>
+<p>Trong CHIP-8, chúng ta có 2 timers: <strong>Delay timer</strong> và <strong>Sound timer</strong></p>
+<p><strong>Delay timer</strong> là một bộ đếm được kích hoạt khi giá trị của thanh ghi Delay Timer (DT) - đã đề cập ở phần Register, xem hình - là khác 0. Giá trị này sẽ tự động giảm (trừ 1) liên tục theo chu kì có tần số 60Hz (60 lần 1 giây). Khi nào nó về 0 thì timer sẽ ngưng hoạt động.</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/delayTimer.png_hdj9rkqc88" alt="alt text"></p>
+<p>Mục đích của Delay timer là làm cho chương trình ngừng lại trong một khoảng thời gian, giống như các hàm <code>Delay()</code> hay <code>Sleep()</code> ở các ngôn ngữ lập trình khác.</p>
+<p><strong>Sound timer</strong> cũng tương tự như Delay timer, khi giá trị của thanh ghi Sound Timer (ST) khác 0 thì nó sẽ tự động kích hoạt, và giảm giá trị này theo chu kì tần số 60Hz, rồi ngưng khi nó về 0. Nhưng điểm khác biệt là, chừng nào giá trị trong thanh ghi ST khác 0 thì cái loa (buzzer) của máy sẽ hú :))</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/soundTimer.png_uqkre5l3e6" alt="alt text"></p>
+<hr>
+<p>Phù!!! Thế là cũng xong phần lý thuyết. Dài quá nhưng đề nghị các bạn đừng có nhảy cóc. Vì trên đây là những khái niệm rất quan trọng cần phải có trước khi bắt tay vào viết Emulator.</p>
+<p>Hy vọng các bạn đã hiểu được cơ chế hoạt động và phần nào hình dung ra được hướng đi mà chúng ta đang thực hiện.</p>
+<p>Tiếp theo, mình sẽ giới thiệu và giải thích tập lệnh (instruction set) của CHIP-8, và nói sơ về công dụng của chúng trong thực tế.</p>
+<h1 id="c-u-tr-c-opcode">Cấu trúc opcode</h1>
+<p>Như đã nói, một chương trình CHIP-8 là một tập hợp các <code>opcode</code> dưới dạng hexa. Ví dụ, đây là một đoạn nội dung khi đọc file rom game PONG:</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/opcodestruct.png_rvtgccz886" alt="alt text"></p>
+<p>Mỗi <code>opcode</code> có độ dài 2 byte và dược thể hiện bởi 4 kí tự hexa. Chúng ta sẽ đọc 2 byte này và chuyển về mã Assembly đơn giản để dễ hình dung, và công việc sẽ là: implement các chức năng mà các câu lệnh Assembly này thực hiện.</p>
+<p>Để lưu vị trí của opcode hiện tại, chúng ta dùng một giá trị gọi là <code>Program Counter</code> (PC)</p>
+<p>Ví dụ, lệnh đơn giản nhất là <code>0x00E0</code>, gồm có 2 byte <code>00</code> và <code>E0</code>, dịch ra mã máy là <code>CLS</code> có nhiệm vụ xoá toàn bộ nội dung màn hình. Hay như hình trên, chúng ta có opcode là <code>0x82E4</code>, trong đó có 2 giá trị <code>x = 2</code> và <code>y = E</code> (sẽ giải thích bên dưới), dịch ra mã máy sẽ là <code>ADD V2, VE</code>, có nhiệm vụ cộng giá trị của thanh ghi <code>VE</code> vào <code>V2</code> (<code>V2 = V2 + VE</code>).</p>
+<h3 id="th-t-cao-th-p-c-a-c-c-bit-byte">Thứ tự cao thấp của các bit, byte</h3>
+<p>Mỗi byte có <code>8 bit</code>, trong đó theo thứ tự từ phải qua trái, các bit sẽ được gọi tên từ thấp đến cao. Và opcode có 2 byte, như vậy là <code>16 bit</code>, và theo thứ tự này, ta có cách gọi tên như hình sau:</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/highlowbyte.png_3adbxv1u1d" alt="alt text"></p>
+<p>Bit thấp là các bit về phía bên phải, và bit cao là các bit về phía bên trái. Bit cao nhất là bit thứ 1, bit thấp nhất là bit thứ 16.</p>
+<p>Byte đầu tiên (1st Byte) được gọi là <code>Byte cao</code> (High byte). Byte thứ 2 (2nd byte) được gọi là <code>Byte thấp</code> (low byte)</p>
+<p>Chúng ta có thể gọi mỗi <strong>4 bit</strong> là một <strong>nibble</strong>.</p>
+<h3 id="l-c-gi-tr-b-ng-ph-p-to-n-and">Lọc giá trị bằng phép toán AND</h3>
+<p>Trong các phép toán thao tác bit, phép toán mà chúng ta cần sử dụng nhiều nhất trong quá trình viết Emulator là phép toán <code>AND</code>.</p>
+<p>Chi tiết về phép toán <code>AND</code> bạn có thể xem tại: <a href="https://vi.wikipedia.org/wiki/Phép_toán_thao_tác_bit">https://vi.wikipedia.org/wiki/Phép_toán_thao_tác_bit</a></p>
+<p>Nếu dài quá nhác đọc thì phép toán này có thể tóm tắt như hình sau:</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/andop.png_5xt4hz78x5" alt="alt text"></p>
+<p>Một giá trị khi thực hiện <code>AND</code> với <code>0</code> thì trả về <code>0</code>, và với <code>F</code> thì trả về chính nó. Chúng ta dùng đặc tính này để lọc và lấy ra các giá trị cần thiết tại các vị trí mong muốn bên trong một opcode.</p>
+<p>Ví dụ:</p>
+<p><img src="https://s3-ap-southeast-1.amazonaws.com/kipalog.com/andopsample.png_cmi9maz49x" alt="alt text"></p>
+<h1 id="c-c-tham-s-trong-opcode">Các tham số trong OPCODE</h1>
+<p>Ở ví dụ trên, ta thấy opcode <code>0x82E4</code> nhận vào 2 tham số <code>x = 2</code> và <code>y = E</code>, có tất cả 4 loại tham số mà chúng ta cần lấy ra từ opcode, tuỳ theo từng loại/chức năng của opcode.</p>
+<ul>
+<li><p><strong>n</strong>: Tham số <code>n</code> là <strong>4 bit cuối cùng</strong> (thấp nhất) của toàn bộ opcode, có thể lấy bằng cách sử dụng phép toán <code>opcode &amp; 0x000F</code>:</p>
+<pre><code>// Giả sử: opcode = 0x8C74
+var n = opcode &amp; 0x000F;
+// Kết quả: n = 4
+</code></pre></li>
+<li><p><strong>nnn</strong>: Tham số <code>nnn</code> là <strong>12 bit thấp nhất</strong> của opcode, là kết quả của phép tính <code>opcode &amp; 0x0FFF</code>:</p>
+<pre><code>// Giả sử: opcode = 0x8C74
+var nnn = opcode &amp; 0x0FFF;
+// Kết quả: nnn = C74
+</code></pre></li>
+<li><p><strong>kk</strong>: Tham số <code>kk</code> là <strong>8 bit thấp nhất</strong> của opcode, tính bằng: <code>opcode &amp; 0x00FF</code>:</p>
+<pre><code>// Giả sử: opcode = 0x8C74
+var kk = opcode &amp; 0x00FF;
+// Kết quả: kk = 74
+</code></pre></li>
+<li><p><strong>x</strong>: Tham số x được xác định bởi <strong>4 bit thấp</strong> nhất của <strong>Byte cao</strong> trong opcode, tức là các bit 5, 6, 7, 8 . Như vậy, ta có thể thực hiện phép toán AND: <code>opcode &amp; 0x0F00</code> kết hợp phép toán <code>dịch bit</code> (shift) để tìm ra <code>x</code>:</p>
+<pre><code>// Giả sử: opcode = 0x8C74
+var x = (opcode &amp; 0x0F00) &gt;&gt; 8;
+// Kết quả của phép (opcode &amp; 0x0F00) sẽ trả về 0x0C00
+// và ta cần dịch chuyển giá trị trên 8 bit về bên phải (&gt;&gt; 8)
+// để thu được giá trị 0x000C = C, là giá trị ta cần tìm
+// Kết quả: x = C
+</code></pre></li>
+<li><p><strong>y</strong>: Tham số <code>y</code> được xác định bằng <strong>4 bit cao</strong> của <strong>Byte thấp</strong> trong opcode, tức là các bit 9, 10, 11, 12. Và ta có thể thực hiện phép toán <code>opcode &amp; 0x00F0</code> và <code>shift</code> để tìm <code>y</code>:</p>
+<pre><code>// Giả sử: opcode = 0x8C74
+var y = (opcode &amp; 0x00F0) &gt;&gt; 4;
+// Kết quả của (opcode &amp; 0x00F0) là 0x0070, nên ta cần
+// dịch chuyển giá trị trên 4 bit về bên trái (&gt;&gt; 4)
+// để thu được giá trị 0x0007 = 7
+// Kết quả: y = 7
+</code></pre></li>
+</ul>
+<h1 id="t-p-l-nh-c-a-chip-8">Tập lệnh của CHIP-8</h1>
+<p>Bây giờ, chúng ta sẽ cùng tìm hiểu chức năng của từng opcode. Chi tiết cách implement cho từng opcode sẽ có ở bài sau.</p>
+<p>Nếu bạn thắc mắc là chúng ta cần biết chức năng của những lệnh này làm gì, thì: bằng cách implement từng lệnh riêng lẽ, chúng ta sẽ tạo được một trình thông dịch mà dựa vào những tập lệnh đó, các lập trình viên có thể kết hợp và viết thành một chương trình hoặc một trò chơi hoàn chỉnh.</p>
+<p>Bạn sẽ cần tập lệnh này để tham khảo khi impement.</p>
+<h2 id="c-c-l-nh-v-x-l-logic">Các lệnh về xử lý logic</h2>
+<h3 id="00e0-cls">00E0 - CLS</h3>
+<p>Opcode có giá trị <code>0x00E0</code> có thể chuyển thành mã assembly tương ứng là <code>CLS</code>, có nhiệm vụ xoá toàn bộ mần hình.</p>
+<h3 id="1nnn-jp-addr">1nnn - JP addr</h3>
+<p>Opcode có dạng <code>0x1nnn</code> có mã assembly tương ứng là <code>JP nnn</code>, có nhiệm vụ đưa <code>program counter</code> đến địa chỉ <code>nnn</code> (tức là nhảy đến một đoạn nào đó trong chương trình)</p>
+<h3 id="2nnn-call-addr">2nnn - CALL addr</h3>
+<p>Opcode có dạng <code>0x2nnn</code> có mã assembly tương ứng là <code>CALL nnn</code>, có nhiệm vụ gọi một <code>subroutine</code> (có thể hiểu là chương trình con) bắt đầu tại vị trí <code>nnn</code>. Vị trí hiện tại của <code>progam counter</code> trước khi thực hiện việc gọi <code>subroutine</code> sẽ được lưu vào <code>stack</code></p>
+<h3 id="00ee-ret">00EE - RET</h3>
+<p>Opcode có giá trị <code>0x00EE</code> có mã assembly tương ứng là <code>RET</code>. Khi gặp lệnh này, interpreter sẽ đưa <code>program counter</code> về vị trí cuối cùng lưu trong <code>stack</code> (tức lf thoát khỏi <code>sobroutine</code>/chương trình con)</p>
+<h3 id="3xkk-se-vx-byte">3xkk - SE Vx, byte</h3>
+<p>Gồm có 2 tham số <code>x</code> và <code>kk</code>, có nhiệm vụ so sánh giá trị của <code>Vx</code> và <code>kk</code>, nếu chúng bằng nhau thì bỏ qua (skip) lệnh tiếp theo bằng cách tăng giá trị của <code>program counter</code> lên 2.</p>
+<h3 id="4xkk-sne-vx-byte">4xkk - SNE Vx, byte</h3>
+<p>Tương tự như lệnh trên, nếu giá trị của <code>Vx</code> khác <code>kk</code> thì skip lệnh tiếp theo (tăng <code>program counter</code> lên 2)</p>
+<h3 id="5yx0-se-vx-vy">5yx0 - SE Vx, Vy</h3>
+<p>So sánh giá trị của <code>Vx</code> và <code>Vy</code>, nếu bằng nhau thì skip lệnh tiếp theo.</p>
+<h3 id="6xkk-ld-vx-byte">6xkk - LD Vx, byte</h3>
+<p>Gán giá trị của <code>Vx</code> thành <code>kk</code></p>
+<h3 id="7xkk-add-vx-byte">7xkk - ADD Vx, byte</h3>
+<p>Đặt giá trị của <code>Vx</code> bằng <code>Vx + kk</code></p>
+<h3 id="8xy0-ld-vx-vy">8xy0 - LD Vx, Vy</h3>
+<p>Lưu giá trị của <code>Vy</code> vào <code>Vx</code></p>
+<h3 id="8xy1-or-vx-vy">8xy1 - OR Vx, Vy</h3>
+<p><code>Vx</code> = <code>Vx</code> OR <code>Vy</code></p>
+<p>Thực hiện phép tính <code>OR</code> giữa 2 giá trị <code>Vx</code> và <code>Vy</code> rồi lưu kết quả vào <code>Vx</code></p>
+<h3 id="8xy2-and-vx-vy">8xy2 - AND Vx, Vy</h3>
+<p><code>Vx</code> = <code>Vx</code> AND <code>Vy</code></p>
+<p>Thực hiện phép tính <code>AND</code> giữa 2 giá trị <code>Vx</code> và <code>Vy</code> rồi lưu kết quả vào <code>Vx</code></p>
+<h3 id="8xy3-xor-vx-vy">8xy3 - XOR Vx, Vy</h3>
+<p><code>Vx</code> = <code>Vx</code> XOR <code>Vy</code></p>
+<p>Thực hiện phép tính <code>XOR</code> giữa <code>Vx</code> và <code>Vy</code> rồi lưu kết quả vào <code>Vx</code></p>
+<h3 id="8xy4-add-vx-vy">8xy4 - ADD Vx, Vy</h3>
+<p>Gán <code>Vx</code> = <code>Vx</code> + <code>Vy</code>, gán <code>VF</code> = <code>carry</code> (nhớ)</p>
+<p>Giá trị của <code>Vx</code> và <code>Vy</code> được cộng lại với nhau và lưu vào <code>Vx</code>, nếu kết quả lớn hơn <code>8 bit</code> (vd: &gt; 255) thì <code>VF</code> sẽ được đặt là <code>1</code>, ngược lại sẽ là <code>0</code>.</p>
+<h3 id="8xy5-sub-vx-vy">8xy5 - SUB Vx, Vy</h3>
+<p>Gán <code>Vx</code> = <code>Vx</code> - <code>Vy</code>, gán <code>VF</code> = <code>NOT borrow</code> (không mượn)</p>
+<p>Nếu <code>Vx</code> &gt; <code>Vy</code> hiệu số của <code>Vx - Vy</code> là không âm, nên <code>VF</code> sẽ được gán bằng <code>1</code>, ngược lại thì bằng <code>0</code>. Kết quả lưu vào <code>Vx</code></p>
+<h3 id="8xy6-shr-vx-vy-">8xy6 - SHR Vx {, Vy}</h3>
+<p>Gán <code>Vx</code> = <code>Vx SHR 1</code></p>
+<p>Nếu bit thấp nhất của <code>Vx</code> là 1 thì gán <code>VF</code> thàh <code>1</code>, ngược lại thì gán bằng <code>0</code>.
+Gán <code>Vx</code> = <code>Vx / 2</code></p>
+<h3 id="8xy7-subn-vx-vy">8xy7 - SUBN Vx, Vy</h3>
+<p>Gán <code>Vx</code> = <code>Vy</code> - <code>Vx</code>, gán <code>VF</code> = <code>NOT borrow</code> (không mượn)</p>
+<p>Nếu <code>Vy</code> &gt; <code>Vx</code> thì gán <code>VF</code> thành <code>1</code>, ngược lại gán thành <code>0</code>. Hiệu số lưu vào <code>Vx</code>.</p>
+<h3 id="8xye-shl-vx-vy-">8xyE - SHL Vx {, Vy}</h3>
+<p>Gán <code>Vx</code> = <code>Vx SHL 1</code></p>
+<p>Nếu bit cao nhất của <code>Vx</code> là <code>1</code> thì gán <code>VF</code> thành <code>1</code>, ngược lại, gán thành <code>0</code>. Cuối cùng gán <code>Vx = Vx * 2</code></p>
+<h3 id="9xy0-sne-vx-vy">9xy0 - SNE Vx, Vy</h3>
+<p>Skip lệnh tiếp theo nếu <code>Vx</code> != <code>Vy</code></p>
+<h3 id="annn-ld-i-addr">Annn - LD I, addr</h3>
+<p>Lưu giá trị <code>nnn</code> vào thanh ghi <code>I</code></p>
+<h3 id="bnnn-jp-v0-addr">Bnnn - JP V0, addr</h3>
+<p>Đưa <code>program counter</code> tới vị trí <code>nnn + V0</code></p>
+<h3 id="cxkk-rnd-vx-byte">Cxkk - RND Vx, byte</h3>
+<p>Gán giá trị <code>Vx</code> = <code>random byte</code> AND <code>kk</code></p>
+<p>Interpreter sẽ khởi tạo một số ngẫu nhiên (random) có giá trị từ <code>0</code> đến <code>255</code>, sau đó <code>AND</code> với giá trị của <code>kk</code>. Kết quả lưu vào <code>Vx</code></p>
+<h2 id="c-c-l-nh-t-ng-t-c-display-keyboard-sound-">Các lệnh tương tác (display, keyboard, sound...)</h2>
+<h3 id="dxyn-drw-vx-vy-nibble">Dxyn - DRW Vx, Vy, nibble</h3>
+<p><strong>Vẽ ra màn hình - Đây là lệnh quan trọng nhất trong số tất cả các lệnh</strong></p>
+<p>Interpreter sẽ đọc <code>n</code> byte từ bộ nhớ, bắt đầu từ địa chỉ được lưu trong thanh ghi <code>I</code>. Các byte này sẽ được hiển thị dưới dạng một <code>sprite</code> trên màn hình từ toạ độ (<code>Vx</code>, <code>Vy</code>).</p>
+<p>Sprite được vẽ ra màn hình theo phép <code>XOR</code>, nếu có pixel nào bị xoá vì phép toán này thì <code>VF</code> sẽ được gán là <code>1</code>, ngược lại thì gán bằng <code>0</code>.</p>
+<p>Nếu các điểm của sprite nằm ở bên ngoại phạm vi hiển thị của màn hình thì sẽ được vẽ ra ngay tại các cạnh biên của màn hình gần với nó nhất.</p>
+<h3 id="ex9e-skp-vx">Ex9E - SKP Vx</h3>
+<p>Skip lệnh tiếp theo nếu phím có giá trị của <code>Vx</code> được nhấn.</p>
+<p>Kiểm tra bàn phím, nếu phím được nhấn có giá trị (key code) bằng vơi giá trị của <code>Vx</code> thì <code>program counter</code> sẽ được tăng lên <code>2</code>.</p>
+<h3 id="exa1-sknp-vx">ExA1 - SKNP Vx</h3>
+<p>Skip lệnh tiếp theo nếu phím có giá trị của <code>Vx</code> không được nhấn.</p>
+<p>Tương tự như lệnh trên, nhưng lệnh này tăng <code>PC</code> lên <code>2</code> nếu phím có key code là <code>Vx</code> không được nhấn xuống.</p>
+<h3 id="fx0a-ld-vx-k">Fx0A - LD Vx, K</h3>
+<p>Chờ bắt sự kiện nhấn phím, lưu <code>key code</code> vào <code>Vx</code></p>
+<p>Lệnh này sẽ ngừng chương trình cho tới khi có phím được nhấn.</p>
+<h3 id="fx07-ld-vx-dt">Fx07 - LD Vx, DT</h3>
+<p>Gán <code>Vx</code> = <code>delay timer value</code></p>
+<p>Lưu giá trị của thanh ghi <code>DT</code> vào thanh ghi <code>Vx</code></p>
+<h3 id="fx15-ld-dt-vx">Fx15 - LD DT, Vx</h3>
+<p>Gán <code>delay timer</code> = <code>Vx</code></p>
+<p>Gán giá trị của thanh ghi <code>DT</code> là <code>Vx</code> để bắt đầu thực hiện việc chờ (delay), xem giải thích về <code>Delay Timer</code> ở bài trước.</p>
+<h3 id="fx18-ld-st-vx">Fx18 - LD ST, Vx</h3>
+<p>Gán <code>sound timer</code> = <code>Vx</code></p>
+<p>Gán giá trị của thanh ghi <code>ST</code> thành <code>Vx</code> để bắt đầu thực hiện phát âm thanh, xem giải thích về <code>Sound Timer</code> ở bài trước.</p>
+<h3 id="fx1e-add-i-vx">Fx1E - ADD I, Vx</h3>
+<p>Gán <code>I</code> = <code>I</code> + <code>Vx</code></p>
+<p>Lưu tổng số của <code>I</code> và <code>Vx</code> vào <code>Vx</code></p>
+<h3 id="fx29-ld-f-vx">Fx29 - LD F, Vx</h3>
+<p>Gán <code>I</code> = <code>vị trí của sprite kí tự Vx</code></p>
+<p>Gán giá trị của thanh ghi <code>I</code> thành vị trí của kí tự hex font dựng sẵn tương ứng với <code>Vx</code>.</p>
+<h3 id="fx33-ld-b-vx">Fx33 - LD B, Vx</h3>
+<p>Interpreter lấy giá trị thập phân của <code>Vx</code>, lưu các số hàng trăm vào bộ nhớ ở vị trí <code>I</code>, các số hàng chục vào vị trí <code>I + 1</code>, các số hàng đơn vị ở vị trí <code>I + 2</code></p>
+<h3 id="fx55-ld-i-vx">Fx55 - LD [I], Vx</h3>
+<p>Lưu giá trị từ thanh ghi <code>V0</code> vào các thanh ghi <code>Vx</code> trong bộ nhớ, bắt đầu từ địa chỉ trong <code>I</code>. Sang phần sau sẽ rõ hơn trong quá trình implement.</p>
+<h3 id="fx65-ld-vx-i-">Fx65 - LD Vx, [I]</h3>
+<p>Đọc giá trị từ các thanh ghi <code>Vx</code>, bắt đầu từ <code>I</code> vào <code>V0</code></p>
+<hr>
+<p>Trên đây là toàn bộ các opcode mà chúng ta sẽ implement ở phần sau. Sau khi implement tất cả các opcode này thì chúng ta có thể load một ROM game mẫu và chơi thử.</p>
+<p>Có một số lệnh của Super CHIP-8 nhưng để bài viết đơn giản, mình sẽ không đề cập đến. Sau này nếu có thời gian thì chúng ta sẽ implement thêm sau.</p>
+
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+
+        </script>
+    </body>
+</html>
