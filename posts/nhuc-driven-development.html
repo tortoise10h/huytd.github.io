@@ -17,15 +17,23 @@
         <script>
         hljs.initHighlightingOnLoad();
         </script>
-        <!-- Load Facebook SDK for JavaScript -->
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
     </head>
     <body>
         <div class="header">
@@ -41,11 +49,11 @@
 <p>Các bài viết tiếng Anh thì sẽ được đăng trên blog <a href="https://thefullsnack.com">The Full Snack</a>. </p>
 <p>Rất mong các bạn quan tâm và ủng hộ.</p>
 
-                <div class="fb-like" 
-                    data-href="http://huytd.github.io/posts/nhuc-driven-development.html" 
-                    data-layout="standard" 
-                    data-action="like" 
-                    data-show-faces="true">
+                <div
+                  class="fb-like"
+                  data-share="true"
+                  data-width="450"
+                  data-show-faces="true">
                 </div>
                 <div id="disqus_thread"></div>
                 <script>

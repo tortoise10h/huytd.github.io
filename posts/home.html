@@ -12,15 +12,23 @@
         <script>
         hljs.initHighlightingOnLoad();
         </script>
-        <!-- Load Facebook SDK for JavaScript -->
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
     </head>
     <body>
         <div class="header">
@@ -30,30 +38,30 @@
             <div class="main">
                 <h1 id="c-c-b-i-m-i-ng">Các bài mới đăng</h1>
 <hr>
-<p><a href="/posts/lap-trinh-va-toan-hoc.html#disqus_thread">Lập trình và toán học</a></p>
+<p><a href="/posts/lap-trinh-va-toan-hoc.html">Lập trình và toán học</a></p>
 <p>Tui và Toán đã từng là hai kẻ thù không đội trời chung trong suốt hơn mười lăm năm ròng rã. Ngay từ ánh nhìn đầu tiên đã ghét nhau rồi...</p>
 <hr>
-<p><a href="/posts/lam-the-nao-viet-blog-ki-thuat.html#disqus_thread">Làm thế nào để viết blog kĩ thuật?</a></p>
+<p><a href="/posts/lam-the-nao-viet-blog-ki-thuat.html">Làm thế nào để viết blog kĩ thuật?</a></p>
 <p>Có rất nhiều bài viết trên mạng nói về vấn đề tại sao một lập trình viên nên thường xuyên viết các bài blog kĩ thuật. Vậy, tại sao phải viết blog kĩ thuật?</p>
 <hr>
-<p><a href="/posts/dan-it-doc-sach.html#disqus_thread">Dân IT nên đọc sách như thế nào?</a></p>
+<p><a href="/posts/dan-it-doc-sach.html">Dân IT nên đọc sách như thế nào?</a></p>
 <p>Dành tặng các bạn nào đã trót đặt ra mục tiêu đọc 10 hay 20 cuốn sách trong năm mới và vẫn chưa có cơ hội thực hiện...</p>
 <hr>
-<p><a href="/posts/tu-viet-emulator.html#disqus_thread">Tự viết Emulator</a></p>
+<p><a href="/posts/tu-viet-emulator.html">Tự viết Emulator</a></p>
 <p>Chắc hẳn, cũng có không ít bạn nung nấu ý định tự viết một bộ emulator cho riêng mình nhưng không biết bắt đầu từ đâu, vậy thì còn chờ gì nữa, vào đọc ngay thôi!!!</p>
 <hr>
-<p><a href="/posts/nhuc-driven-development.html#disqus_thread">Nhục Driven Development</a></p>
+<p><a href="/posts/nhuc-driven-development.html">Nhục Driven Development</a></p>
 <p>Một quan điểm thách thức dư luận về việc phát triển bản thân =))</p>
 <hr>
-<p><a href="http://huytd.github.io/posts/lam-game-flappy-bird-tren-arduino.html#disqus_thread">Làm Game Flappy Bird trên Arduino</a></p>
+<p><a href="http://huytd.github.io/posts/lam-game-flappy-bird-tren-arduino.html">Làm Game Flappy Bird trên Arduino</a></p>
 <p>Hướng dẫn làm game Flappy Bird chơi trên Arduino UNO R3.</p>
 <hr>
 
-                <div class="fb-like" 
-                    data-href="http://huytd.github.io/posts/home.html" 
-                    data-layout="standard" 
-                    data-action="like" 
-                    data-show-faces="true">
+                <div
+                  class="fb-like"
+                  data-share="true"
+                  data-width="450"
+                  data-show-faces="true">
                 </div>
                 <div id="disqus_thread"></div>
                 <script>
