@@ -20,6 +20,9 @@ Các bạn chỉ thực sự đụng đến code từ phần 3, dục tốc bấ
 
 ----
 
+# Phần 1: Giới thiệu CHIP-8 và các khái niệm cơ bản
+---
+
 Vậy CHIP-8 là cái gì? tại sao không phải NES, Gameboy mà lại là CHIP-8?
 
 # Phần 1: Một số khái niệm cơ bản
@@ -150,6 +153,9 @@ Phù!!! Thế là cũng xong phần lý thuyết. Dài quá nhưng đề nghị 
 Hy vọng các bạn đã hiểu được cơ chế hoạt động và phần nào hình dung ra được hướng đi mà chúng ta đang thực hiện.
 
 Tiếp theo, mình sẽ giới thiệu và giải thích tập lệnh (instruction set) của CHIP-8, và nói sơ về công dụng của chúng trong thực tế.
+
+# Phần 2: Tập lệnh của CHIP-8
+---
 
 # Cấu trúc opcode
 
@@ -395,3 +401,8 @@ Lưu giá trị từ thanh ghi `V0` vào các thanh ghi `Vx` trong bộ nhớ, b
 Trên đây là toàn bộ các opcode mà chúng ta sẽ implement ở phần sau. Sau khi implement tất cả các opcode này thì chúng ta có thể load một ROM game mẫu và chơi thử.
 
 Có một số lệnh của Super CHIP-8 nhưng để bài viết đơn giản, mình sẽ không đề cập đến. Sau này nếu có thời gian thì chúng ta sẽ implement thêm sau.
+
+# Phần 3: Implement
+---
+
+Chi tiết về cách implement các bạn có thể tham khảo mã nguồn tại: https://github.com/huytd/js-chip8-emulator
