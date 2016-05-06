@@ -36,6 +36,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  	postContent = marked(markdownPost);
 			  	htmlContent = templateHtml.replace('{%content%}', postContent);
 			  	htmlContent = htmlContent.replace('{%title%}', title);
+			  	htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
 			  	htmlContent = htmlContent.replace('{%meta%}', metaData);
 			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
 				     if (err)
