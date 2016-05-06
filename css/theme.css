@@ -85,6 +85,30 @@ img {
     border-radius: 3px;
 }
 
+table {
+    border-radius: 3px;
+    border: 1px solid #DDD;
+}
+
+table thead {
+    background: #EFEFEF;
+}
+
+table thead th {
+    padding: 8px;
+    font-weight: bold;
+}
+
+table td {
+    padding: 8px;
+    margin: 0;
+    border-bottom: 1px solid #EEE;
+}
+
+table tr:nth-last-child(1) td {
+    border-bottom: none;
+}
+
 html, body {
     margin: 0; padding: 0;
 }
