@@ -34,7 +34,7 @@ Trong một cuốn tiểu thuyết ngôn tình (vâng! ngôn tình =))) mình v�
 
 > Mình muốn thế giới này, vì có mình tồn tài, mà trở nên khác đi một tí
 
-Dù cho ý nghĩa thực sự của _"thế giới"_ trong câu nói này là nói đến trái tim của cô bạn gái Thẩm Giai Nghi mà cả đám con trai cùng theo đuổi. Nhưng câu nói này luôn để lại ấn tượng cho mình rất lớn, ngay từ lần đầu mình đọc cuốn này vài năm trước. Vì dù là thay đổi thế giới, hay chỉ là thay đổi hình ảnh của mình trong mắt cô bạn gái mình để ý, nó đều khích lệ chúng ta cần phải làm gì đó, cần phải tiến lên phía trước.
+Dù cho ý nghĩa thực sự của _"thế giới"_ trong câu nói này là nói đến trái tim của cô bạn cùng lớp Thẩm Giai Nghi mà cả đám con trai cùng theo đuổi. Nhưng câu nói này luôn để lại ấn tượng cho mình rất lớn, ngay từ lần đầu mình đọc cuốn này vài năm trước. Vì dù là thay đổi thế giới, hay chỉ là thay đổi hình ảnh của mình trong mắt cô bạn gái mình để ý, nó đều khích lệ chúng ta cần phải làm gì đó, cần phải tiến lên phía trước.
 
 Không phải là những hoài mộng đao to búa lớn, đơn giản, chúng ta cố gắng là vì muốn làm cho thế giới nó khác đi một tí thôi, miễn là chính vì có ta mà nó khác đi. Không hề hoang đường tí nào. Vậy khác ra làm sao? Và làm sao để làm cho thế giới này khác đi?
 
