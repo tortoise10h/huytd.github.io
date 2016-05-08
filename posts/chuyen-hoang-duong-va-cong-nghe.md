@@ -44,6 +44,20 @@ Bớt thời gian ngủ nướng hoặc chơi game vào cuối tuần để làm
 
 Đứng trước một vấn đề hoang đường hay một ý kiến hoang tưởng từ một ai đó, chậm đi một giây kiềm chế cái miệng lại đừng để nó phun ra những lời công kích chê bai, bật một tab mới và làm một cuộc nghiên cứu nho nhỏ để xem thử trên thế giới đã có ai cũng từng nghĩ về ý tưởng này chưa, có cách nào hiện thực nó không? Bớt một giây để bình tĩnh, ngồi lại suy nghĩ xem nếu cái ý tưởng haong đường đó được ứng dụng vào thực tế thì nó sẽ như thế nào, biết đâu bạn sẽ trở thành một cộng sự chung tay cùng với anh bạn kia nghiên cứu để biến điều hoang đường thành sự thật chăng?
 
-Người Việt Nam chúng ta có một bản tính rất xấu đó là thẳng tay chửi rủa, công kích những điều nằm ngoài sự chấp nhận (chấp nhận = hiểu biết + định kiến) của mình. Chính nhờ cái bản tính này, chúng ta đã gặt hái được sự thua kém và sự thiếu tôn trọng từ những đất nước khác như Nhật, Hàn, Trung Quốc hay Anh, Mỹ,...
+Người Việt Nam chúng ta có một bản tính rất xấu đó là thẳng tay chửi rủa, công kích những điều nằm ngoài sự chấp nhận (chấp nhận = hiểu biết + định kiến) của mình. Chính nhờ cái bản tính này, chúng ta đã tự giới hạn khả năng của mình lại trong một cái hộp vô hình, từ đó gặt hái được sự thua kém và sự thiếu tôn trọng từ những đất nước khác như Nhật, Hàn, Trung Quốc hay Anh, Mỹ,...
 
-Còn sau bài viết này, số phận của thế giới như thế nào, là tuỳ thuộc vào tay bạn hết rồi đấy! Chào các bạn, mình lên đường đi cứu thế giới tiếp đây.
+Nếu bạn từng có cơ hội đi nước ngoài, dù chỉ là đi du lịch, ít nhiều cũng sẽ cảm nhận được sự kì thị dành cho người Việt ở những nơi có người Việt nhập cư vào. Đồng ý sự kì thị dành cho người nhập cư là một phần nguyên nhân, nhưng nguyên nhân khác đó là sự thua kém, cả về kiến thức lẫn ý thức của cộng đồng người Việt.
+
+Ở Mỹ cũng có, sự kì thị dành cho các dân tộc nhập cư như Ấn Độ, Trung Quốc, Việt Nam, Philippines, đó là điều chắc chắn rồi, nhưng nếu để ý, các bạn sẽ thấy thái độ của người Mỹ khi nói về người Trung Quốc, họ coi dân tộc này là một dân tộc đáng gờm, vì có thực lực. Và nhắc tới Ấn Độ, không ai dám coi thường, vì một lẽ đơn giản, người Ấn Độ thông minh, tuy có hơi keo kiệt và cũng có những cá nhân vô ý thức như bao dân tộc khác, nhưng nhìn chung người Ấn Độ rất thành công trong xã hội Mỹ.
+
+Số liệu thống kê cho thấy trình độ học vấn của người Ấn Độ tại Mỹ so với người Việt Nam tại Mỹ và các dân tộc khác:
+
+![](http://www.pewsocialtrends.org/files/2012/06/ST_12.06.17_AA_higher-education1.png)
+
+Tỉ lệ cấp visa H-1B (visa dành cho lao động trình độ cao) vào Mỹ làm việc của người Ấn Độ cao hơn nhiều so với các nước khác trên thế giới:
+
+![](http://www.pewsocialtrends.org/files/2012/06/ST_12.06.17_AA_visas2.png)
+
+(Nguồn: http://www.pewsocialtrends.org/asianamericans-graphics/)
+
+Sau bài viết này, số phận của người Việt Nam có thay đổi không, số phận của thế giới như thế nào, là tuỳ thuộc vào tay bạn hết rồi đấy! Chào các bạn, mình lên đường đi cứu thế giới tiếp đây.
