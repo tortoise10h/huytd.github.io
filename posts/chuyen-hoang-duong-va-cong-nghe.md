@@ -40,7 +40,7 @@ Không phải là những hoài mộng đao to búa lớn, đơn giản, chúng 
 
 Viết một bài hướng dẫn về những điều chúng ta đã biết, hoặc chia sẽ một dòng code lên mạng, hành động nhỏ nhoi này cũng đủ làm thay đổi, vì ở đâu đó sẽ có một cậu thiếu niên đang lò mò học lập trình và vô tình đọc được bài viết này của bạn, biết đâu cậu bé này về sau trở thành một nhân vật tầm cỡ nào đó chăng?
 
-Bớt thời gian ngủ nước hoặc chơi game vào cuối tuần để làm một side project nào đó mà bạn cho là thú vị rồi chia sẽ lên Github, biết đâu, sẽ có một anh bạn nào đó thấy hay ho và join vào cùng làm với bạn, để rồi project được hoàn thiện và được dùng vào làm những việc phi thường mà ngay cả chính bạn cũng không bao giờ nghĩ đến? Hãy xem Linux là một trong vô vàn những ví dụ cho điều này.
+Bớt thời gian ngủ nướng hoặc chơi game vào cuối tuần để làm một side project nào đó mà bạn cho là thú vị rồi chia sẽ lên Github, biết đâu, sẽ có một anh bạn nào đó thấy hay ho và join vào cùng làm với bạn, để rồi project được hoàn thiện và được dùng vào làm những việc phi thường mà ngay cả chính bạn cũng không bao giờ nghĩ đến? Hãy xem Linux là một trong vô vàn những ví dụ cho điều này.
 
 Đứng trước một vấn đề hoang đường hay một ý kiến hoang tưởng từ một ai đó, chậm đi một giây kiềm chế cái miệng lại đừng để nó phun ra những lời công kích chê bai, bật một tab mới và làm một cuộc nghiên cứu nho nhỏ để xem thử trên thế giới đã có ai cũng từng nghĩ về ý tưởng này chưa, có cách nào hiện thực nó không? Bớt một giây để bình tĩnh, ngồi lại suy nghĩ xem nếu cái ý tưởng haong đường đó được ứng dụng vào thực tế thì nó sẽ như thế nào, biết đâu bạn sẽ trở thành một cộng sự chung tay cùng với anh bạn kia nghiên cứu để biến điều hoang đường thành sự thật chăng?
 
