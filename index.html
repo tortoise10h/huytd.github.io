@@ -1,78 +1,45 @@
 <html>
     <head>
-        <title>Huy's Blog</title>
+        <title> Nơi tổng hợp những ghi chép linh tinh | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
         <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,300&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
-        <link href="./css/theme.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="./css/highlight/tomorrow-night.css">
-        <link rel="stylesheet" href="./css/fontello.css">
-        <script src="./js/highlight.pack.js"></script>
-        <script src="./js/marked.js"></script>
+        <link href="css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="css/fontello.css">
+        <script src="js/highlight.pack.js"></script>
         <script>
-        var blogTitle = "Huy's Blog";
-
         hljs.initHighlightingOnLoad();
-        marked.setOptions({
-          highlight: function(code) {
-            return hljs.highlightAuto(code).value;
-          }
-        });
-
-        var open = function(url) {
-            return new Promise(function(resolve, reject){
-                var xhr = new XMLHttpRequest;
-                xhr.open('GET', url, true);
-
-                xhr.onload = function () {
-                    if (xhr.status == 200) {
-                        resolve(xhr.response);
-                    } else {
-                        reject();
-                    }
-                };
-
-                xhr.onerror = function() {
-                    reject();
-                }
-
-                xhr.send();
-            });
-        };
-
-        var launch = function() {
-            var body = document.querySelector(".main");
-            var file = window.location.hash.replace(/#/g, '') + '.md';
-            if (body != undefined) {
-                if (file == '.md') file = 'home.md';
-                open('./posts/' + file).then(function(data){
-                    if (data != '') {
-                        var lines = data.split('\n');
-                        var title = blogTitle;
-                        if (lines.length > 0) title = lines[0].replace(/#/g, '') + ' | ' + blogTitle;
-                        body.innerHTML = marked(data);
-                        document.title = title;
-                    }
-                }, function(){
-                    open('./posts/home.md').then(function(data){
-                        document.title = blogTitle;
-                        body.innerHTML = marked(data);
-                    });
-                });
-            }
-        };
-
-        var startup = function() {
-            launch();
-        };
         </script>
     </head>
-    <body onload="startup()" onhashchange="launch()">
+    <body>
         <div class="header">
-            <a href="#home"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
         </div>
         <div class="container">
-            <div class="main"></div>
+            <div class="main">
+                <h1 id="n-i-t-ng-h-p-nh-ng-ghi-ch-p-linh-tinh">Nơi tổng hợp những ghi chép linh tinh</h1>
+<p><a href="/posts/lap-trinh-va-toan-hoc.html">Lập trình và toán học</a></p>
+<p>Tui và Toán đã từng là hai kẻ thù không đội trời chung trong suốt hơn mười lăm năm ròng rã. Ngay từ ánh nhìn đầu tiên đã ghét nhau rồi...</p>
+<hr>
+<p><a href="/posts/lam-the-nao-viet-blog-ki-thuat.html">Làm thế nào để viết blog kĩ thuật?</a></p>
+<p>Có rất nhiều bài viết trên mạng nói về vấn đề tại sao một lập trình viên nên thường xuyên viết các bài blog kĩ thuật. Vậy, tại sao phải viết blog kĩ thuật?</p>
+<hr>
+<p><a href="/posts/dan-it-doc-sach.html">Dân IT nên đọc sách như thế nào?</a></p>
+<p>Dành tặng các bạn nào đã trót đặt ra mục tiêu đọc 10 hay 20 cuốn sách trong năm mới và vẫn chưa có cơ hội thực hiện...</p>
+<hr>
+<p><a href="/posts/tu-viet-emulator.html">Tự viết Emulator</a></p>
+<p>Chắc hẳn, cũng có không ít bạn nung nấu ý định tự viết một bộ emulator cho riêng mình nhưng không biết bắt đầu từ đâu, vậy thì còn chờ gì nữa, vào đọc ngay thôi!!!</p>
+<hr>
+<p><a href="/posts/nhuc-driven-development.html">Nhục Driven Development</a></p>
+<p>Một quan điểm thách thức dư luận về việc phát triển bản thân =))</p>
+<hr>
+<p><a href="http://huytd.github.io/posts/lam-game-flappy-bird-tren-arduino.html">Làm Game Flappy Bird trên Arduino</a></p>
+<p>Hướng dẫn làm game Flappy Bird chơi trên Arduino UNO R3.</p>
+<hr>
+
+            </div>
         </div>
 	    <div class="footer">
             <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
@@ -93,5 +60,6 @@
           ga('send', 'pageview');
 
         </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
     </body>
 </html>

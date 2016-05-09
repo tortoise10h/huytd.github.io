@@ -1,11 +1,5 @@
-# Các bài mới đăng
+# Nơi tổng hợp những ghi chép linh tinh
 
----
-[Tôn trọng sự hoang đường](/posts/chuyen-hoang-duong-va-cong-nghe.html)
-
-Tui muốn thế giới này, vì có tui, mà trở nên khác đi một tí...
-
----
 [Lập trình và toán học](/posts/lap-trinh-va-toan-hoc.html)
 
 Tui và Toán đã từng là hai kẻ thù không đội trời chung trong suốt hơn mười lăm năm ròng rã. Ngay từ ánh nhìn đầu tiên đã ghét nhau rồi...
