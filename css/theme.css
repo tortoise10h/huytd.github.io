@@ -51,11 +51,15 @@ code {
     font-size: 0.8em;
 }
 
+.hljs {
+    background: none !important;
+}
+
 pre {
     background: #292824 !important;
     padding: 10px; border-radius: 3px;
     font-family: monospace;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 pre > code {
