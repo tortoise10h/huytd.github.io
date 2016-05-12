@@ -53,13 +53,14 @@ code {
 
 .hljs {
     background: none !important;
+    overflow-x: hidden;
 }
 
 pre {
     background: #292824 !important;
     padding: 10px; border-radius: 3px;
     font-family: monospace;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 pre > code {
