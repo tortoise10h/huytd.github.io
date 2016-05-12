@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Thuật toán tạo lịch tháng trong các component Datepicker | Huy's Blog</title>
+        <title> Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,7 +19,7 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="thu-t-to-n-t-o-l-ch-th-ng-trong-c-c-component-datepicker">Thuật toán tạo lịch tháng trong các component Datepicker</h1>
+                <h1 id="ph-c-t-p-h-a-v-n-datepicker-v-thu-t-to-n-ng-sau-n-">Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó</h1>
 <p>Datepicker là một dạng component đã quá quen thuộc với các bạn làm front-end, được sử dụng rộng rãi trên rất nhiều ứng dụng web. Mục đích của nó là hiển thị một &quot;tờ&quot; lịch trên màn hình máy tính để người dùng có thể chọn ngày tháng một cách dễ dàng.</p>
 <p><img src="img/components_pickers_date3.png" alt=""></p>
 <p>Cách sử dụng các component này cũng rất là đơn giản, vì hầu như các thư viện UI phổ biến hiện nay đều có cả, ví dụ đây là cách sử dụng trong <a href="https://angular-ui.github.io/bootstrap/">Angular UI</a></p>
@@ -69,12 +69,12 @@ Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa
 </tr>
 <tr>
 <td>$century$</td>
-<td>là thế kỷ hiện tại của năm đang xét, <strong>bắt đầu từ 0</strong></td>
+<td>là thế kỷ hiện tại của năm đang xét, <strong>bắt đầu từ 0</strong>, hoặc đơn giản là 2 con số đầu tiên của năm hiện tại</td>
 <td><code>Thế kỷ 21 = 20</code></td>
 </tr>
 <tr>
 <td>$year$</td>
-<td>là số năm thứ mấy thuộc thế kỉ đang xét</td>
+<td>là số năm thứ mấy thuộc thế kỷ đang xét, hoặc đơn giản là 2 con số cuối cùng của năm hiện tại</td>
 <td><code>Năm 2016 = 16</code></td>
 </tr>
 </tbody>

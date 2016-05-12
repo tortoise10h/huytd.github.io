@@ -1,4 +1,6 @@
-# Thuật toán tạo lịch tháng trong các component Datepicker
+# Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó
+
+
 
 Datepicker là một dạng component đã quá quen thuộc với các bạn làm front-end, được sử dụng rộng rãi trên rất nhiều ứng dụng web. Mục đích của nó là hiển thị một "tờ" lịch trên màn hình máy tính để người dùng có thể chọn ngày tháng một cách dễ dàng.
 
@@ -48,8 +50,8 @@ Trong đó ta có:
 | $weekday$	| là thứ ngày mà chúng ta cần tìm      	| `0 = Chủ nhật`, `1 = Thứ 2`,...      	|
 | $month$	| là tháng chúng ta cần xét, giá trị `1` đến `12`, bắt đầu từ tháng `3`      	| `Tháng 3 = 1`, `Tháng 4 = 2`,..., `Tháng 12 = 10`, `Tháng 1 = 11`, `Tháng 2 = 12`      	|
 | $day$ 	| là ngày chúng ta cần tính      	| ngày 1, 2, 3,..., 29, 30, 31      	|
-| $century$ | là thế kỷ hiện tại của năm đang xét, **bắt đầu từ 0**      	| `Thế kỷ 21 = 20`      	|
-| $year$ 	| là số năm thứ mấy thuộc thế kỉ đang xét      	| `Năm 2016 = 16`      	|
+| $century$ | là thế kỷ hiện tại của năm đang xét, **bắt đầu từ 0**, hoặc đơn giản là 2 con số đầu tiên của năm hiện tại      	| `Thế kỷ 21 = 20`      	|
+| $year$ 	| là số năm thứ mấy thuộc thế kỷ đang xét, hoặc đơn giản là 2 con số cuối cùng của năm hiện tại      	| `Năm 2016 = 16`      	|
 
 ---
 **Ví dụ:** Tìm xem ngày `18/09/2016` là thứ mấy?
