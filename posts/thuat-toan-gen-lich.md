@@ -33,6 +33,8 @@ Sau khi đã xác định được đâu là ngày bắt đầu, chúng ta sẽ 
 
 ## Công thức Zeller - Tính thứ ngày trong tuần
 
+**Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần [Implement](#implement-cong-thuc-zeller) luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)**
+
 Đầu tiên, ta sẽ tìm hiểu về **công thức Zeller**. Đây là công thức giúp chúng ta xác định được một ngày thuộc thứ mấy. Giúp giải quyết vấn đề thứ 1 đã đề cập ở trên.
 
 Công thức Zeller có dạng:
@@ -41,16 +43,10 @@ $$weekday=\left( \frac{13\; \times \; month\; -\; 1}{5}+\frac{year}{4}+\frac{cen
 
 Trong đó ta có:
 
-- $weekday$: là thứ ngày mà chúng ta cần tìm, ví dụ: `0 = Chủ nhật`, `1 = Thứ 2`,...
-- $month$: là tháng chúng ta cần xét, lưu ý: `Tháng 3 = 1`, `Tháng 4 = 2`,..., `Tháng 12 = 10`, `Tháng 1 = 11`, `Tháng 2 = 12`
-- $day$: là ngày chúng ta cần tính (ngày 1, 2, 3,..., 29, 30, 31)
-- $century$: là thế kỷ hiện tại của năm đang xét, lưu ý: **bắt đầu từ 0**, như vậy `Thế kỷ 21 = 20`
-- $year$: là số năm thứ mấy thuộc thế kỉ đang xét, ví dụ: `Năm 2016 = 16`
-
 | Ký hiệu 	| Mô tả 	| Ví dụ 	|
 |---------	|-------	|-------	|
 | $weekday$	| là thứ ngày mà chúng ta cần tìm      	| `0 = Chủ nhật`, `1 = Thứ 2`,...      	|
-| $month$	| là tháng chúng ta cần xét, giá trị `1` bắt đầu từ tháng 3      	| `Tháng 3 = 1`, `Tháng 4 = 2`,..., `Tháng 12 = 10`, `Tháng 1 = 11`, `Tháng 2 = 12`      	|
+| $month$	| là tháng chúng ta cần xét, giá trị `1` đến `12`, bắt đầu từ tháng `3`      	| `Tháng 3 = 1`, `Tháng 4 = 2`,..., `Tháng 12 = 10`, `Tháng 1 = 11`, `Tháng 2 = 12`      	|
 | $day$ 	| là ngày chúng ta cần tính      	| ngày 1, 2, 3,..., 29, 30, 31      	|
 | $century$ | là thế kỷ hiện tại của năm đang xét, **bắt đầu từ 0**      	| `Thế kỷ 21 = 20`      	|
 | $year$ 	| là số năm thứ mấy thuộc thế kỉ đang xét      	| `Năm 2016 = 16`      	|
@@ -81,5 +77,53 @@ Su   Mo   Tu   We   Th   Fr   Sa
 [18] 19   20   21   22   23   24
 25   26   27   28   29   30
 ```
-
 ---
+
+### Implement công thức Zeller
+
+Chúng ta có thể implement công thức Zeller bằng JavaScript như sau:
+
+```
+// hàm tính thế kỷ
+function century(y) {
+	return Math.floor(y / 100);
+}
+
+// hàm tính tháng cho công thức zeller
+function month(m) {
+	if (m < 3) return m + 10;
+	else return m - 2;
+}
+
+// hàm tính năm trong thể kỷ
+function year(y) {
+	return y % 100;
+}
+
+// công thức zeller
+function _zeller(day, month, year, century) {
+  return ((13 * month - 1) / 5 + year / 4 + century/4 + day + year - 2 * century) % 7;
+}
+
+// viết lại cho dễ dùng
+function zeller(d, m, y) {
+   return _zeller(d, month(m), year(y), century(y));
+}
+```
+
+Ở đây mình tách từng hàm xử lý ra cho dễ đọc, các bạn có thể gộp chung lại cho gọn cũng được.
+
+```
+function zeller(d, m, y) {
+    return ((13 * ((m < 3) ? (m + 10) : (m - 2)) - 1) / 5 + (y % 100) / 4 + Math.floor(y / 100) / 4 + d + (y % 100) - 2 * Math.floor(y / 100)) % 7;
+}
+```
+
+Kết quả của công thức Zeller không phải lúc nào cũng là số nguyên (integer), nhưng ta chỉ cần xét phần số nguyên trong đó. Để tách lấy phần nguyên, ta dùng hàm `Math.trunc()`:
+
+```
+var zweekday = zeller(12, 5, 2016); // = 4.600000000000001
+var weekday = Math.trunc(zweekday); // = 4
+```
+
+> Phàm trên đời, cái gì đơn giản thì không phải tại nó đơn giản, mà tại vì người ta đã làm giúp cho ta phần không đơn giản của nó mất rồi. - (Huy Trần phán)
