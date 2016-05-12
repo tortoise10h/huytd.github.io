@@ -53,7 +53,7 @@ code {
 
 .hljs {
     background: none !important;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 pre {
