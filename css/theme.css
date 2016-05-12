@@ -1,7 +1,5 @@
 * {
     font-family: 'Roboto Slab', serif;
-    font-size: 20px;
-    font-weight: 100;
 }
 
 h1 {
@@ -111,6 +109,8 @@ table tr:nth-last-child(1) td {
 
 html, body {
     margin: 0; padding: 0;
+    font-size: 20px;
+    font-weight: 100;
 }
 
 .container {
