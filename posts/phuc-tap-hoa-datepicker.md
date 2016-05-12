@@ -1,6 +1,6 @@
 # Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó
 
-Trong sê-ri bài viết **Phức tạp hóa vấn đề** này, mình sẽ trình bày các vấn đề kĩ thuật đằng sau những tác vụ đơn giản thường gặp trong công việc hằng ngày. Sẽ thật là tệ nếu chúng ta chỉ là những lập trình viên chỉ biết dùng những thứ được dọn ra sẵn và dâng tận miệng một cách công nghiệp chỉ để đáp ứng yêu cầu của công việc, mà bỏ qua những thứ kiến thức hay ho đằng sau, vốn đã được những người đi trước gói gém cẩn thận vào bên trong.
+Trong sê-ri bài viết **Phức tạp hóa vấn đề** này, mình sẽ trình bày các vấn đề kĩ thuật đằng sau những tác vụ đơn giản thường gặp trong công việc hằng ngày. Sẽ thật là tệ nếu chúng ta chỉ là những lập trình viên chỉ biết dùng những thứ được dọn ra sẵn và dâng tận miệng chỉ để xong việc, mà bỏ qua những kiến thức hay ho đằng sau, vốn đã dành cho chúng ta ngay từ đầu.
 
 > Mọi công việc bất kỳ đều dễ đối với những người không phải làm nó. - Murphy's law
 
