@@ -1,6 +1,10 @@
 # Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó
 
+Trong sê-ri bài viết **Phức tạp hóa vấn đề** này, mình sẽ trình bày các vấn đề kĩ thuật đằng sau những tác vụ đơn giản thường gặp trong công việc hằng ngày. Sẽ thật là tệ nếu chúng ta chỉ là những lập trình viên chỉ biết dùng những thứ được dọn ra sẵn và dâng tận miệng một cách công nghiệp chỉ để đáp ứng yêu cầu của công việc, mà bỏ qua những thứ kiến thức hay ho đằng sau, vốn đã được những người đi trước gói gém cẩn thận vào bên trong.
 
+> Mọi công việc bất kỳ đều dễ đối với những người không phải làm nó. - Murphy's law
+
+---
 
 Datepicker là một dạng component đã quá quen thuộc với các bạn làm front-end, được sử dụng rộng rãi trên rất nhiều ứng dụng web. Mục đích của nó là hiển thị một "tờ" lịch trên màn hình máy tính để người dùng có thể chọn ngày tháng một cách dễ dàng.
 
@@ -127,5 +131,3 @@ Kết quả của công thức Zeller không phải lúc nào cũng là số ngu
 var zweekday = zeller(12, 5, 2016); // = 4.600000000000001
 var weekday = Math.trunc(zweekday); // = 4
 ```
-
-> Mọi công việc bất kỳ đều dễ đối với những người không phải làm nó. - Murphy's law

@@ -20,6 +20,11 @@
         <div class="container">
             <div class="main">
                 <h1 id="ph-c-t-p-h-a-v-n-datepicker-v-thu-t-to-n-ng-sau-n-">Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó</h1>
+<p>Trong sê-ri bài viết <strong>Phức tạp hóa vấn đề</strong> này, mình sẽ trình bày các vấn đề kĩ thuật đằng sau những tác vụ đơn giản thường gặp trong công việc hằng ngày. Sẽ thật là tệ nếu chúng ta chỉ là những lập trình viên chỉ biết dùng những thứ được dọn ra sẵn và dâng tận miệng một cách công nghiệp chỉ để đáp ứng yêu cầu của công việc, mà bỏ qua những thứ kiến thức hay ho đằng sau, vốn đã được những người đi trước gói gém cẩn thận vào bên trong.</p>
+<blockquote>
+<p>Mọi công việc bất kỳ đều dễ đối với những người không phải làm nó. - Murphy&#39;s law</p>
+</blockquote>
+<hr>
 <p>Datepicker là một dạng component đã quá quen thuộc với các bạn làm front-end, được sử dụng rộng rãi trên rất nhiều ứng dụng web. Mục đích của nó là hiển thị một &quot;tờ&quot; lịch trên màn hình máy tính để người dùng có thể chọn ngày tháng một cách dễ dàng.</p>
 <p><img src="img/components_pickers_date3.png" alt=""></p>
 <p>Cách sử dụng các component này cũng rất là đơn giản, vì hầu như các thư viện UI phổ biến hiện nay đều có cả, ví dụ đây là cách sử dụng trong <a href="https://angular-ui.github.io/bootstrap/">Angular UI</a></p>
@@ -130,10 +135,7 @@ function zeller(d, m, y) {
 </code></pre><p>Kết quả của công thức Zeller không phải lúc nào cũng là số nguyên (integer), nhưng ta chỉ cần xét phần số nguyên trong đó. Để tách lấy phần nguyên, ta dùng hàm <code>Math.trunc()</code>:</p>
 <pre><code>var zweekday = zeller(12, 5, 2016); // = 4.600000000000001
 var weekday = Math.trunc(zweekday); // = 4
-</code></pre><blockquote>
-<p>Mọi công việc bất kỳ đều dễ đối với những người không phải làm nó. - Murphy&#39;s law</p>
-</blockquote>
-
+</code></pre>
                 <div id="fb-root"></div>
                 <script>(function(d, s, id) {
                   var js, fjs = d.getElementsByTagName(s)[0];
