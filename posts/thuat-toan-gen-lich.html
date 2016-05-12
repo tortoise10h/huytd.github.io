@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Thuật toán tạo lịch tháng trong Datepicker | Huy's Blog</title>
+        <title> Thuật toán tạo lịch tháng trong các component Datepicker | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,7 +19,7 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="thu-t-to-n-t-o-l-ch-th-ng-trong-datepicker">Thuật toán tạo lịch tháng trong Datepicker</h1>
+                <h1 id="thu-t-to-n-t-o-l-ch-th-ng-trong-c-c-component-datepicker">Thuật toán tạo lịch tháng trong các component Datepicker</h1>
 <p>Datepicker là một dạng component đã quá quen thuộc với các bạn làm front-end, được sử dụng rộng rãi trên rất nhiều ứng dụng web. Mục đích của nó là hiển thị một &quot;tờ&quot; lịch trên màn hình máy tính để người dùng có thể chọn ngày tháng một cách dễ dàng.</p>
 <p><img src="img/components_pickers_date3.png" alt=""></p>
 <p>Cách sử dụng các component này cũng rất là đơn giản, vì hầu như các thư viện UI phổ biến hiện nay đều có cả, ví dụ đây là cách sử dụng trong <a href="https://angular-ui.github.io/bootstrap/">Angular UI</a></p>
@@ -49,6 +49,42 @@ Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa
 <li>$century$: là thế kỷ hiện tại của năm đang xét, lưu ý: <strong>bắt đầu từ 0</strong>, như vậy <code>Thế kỷ 21 = 20</code></li>
 <li>$year$: là số năm thứ mấy thuộc thế kỉ đang xét, ví dụ: <code>Năm 2016 = 16</code></li>
 </ul>
+<table>
+<thead>
+<tr>
+<th>Ký hiệu</th>
+<th>Mô tả</th>
+<th>Ví dụ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$weekday$</td>
+<td>là thứ ngày mà chúng ta cần tìm</td>
+<td><code>0 = Chủ nhật</code>, <code>1 = Thứ 2</code>,...</td>
+</tr>
+<tr>
+<td>$month$</td>
+<td>là tháng chúng ta cần xét, giá trị <code>1</code> bắt đầu từ tháng 3</td>
+<td><code>Tháng 3 = 1</code>, <code>Tháng 4 = 2</code>,..., <code>Tháng 12 = 10</code>, <code>Tháng 1 = 11</code>, <code>Tháng 2 = 12</code></td>
+</tr>
+<tr>
+<td>$day$</td>
+<td>là ngày chúng ta cần tính</td>
+<td>ngày 1, 2, 3,..., 29, 30, 31</td>
+</tr>
+<tr>
+<td>$century$</td>
+<td>là thế kỷ hiện tại của năm đang xét, <strong>bắt đầu từ 0</strong></td>
+<td><code>Thế kỷ 21 = 20</code></td>
+</tr>
+<tr>
+<td>$year$</td>
+<td>là số năm thứ mấy thuộc thế kỉ đang xét</td>
+<td><code>Năm 2016 = 16</code></td>
+</tr>
+</tbody>
+</table>
 <hr>
 <p><strong>Ví dụ:</strong> Tìm xem ngày <code>18/09/2016</code> là thứ mấy?</p>
 <p>Đối với ngày $18/09/2016$ ta có:</p>
