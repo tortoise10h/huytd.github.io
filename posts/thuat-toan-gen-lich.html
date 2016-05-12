@@ -38,7 +38,7 @@ Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa
 </code></pre><p>Vì vậy, việc đầu tiên chúng ta cần làm là <em>xác định ngày đầu tiên của tháng cần tạo là ngày thứ mấy trong tuần</em>.</p>
 <p>Sau khi đã xác định được đâu là ngày bắt đầu, chúng ta sẽ bắt đầu điền tiếp vào các ngày tiếp theo cho đến hết tháng (30 hoặc 31 ngày). Riêng tháng 2 sẽ có 28 ngày, đặc biệt vào <em>năm nhuận</em> thì tháng 2 sẽ có 29 ngày. Vậy, việc thứ 2 cần làm đó là <em>xác định năm hiện tại có phải là năm nhuận</em> không.</p>
 <h2 id="c-ng-th-c-zeller-t-nh-th-ng-y-trong-tu-n">Công thức Zeller - Tính thứ ngày trong tuần</h2>
-<p><strong>Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần <a href="#implement-cong-thuc-zeller">Implement</a> luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)</strong></p>
+<p><strong>Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần <a href="#implement-c-ng-th-c-zeller">Implement</a> luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)</strong></p>
 <p>Đầu tiên, ta sẽ tìm hiểu về <strong>công thức Zeller</strong>. Đây là công thức giúp chúng ta xác định được một ngày thuộc thứ mấy. Giúp giải quyết vấn đề thứ 1 đã đề cập ở trên.</p>
 <p>Công thức Zeller có dạng:</p>
 <p>$weekday=\left( \frac{13\; \times \; month\; -\; 1}{5}+\frac{year}{4}+\frac{century}{4}+day+year-2\times century \right)\%7$</p>

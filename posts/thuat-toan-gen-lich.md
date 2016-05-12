@@ -33,7 +33,7 @@ Sau khi đã xác định được đâu là ngày bắt đầu, chúng ta sẽ 
 
 ## Công thức Zeller - Tính thứ ngày trong tuần
 
-**Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần [Implement](#implement-cong-thuc-zeller) luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)**
+**Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần [Implement](#implement-c-ng-th-c-zeller) luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)**
 
 Đầu tiên, ta sẽ tìm hiểu về **công thức Zeller**. Đây là công thức giúp chúng ta xác định được một ngày thuộc thứ mấy. Giúp giải quyết vấn đề thứ 1 đã đề cập ở trên.
 
