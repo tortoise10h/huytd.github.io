@@ -126,4 +126,4 @@ var zweekday = zeller(12, 5, 2016); // = 4.600000000000001
 var weekday = Math.trunc(zweekday); // = 4
 ```
 
-> Phàm trên đời, cái gì đơn giản thì không phải tại nó đơn giản, mà tại vì người ta đã làm giúp cho ta phần không đơn giản của nó mất rồi. - (Huy Trần phán)
+> Mọi công việc bất kỳ đều dễ đối với những người không phải làm nó. - Murphy's law
