@@ -1,4 +1,4 @@
-# Phức tạp hóa vấn đề: Datepicker và thuật toán đằng sau nó
+# Phức tạp hóa vấn đề: Datepicker và các thuật toán đằng sau nó
 
 Trong sê-ri bài viết **Phức tạp hóa vấn đề** này, mình sẽ trình bày các vấn đề kĩ thuật đằng sau những tác vụ đơn giản thường gặp trong công việc hằng ngày. Sẽ thật là tệ nếu chúng ta chỉ là những lập trình viên chỉ biết dùng những thứ được dọn ra sẵn và dâng tận miệng chỉ để xong việc, mà bỏ qua những kiến thức hay ho đằng sau, vốn đã dành cho chúng ta ngay từ đầu.
 
@@ -117,7 +117,7 @@ function zeller(d, m, y) {
 }
 ```
 
-Ở đây mình tách từng hàm xử lý ra cho dễ đọc, các bạn có thể gộp chung lại cho gọn cũng được.
+Ở đây mình tách từng hàm xử lý ra cho dễ đọc, các bạn có thể gộp chung lại cho gọn như thế này cũng được:
 
 ```
 function zeller(d, m, y) {
@@ -131,3 +131,101 @@ Kết quả của công thức Zeller không phải lúc nào cũng là số ngu
 var zweekday = zeller(12, 5, 2016); // = 4.600000000000001
 var weekday = Math.trunc(zweekday); // = 4
 ```
+
+## Xác định năm nhuận
+
+Cái này thì phổ biến quá rồi không có gì để nói, tổng hợp lại tí điều kiện xác định năm nhuận cho bạn nào cần:
+
+| Điều kiện            | Là năm nhuận? |
+|----------------------|---------------|
+| Không chia hết cho 4 | Sai           |
+| Chia hết cho 4       | Đúng          |
+| Chia hết cho 100     | Sai           |
+| Chia hết cho 400     | Đúng          |
+
+Giờ quăng code luôn:
+
+```
+function isLeap(year) {
+   if ((year % 4) || ((year % 100 === 0) && (year % 400))) return 0;
+   else return 1;
+}
+```
+
+Ở đây chúng ta trả về giá trị `0` (không nhuận) và `1` (nhuận) thay vì `true`/`false` để phục vụ cho hàm tính số ngày của tháng sẽ đề cập ở phần sau.
+
+## Tính số ngày của một tháng
+
+Tiếp đến chúng ta sẽ có hàm tính số ngày của một tháng, ví dụ tháng 1 là 31 ngày, tháng 2 sẽ có 28 ngày nếu không phải năm nhuận và 29 ngày nếu năm nhuận, code như sau:
+
+```
+function daysInMonth(month, year) {
+    return (month === 2) ? (28 + isLeap(year)) : 31 - (month - 1) % 7 % 2;
+}
+```
+
+## Gộp chung lại nào: Thuật toán lập lịch tháng
+
+Bây giờ chúng ta sẽ tổng hợp các phân tích ở trên và implement thuật toán lập lịch cho một tháng bất kì.
+
+**Input:** Tháng và năm cần lập lịch, ví dụ: **1** và **2016**
+
+**Output:** Một mảng 1 chiều chứa **42** phần tử ứng với một khung lịch **6x7** ô
+
+Đầu tiên ta sẽ khởi tạo mảng `result` 1 chiều gồm `42` phần tử, tất cả đều mang giá trị mặc định là `0`.
+Sau đó tạo 1 biến `startIndex`, có giá trị là kết quả của hàm `zeller()` với ngày đầu tiên của tháng (ngày 1). Cuối cùng bạn chỉ cần điền các ngày tương ứng từ (gía trị của) `startIndex` đến `daysInMonth()` của tháng hiện tại là hoàn thành.
+
+Sau đây là cách implement của thuật toán bằng JavaScript:
+
+```
+function calendar(month, year) {
+    var startIndex = Math.trunc(zeller(1, month, year));
+    var endIndex = daysInMonth(month, year);
+    var result = Array.apply(0, Array(42)).map(function(i){ return 0; });
+    for (var i = startIndex; i < endIndex + startIndex; i++) {
+        result[i] = (i - startIndex) + 1;
+    }
+    return result;
+}
+```
+
+Để sử dụng, chúng ta gọi hàm `calendar()`, truyền vào `tháng` và `năm` cần tìm:
+
+```
+var september = calendar(9, 2016);
+```
+
+Kết quả sẽ có dạng như sau (lưu ý các số `0` ở đầu và cuối kết quả):
+
+```
+[0, 0, 0, 0, 1, 2, 3, 4, 5, 6, ..., 28, 29, 30, 0, 0, 0, 0, 0, 0, 0, 0]
+```
+
+Vậy chúng ta sẽ sử dụng kết quả này như thế nào? Chúng ta sẽ đọc mảng này theo từng cụm 7 phần tử.
+
+Để kiểm chứng, mời bạn sử dụng câu lệnh `cal` (trong Mac OS X hoặc Linux) để in lịch của tháng 9 năm 2016 lên màn hình.
+
+```
+cal 9 2016
+```
+
+Và đối chiếu với mảng `september` của chúng ta.
+
+```
+                                       September 2016
+                                    Su Mo Tu We Th Fr Sa
+0,  0,  0,  0,  1,  2,  3,                       1  2  3
+4,  5,  6,  7,  8,  9,  10,          4  5  6  7  8  9 10
+11, 12, 13, 14, 15, 16, 17,         11 12 13 14 15 16 17
+18, 19, 20, 21, 22, 23, 24,         18 19 20 21 22 23 24
+25, 26, 27, 28, 29, 30, 0,          25 26 27 28 29 30
+0,  0,  0,  0,  0,  0,  0
+```
+
+---
+
+Hy vọng qua bài viết này, mỗi khi nghĩ tới Datepicker hoặc việc xử lý ngày tháng, các bạn sẽ cảm thấy nó phiền phức hơn một tí =)) Nhưng bù lại các bạn đã hiểu rằng nó được tạo ra như thế nào (và cũng hiểu luôn câu quote Murphy's Law ở đầu bài :v).
+
+Đến đây bạn hoàn toàn có thể tự viết cho riêng mình một component Datepicker mà không bị phụ thuộc vào bất cứ một món ăn sẵn nào nữa.
+
+Hẹn gặp lại các bạn trong các bài viết tiếp theo của sê-ri **Phức tạp hoá vấn đề** ^^
