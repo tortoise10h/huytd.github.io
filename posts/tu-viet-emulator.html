@@ -320,6 +320,11 @@ Gán <code>Vx</code> = <code>Vx / 2</code></p>
           ga('create', 'UA-71353335-1', 'auto');
           ga('send', 'pageview');
 
+          if (FB) {
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          }
         </script>
         <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
         <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
