@@ -1,5 +1,10 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
+[Phức tạp hoá vấn đề: Các thuật toán đằng sau Datepicker](/posts/phuc-tap-hoa-datepicker.html)
+
+Bài đầu tiên của sê ri **Phức tạp hoá vấn đề**, đây là chuyên mục chuyện bé xé ra to :v Lần này chúng ta sẽ cùng đi vào phân tích các component Datepicker để xem thuật toán nào đã góp phần xây dựng nên nó.
+
+---
 [Lập trình và toán học](/posts/lap-trinh-va-toan-hoc.html)
 
 Tui và Toán đã từng là hai kẻ thù không đội trời chung trong suốt hơn mười lăm năm ròng rã. Ngay từ ánh nhìn đầu tiên đã ghét nhau rồi...
