@@ -171,7 +171,7 @@ var weekday = Math.trunc(zweekday); // = 4
 </code></pre><p>Ở đây chúng ta trả về giá trị <code>0</code> (không nhuận) và <code>1</code> (nhuận) thay vì <code>true</code>/<code>false</code> để phục vụ cho hàm tính số ngày của tháng sẽ đề cập ở phần sau.</p>
 <h2 id="t-nh-s-ng-y-c-a-m-t-th-ng">Tính số ngày của một tháng</h2>
 <p>Tiếp đến chúng ta sẽ có hàm tính số ngày của một tháng, ví dụ tháng 1 là 31 ngày, tháng 2 sẽ có 28 ngày nếu không phải năm nhuận và 29 ngày nếu năm nhuận, code như sau:</p>
-<pre><code>function daysInMonth(month, year) {
+<pre><code>function daysIn(month, year) {
     return (month === 2) ? (28 + isLeap(year)) : 31 - (month - 1) % 7 % 2;
 }
 </code></pre><h2 id="g-p-chung-l-i-n-o-thu-t-to-n-l-p-l-ch-th-ng">Gộp chung lại nào: Thuật toán lập lịch tháng</h2>
@@ -179,11 +179,11 @@ var weekday = Math.trunc(zweekday); // = 4
 <p><strong>Input:</strong> Tháng và năm cần lập lịch, ví dụ: <strong>1</strong> và <strong>2016</strong></p>
 <p><strong>Output:</strong> Một mảng 1 chiều chứa <strong>42</strong> phần tử ứng với một khung lịch <strong>6x7</strong> ô</p>
 <p>Đầu tiên ta sẽ khởi tạo mảng <code>result</code> 1 chiều gồm <code>42</code> phần tử, tất cả đều mang giá trị mặc định là <code>0</code>.
-Sau đó tạo 1 biến <code>startIndex</code>, có giá trị là kết quả của hàm <code>zeller()</code> với ngày đầu tiên của tháng (ngày 1). Cuối cùng bạn chỉ cần điền các ngày tương ứng từ (gía trị của) <code>startIndex</code> đến <code>daysInMonth()</code> của tháng hiện tại là hoàn thành.</p>
+Sau đó tạo 1 biến <code>startIndex</code>, có giá trị là kết quả của hàm <code>zeller()</code> với ngày đầu tiên của tháng (ngày 1). Cuối cùng bạn chỉ cần điền các ngày tương ứng từ (gía trị của) <code>startIndex</code> đến <code>daysIn(month, year)</code> của tháng hiện tại là hoàn thành.</p>
 <p>Sau đây là cách implement của thuật toán bằng JavaScript:</p>
 <pre><code>function calendar(month, year) {
     var startIndex = Math.trunc(zeller(1, month, year));
-    var endIndex = daysInMonth(month, year);
+    var endIndex = daysIn(month, year);
     var result = Array.apply(0, Array(42)).map(function(i){ return 0; });
     for (var i = startIndex; i &lt; endIndex + startIndex; i++) {
         result[i] = (i - startIndex) + 1;

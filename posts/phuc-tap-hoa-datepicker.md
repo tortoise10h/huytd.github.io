@@ -159,7 +159,7 @@ function isLeap(year) {
 Tiếp đến chúng ta sẽ có hàm tính số ngày của một tháng, ví dụ tháng 1 là 31 ngày, tháng 2 sẽ có 28 ngày nếu không phải năm nhuận và 29 ngày nếu năm nhuận, code như sau:
 
 ```
-function daysInMonth(month, year) {
+function daysIn(month, year) {
     return (month === 2) ? (28 + isLeap(year)) : 31 - (month - 1) % 7 % 2;
 }
 ```
@@ -173,14 +173,14 @@ Bây giờ chúng ta sẽ tổng hợp các phân tích ở trên và implement 
 **Output:** Một mảng 1 chiều chứa **42** phần tử ứng với một khung lịch **6x7** ô
 
 Đầu tiên ta sẽ khởi tạo mảng `result` 1 chiều gồm `42` phần tử, tất cả đều mang giá trị mặc định là `0`.
-Sau đó tạo 1 biến `startIndex`, có giá trị là kết quả của hàm `zeller()` với ngày đầu tiên của tháng (ngày 1). Cuối cùng bạn chỉ cần điền các ngày tương ứng từ (gía trị của) `startIndex` đến `daysInMonth()` của tháng hiện tại là hoàn thành.
+Sau đó tạo 1 biến `startIndex`, có giá trị là kết quả của hàm `zeller()` với ngày đầu tiên của tháng (ngày 1). Cuối cùng bạn chỉ cần điền các ngày tương ứng từ (gía trị của) `startIndex` đến `daysIn(month, year)` của tháng hiện tại là hoàn thành.
 
 Sau đây là cách implement của thuật toán bằng JavaScript:
 
 ```
 function calendar(month, year) {
     var startIndex = Math.trunc(zeller(1, month, year));
-    var endIndex = daysInMonth(month, year);
+    var endIndex = daysIn(month, year);
     var result = Array.apply(0, Array(42)).map(function(i){ return 0; });
     for (var i = startIndex; i < endIndex + startIndex; i++) {
         result[i] = (i - startIndex) + 1;
