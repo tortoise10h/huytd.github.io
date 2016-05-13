@@ -39,6 +39,8 @@ Sau khi đã xác định được đâu là ngày bắt đầu, chúng ta sẽ 
 
 ## Công thức Zeller - Tính thứ ngày trong tuần
 
+![](img/thinking.jpg)
+
 **Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần [Implement](#implement-c-ng-th-c-zeller) luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)**
 
 Đầu tiên, ta sẽ tìm hiểu về **công thức Zeller**. Đây là công thức giúp chúng ta xác định được một ngày thuộc thứ mấy. Giúp giải quyết vấn đề thứ 1 đã đề cập ở trên.
@@ -134,6 +136,8 @@ var weekday = Math.trunc(zweekday); // = 4
 
 ## Xác định năm nhuận
 
+![](img/leapyear.jpg)
+
 Cái này thì phổ biến quá rồi không có gì để nói, tổng hợp lại tí điều kiện xác định năm nhuận cho bạn nào cần:
 
 | Điều kiện            | Là năm nhuận? |
@@ -156,6 +160,8 @@ function isLeap(year) {
 
 ## Tính số ngày của một tháng
 
+![](img/daysmonth.jpg)
+
 Tiếp đến chúng ta sẽ có hàm tính số ngày của một tháng, ví dụ tháng 1 là 31 ngày, tháng 2 sẽ có 28 ngày nếu không phải năm nhuận và 29 ngày nếu năm nhuận, code như sau:
 
 ```
@@ -165,6 +171,8 @@ function daysIn(month, year) {
 ```
 
 ## Gộp chung lại nào: Thuật toán lập lịch tháng
+
+![](img/letscook.jpg)
 
 Bây giờ chúng ta sẽ tổng hợp các phân tích ở trên và implement thuật toán lập lịch cho một tháng bất kì.
 

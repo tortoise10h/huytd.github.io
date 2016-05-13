@@ -43,6 +43,7 @@ Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa   Su Mo Tu We Th Fr Sa
 </code></pre><p>Vì vậy, việc đầu tiên chúng ta cần làm là <em>xác định ngày đầu tiên của tháng cần tạo là ngày thứ mấy trong tuần</em>.</p>
 <p>Sau khi đã xác định được đâu là ngày bắt đầu, chúng ta sẽ bắt đầu điền tiếp vào các ngày tiếp theo cho đến hết tháng (30 hoặc 31 ngày). Riêng tháng 2 sẽ có 28 ngày, đặc biệt vào <em>năm nhuận</em> thì tháng 2 sẽ có 29 ngày. Vậy, việc thứ 2 cần làm đó là <em>xác định năm hiện tại có phải là năm nhuận</em> không.</p>
 <h2 id="c-ng-th-c-zeller-t-nh-th-ng-y-trong-tu-n">Công thức Zeller - Tính thứ ngày trong tuần</h2>
+<p><img src="img/thinking.jpg" alt=""></p>
 <p><strong>Nếu không thích toán thì các bạn có thể bỏ qua và đọc đến phần <a href="#implement-c-ng-th-c-zeller">Implement</a> luôn cũng được, nhưng mà nên đọc phần này để hiểu nhé :)</strong></p>
 <p>Đầu tiên, ta sẽ tìm hiểu về <strong>công thức Zeller</strong>. Đây là công thức giúp chúng ta xác định được một ngày thuộc thứ mấy. Giúp giải quyết vấn đề thứ 1 đã đề cập ở trên.</p>
 <p>Công thức Zeller có dạng:</p>
@@ -136,6 +137,7 @@ function zeller(d, m, y) {
 <pre><code>var zweekday = zeller(12, 5, 2016); // = 4.600000000000001
 var weekday = Math.trunc(zweekday); // = 4
 </code></pre><h2 id="x-c-nh-n-m-nhu-n">Xác định năm nhuận</h2>
+<p><img src="img/leapyear.jpg" alt=""></p>
 <p>Cái này thì phổ biến quá rồi không có gì để nói, tổng hợp lại tí điều kiện xác định năm nhuận cho bạn nào cần:</p>
 <table>
 <thead>
@@ -170,11 +172,13 @@ var weekday = Math.trunc(zweekday); // = 4
 }
 </code></pre><p>Ở đây chúng ta trả về giá trị <code>0</code> (không nhuận) và <code>1</code> (nhuận) thay vì <code>true</code>/<code>false</code> để phục vụ cho hàm tính số ngày của tháng sẽ đề cập ở phần sau.</p>
 <h2 id="t-nh-s-ng-y-c-a-m-t-th-ng">Tính số ngày của một tháng</h2>
+<p><img src="img/daysmonth.jpg" alt=""></p>
 <p>Tiếp đến chúng ta sẽ có hàm tính số ngày của một tháng, ví dụ tháng 1 là 31 ngày, tháng 2 sẽ có 28 ngày nếu không phải năm nhuận và 29 ngày nếu năm nhuận, code như sau:</p>
 <pre><code>function daysIn(month, year) {
     return (month === 2) ? (28 + isLeap(year)) : 31 - (month - 1) % 7 % 2;
 }
 </code></pre><h2 id="g-p-chung-l-i-n-o-thu-t-to-n-l-p-l-ch-th-ng">Gộp chung lại nào: Thuật toán lập lịch tháng</h2>
+<p><img src="img/letscook.jpg" alt=""></p>
 <p>Bây giờ chúng ta sẽ tổng hợp các phân tích ở trên và implement thuật toán lập lịch cho một tháng bất kì.</p>
 <p><strong>Input:</strong> Tháng và năm cần lập lịch, ví dụ: <strong>1</strong> và <strong>2016</strong></p>
 <p><strong>Output:</strong> Một mảng 1 chiều chứa <strong>42</strong> phần tử ứng với một khung lịch <strong>6x7</strong> ô</p>
