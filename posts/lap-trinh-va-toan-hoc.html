@@ -94,14 +94,6 @@
 <li>Xây dựng recommend engine bằng NodeJS (<a href="https://www.toptal.com/algorithms/predicting-likes-inside-a-simple-recommendation-engine">https://www.toptal.com/algorithms/predicting-likes-inside-a-simple-recommendation-engine</a>)</li>
 </ul>
 
-                <div id="fb-root"></div>
-                <script>(function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) return;
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=462066520669072";
-                  fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));</script>
                 <div class="fb-like" data-href="http://huytd.github.io/posts/lap-trinh-va-toan-hoc.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
@@ -144,12 +136,27 @@
 
           ga('create', 'UA-71353335-1', 'auto');
           ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
 
-          if (FB) {
             FB.Event.subscribe('edge.create', function(url) {
               ga('send', 'social', 'facebook', 'like', url);
             });
-          }
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
         </script>
         <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
         <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
