@@ -2,7 +2,7 @@
 
 Nhân dịp đầu năm, mình xin viết một bài bàn về chuyện đọc sách, dựa trên những kinh nghiệm cá nhân, dành tặng các bạn nào đã trót đặt ra mục tiêu đọc 10 hay 20 cuốn sách trong năm mới **một lần nữa** và chưa có cơ hội thực hiện. Và cả những bạn nào chưa có ý định đọc sách. Hy vọng các bạn sẽ hoàn thành mục tiêu mình đặt ra và đọc càng nhiều sách càng tốt trong năm nay :)
 
-# Mở bài
+## Mở bài
 
 Như các bạn đã biết, ngay từ khi mới chập chững vào lớp 1 hay từ mẫu giáo cũng đã biết, đến khi lớn lên vào Đại học hay không vào đại học thì cũng biết luôn là đọc sách rất có lợi. Hằng ngày, mọi người vẫn kháo nhau rằng sách là kho tàng kiến thức của nhân loại, đọc sách là một phương pháp thể dục cho trí óc và là cách hiệu quả nhất để tiếp thu kho tàng kiến thức đó.
 
@@ -12,7 +12,7 @@ Và tất nhiên ai cũng muốn đọc sách để xem thử nó có nâng tầ
 
 Vậy một ngày có 24 tiếng, thời gian đi đâu hết nhỉ? Để xem nào, sáng 8h thức dậy, vội vã ăn sáng đánh răng, 9h phóng xe lên cty, đọc báo, "làm việc nước" trên skype, đến đâu tầm 12h thì rủ nhau ra ngoài ăn trưa, ăn trưa xong vào làm 1 giấc tới 1h30 hoặc có khi là đế chế, half-life, gần đây có cả dota, starcraft đến tận 2h chiều. Đến khi sếp bước xuống thì lật đật alt-tab ra ngoài bật IntelliJ hay Sublime lên ngồi gõ gõ. 6h chiều tắt máy đi về, tới nhà thì tầm 6h30, 7h đêm. Dân FA thì bật máy tính lên và chơi game hoặc lướt Kênh 14 tiếp, các bạn khá khẩm hơn tí thì dẫn gấu đi làm nghĩa vụ hằng ngày là chạy xe quanh thành phố, nộp sưu thuế cho mấy quán trà chanh, cà phê, loáng phát là đến 9, 10h đêm. Hôm nào cãi nhau với gấu thì đùng đùng bỏ về lấy điện thoại ra nhắn tin cãi nhau tiếp đến tận 1, 2h sáng, anh nào ko cãi nhau thì về mở máy ra chiến Freelancer hay 9gag đến tận rạng sáng ngày hôm sau.... Thế đấy, xong bà nó một ngày rồi. Thời gian đâu mà đọc sách nữa...
 
-# Dài dòng quá, thân bài
+## Dài dòng quá, thân bài
 
 Thực ra đây là cái lịch trình sinh hoạt của mình đúng 1 năm về trước. Lúc đó thời gian thì tiêu biến thật là nhanh nhưng mà chung quy lại một ngày chả làm được cái gì nhiều, mặc dù lịch trình thì luôn sát nút như vậy. Và tất nhiên giấc mơ đọc sách để có ngày viết những bài review hoành tráng như các bậc vĩ nhân trên mạng, hay các bài xã hội học thâm nho như triết học đường phố luôn là cái giấc mơ xa vời, vì chưa bao giờ có cuốn sách nào được lật quá 10 trang đầu tiên...
 
@@ -101,7 +101,7 @@ Tuỳ thuộc vào mục đích của loại sách mà chúng ta đang muốn đ
 - **Đọc kiểu Cưỡi ngựa xem hoa:** Đọc lươn lướt để biết trên đời này có cái gì, và biết được thứ kiến thức gì nó nằm ở đâu để sau này có thể tiện tra cứu lại. Cách này có thể áp dụng khi đọc các bài viết kĩ thuật trên internet, nhất là các bài về lập trình, đảo mắt nhìn quanh một lượt, liếc qua vài dòng code rồi nếu thích thì đi vào đọc chi tiết nội dung bài.
 - **Đọc kiểu Hiểu:** Phải đọc và lĩnh hội được cuốn sách ở mức độ có thể tự xây dựng lại nội dung, có thể khái quát cũng được, mà không cần nhìn vào sách nữa. Cần có sự thực hành đi đôi với quá trình đọc sách (chạy thử code, thử giải các câu đố có trong sách, lý giải một hành động nào đó của nhân vật chính trong sách, hoặc thực hành theo các kinh nghiệm làm giàu nếu bạn dám :trollface:...), đòi hỏi cần phải đọc nghiêm túc hơn.
 
-# Kết bài
+## Kết bài
 
 Trên đây là kinh nghiệm đọc của mình, lần mò ra được trong một năm qua, sau khi vận dụng và thay đổi thì mình cũng đã hoàn thành được kha khá một vài cuốn sách trong vô số cuốn sách mà mình muốn đọc. Hy vọng các bạn sẽ có thêm động lực để đọc sau bài viết này. Và nếu có ai còn những kinh nghiệm quý giá nào khác, xin mời các bạn chia sẽ ở phần comment cuối bài viết :D
 
