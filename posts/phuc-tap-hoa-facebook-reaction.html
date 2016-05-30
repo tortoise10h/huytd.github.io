@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Phức tạp hoá vấn đề: Phân tích và mô phỏng nút cảm xúc của Facebook - Phần 1 | Huy's Blog</title>
+        <title> Phức tạp hoá vấn đề: Phân tích và mô phỏng nút cảm xúc của Facebook | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,26 +19,26 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="ph-c-t-p-ho-v-n-ph-n-t-ch-v-m-ph-ng-n-t-c-m-x-c-c-a-facebook-ph-n-1">Phức tạp hoá vấn đề: Phân tích và mô phỏng nút cảm xúc của Facebook - Phần 1</h1>
+                <h1 id="ph-c-t-p-ho-v-n-ph-n-t-ch-v-m-ph-ng-n-t-c-m-x-c-c-a-facebook">Phức tạp hoá vấn đề: Phân tích và mô phỏng nút cảm xúc của Facebook</h1>
 <p><img src="img/css-animation.png" alt="cssanim.png"></p>
 <p>Tiếp tục sê-ri <a href="http://huytd.github.io/posts/phuc-tap-hoa-datepicker.html">Phức tạp hoá vấn đề</a> lần này, chúng ta sẽ cùng tìm hiểu và mô phỏng lại một chức năng mà mọi người đang bắt đầu sử dụng hằng ngày, đó là chức năng thể hiện cảm xúc (reaction) của Facebook.</p>
-<p><img src="img/facebook-reaction.png" alt="reaction.png"></p>
+<p><img src="img/css-animation-example.png" alt="reaction.png"></p>
 <p>Khi bạn rê chuột vào nút <strong>Like</strong>, một khối màu trắng sẽ hiện ra, đồng thời các biểu tượng cảm xúc cũng bay lên, nhún nhún trông rất là bắt mắt, khi ta rê chuột vào từng biểu tượng nó sẽ to ra, sau đó ta chỉ cần click vào đó để thể hiện cảm xúc của mình.</p>
 <h2 id="ph-n-t-ch-hi-u-ng-reaction">Phân tích hiệu ứng Reaction</h2>
 <p>Đầu tiên, để hiểu rõ hơn về hiệu ứng này, chúng ta cùng phân tích nó bằng cách chia nhỏ thành từng bước.</p>
 <p>Đây là trạng thái đầu tiên của một bản tin trên Newsfeed mà chúng ta thường thấy:</p>
-<p><img src="img/newsfeed-item.png" alt="newsitem.png"></p>
+<p><img src="img/css-animation-newsfeed-blank.png" alt="newsitem.png"></p>
 <p>Tiếp theo, khi chúng ta rê chuột vào nút <strong>Like</strong>, hộp Reactions sẽ hiện ra:</p>
-<p><img src="img/newsfeed-item-hover.png" alt="reactionshow.png"></p>
+<p><img src="img/css-animation-newsfeed-hover-start.png" alt="reactionshow.png"></p>
 <p>Liền sau đó là các biểu tượng cảm xúc xuất hiện, các biểu tượng cảm xúc này xuất hiện từ những vị trí khác nhau (về độ cao), và từ những thời điểm khác nhau (cách nhau vài mili-giây), tạo cảm giác rất mượt, mũi tên màu đỏ trong hình thể hiện lộ trình chuyển động của các biểu tượng cảm xúc:</p>
-<p><img src="img/newsfeed-item-icon-anim.png" alt="reactionicons.png"></p>
+<p><img src="img/css-animation-newsfeed-analysis.png" alt="reactionicons.png"></p>
 <p>Nếu đi sâu vào chi tiết của hiệu ứng này, chúng ta có thể thấy mỗi một biểu tượng cảm xúc, sẽ di chuyển với lộ trình như sau:</p>
-<p><img src="img/newsfeed-item-icon-anim-2.png" alt="reactioniconanim.png"></p>
+<p><img src="img/css-animation-newsfeed-analysis-2.png" alt="reactioniconanim.png"></p>
 <p>Đầu tiên chúng trong suốt (opacity thấp), và cách xa hộp Reaction, sau đó chuyển động tiến dần về hộp Reaction, tăng dần opacity, đến khi gặp hộp Reaction thì chúng còn chuyển động lên trên một khoảng nhỏ trước khi chạy ngược trở lại và đi về vị trí cần đến.</p>
 <p>Sau khi hoàn thành hiệu ứng xuất hiện, các biểu tượng cảm xúc lúc này trải đều trên hộp Reactions như hình sau, và chờ sự tương tác từ phía người dùng:</p>
-<p><img src="img/newsfeed-icon-finish.png" alt="reactionok.png"></p>
+<p><img src="img/css-animation-newsfeed-finish.png" alt="reactionok.png"></p>
 <p>Khi người dùng rê chuột vào từng biểu tượng cảm xúc, nó sẽ được phóng to lên đồng thời một label nhỏ có nền màu đen hiện ra trên đầu:</p>
-<p><img src="img/newsfeed-icon-hover.png" alt="reactionhover.png"></p>
+<p><img src="img/css-animation-newsfeed-hover.png" alt="reactionhover.png"></p>
 <h2 id="implement-ph-n-th-">Implement phần &quot;thô&quot;</h2>
 <p>Chúng ta sẽ implement lại hiệu ứng này bằng các kĩ thuật animation, transition, transform của CSS.</p>
 <p>Đầu tiên, chúng ta sẽ xây dựng phần &quot;thô&quot; của hiệu ứng, tức là tạo ra các đối tượng trên màn hình, rê chuột vào nó ẩn hiện ẩn hiện, nhưng chưa có hiệu ứng chuyển động mượt mà gì cả. Phần mông má mượt mà đó sẽ dành cho phần sau.</p>
@@ -111,7 +111,7 @@
     }
   }
 </code></pre><p>Chúng ta có kết quả như hình bên dưới:</p>
-<p><img src="img/newsfeed-anim-1.gif" alt="hover animation"></p>
+<p><img src="img/css-animation-newsfeed-anim-1.gif" alt="hover animation"></p>
 <h3 id="c-c-bi-u-t-ng-c-m-x-c">Các biểu tượng cảm xúc</h3>
 <p>Giờ chúng ta thêm vào các biểu tượng cảm xúc (emo icon), mà thực ra trong bài này chỉ dùng các hình tròn màu tím, bé bé xinh xinh để mô phỏng thôi :v</p>
 <p>Mỗi một emo icon sẽ có dạng như sau:</p>
@@ -184,7 +184,7 @@
 }
 </code></pre><p>Ở sự kiện <code>:hover</code> của <code>reaction-icon</code>, chúng ta dùng thuộc tính <code>transform: scale(1.4)</code> để phóng to emo icon này lên <code>1.4</code> lần, đồng thời dùng thuộc tính <code>transform-origin: bottom</code> để xác định tâm của emo icon là ở cạnh bên dưới của nó. Bạn có thể thử bỏ hoặc thay đổi thuộc tính <code>transform-origin</code> để xem cách nó phóng to như thế nào khi không gán về <code>bottom</code>.</p>
 <p>Ta có kết quả như hình sau:</p>
-<p><img src="img/newsfeed-anim-2.gif" alt="hover icon"></p>
+<p><img src="img/css-animation-newsfeed-anim-2.gif" alt="hover icon"></p>
 <h3 id="v-ng-hover-chu-t-c-a-n-t-like">Vùng hover chuột của nút like</h3>
 <p>Nếu để ý, các bạn sẽ thấy hộp <code>reaction-box</code> của chúng ta nằm quá sát so với nút Like. Thử dịch chuyển nó lên một tí xem?</p>
 <p>Thay đổi thuộc tính <code>bottom</code> của class <code>reaction-box</code> lên <code>10px</code>, từ <code>25px</code> thành <code>35px</code>.</p>
@@ -193,7 +193,7 @@
     left: -25px; bottom: 35px;
     ...
 </code></pre><p>Nhìn có vẻ ổn hơn rồi, nhưng mà cái quái gì đây? Không rê chuột lên reaction box được nữa :(( Sao ông phá code của tui vậy, ông thần trời đánh kia???</p>
-<p><img src="img/newsfeed-anim-3.gif" alt="error"></p>
+<p><img src="img/css-animation-newsfeed-anim-3.gif" alt="error"></p>
 <p>Thực ra nguyên nhân là do khoảng cách của hộp reaction box đang cách nút like của chúng ta một khoảng <code>10px</code>, nên khi chúng ta vừa định rê chuột lên reaction box thì vô tình rớt ra khỏi phạm vi rê chuột của nút Like, dẫn đến sự kiện <code>:hover</code> của nút Like bị mất. Nếu xem trong file CSS thì các bạn sẽ thấy, chúng ta hiển thị reaction box thông qua sự kiện <code>:hover</code> của nút Like.</p>
 <p>Vậy cách xử lý ở đây là làm cho nút Like to ra để con trỏ chuột vẫn nằm bên trong nó trong đoạn đường đi lên reaction box.</p>
 <p>Có rất nhiều cách để làm điều này, mình sẽ giới thiệu một cách đơn giản nhất, đó là sử dụng pseudo element <code>::before</code>. Khi ta sử dụng <code>::before</code>, trình duyệt sẽ chèn một đoạn nội dung vào đầu của thẻ mang <code>::before</code>. Ở đây chúng ta sẽ chèn vào một đoạn nội dung trong suốt, user không nhìn thấy được, có kích thước <code>44x10</code>, lấp vào khoảng trống giữa nút Like và reaction box.</p>
@@ -223,8 +223,8 @@
    }
 }
 </code></pre><p>Giờ refresh lại page để xem lại thành quả nào:</p>
-<p><img src="img/newsfeed-anim-4.gif" alt="raw finished"></p>
-<p>Sau đây là đoạn code đầy đủ cho giai đoạn này:</p>
+<p><img src="img/css-animation-newsfeed-anim-4.gif" alt="raw finished"></p>
+<p>Các bạn có thể tham khảo đoạn code đầy đủ cho giai đoạn implement phần &quot;thô&quot; tại <a href="http://codepen.io/huytd/pen/ZOEoMe">Codepen - Facebook Reaction Animation - Part 1</a></p>
 <p>Code HTML:</p>
 <pre><code>&lt;div class=&quot;feed&quot;&gt;
   &lt;a class=&quot;like-btn&quot;&gt;
@@ -323,10 +323,207 @@
     }
   }
 }
-</code></pre><p>Phần 1 đến đây là kết thúc. Chúng ta tạm thời nghỉ tay ở đây. Code nhiều quá là không tốt. Nhớ nhé, không hề tốt.</p>
-<p>Hẹn gặp lại các bạn trong phần 2, chúng ta sẽ đi vào phần mông má :v implement các hiệu ứng chuyển động để làm cho reaction box của chúng ta mượt mà hơn.</p>
+</code></pre><p>Chúng ta tạm thời nghỉ tay ở đây. Các bạn có thể đứng dậy đi uống cà phê, ngồi xem lại code và nghiền ngẫm hoặc đánh một giấc trước khi đi vào giai đoạn chông gai tiêp theo =))</p>
+<hr>
+<h2 id="implement-hi-u-ng-chuy-n-ng">Implement hiệu ứng chuyển động</h2>
+<p>Bây giờ chúng ta đi vào phần &quot;mông má&quot;. Trước khi bắt đầu phần này thì mình cũng xin làm công tác tư tưởng với các bạn luôn là ở đây chúng ta chỉ &quot;mô phỏng&quot;, nên chắc chắn nó không có &quot;mượt&quot; đến cái level như của Facebook thực tế được, cho nên đề nghị các bạn không yêu đừng nói lời cay đắng, không được comment đả kích mấy câu kiểu như là &quot;sao trông nó xấu như tác giả vậy&quot;, không có zui đâu. :v</p>
+<h3 id="hi-u-ng-ph-ng-to-cho-emo-icon">Hiệu ứng phóng to cho emo icon</h3>
+<p>Chúng ta sẽ khởi động nhẹ nhàng với hiệu ứng phóng to dần dần cho emo icon.</p>
+<p>Chỉ cần thêm vào thuộc tính <code>transition: all 0.3s;</code> cho class <code>reaction-icon</code> như sau:</p>
+<p>CSS (SCSS):</p>
+<pre><code>.reaction-icon {
+  ...
+  // Animation
+  transition: all 0.3s;
+</code></pre><p>Thuộc tính trên có nghĩa là chúng ta cho trình duyệt biết rằng, tất cả (<code>all</code>) các thuộc tính của class <code>reaction-icon</code> đều có thể được thay đổi một cách từ từ, trong thời gian <code>0.3 giây</code></p>
+<p>Và đây là thành quả:</p>
+<p><img src="img/css-animation-newsfeed-anim-5.gif" alt=""></p>
+<p>Để hiểu thêm về <code>transition</code>, các bạn có thể tìm đọc tại đây: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions">Using CSS transitions - MDN</a></p>
+<h3 id="hi-u-ng-chuy-n-ng-cho-c-c-emo-icon">Hiệu ứng chuyển động cho các emo icon</h3>
+<p>Chúng ta cùng xem lại hình minh hoạ lộ trình chuyển động của một emo icon:</p>
+<p><img src="img/css-animation-newsfeed-analysis-2.png" alt="reactioniconanim.png"></p>
+<p>Chuyển động này có thể được minh hoạ bằng đồ thị sau:</p>
+<p><img src="img/css-animation-newsfeed-function.png" alt="ease.png"></p>
+<p>Hình bên trái là đồ thị minh hoạ đường đi của emo icon, và hình bên phải là mô phỏng chi tiết vị trí ứng với từng mốc thời gian của emo icon.</p>
+<p>Vậy việc chúng ta cần làm là điều khiển cho các emo icon di chuyển theo đồ thị trên.</p>
+<p>Khi làm việc với <code>transition</code>, chúng ta có thể điều khiển được sự thay đổi của các thuộc tính CSS theo thời gian thông qua các hàm như trên, chúng ta gọi các hàm này là <code>easing function</code> hoặc <code>timing function</code> và việc điều khiển được thực hiện thông qua thuộc tính <code>transition-timing-function</code>.</p>
+<p>Các bạn có thể đọc thêm về <code>timing function</code> tại đây: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">Timing Function - MDN</a></p>
+<p>Quay trở lại với đồ thị chúng ta đang cần dùng, đồ thị này còn có một tên gọi khác là <code>easeOutBack</code>, là một đường ben-zen (benzier), có thể định nghĩa trong CSS thông qua hàm <code>cubic-bezier()</code>.</p>
+<p>Chúng ta sẽ sử dụng hàm benzier được viết sẵn tại đây <a href="http://easings.net/#easeOutBack">Easing Function - easeOutBack</a></p>
+<pre><code>cubic-bezier(0.175, 0.885, 0.32, 1.275)
+</code></pre><p>Trông thì có vẻ rất phức tạp, nhưng cách sử dụng rất đơn giản, chúng ta chỉ cần thay đổi thuộc tính <code>transition: all 0.3s</code> của class <code>reaction-icon</code> ở phần trước thành:</p>
+<pre><code>.reaction-icon {
+  ...
+  // Animation
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+</code></pre><p>Bây giờ, để thực hiện hiệu ứng chuyển động, đầu tiên chúng ta sẽ thiết lập các thuộc tính ban đầu của các emo icon (reaction-icon), gồm có: Trong suốt, nằm cách vị trí cần hiển thị <code>100px</code> và scale nhỏ về thành <code>0</code>.</p>
+<pre><code>.reaction-icon {
+  ...
+  // Animation
+  opacity: 0;
+  transform: translate(0, 100px) scale(0);
+</code></pre><p>Sau đó, ta viết thêm 1 class có tên là <code>show</code> cho các emo icon này, trong sự kiện <code>:hover</code> của class <code>like-btn</code>:</p>
+<pre><code>&amp;:hover {
+    ...
 
-                <div class="fb-like" data-href="http://huytd.github.io/posts/phuc-tap-hoa-facebook-reaction-p1.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    .reaction-box {
+      ...
+
+      .reaction-icon {
+
+        &amp;.show {
+          opacity: 1;
+          transform: translate(0, 0) scale(1);
+        }
+</code></pre><p>Mục đích của việc tạo define các thuộc tính ban đầu và việc tạo ra class <code>show</code> là để phục vụ cho bước tiếp theo: Khi người dùng rê chuột vào nút Like (class <code>like-btn</code>) thì chúng ta sẽ tìm các emo icon (class <code>reaction-icon</code>) và gán cho chúng class <code>show</code>, để kích hoạt hiệu ứng chuyển động. Việc gán class mới sẽ được thực hiện bằng đoạn JavaScript (jQuery) sau:</p>
+<pre><code>$(function(){
+  $(&quot;.like-btn&quot;).hover(function() {
+    $(&quot;.reaction-icon&quot;).each(function(index, element) {
+      setTimeout(function(){
+        $(element).addClass(&quot;show&quot;);
+      }, index * 100);
+    });
+  }, function() {
+    $(&quot;.reaction-icon&quot;).removeClass(&quot;show&quot;)
+  });
+})
+</code></pre><p>Hàm <code>$().each()</code> của jQuery truyền vào 2 tham số là <code>index</code> (số thứ tự của element đang duyệt) và <code>element</code> (bản thân cái element đó).</p>
+<p>Tại đây chúng ta sử dụng hàm <code>setTimeout()</code> để trì hoãn (delay) việc thực thi lệnh <code>addClass</code> cho từng emo icon dựa trên <code>index</code> của nó. Theo thứ tự từ emo icon đầu tiên (<code>index = 0</code>) đến emo icon cuối cùng (<code>index = 5</code>), thời gian chờ để thực hiện lệnh <code>addClass</code> là: <code>0</code>, <code>100</code>, <code>200</code>, <code>300</code>, <code>400</code> và <code>500</code>, như vậy, các emo icon sẽ được xuất hiện lần lượt chứ không phải đồng loạt.</p>
+<p>Đến đây chúng ta hoàn thành, các bạn có thể refresh lại trang để xem thành quả:</p>
+<p><img src="img/css-animation-newsfeed-anim-finished.gif" alt=""></p>
+<p>Trong quá trình theo dõi bài viết, nếu các bạn không theo kịp, thì có thể tham khảo source code đầy đủ của ví dụ này tại <a href="http://codepen.io/huytd/pen/beGKWB">Codepen - Facebook Reaction Animation - Part 2</a></p>
+<p>Code HTML:</p>
+<pre><code>&lt;div class=&quot;feed&quot;&gt;
+  &lt;a class=&quot;like-btn&quot;&gt;
+    &lt;div class=&quot;reaction-box&quot;&gt;
+      &lt;div class=&quot;reaction-icon&quot;&gt;
+        &lt;label&gt;Like&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;reaction-icon&quot;&gt;
+        &lt;label&gt;Love&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;reaction-icon&quot;&gt;
+        &lt;label&gt;Haha&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;reaction-icon&quot;&gt;
+        &lt;label&gt;Wow&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;reaction-icon&quot;&gt;
+        &lt;label&gt;Sad&lt;/label&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;reaction-icon&quot;&gt;
+        &lt;label&gt;Angry&lt;/label&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+</code></pre><p>CSS (SCSS):</p>
+<pre><code>html, body {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.feed {
+  width: 500px; height: 473px;
+  background-image: url(http://i.imgur.com/HckmGbj.png);
+  position: relative;
+
+  .like-btn {
+    width: 44px; height: 25px;
+    background: #D0D0D0;
+    position: absolute;
+    bottom: 13px; left: 13px;
+    cursor: pointer;
+
+    &amp;::before {
+      content: &quot;.&quot;; opacity: 0;
+      display: block;
+      width: 44px; height: 10px;
+      position: absolute;
+      top: -10px; left: 0;
+    }
+
+    .reaction-box {
+      position: absolute;
+      width: 312px; height: 55px;
+      background: #F0C674;
+      border-radius: 28px;
+      left: -25px; bottom: 35px;
+      display: none;
+
+      .reaction-icon {
+        width: 40px; height: 40px;
+        display: inline-block;
+        background: #8959A8;
+        border-radius: 20px;
+        margin: 8px -1px 0 8px;
+        text-align: center;
+        // Animation
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        opacity: 0;
+        transform: translate(0, 100px) scale(0);
+
+        label {
+          padding: 3px 5px 3px 5px;
+          position: relative;
+          top: -24px;
+          border-radius: 10px;
+          font-size: 11px;
+          color: #FFF;
+          background: #333;
+          visibility: hidden;
+        }
+      }
+    }
+
+    &amp;:hover {
+      background: #718C00;
+
+      .reaction-box {
+        display: block;  
+
+        .reaction-icon {
+
+          &amp;.show {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+          }
+
+          &amp;:hover {
+            transform: scale(1.4);
+            transform-origin: bottom;
+
+            label {
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre><p>JavaScript (cần có jQuery):</p>
+<pre><code>$(function(){
+  $(&quot;.like-btn&quot;).hover(function() {
+    $(&quot;.reaction-icon&quot;).each(function(i, e) {
+      setTimeout(function(){
+        $(e).addClass(&quot;show&quot;);
+      }, i * 100);
+    });
+  }, function() {
+    $(&quot;.reaction-icon&quot;).removeClass(&quot;show&quot;)
+  });
+})
+</code></pre><hr>
+<p>Sau đây là ví dụ hoàn chỉnh, có sử dụng hình ảnh các emoticon của Facebook để cho nó sinh động hơn:</p>
+<p><img src="img/css-animation-newsfeed-anim-facebook.gif" alt=""></p>
+<p>Vì là hình GIF nên hơi bị giật, các bạn có thể <a href="https://gfycat.com/ZigzagForthrightCob">xem video demo tại Gfycat</a></p>
+<p>Hoặc chạy thử trực tiếp tại <a href="http://codepen.io/huytd/pen/gMOjwx">Codepen</a></p>
+<hr>
+<p>Hy vọng qua bài viết này, các bạn đã có thêm cái nhìn sâu sắc hơn về CSS và các kĩ thuật animation trong đó. Không phải cứ hễ những công việc gì liên quan đến CSS thì đều là khô khan nhàm chán cả :D</p>
+<p>Hẹn gặp lại các bạn trong các bài viết sau.</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/phuc-tap-hoa-facebook-reaction.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**

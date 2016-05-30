@@ -1,5 +1,11 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
+[Phức tạp hoá vấn đề: Mô phỏng hiệu ứng Reaction của Facebook](/posts/phuc-tap-hoa-facebook-reaction.html)
+
+Tiếp tục với sê ri **Phức tạp hoá vấn đề**, lần này chúng ta sẽ đi vào phân tích và mô phỏng lại hiệu ứng rê chuột để add reaction của Facebook. Bảo đảm sau khi đọc xong các bạn sẽ phải thốt lên rằng: "Đ** m* chỉ là CSS thôi có cần phải phức tạp đến vậy không?" :))
+
+---
+
 [Phức tạp hoá vấn đề: Các thuật toán đằng sau Datepicker](/posts/phuc-tap-hoa-datepicker.html)
 
 Bài đầu tiên của sê ri **Phức tạp hoá vấn đề**, đây là chuyên mục chuyện bé xé ra to :v Lần này chúng ta sẽ cùng đi vào phân tích các component Datepicker để xem thuật toán nào đã góp phần xây dựng nên nó.
