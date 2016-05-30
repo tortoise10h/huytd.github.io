@@ -238,7 +238,7 @@ CSS (SCSS):
 
 Ta có kết quả như hình sau:
 
-![hover icon](img/newsfed-anim-2.gif)
+![hover icon](img/newsfeed-anim-2.gif)
 
 ### Vùng hover chuột của nút like
 
