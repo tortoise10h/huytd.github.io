@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Machine Learning - Máy học như cơm bình dân | Huy's Blog</title>
+        <title> Generator và xử lý asynchronous trong JavaScript | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,22 +19,28 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="machine-learning-m-y-h-c-nh-c-m-b-nh-d-n">Machine Learning - Máy học như cơm bình dân</h1>
-<p>Bắt chước slogan của tờ báo e-Chip, mình viết bài này mục đích là giúp các bạn làm quen với <strong>Machine Learning</strong> (máy học, có người dịch là học máy, tuy nhiên từ bây giờ mình sẽ gọi là Machine Learning - ML) một cách gần gũi và dễ hiểu nhất.</p>
-<h2 id="tr-c-khi-b-t-u">Trước khi bắt đầu</h2>
-<p>Trước khi bắt đầu đi vào tìm hiểu Machine Learning, có vài điểm các bạn cần lưu ý để tiện theo dõi bài viết này:</p>
-<ul>
-<li><p>Mình khởi điểm đến với ngành CNTT cũng chỉ là đam mê code rồi tự mày mò, <a href="http://huytd.github.io/posts/lap-trinh-va-toan-hoc.html">cũng khá là ghét Toán</a>, chuyên ngành mình học là Cử nhân CNTT, không phải chuyên ngành toán, vì thế cách mình giải thích về các khái niệm toán học ở trong bài có thể sẽ không bài bản lắm đối với một số người.</p>
-</li>
-<li><p>Nói là &quot;cơm bình dân&quot;, nhưng sẽ không thể tránh được việc xuất hiện một vài thuật ngữ, kí hiệu hoặc khái niệm mang yếu tố học thuật trong bài viết này, vì dù sao thì Machine Learning cũng là một môn khoa học xuất phát từ Toán học, và không phải ở mức độ dễ như ăn cháo (tức là nó cũng không tới mức quá khó để tự học), nhưng mình sẽ cố gắng đưa các nội dung đó vào một cách ít gây dị ứng nhất cho các bạn :))</p>
-</li>
-<li><p>Bài viết có thể rất dài, nhưng mình ko định chia thành nhiều post (so với việc bài dài quá scroll mỏi tay, thì việc lội qua nhiều bài post càng dễ làm nản lòng người đọc lẫn người viết hơn nữa) các bạn nên chuẩn bị tâm lý và sức khoẻ thật tốt trước khi bắt đầu đọc.</p>
-</li>
-<li><p>Trừ cái tiêu đề bài viết mình dùng chữ &quot;máy học&quot; cho nó hợp vần với cái vế &quot;như cơm bình dân&quot;, để dễ bề câu view :troll: mình sẽ không dịch bất cứ thuật ngữ nào ra tiếng Việt, nếu có thì chỉ nói lướt qua để gợi nhớ cho các bạn về sự liên quan của nó với các kiến thức phổ thông, và hết. Vì theo mình, chính việc dịch các thuật ngữ sang tiếng Việt này góp phần làm cho môn này trở nên khó hiểu hơn bao giờ hết. Cho nên các bạn hãy chịu khó đọc và nhớ các từ tiếng Anh, không riêng gì với ML mà đây là vấn đề chung của lĩnh vực CNTT.</p>
-</li>
-</ul>
-
-                <div class="fb-like" data-href="http://huytd.github.io/posts/machine-learning-com-binh-dan.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <h1 id="generator-v-x-l-asynchronous-trong-javascript">Generator và xử lý asynchronous trong JavaScript</h1>
+<p>Mặc dù đã có rất nhiều bài viết trên mạng về Generator trong JavaScript ES6, nhưng mình quyết định viết thêm 1 bài nữa, hy vọng đây sẽ là bài cuối cùng về Generator mà các bạn cần tìm để đọc =))</p>
+<h2 id="v-y-generator-l-g-">Vậy, Generator là gì?</h2>
+<p>Đầu tiên, chúng ta sẽ xem cách hoạt động của một hàm thông thường trong JavaScript:</p>
+<pre><code>function hello() {
+    console.log(&#39;Hello World&#39;);
+    return 100;
+}
+</code></pre><p>Khi thực thi hàm này, JavaScript sẽ chạy từ đầu đến cuối hàm, làm các việc như: In ra màn hình chữ <code>Hello World</code>, rồi return về con số <code>100</code>, xong, đến đây nhiệm vụ của nó hoàn thành.</p>
+<p><img src="img/generator_function_call.png" alt=""></p>
+<p>Generator thì không chạy như thế. Nó là những hàm có khả năng chạy, return kết quả xong rồi dừng đó, khi nào thích thì có thể quay lại và xử lý tiếp rồi lại return tiếp. Nói tới đây làm mình tưởng tượng tới hình ảnh con bò ăn cỏ xong để dành lâu lâu lấy ra nhai lại =.= (ví dụ hơi thô bạo nhưng mà nó rất là tương đồng =)))</p>
+<p><img src="img/generator_generator_call.png" alt=""></p>
+<h2 id="n-i-r-ch-t-coi-">Nói rõ chút coi?</h2>
+<p>Vầng, để em trình bày rõ hơn tí ạ...</p>
+<p>Khi chúng ta gọi tới một hàm Generator, thì nội dung của hàm đó chưa được gọi ngay đâu, mà nó sẽ trả về một đối tượng gọi là <code>iterator</code> (cứ tạm gọi nó là con trỏ đi, về sau mình sẽ nói kĩ hơn).</p>
+<p>Trong đối tượng <code>iterator</code> này có một hàm <code>next()</code>, khi chúng ta gọi đến hàm này thì phần nội dung của hàm mới bắt đầu được chạy, và nó sẽ dừng lại + trả về giá trị khi gặp câu lệnh <code>yield</code>.</p>
+<p><img src="img/generator_flow.png" alt=""></p>
+<p>Và chúng ta có thể truy cập tới dữ liệu trả về này qua hàm <code>next()</code> ở trên.</p>
+<pre><code>var result = hamGenerator.next();
+// Ket qua la: result.value
+</code></pre>
+                <div class="fb-like" data-href="http://huytd.github.io/posts/generator-la-gi.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**
