@@ -1,5 +1,12 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
+---
+[Vài điều linh tinh về Github](/posts/tan-man-github.html)
+
+Bạn có biết là Github cũng là một mạng xã hội không? Vậy để tham gia mạng xã hội này thì phải làm thế nào? Và nó khác gì so với những mạng xã hội như Facebook hay Instagram?
+
+---
+
 [Phức tạp hoá vấn đề: Mô phỏng hiệu ứng Reaction của Facebook](/posts/phuc-tap-hoa-facebook-reaction.html)
 
 Tiếp tục với sê ri **Phức tạp hoá vấn đề**, lần này chúng ta sẽ đi vào phân tích và mô phỏng lại hiệu ứng rê chuột để add reaction của Facebook. Bảo đảm sau khi đọc xong các bạn sẽ phải thốt lên rằng: "Đ** m* chỉ là CSS thôi có cần phải phức tạp đến vậy không?" :))
