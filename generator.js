@@ -36,6 +36,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 	        fs.readFile(__dirname + '/posts/' + f, function (err, data) {
 			  if (err)
 			    throw err;
+        console.log("Reading: ", f);
 			  if (data) {
 			  	var markdownPost = data.toString('utf8');
 			  	var lines = markdownPost.split('\n');

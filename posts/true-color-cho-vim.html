@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Generator và xử lý asynchronous trong JavaScript | Huy's Blog</title>
+        <title> Thiết lập vim ở chế độ True color | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,28 +19,15 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="generator-v-x-l-asynchronous-trong-javascript">Generator và xử lý asynchronous trong JavaScript</h1>
-<p>Mặc dù đã có rất nhiều bài viết trên mạng về Generator trong JavaScript ES6, nhưng mình quyết định viết thêm 1 bài nữa, hy vọng đây sẽ là bài cuối cùng về Generator mà các bạn cần tìm để đọc =))</p>
-<h2 id="v-y-generator-l-g-">Vậy, Generator là gì?</h2>
-<p>Đầu tiên, chúng ta sẽ xem cách hoạt động của một hàm thông thường trong JavaScript:</p>
-<pre><code>function hello() {
-    console.log(&#39;Hello World&#39;);
-    return 100;
-}
-</code></pre><p>Khi thực thi hàm này, JavaScript sẽ chạy từ đầu đến cuối hàm, làm các việc như: In ra màn hình chữ <code>Hello World</code>, rồi return về con số <code>100</code>, xong, đến đây nhiệm vụ của nó hoàn thành.</p>
-<p><img src="img/generator_function_call.png" alt=""></p>
-<p>Generator thì không chạy như thế. Nó là những hàm có khả năng chạy, return kết quả xong rồi dừng đó, khi nào thích thì có thể quay lại và xử lý tiếp rồi lại return tiếp. Nói tới đây làm mình tưởng tượng tới hình ảnh con bò ăn cỏ xong để dành lâu lâu lấy ra nhai lại =.= (ví dụ hơi thô bạo nhưng mà nó rất là tương đồng =)))</p>
-<p><img src="img/generator_generator_call.png" alt=""></p>
-<h2 id="n-i-r-ch-t-coi-">Nói rõ chút coi?</h2>
-<p>Vầng, để em trình bày rõ hơn tí ạ...</p>
-<p>Khi chúng ta gọi tới một hàm Generator, thì nội dung của hàm đó chưa được gọi ngay đâu, mà nó sẽ trả về một đối tượng gọi là <code>iterator</code> (cứ tạm gọi nó là con trỏ đi, về sau mình sẽ nói kĩ hơn).</p>
-<p>Trong đối tượng <code>iterator</code> này có một hàm <code>next()</code>, khi chúng ta gọi đến hàm này thì phần nội dung của hàm mới bắt đầu được chạy, và nó sẽ dừng lại + trả về giá trị khi gặp câu lệnh <code>yield</code>.</p>
-<p><img src="img/generator_flow.png" alt=""></p>
-<p>Và chúng ta có thể truy cập tới dữ liệu trả về này qua hàm <code>next()</code> ở trên.</p>
-<pre><code>var result = hamGenerator.next();
-// Ket qua la: result.value
-</code></pre>
-                <div class="fb-like" data-href="http://huytd.github.io/posts/generator-la-gi.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <h1 id="thi-t-l-p-vim-ch-true-color">Thiết lập vim ở chế độ True color</h1>
+<p>Tuần vừa rồi mình và hội &quot;VIM thủ&quot; ở cộng đồng Ruby Việt Nam rủ nhau dành hẳn ra một tuần làm việc để ngồi cài VIM cùng mấy thứ đồ chơi linh tinh cho nó. Mặc dù kết quả rất khả quan là dến cuối tuần thì hầu như tất cả đã có được cho mình một bộ môi trường terminal hoàn hảo gồm có iTerm hoặc Cygwin chạy Tmux và VIM ở chế độ True Color, màu mè thì đẹp khỏi chê, có điều gần một tuần không làm ăn được gì cả =))</p>
+<p>Quá trình cài đặt cũng không quá phức tạp, tuy nhiên nó khá là dài dòng và lôi thôi, lại có nhiều lỗi phát sinh tùy theo môi trường hiện hành của mỗi máy tính, vì thế mình viết bài này để lưu lại, phòng khi về sau máy móc có dở chứng thì cũng còn có thứ lấy ra tham khảo lại. Cũng tiện thể làm tài liệu hướng dẫn, dễ bề lôi kéo thêm nhiều bạn gia nhập vào hội cuồng terminal của bọn mình :v </p>
+<h2 id="vim-tmux-l-g-">VIM, Tmux là gì?</h2>
+<p>VIM là một trình soạn thảo văn bản trên giao diện dòng lệnh, thường được tích hợp sẵn trong các hệ điều hành unix-like như Linux hay OS X. Trên Windows cũng có thể cài đặt và sử dụng công cụ này nếu bạn thích. VIM là phiên bản mở rộng của trình soạn thảo <code>vi</code>. Sức mạnh của bộ editor này là tốc độ và khả năng tùy biến cao, cùng hệ sinh thái plugin đa dạng, nhờ đó bạn có thể làm được mọi việc với VIM mà không cần dùng đến các editor/IDE khác như Sublime, Atom hoặc WebStorm, RubyMine gì đó nữa.</p>
+<p>Nghe có vẻ vô đối, nhưng thực ra đúng là như vậy đấy :trollface:</p>
+<p>Đùa chút thôi, VIM có một đối thủ cạnh tranh khá nặng ký đó là EMACS, tuy nhiên, vì là thành viên hội cuồng VIM, mình xin không đưa ra bất cứ lời chỉ trích hay bình luận nào về cái thứ editor vừa khó chịu vừa phức tạp, tốn thời gian gõ bàn phím như EMACS kia. Các bạn không nhất thiết phải comment công kích EMACS thêm nữa đâu nhé :trollface:</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/true-color-cho-vim.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**
