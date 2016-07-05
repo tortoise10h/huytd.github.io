@@ -14,6 +14,8 @@ Vì là bài chia sẽ kinh nghiệm cá nhân nên có thể nó sẽ chủ qua
 
 Bài ông này viết thì phải nói là cực kì dài dòng =.= nhưng mà được cái là rất bổ.
 
+![](./img/writing.jpg)
+
 Về chuyện viết lách của anh Paul, ảnh có viết một bài có tựa đề là [Write like you talk](http://paulgraham.com/talk.html) - Viết như khi bạn nói. Đây cũng là một ý trong bài "Làm thế nào để viết blog kĩ thuật" của mình =)) nhưng không phải là anh Paul bắt chước mình đâu nhé :v
 
 Bài này cũng không dài lắm, các bạn có thể tự đọc để cho thấm và tự tin hơn khi viết, vì bất cứ ai cũng có thể viết như vậy được. Mình chỉ tóm tắt sơ một vài ý trong bài, còn phần đọc thì để dành cho các bạn.
