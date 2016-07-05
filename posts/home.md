@@ -1,6 +1,13 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
 ---
+
+[Chuyện viết lách](/posts/chuyen-viet-lach.html)
+
+Vài dòng linh tinh về chuyện viết lách, và chia sẽ cách viết của tác giả Paul Graham, nhà đồng sáng lập tổ chức Y Combinator, investor của Dropbox, Airbnb,...
+
+---
+
 [Vài điều linh tinh về Github](/posts/tan-man-github.html)
 
 Bạn có biết là Github cũng là một mạng xã hội không? Vậy để tham gia mạng xã hội này thì phải làm thế nào? Và nó khác gì so với những mạng xã hội như Facebook hay Instagram?
