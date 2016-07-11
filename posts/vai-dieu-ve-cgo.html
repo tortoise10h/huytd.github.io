@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <title> Kinh nghiệm làm việc với Cgo | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="kinh-nghi-m-l-m-vi-c-v-i-cgo">Kinh nghiệm làm việc với Cgo</h1>
+<p>Cuối tuần vừa rồi mình có làm một project nho nhỏ để học hỏi thêm, điểm khá thú vị là project này tuy không to lắm nhưng lại chứa khá là nhiều vấn đề và buộc mình phải tìm hiểu sâu vào rất nhiều mảng kĩ thuật.</p>
+<p>Một trong những chức năng của project này là việc chụp ảnh màn hình (screenshot), cũng nhờ vậy mà biết được việc chụp ảnh màn hình trên từng hệ điều hành khác nhau là một công việc không hề đơn giản và chắc chắn không thể thực hiện trực tiếp trong Golang mà phải thông qua API của từng hệ điều hành, chính vì vậy nên cần phải đụng tới Cgo. Chi tiết về việc chụp ảnh chắc mình sẽ viết ở một bài viết khác, bài này mình chia sẽ một vài điều rút ra khi làm việc với Cgo trong 2 ngày cuối tuần vừa rồi.</p>
+<h2 id="gi-i-thi-u-nhanh-v-cgo">Giới thiệu nhanh về Cgo</h2>
+<p>Cgo tức là C kết hợp với Go, nói đơn giản thì Cgo giúp cho Go có thể gọi được code C và ngược lại, gọi code C trong Go... à nhầm, gọi code Go trong C.</p>
+<p>Để gọi được code C trong Go thì chúng ta viết đoạn code C đó trong một khối comment <code>/* */</code> hoặc <code>//</code> rồi import gói <code>&quot;C&quot;</code>. Trình biên dịch sẽ tự động chia ra, gọi <code>gcc</code> (hoặc trình biên dịch C default của máy tính) để biên dịch đoạn code trên, sau đó go compiler sẽ làm nhiệm vụ liên kết nó vào chương trình.</p>
+<p>Chúng ta có thể truy cập vào C code thông qua đối tượng <code>C</code> trong Go, ví dụ:</p>
+<pre><code>package main
+
+/*
+#include &lt;stdio.h&gt;
+
+void sayHello() {
+  printf(&quot;YOLO!&quot;)
+}
+*/
+import &quot;C&quot;
+
+func main() {
+  C.sayHello()
+}
+</code></pre><p>Nếu muốn tìm hiểu chi tiết hơn về Cgo các bạn có thể tham khảo các link ở cuối bài.</p>
+<p>Sau đây mình sẽ nói sơ về một vài kinh nghiệm mình gặp phải trong quá trình làm việc với nó.</p>
+<h2 id="cygwin-kh-ng-t-ng-th-ch-v-i-cgo">Cygwin không tương thích với Cgo</h2>
+<p>Nếu dùng Windows hẳn các bạn sẽ dùng Cygwin, và trình biên dịch <code>gcc</code> đi kèm của Cygwin thì không có khả năng biên dịch được Cgo.</p>
+<p>Để làm việc với Cgo trên Windows bạn bắt buộc phải sử dụng Command Line của win, và biên dịch bằng MingGW.</p>
+<h2 id="cgo-kh-ng-ch-c-c">Cgo không chỉ có C</h2>
+<p>Nếu làm việc trên Mac, bạn còn có thể dùng Cgo để gọi code Objective-C và xài các framework của Objective-C như Cocoa ngay trong Go luôn cũng được, ví dụ:</p>
+<pre><code>/*
+#cgo CFLAGS: -x objective-c
+#cgo LDFLAGS: -framework Cocoa -framework Foundation
+#import &lt;Cocoa/Cocoa.h&gt;
+#import &lt;Foundation/Foundation.h&gt;
+
+...
+*/
+</code></pre><h2 id="memory-leak-t-ph-a-c">Memory Leak từ phía C</h2>
+<p>Go có garbage collector (GC), và GC của Go hoạt động trong lúc runtime luôn. Nhưng C thì không như vậy. Điều này có nghĩa là khi làm khởi tạo các object bên trong phần C, bạn phải quản lý chúng bằng tay (tạo ra thì nhớ hủy nó đi), nếu không thì memleak sẽ là một vấn đề đau đầu. </p>
+<p>Cách đơn giản nhất để phát hiện memleak là dùng Task Manager của Windows hoặc Activity Monitor của Mac theo dõi bộ nhớ sử dụng của chương trình, nếu code logic của bạn không làm gì nhiều nhưng memory cứ tăng lên liên tục, thì khả năng đó là nó đang bị leak.</p>
+<h2 id="th-i-gian-build-ch-m-h-n">Thời gian build chậm hơn</h2>
+<p>Rõ ràng rồi, thay vì chỉ có Go compiler biên dịch chương trình của bạn, thì lần này trong build process phải chạy đến 2 compiler (GCC và Go compiler) biên dịch 2 lần code và link chúng lại với nhau.</p>
+<h2 id="v-n-dependencies-khi-deploy">Vấn đề dependencies khi deploy</h2>
+<p>Nếu dùng Cgo, khi user cài đặt chương trình Go của bạn thì trên máy tính của họ ngoài các thư viện mà Go phụ thuộc ra, họ còn phải cài đặt thêm các thư viện mà phần code C của bạn cần dùng tới. Điều này sẽ khiến cho việc deployment tốn thêm vài bước nữa để đảm bảo chương trình chạy tốt.</p>
+<p>Èo, tạm thời tuần này mình chỉ ghi ra được một vài ý đơn giản vậy, còn nhiều thứ nữa nhưng mà giờ chưa hệ thống lại để diễn đạt một cách gọn gàng đường, chắc phải hẹn tuần sau thôi :D Nhưng kết luận là: Cgo là một chức năng khá hay và quan trọng của Go, giúp mở rộng Go để có thể sử dụng sức mạnh của nhiều công nghệ khác, nhưng bất cứ thứ công nghệ nào cũng đều có 2 mặt, thứ gì càng hay thì càng cần phải tìm hiểu rõ về nó để biết khi nào cần xài, khi nào thì nên tránh. Đúng với câu nói vui của một anh bạn mình:</p>
+<blockquote>
+<p>Hiểu để xài nhau tốt hơn</p>
+</blockquote>
+<p>Chốt bài viết mình xin dẫn một vài link nên đọc về Cgo cho bạn nào muốn tìm hiểu sâu thêm về nó:</p>
+<p> <a href="https://blog.golang.org/c-go-cgo">[1] Go Blog - C? Go? Cgo!</a></p>
+<p> <a href="https://golang.org/cmd/cgo/">[2] Godoc - Command cgo</a></p>
+<p> <a href="https://github.com/golang/go/wiki/cgo">[3] Wiki Cgo</a></p>
+<p> <a href="http://dave.cheney.net/2016/01/18/cgo-is-not-go">[4] Blog của bác Dave Cheney - Cgo is not Go</a></p>
+<p> <a href="https://www.cockroachlabs.com/blog/the-cost-and-complexity-of-cgo/">[5] Cockroach Labs - The Cost and Complexity of Cgo</a></p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/vai-dieu-ve-cgo.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+        </script>
+    </body>
+</html>
