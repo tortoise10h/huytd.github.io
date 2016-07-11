@@ -2,6 +2,12 @@
 
 ---
 
+[Vài kinh nghiệm làm việc với Cgo](/posts/vai-dieu-ve-cgo.html)
+
+Vài kinh nghiệm làm việc với Cgo mình rút ra sau 2 ngày cuối tuần làm cái project linh tinh.
+
+---
+
 [Chuyện viết lách](/posts/chuyen-viet-lach.html)
 
 Vài dòng linh tinh về chuyện viết lách, và chia sẽ cách viết của tác giả Paul Graham, nhà đồng sáng lập tổ chức Y Combinator, investor của Dropbox, Airbnb,...
