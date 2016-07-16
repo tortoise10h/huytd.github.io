@@ -56,9 +56,11 @@ Gõ `Shift + ,` (tức là phím `<`) để kéo đoạn code đang chọn về 
 
 Để tự động căn lề một đoạn code cho đẹp mắt, bạn làm như sau:
 
-Bôi đen đoạn code cần căn lề bằng visual mode.
+**Cách 1:** Bôi đen đoạn code cần căn lề bằng visual mode.
 
 Gõ phím `=` và đoạn code sẽ được tự động căn chỉnh.
+
+**Cách 2:** Căn lề từ đầu tới cuối file luôn. Chỉ cần gõ `gg=G`.
 
 ---
 
