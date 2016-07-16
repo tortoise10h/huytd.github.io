@@ -40,6 +40,26 @@ Một trong những thao tác quan trọng nhất là việc thò ra thụt vào
 
 Bôi đen code bằng visual mode (gõ phím `v` rồi di chuyển con trỏ để chọn vùng code cần bôi).
 
-Gõ `Sk
+Gõ `Shift + .` (tức là phím `>`) để đẩy khối code về bên phải.
 
+### Thụt vào
 
+Tương tự như trên, bôi đen đoạn code cần căn lề.
+
+Gõ `Shift + ,` (tức là phím `<`) để kéo đoạn code đang chọn về bên trái.
+
+### Tự động căn lề
+
+Để tự động căn lề một đoạn code cho đẹp mắt, bạn làm như sau:
+
+Bôi đen đoạn code cần căn lề bằng visual mode.
+
+Gõ phím `=` và đoạn code sẽ được tự động căn chỉnh.
+
+---
+
+Trên đây là một vài thủ thuật mình thường dùng khi sử dụng Vim. Hy vọng nó có ích cho các bạn.
+
+Nếu các bạn cảm thấy Vim quá phức tạp và rối rắm vì phải nhớ những phím tắt rắc rối thì đó là bạn đang học sử dụng Vim sai cách rồi, đừng bao giờ cố nhớ một tổ hợp phím tắt hoặc một lệnh nào trong Vim cả, mà hãy dùng nó theo phương pháp: "Learn as you go", tức là khi cần dùng cái gì thì lên mạng tra cứu cái đó, và sử dụng nó cho đến khi thành thạo.
+
+Happy vimming ^^

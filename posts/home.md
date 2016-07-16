@@ -2,6 +2,12 @@
 
 ---
 
+[Một số kinh nghiệm làm việc với Vim](/posts/vai-phim-tat-vim.html)
+
+Một số thủ thuật khi làm việc với Vim của mình. Các bạn cũng chuyển qua xài Vim luôn đê... :v
+
+---
+
 [Vài kinh nghiệm làm việc với Cgo](/posts/vai-dieu-ve-cgo.html)
 
 Vài kinh nghiệm làm việc với Cgo mình rút ra sau 2 ngày cuối tuần làm cái project linh tinh.
