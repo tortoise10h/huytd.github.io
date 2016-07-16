@@ -38,15 +38,19 @@ Một trong những thao tác quan trọng nhất là việc thò ra thụt vào
 
 ### Thò ra
 
-Bôi đen code bằng visual mode (gõ phím `v` rồi di chuyển con trỏ để chọn vùng code cần bôi).
+**Cách 1:** Bôi đen code bằng visual mode (gõ phím `v` rồi di chuyển con trỏ để chọn vùng code cần bôi).
 
 Gõ `Shift + .` (tức là phím `>`) để đẩy khối code về bên phải.
 
+**Cách 2:** Không cần bôi đen, gõ `>` + `số dòng cần thò` + `j`
+
 ### Thụt vào
 
-Tương tự như trên, bôi đen đoạn code cần căn lề.
+**Cách 1:** Tương tự như trên, bôi đen đoạn code cần căn lề.
 
 Gõ `Shift + ,` (tức là phím `<`) để kéo đoạn code đang chọn về bên trái.
+
+**Cách 2:** Tương tự, gõ `<` + `số dòng cần thụt` + `j`
 
 ### Tự động căn lề
 
