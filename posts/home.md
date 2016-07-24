@@ -2,6 +2,12 @@
 
 ---
 
+[TDD qua ví dụ thực tế](/posts/tdd.html)
+
+Lựa chọn giữa tốc độ (bay vào code ào ào) hay chất lượng (uống miếng nước ăn miếng bánh, viết miếng test case trước rồi mới code)? Bỏ thời gian ra ngồi debug và cãi nhau với tester hay nhận bug về chạy test để biết được vấn đề nằm ở đâu rồi fix một cách nhanh chóng? Trở thành một lập trình viên chuyên nghiệp hay một công nhân fix bug, fix vài năm rồi lên làm leader...
+
+---
+
 [Một số kinh nghiệm làm việc với Vim](/posts/vai-phim-tat-vim.html)
 
 Một số thủ thuật khi làm việc với Vim của mình. Các bạn cũng chuyển qua xài Vim luôn đê... :v

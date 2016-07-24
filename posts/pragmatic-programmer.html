@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title> Pragmatic Programmer | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="pragmatic-programmer">Pragmatic Programmer</h1>
+<p>Từ khi mới chập chững học lập trình thì mình thường được nghe mọi người nhắc hoài về chuyện tuổi nghề của một lập trình viên. Theo đó đại đa số những người mà mình gặp ở Việt Nam khi đề cập đến chuyện này đều có cùng một quan điểm đó là: </p>
+<blockquote>
+<p>Không ai làm lập trình đến quá 30, 40 tuổi cả</p>
+</blockquote>
+<p>Và lý luận họ đưa ra là tuổi đó cũng đã đứng bóng chiều tà rồi, đầu óc ko còn được linh hoạt nhạy bén như thời thanh thiếu niên nhi đồng nữa, vì thế mà tư duy cũng sẽ ko được sắc bén và khả năng học hỏi cái mới cùng theo thời gian mà mai một dần đi, trong khi đó là cái quan trọng nhất của nghề lập trình.</p>
+<p>Uh thì xưa nghe vậy nghĩ vậy, nên nghĩ tới năm 30 tuổi mình sẽ làm cái gì đó khác, ai hổi mình cũng nói vậy rồi ko biết làm cái gì luôn. Hoang mang - Hồ Ngọc Hà...</p>
+<p>Cho đến một lần phỏng vấn xin việc ở một công ty, anh giám đốc sau khi nghe mình trả lời câu hỏi <em>&quot;Dự định của bạn trong 10 năm tới là như thế nào?&quot;</em> thì ảnh nói mình nên đi sâu vào con đường kĩ thuật, ảnh nói: <em>&quot;sự nghiệp lập trình của em không chỉ dừng lại ở tuổi 30, 40 đâu&quot;</em></p>
+<p>Thực sự lúc đó có hơi tự ái vì mục đích của mình là làm việc đến tầm 6, 7 năm kinh nghiệm thì nhảy qua làm PM hoặc cái gì đó rồi lên quản lý =))) Giờ tự nhiên có ông nào bay zô nói mình nên đi đường ngược lại, chẳng phải vỗ mặt mình bảo: <em>&quot;Chú mầy không có khiếu làm management đâu&quot;</em> =))</p>
+<p>Theo thời gian thì mình nhận ra đúng là mình không thích hợp để đi theo con đường management thiệt, và cũng lúc đó mình nhận ra career path của một lập trình viên không phải chỉ có mỗi việc đi lên manager. Nếu có thể phát triển sâu vào hướng kĩ thuật thì sẽ rất là thành công, nhưng biết vậy chớ chưa hình dung ra được nhiều.</p>
+<p>Phải mất vài năm sau, tức là quay trở lại thời điểm bây giờ, mình có dịp tìm hiểu nhiều và tình cờ nhận ra có một bộ phận những lập trình viên cực kì gạo cội trong ngành lập trình, và tuổi đời của họ không phải chỉ mới 30, 40 tuổi, những cái tên như Uncle Bob, Linus Torvalds, Jeff Atwood, John Carmack... và rất nhiều những tên tuổi khác nữa, họ đều là những lập trình viên và chưa bao giờ đi lên làm quản lý. </p>
+<p>Đến đây mình cũng lờ mờ nhận ra ở những con người này họ đều có một điểm chung là cực kì giỏi trong lĩnh vực kĩ thuật, chưa từng đi qua làm quản lý và đi hoàn toàn theo hướng technical để khẳng định tên tuổi bản thân.</p>
+<p>Có vẻ khó hình dung, vậy thì các bạn hãy nghĩ đến hình ảnh 2 nhà sáng lập nên công ty Apple: Steve Jobs và Steve Wozniak.</p>
+<p>Nếu Jobs đi theo con đường làm một nhà quản lý với đầu óc chiến lược, kinh doanh tài ba cũng khả năng lãnh đạo quyết đoán, khắc khe -- nghe không giống mình tí nào, thì Steve Wozniak, một ông già geek chính hiệu, nerd chính hiệu, là cái đầu đứng sau những phát minh nổi tiếng của Apple thời bấy giờ. Người đứng sau ánh đèn sân khấu để một tay dựng lên toàn bộ cái sân khấu...</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/pragmatic-programmer.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+        </script>
+    </body>
+</html>
