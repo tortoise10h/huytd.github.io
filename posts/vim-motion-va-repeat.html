@@ -1,0 +1,136 @@
+<html>
+    <head>
+        <title> Motion và Repeat trong Vim | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="motion-v-repeat-trong-vim">Motion và Repeat trong Vim</h1>
+<p>Ở <a href="https://huytd.github.io/posts/vai-phim-tat-vim.html">bài trước</a> mình có đề cập tới <strong>Visual mode</strong> của Vim, để thực hiện các thao tác bôi chọn một vùng nội dung rồi thực hiện một thao tác nào đó. Đối với những ai vừa mới chuyển qua Vim từ các editor khác thì có thể sử dụng visual mode để làm quen dần dần, nhưng nếu xác định xài Vim lâu dài thì nên làm quen với khái niệm <strong>Motion</strong>.</p>
+<h2 id="motion">Motion</h2>
+<p>Motion, nôm na là thực hiện các thao tác bằng các phím điều hướng <strong>(h, j, k, l)</strong></p>
+<p>Ví dụ, ta kết hợp các phím điều hướng và phím số để:</p>
+<ul>
+<li>Dịch chuyển con trỏ qua bên trái 5 kí tự: <strong>5h</strong></li>
+<li>Dịch chuyển con trỏ xuống 10 dòng: <strong>10j</strong></li>
+<li>Dịch chuyển con trỏ qua phải 3 từ: <strong>3w</strong></li>
+</ul>
+<p>Nếu sử dụng thành thạo Motion, chúng ta có thể làm nhiều thao tác phức tạp hơn, ví dụ:</p>
+<ul>
+<li>Copy 5 dòng tiếp theo kể từ vị trí con trỏ hiện tại: <strong>y5j</strong></li>
+<li>Delete 10 dòng tính từ vị trí con trỏ trở lên: <strong>d10k</strong></li>
+<li>Tự động canh lề cho 50 dòng tiếp theo: <strong>=50j</strong></li>
+</ul>
+<p>Đọc qua thì có vẻ phức tạp nhưng nếu dùng thì sẽ thấy sự tiện lợi của nó.</p>
+<h2 id="relative-line-number">Relative Line Number</h2>
+<p>Để giúp cho việc đếm số dòng khi sử dụng Motion được thuận tiện hơn, Vim cung cấp một chức năng gọi là <strong>Relavie Line Number</strong>. Để kích hoạt tính năng này, thêm dòng sau vào <code>.vimrc</code> của bạn:</p>
+<pre><code>set relativenumber
+</code></pre><p>Kết quả sẽ được như hình sau:</p>
+<p><img src="https://qiita-image-store.s3.amazonaws.com/0/110308/93d9d7bd-cd56-744f-2db9-caaada4a8a5d.png" alt="Screen Shot 2016-07-29 at 10.01.46 PM.png" title="Screen Shot 2016-07-29 at 10.01.46 PM.png"></p>
+<p>Như hình trên thì vị trí con trỏ đang nằm ở dòng thứ 23, và các dòng phía trên, phía dưới của nó được đánh số theo khoảng cách từ dòng đó đến dòng hiện tại.</p>
+<p>Giả sử mình muốn xóa toàn bộ nội dung của hàm <code>pixel()</code> thì chỉ cần gõ <strong>d1k</strong> ở dòng 23.</p>
+<h2 id="repeat">Repeat</h2>
+<p>Một chức năng quan trọng khác của Vim đó là <strong>Repeat</strong>, với phím tắt là dấu <strong> chấm (.)</strong>.</p>
+<p>Khi nhấn nút repeat thì Vim sẽ lặp lại thao tác trước đó mà bạn vừa thực hiện.</p>
+<p>Ví dụ:</p>
+<p>Bạn có một đoạn nội dung như sau</p>
+<pre><code>The quick brown fox jumps over the lazy dog
+</code></pre><p>Bạn muốn xóa cụm từ &quot;quick brown fox jumps over the&quot;, thì bạn có thể sử dụng lệnh repeat kết hợp với lệnh xóa từ <strong>dw</strong> như sau:</p>
+<ul>
+<li>Đưa con trỏ đến đầu từ &quot;quick&quot;</li>
+<li>Xóa từ đó bằng lệnh <strong>dw</strong></li>
+<li>Nhấn nút dấu chấm 5 lần</li>
+</ul>
+<p>Và thế là cụm từ trên đã được xóa. Ở đây bạn cũng có thể kết hợp với motion để tăng tốc, ở bước cuối cùng thay vì nhấn nút dấu chấm 5 lần thì bạn chỉ cần gõ: <strong>5.</strong> (số 5 và dấu chấm), tức là lặp lại thao tác xóa vừa nãy 5 lần.</p>
+<hr>
+<p>Nếu đọc xong mà cảm thấy Vim sao mà rắc rối quá, thì ko sao đâu, bản chất của Vim là sự kết hợp của nhiều phím tắt mà. Nhưng lợi ích mà nó đem lại thì không có editor nào có thể sánh bằng, bạn có thể thực hiện mọi thao tác edit chỉ bằng các tổ hợp trên bàn phím, không cần phải nhấc tay ra để đụng vào con chuột luôn.</p>
+<p>Và như mọi khi, là lời khuyên: &quot;Learn as you go&quot;, đừng bao giờ cố học thuộc các phím tắt, mà hãy nhớ bằng cách thực sự áp dụng nó khi bạn làm việc.</p>
+<p>Happy vimming ^^ </p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/vim-motion-va-repeat.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+        </script>
+    </body>
+</html>

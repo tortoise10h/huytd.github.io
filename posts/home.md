@@ -2,6 +2,12 @@
 
 ---
 
+[Motion và Repeat trong Vim](posts/vim-motion-va-repeat.html)
+
+Hai kĩ thuật cực kì quan trọng trong Vim đó là Motion và Repeat, nếu làm chủ được 2 kĩ thuật này thì bạn đã tiến gần hơn tới cảnh giới sử dụng Vim thành thạo như là phản xạ tự nhiên luôn rồi đấy =))
+
+---
+
 [TDD qua ví dụ thực tế](/posts/tdd.html)
 
 Lựa chọn giữa tốc độ (bay vào code ào ào) hay chất lượng (uống miếng nước ăn miếng bánh, viết miếng test case trước rồi mới code)? Bỏ thời gian ra ngồi debug và cãi nhau với tester hay nhận bug về chạy test để biết được vấn đề nằm ở đâu rồi fix một cách nhanh chóng? Trở thành một lập trình viên chuyên nghiệp hay một công nhân fix bug, fix vài năm rồi lên làm leader...
