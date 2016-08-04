@@ -2,7 +2,7 @@
 
 ---
 
-[Dùng neovim thay thế vimdiff](posts/compare-neovim.md)
+[Dùng neovim thay thế vimdiff](posts/compare-neovim.html)
 
 Cấu hình sử dụng **neovim** làm diff tool cho Git thay vì **vimdiff**
 
