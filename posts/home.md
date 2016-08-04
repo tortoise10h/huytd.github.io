@@ -2,6 +2,12 @@
 
 ---
 
+[Dùng neovim thay thế vimdiff](posts/compare-neovim.md)
+
+Cấu hình sử dụng **neovim** làm diff tool cho Git thay vì **vimdiff**
+
+---
+
 [Motion và Repeat trong Vim](posts/vim-motion-va-repeat.html)
 
 Hai kĩ thuật cực kì quan trọng trong Vim đó là Motion và Repeat, nếu làm chủ được 2 kĩ thuật này thì bạn đã tiến gần hơn tới cảnh giới sử dụng Vim thành thạo như là phản xạ tự nhiên luôn rồi đấy =))

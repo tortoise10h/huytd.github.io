@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Coder và giấc ngủ | Huy's Blog</title>
+        <title> Dùng neovim thay thế vimdiff | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,12 +19,29 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="coder-v-gi-c-ng-">Coder và giấc ngủ</h1>
-<p>Developer là một nghề nguy hiểm. Nó nguy hiểm hơn nhiều so với cái vẻ bề ngoài của nó. Vì tính chất công việc này khá là căng thẳng, đa số chúng ta có xu hướng chọn cách thức khuya để có nhiều thời gian làm việc hơn, không gian yên tĩnh hơn, hoặc đơn giản là vì giờ đó vợ con đi ngủ cả rồi nên mới làm việc được :))</p>
-<p>Đầu óc căng thẳng, luôn luôn suy nghĩ, gần như toàn thời gian trong ngày là ngồi trước màn hình máy tính và thiếu ngủ. Khi còn trẻ thì không sao, vì ai mà cản được sức trẻ chứ. Nhưng cũng không ai cản lại được biểu đồ sức khỏe ngày một đi xuống của chúng ta hết :)) Những hệ quả của việc thiếu ngủ thì thôi chắc không cần phải liệt kê thêm làm gì.</p>
-<p>Nhưng biết làm sao được khi mà một ngày chỉ có 24 tiếng, đi làm mất 8, 9 tiếng rồi. Hôm nào OT thì thôi, xác định là 13, 14 tiếng cày bừa. Chưa tính thời gian đi lại, cà phê cà pháo, đêm về không biết còn được mấy tiếng để chuyên tâm nghiên cứu công nghệ mới? Nếu 9, 10h mà lăn ra ngủ thì phí mất thêm mấy tiếng của cuộc đời rồi.</p>
+                <h1 id="d-ng-neovim-thay-th-vimdiff">Dùng neovim thay thế vimdiff</h1>
+<p>Nếu xài Git và <strong>vim</strong> hẳn các bạn biết tool <strong>vimdiff</strong>, dùng để xem diff và merge code. </p>
+<p><strong>neovim</strong> cũng có chế độ diff tuy nhiên cách cài đặt nó để thay thế cho <strong>vimdiff</strong> hơi rườm rà một tí. Để tiết kiệm thời gian thì mình share lên đây luôn. </p>
+<p>Các bạn có thể copy phần cấu hình dưới đây vào file <code>~/.gitconfig</code>:</p>
+<pre><code>[merge]
+  tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool &quot;vimdiff&quot;]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c &#39;$wincmd w&#39; -c &#39;wincmd J&#39;
+[difftool]
+    prompt = false
+[diff]
+    tool = vimdiff
+</code></pre><p>Từ bây giờ có thể gõ: </p>
+<pre><code>git difftool &lt;blah-blah&gt;
+</code></pre><p>Để sử dụng <strong>neovim diff</strong>. Nếu lười thì các bạn có thể đặt alias như sau:</p>
+<pre><code>git config --global alias.d vimdiff
+</code></pre><p>Rồi thay vì gõ <code>git difftool</code>, chúng ta có thể gõ:</p>
+<pre><code>git d &lt;blah-blah&gt;
+</code></pre><p>Happy Vimming ^^</p>
 
-                <div class="fb-like" data-href="http://huytd.github.io/posts/coder-va-giac-ngu.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div class="fb-like" data-href="http://huytd.github.io/posts/compare-neovim.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**
