@@ -2,6 +2,12 @@
 
 ---
 
+[var, let và const trong JavaScript ES6](posts/var-let-const.html)
+
+Sự khác nhau giữa các từ khóa `var`, `let` và `const` trong JavaScript ES6, và khi nào thì nên dùng cái gì.
+
+---
+
 [Dùng neovim thay thế vimdiff](posts/compare-neovim.html)
 
 Cấu hình sử dụng **neovim** làm diff tool cho Git thay vì **vimdiff**
