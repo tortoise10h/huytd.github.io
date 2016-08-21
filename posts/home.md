@@ -1,6 +1,11 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
 ---
+["Bí mật" đằng sau bảng hiệu Like của Facebook](posts/facebook-sun-backend.html)
+
+Được dịp đi tham quan Facebook nên về viết vài dòng thể hiện cảm xúc linh tinh thôi :v 
+
+---
 
 [var, let và const trong JavaScript ES6](posts/var-let-const.html)
 
