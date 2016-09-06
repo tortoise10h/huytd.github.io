@@ -1,6 +1,11 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
 ---
+[Một commit cho 2 branches](posts/git-cherry-pick.html)
+
+Sử dụng `cherry-pick` để commit cùng một thay đổi vào cho 2 branches khác nhau.
+
+---
 ["Bí mật" đằng sau bảng hiệu Like của Facebook](posts/facebook-sun-backend.html)
 
 Được dịp đi tham quan Facebook nên về viết vài dòng thể hiện cảm xúc linh tinh thôi :v 
