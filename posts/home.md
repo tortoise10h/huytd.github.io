@@ -1,6 +1,11 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
 ---
+[Dùng WhatTheCommit để tiết kiệm thời gian push code :v](posts/what-the-commit.html)
+
+Những việc gì có thể làm được trong 5 giây thì hãy rút nó về còn 1 giây thôi...
+
+---
 [Một commit cho 2 branches](posts/git-cherry-pick.html)
 
 Sử dụng `cherry-pick` để commit cùng một thay đổi vào cho 2 branches khác nhau.
