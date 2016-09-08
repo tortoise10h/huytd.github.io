@@ -1,4 +1,4 @@
-# Tao commit message ngau nhien voi WhatTheCommit
+# Tiết kiệm thời gian commit bằng WhatTheCommit 
 
 [WhatTheCommit](http://whatthecommit.com/index.txt) là một trang web cung cấp các đoạn text ngẫu nhiên, ý đồ của tác giả trang web này là để sử dụng nội dung này vào cho các commit khi làm việc với Git để tiết kiệm thời gian :)))
 
@@ -36,3 +36,4 @@ To https://<repo>
    540fa34..9a2682a  master -> master
 ➜  notepad git:(master)
 ```
+
