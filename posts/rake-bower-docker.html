@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title> rake bower:install trong Docker | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="rake-bower-install-trong-docker">rake bower:install trong Docker</h1>
+<p>Nếu xài Docker làm môi trường dev khi làm việc với Rails, hẳn sẽ có lục bạn gặp lỗi sau khi chạy <code>rake bower:install</code>:</p>
+<pre><code>bower ESUDO Cannot be run with sudo
+</code></pre><p>Nguyên nhân là vì <code>bower</code> không &quot;thích&quot; chạy với quyền root vì sẽ dễ dẫn đến các vấn đề về quyền truy cập về sau (lỗi mà dân xài <code>npm</code> rất thường gặp). Nhưng ngặt nỗi mặc định Docker cung cấp cho ta quyền root khi làm việc trong một container.</p>
+<p>Cách giải quyết có rất nhiều, ví dụ như tạo user mới trong container đó để chạy, nhưng như vậy rất phiền phức. Giải pháp dễ hơn là sử dụng tham số <code>--allow-root</code> để bower bỏ qua bước kiểm tra quyền root này.</p>
+<p>Có 2 cách để sử dụng tham số <code>--allow-root</code>:</p>
+<h3 id="th-m-tham-s-tr-c-ti-p">Thêm tham số trực tiếp</h3>
+<p>Bạn có thể chạy <code>rake</code> với tham số này trực tiếp như sau:</p>
+<pre><code>rake bower:install[&#39;--allow-root&#39;]
+</code></pre><h3 id="th-m-tham-s-v-o-file-bowerrc">Thêm tham số vào file .bowerrc</h3>
+<p>Cách 2 là tạo file <code>~/.bowerrc</code> với nội dung như sau:</p>
+<pre><code>{
+   &quot;allow_root&quot;: true
+}
+</code></pre><p>Rồi chạy <code>rake</code> như bình thường:</p>
+<pre><code>rake bower:install
+</code></pre><p>huytd 10-09-2016</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/rake-bower-docker.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+        </script>
+    </body>
+</html>

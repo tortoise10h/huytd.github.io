@@ -1,6 +1,11 @@
 # Nơi tổng hợp những ghi chép linh tinh
 
 ---
+[rake bower:install trong Docker](posts/rake-bower-docker.html)
+
+Cách giải quyết lỗi `bower ESUDO Cannot be run with sudo` khi dùng Docker làm môi trường dev Rails
+
+---
 [Dùng WhatTheCommit để tiết kiệm thời gian push code :v](posts/what-the-commit.html)
 
 Những việc gì có thể làm được trong 5 giây thì hãy rút nó về còn 1 giây thôi...
