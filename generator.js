@@ -7,7 +7,7 @@ var indexTemplateHtml = '';
 console.log('Loading template...');
 templateHtml = fs.readFileSync('template.html', { encoding: 'utf8' });
 console.log('Loading index template...');
-indexTemplateHtml = fs.readFile('indexTemplate.html', { encoding: 'utf8' });
+indexTemplateHtml = fs.readFileSync('indexTemplate.html', { encoding: 'utf8' });
 
 console.log('Generating static files...');
 fs.readdir(__dirname + '/posts/', function(err, files) {
