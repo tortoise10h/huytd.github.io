@@ -56,7 +56,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 console.log('Generating index page...');
 var publishedPosts = Array.from(require('./publish.json').published);
 var htmlOutput = __dirname + '/index.html';
-var postContent = '';
+var postContent = "# Nơi tổng hợp những ghi chép linh tinh\n\n";
 var htmlContent = '';
 
 for (var i = publishedPosts.length - 1; i >= 0; i--) {
@@ -65,6 +65,7 @@ for (var i = publishedPosts.length - 1; i >= 0; i--) {
 
 htmlContent = indexTemplateHtml.replace('{%content%}', marked(postContent));
 htmlContent = htmlContent.replace('{%title%}', 'Nơi tổng hợp những ghi chép linh tinh');
+htmlContent = htmlContent.replace('{%meta%}', '');
 htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io');
 
 fs.writeFile(htmlOutput, htmlContent, function (err) {
