@@ -69,45 +69,22 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 });
 
 console.log('Generating index page...');
-fs.readdir(__dirname + '/posts/', function(err, files) {
-    if (err) return;
-    files.forEach(function(f) {
-        if (f.indexOf('home.md') != -1) {
-        	var htmlOutput = __dirname + '/index.html';
-	        var postContent = '';
-	        var htmlContent = '';
-	        var metaData = '';
-	        fs.readFile(__dirname + '/posts/' + f, function (err, data) {
-			  if (err)
-			    throw err;
-			  if (data) {
-			  	var markdownPost = data.toString('utf8');
-			  	var lines = markdownPost.split('\n');
-			  	var title = '';
-			  	if (lines.length > 0) {
-			  		title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '');
-			  		if (lines[lines.length - 6].indexOf('<meta') == 0) {
-			  			metaData = lines.slice(lines.length - 6).join('\n');
-			  			markdownPost = markdownPost.split('\n');
-			  			markdownPost.splice(markdownPost.length - 6);
-			  			markdownPost = markdownPost.join('\n');
-			  		}
-			  	}
-			  	postContent = marked(markdownPost);
-			  	htmlContent = indexTemplateHtml.replace('{%content%}', postContent);
-			  	htmlContent = htmlContent.replace('{%title%}', title);
-			  	htmlContent = htmlContent.replace('{%meta%}', metaData);
-			  	htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io');
+var publishedPosts = Array.from(require('./publish.json').published);
+var htmlOutput = __dirname + '/index.html';
+var postContent = '';
+var htmlContent = '';
 
-			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
-				     if (err)
-				       throw err;
-				     else
-				     	console.log('>>', htmlOutput);
-				});
-			  }
-			});
-        }
-    });
+for (var i = publishedPosts.length - 1; i >= 0; i--) {
+  postContent += "\n---\n[" + publishedPosts[i].title  + "](" + publishedPosts[i].url + ")\n\n" + publishedPosts[i].desc + "\n";
+}
+
+htmlContent = indexTemplateHtml.replace('{%content%}', marked(postContent));
+htmlContent = htmlContent.replace('{%title%}', 'Nơi tổng hợp những ghi chép linh tinh');
+htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io');
+
+fs.writeFile(htmlOutput, htmlContent, function (err) {
+  if (err)
+    throw err;
+  else
+    console.log('>>', htmlOutput);
 });
-
