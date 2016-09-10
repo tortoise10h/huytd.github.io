@@ -6,6 +6,7 @@
     <style>
     * {
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      outline: none;
     }
     html, body {
       margin: 0; padding: 0;
@@ -27,52 +28,102 @@
       background: #F1F1F1;
     }
 
-    .published ul {
+    ul {
       margin: 0; padding: 0;
       list-style: none;
     }
 
-    .published ul li {
+    ul li {
       margin: 5px; padding: 10px;
       background: #FEFEFE;
       position: relative;
+      cursor: pointer;
     }
 
-    .published ul li .postTitle {
+    ul li .postTitle {
       font-weight: bold;
       font-size: 1.2em;
     }
 
-    .published ul li .postTitle a {
+    ul li:hover {
+      background: #e74c3c;
+    }
+    ul li:hover .postDesc textarea, ul li:hover .postTitle a {
+      color: #FFF;
+    }
+
+    ul li .postTitle a {
       text-decoration: none;
       color: #e74c3c;
     }
 
-    .published ul li .postDesc {
+    ul li .postDesc {
+      width: 100%; height: 50px;
+    }
 
+    ul li .postDesc textarea {
+      outline: none;
+      border: none;
+      padding: 5px 0 5px 0;
+      box-sizing: border-box; 
+      width: 100%; height: 50px;
+      font-size: 14px;
+      resize: none;
+      background: none;
+      color: #000;
     }
     
     .published ul li button {
       position: absolute;
-      padding: 1px;
-      right: 5px; top: 5px;
+      padding: 10px;
+      right: 10px; top: 10px;
       background: #e74c3c;
       border: none;
       color: #FFF;
+      cursor: pointer;
     }
 
+    .published ul li {
+      padding-left: 50px;
+    }
+
+    .published ul li .moveUp {
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 30px; height: 30px;
+      color: #FFF; text-align: center;
+      line-height: 30px; font-size: 18px;
+      background: #c0392b;
+      cursor: pointer;
+    }
+
+    .published ul li .moveDown {
+      position: absolute;
+      top: 50px; left: 10px;
+      width: 30px; height: 30px;
+      color: #FFF; text-align: center;
+      line-height: 30px; font-size: 18px;
+      background: #c0392b;
+      cursor: pointer;
+    }
     </style>
   </head>
   <body ng-app="adminApp" ng-controller="admin">
     <div class="unpublished">
-
+      <ul>
+        <li ng-repeat="post in unpublishedPosts" ng-click="publishPost(post, $index)">
+          <div class="postTitle"><a>{{post.title}}</a></div>
+        </li>
+      </ul>
     </div>
     <div class="published">
       <ul>
-        <li>
-          <div class="postTitle"><a href="#">Lorem Ipsum Doro</a></div>
-          <div class="postDesc">Lorem Lorem Lorem Lorem Lorem Lorem</div>
-          <button>UNPUBLISH</button>
+        <li ng-repeat="post in publishedPosts">
+          <div class="moveUp" ng-click="moveUp($index)">+</div>
+          <div class="moveDown" ng-click="moveDown($index)">-</div>
+          <div class="postTitle"><a href="{{post.url}}">{{post.title}}</a></div>
+          <div class="postDesc"><textarea ng-change="updateAll()" type="text" ng-model="post.desc"></textarea></div>
+          <button ng-click="unpublishPost(post, $index)">UNPUBLISH</button>
         </li>
       </ul>
     </div>
