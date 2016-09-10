@@ -5,24 +5,9 @@ var templateHtml = '';
 var indexTemplateHtml = '';
 
 console.log('Loading template...');
-fs.readFile('template.html', function (err, data) {
-  if (err)
-    throw err;
-  if (data) {
-  	templateHtml = data.toString('utf8');
-  	console.log('DONE');
-  }
-});
-
+templateHtml = fs.readFileSync('template.html', { encoding: 'utf8' });
 console.log('Loading index template...');
-fs.readFile('indexTemplate.html', function (err, data) {
-  if (err)
-    throw err;
-  if (data) {
-  	indexTemplateHtml = data.toString('utf8');
-  	console.log('DONE');
-  }
-});
+indexTemplateHtml = fs.readFile('indexTemplate.html', { encoding: 'utf8' });
 
 console.log('Generating static files...');
 fs.readdir(__dirname + '/posts/', function(err, files) {
