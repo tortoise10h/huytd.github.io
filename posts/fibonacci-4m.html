@@ -86,7 +86,17 @@ $F_{n}\;=\;\frac{\left( 1\; +\; \sqrt{5} \right)^{^{n}}\; -\; \left( 1\; -\; \sq
 </pre>
 
 <p>Áp dụng 2 công thức trên, chúng ta có thể loại bỏ hoàn toàn việc sử dụng đệ quy hoặc vòng lặp, và điều này sẽ cải thiện tốc độ tính toán một cách đáng kể.</p>
-<p>Một nhược điểm duy nhất của cách này là việc tính toán với căn bậc 2 trên máy tính sẽ dẫn tới tình trạng làm tròn số và sẽ xuất hiện sai số nhất định khiến cho giá trị không thực sự chính xác.</p>
+<p>Cách implement thì cực kì đơn giản: </p>
+<pre><code>import Foundation
+
+func Fibonacci(n: Double) -&gt; Double {
+  return (pow((1.0 + sqrt(5.0)), n) - pow((1.0 - sqrt(5.0)), n)) / (pow(2.0, n) * sqrt(5.0))
+}
+
+func Sum(n: Double) -&gt; Double {
+  return Fibonacci(n: n + 2.0) - 1.0
+}
+</code></pre><p>Một nhược điểm duy nhất của cách này là việc tính toán với căn bậc 2 trên máy tính sẽ dẫn tới tình trạng làm tròn số và sẽ xuất hiện sai số nhất định khiến cho giá trị không thực sự chính xác.</p>
 <p>Tuy nhiên đây cũng là một trong những ví dụ cho việc ứng dụng toán học vào lập trình để giúp giải quyết vấn đề một cách hiệu quả hơn. </p>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/fibonacci-4m.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
