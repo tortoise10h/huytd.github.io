@@ -74,13 +74,22 @@ pre code, pre code * {
     font-family: monospace !important;
 }
 
+pre.math {
+  background: transparent !important;
+  text-align: center;
+}
+
+code.math {
+  background: transparent !important;
+}
+
 a {
     text-decoration: none;
     color: #e74c3c;
 }
 
 a:hover {
-    font-weight: bold;
+  text-decoration: underline;
 }
 
 img {

@@ -22,7 +22,10 @@
                 <h1 id="t-nh-t-ng-c-c-s-fibonacci-t-1-t-i-4-tri-u">Tính tổng các số Fibonacci từ 1 tới 4 triệu</h1>
 <p>Cuối tuần này có nói chuyện với bác <a href="http://kipalog.com/users/nguyenduyhao1111/mypage">@haond</a> về một đề tài khá là thú vị, đó là bài toán: <strong>Tính tổng các số Fibonacci từ 1 tới 4 triệu</strong></p>
 <p>Để tính một số Fibonacci thì cực kì đơn giản, chỉ cần làm theo công thức: </p>
-<p>$F\left( n \right)\; =\; F<em>{n-1}\; +\; F</em>{n-2}$</p>
+<pre class="math">
+$F_{n}=F_{n-1}+F_{n-2}$
+</pre>
+
 <p>Code thì khá là đơn giản bằng cách dùng đệ quy: </p>
 <pre><code>func Fibonacci(n: Int) -&gt; Int {
   if n &lt;= 2 {
@@ -63,16 +66,25 @@
 <p>Vì mọi vấn đề liên quan đến số học đều, hiển nhiên, có thể biểu diễn được bằng toán học, vậy đây cũng không phải là ngoại lệ, hãy xem chúng ta có thể mượn được gì từ toán nào.</p>
 <h2 id="c-ng-th-c-t-nh-t-ng-n-s-fibonacci">Công thức tính tổng n số Fibonacci</h2>
 <p>Chúng ta có công thức tính tổng n số Fibonacci với mọi số n &gt;= 2 như sau:</p>
-<p>$\mbox{S}<em>{n}\; =\; \sum</em>{i=1}^{n}{F<em>{i}}=\; F</em>{n+2}\; -\; 1$</p>
+<pre class="math">
+$\mbox{S}_{n}\;=\;\sum_{i=1}^{n}{F_{i}}=\;F_{n+2}\; -\; 1$
+</pre>
+
 <p>Nếu không tin tưởng vào công thức, thì các bạn có thể tham khảo <a href="https://proofwiki.org/wiki/Sum_of_Sequence_of_Fibonacci_Numbers#Proof">chứng minh công thức tại đây</a></p>
-<p>Vậy để tính tổng các số Fibonacci từ 1 tới 4 triệu, chúng ta có thể <strong>tìm số Fibonacci thứ 4 triệu lẻ 2 (4000002) rồi trừ giá trị này đi cho 1</strong>. Bài toán quay trở về tìm một số Fibonacci bất kì.</p>
+<p>Vậy để tính tổng các số Fibonacci từ 1 tới 4 triệu, chúng ta có thể <strong>tìm số Fibonacci thứ 4 triệu lẻ 2 (4,000,002) rồi trừ giá trị này đi cho 1</strong>. Bài toán quay trở về tìm một số Fibonacci bất kì.</p>
 <p>Tuy nhiên, 4 triệu lẻ 2 vẫn là một con số quá lớn để có thể tính toán bình thường trên một máy tính cá nhân (với các yếu tố như: tốc độ xử lý, giới hạn bộ nhớ, giới hạn của kiểu dữ liệu,...). Chúng ta cần tìm một giải pháp khác ít tốn kém hơn.</p>
 <h2 id="c-ng-th-c-t-nh-s-fibonacci-b-t-k-">Công thức tính số Fibonacci bất kì</h2>
 <p>Chúng ta có thêm công thức <a href="http://mathworld.wolfram.com/BinetsFibonacciNumberFormula.html">Binet</a> để tìm một số Fibonacci bất kì như sau:</p>
-<p>$F_{n}\; =\; \frac{\phi ^{n}\; -\; \left( -\phi  \right)^{-n}}{\sqrt{5}}$</p>
-<p>Chi tiết về kí hiệu <code>Φ</code> (phi): Xem <a href="http://mathworld.wolfram.com/GoldenRatio.html">tỉ lệ vàng</a></p>
+<pre class="math">
+$F_{n}\;=\;\frac{\phi ^{n}\; -\; \left( -\phi  \right)^{-n}}{\sqrt{5}}$
+</pre>
+
+<p>Chi tiết về kí hiệu <code class="math">$\phi$</code> (phi): Xem <a href="http://mathworld.wolfram.com/GoldenRatio.html">tỉ lệ vàng</a></p>
 <p>Công thức trên có thể được khai triển thành: </p>
-<p>$F_{n}\; =\; \frac{\left( 1\; +\; \sqrt{5} \right)^{^{n}}\; -\; \left( 1\; -\; \sqrt{5} \right)^{^{n}}}{2^{^{n}}\sqrt{5}}$</p>
+<pre class="math">
+$F_{n}\;=\;\frac{\left( 1\; +\; \sqrt{5} \right)^{^{n}}\; -\; \left( 1\; -\; \sqrt{5} \right)^{^{n}}}{2^{^{n}}\sqrt{5}}$
+</pre>
+
 <p>Áp dụng 2 công thức trên, chúng ta có thể loại bỏ hoàn toàn việc sử dụng đệ quy hoặc vòng lặp, và điều này sẽ cải thiện tốc độ tính toán một cách đáng kể.</p>
 <p>Một nhược điểm duy nhất của cách này là việc tính toán với căn bậc 2 trên máy tính sẽ dẫn tới tình trạng làm tròn số và sẽ xuất hiện sai số nhất định khiến cho giá trị không thực sự chính xác.</p>
 <p>Tuy nhiên đây cũng là một trong những ví dụ cho việc ứng dụng toán học vào lập trình để giúp giải quyết vấn đề một cách hiệu quả hơn. </p>
@@ -145,7 +157,10 @@
         <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
         <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-          tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
         });
         </script>
     </body>

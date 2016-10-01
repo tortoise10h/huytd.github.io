@@ -1,6 +1,18 @@
 var fs = require('fs');
 var marked = require('./js/marked.js');
 
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false, // IMPORTANT, because we do MathJax before markdown,
+                  //            however we do escaping in 'CreatePreview'.
+  smartLists: true,
+  smartypants: false
+});
+
 var templateHtml = '';
 var indexTemplateHtml = '';
 
@@ -34,7 +46,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  			markdownPost.splice(markdownPost.length - 6);
 			  			markdownPost = markdownPost.join('\n');
 			  		}
-			  	}
+			  	}          
 			  	postContent = marked(markdownPost);
 			  	htmlContent = templateHtml.replace('{%content%}', postContent);
 			  	htmlContent = htmlContent.replace('{%title%}', title);

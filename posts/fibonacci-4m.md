@@ -4,7 +4,9 @@ Cuối tuần này có nói chuyện với bác [@haond](http://kipalog.com/user
 
 Để tính một số Fibonacci thì cực kì đơn giản, chỉ cần làm theo công thức: 
 
-$$F\left( n \right)\; =\; F_{n-1}\; +\; F_{n-2}$$
+<pre class="math">
+$F_{n}=F_{n-1}+F_{n-2}$
+</pre>
 
 Code thì khá là đơn giản bằng cách dùng đệ quy: 
 
@@ -67,11 +69,13 @@ Vì mọi vấn đề liên quan đến số học đều, hiển nhiên, có th
 
 Chúng ta có công thức tính tổng n số Fibonacci với mọi số n >= 2 như sau:
 
-$$\mbox{S}_{n}\; =\; \sum_{i=1}^{n}{F_{i}}=\; F_{n+2}\; -\; 1$$
+<pre class="math">
+$$\mbox{S}_{n}\;=\;\sum_{i=1}^{n}{F_{i}}=\;F_{n+2}\; -\; 1$$
+</pre>
 
 Nếu không tin tưởng vào công thức, thì các bạn có thể tham khảo [chứng minh công thức tại đây](https://proofwiki.org/wiki/Sum_of_Sequence_of_Fibonacci_Numbers#Proof)
 
-Vậy để tính tổng các số Fibonacci từ 1 tới 4 triệu, chúng ta có thể **tìm số Fibonacci thứ 4 triệu lẻ 2 (4000002) rồi trừ giá trị này đi cho 1**. Bài toán quay trở về tìm một số Fibonacci bất kì.
+Vậy để tính tổng các số Fibonacci từ 1 tới 4 triệu, chúng ta có thể **tìm số Fibonacci thứ 4 triệu lẻ 2 (4,000,002) rồi trừ giá trị này đi cho 1**. Bài toán quay trở về tìm một số Fibonacci bất kì.
 
 Tuy nhiên, 4 triệu lẻ 2 vẫn là một con số quá lớn để có thể tính toán bình thường trên một máy tính cá nhân (với các yếu tố như: tốc độ xử lý, giới hạn bộ nhớ, giới hạn của kiểu dữ liệu,...). Chúng ta cần tìm một giải pháp khác ít tốn kém hơn.
 
@@ -79,13 +83,17 @@ Tuy nhiên, 4 triệu lẻ 2 vẫn là một con số quá lớn để có thể
 
 Chúng ta có thêm công thức [Binet](http://mathworld.wolfram.com/BinetsFibonacciNumberFormula.html) để tìm một số Fibonacci bất kì như sau:
 
-$$F_{n}\; =\; \frac{\phi ^{n}\; -\; \left( -\phi  \right)^{-n}}{\sqrt{5}}$$
+<pre class="math">
+$$F_{n}\;=\;\frac{\phi ^{n}\; -\; \left( -\phi  \right)^{-n}}{\sqrt{5}}$$
+</pre>
 
-Chi tiết về kí hiệu `Φ` (phi): Xem [tỉ lệ vàng](http://mathworld.wolfram.com/GoldenRatio.html)
+Chi tiết về kí hiệu <code class="math">$\phi$</code> (phi): Xem [tỉ lệ vàng](http://mathworld.wolfram.com/GoldenRatio.html)
 
 Công thức trên có thể được khai triển thành: 
 
-$$F_{n}\; =\; \frac{\left( 1\; +\; \sqrt{5} \right)^{^{n}}\; -\; \left( 1\; -\; \sqrt{5} \right)^{^{n}}}{2^{^{n}}\sqrt{5}}$$
+<pre class="math">
+$$F_{n}\;=\;\frac{\left( 1\; +\; \sqrt{5} \right)^{^{n}}\; -\; \left( 1\; -\; \sqrt{5} \right)^{^{n}}}{2^{^{n}}\sqrt{5}}$$
+</pre>
 
 Áp dụng 2 công thức trên, chúng ta có thể loại bỏ hoàn toàn việc sử dụng đệ quy hoặc vòng lặp, và điều này sẽ cải thiện tốc độ tính toán một cách đáng kể.
 
