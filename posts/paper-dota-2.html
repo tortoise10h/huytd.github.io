@@ -1,0 +1,114 @@
+<html>
+    <head>
+        <title> Một vài papers về DotA 2 và Machine Learning | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="m-t-v-i-papers-v-dota-2-v-machine-learning">Một vài papers về DotA 2 và Machine Learning</h1>
+<h2 id="how-does-he-saw-me-">How Does He Saw Me?</h2>
+<p>Link bài báo: <a href="http://cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf">http://cs229.stanford.edu/proj2013/PerryConley-HowDoesHeSawMeARecommendationEngineForPickingHeroesInDota2.pdf</a></p>
+<p>Paper đầu tiên về việc dùng số liệu trong DotA 2 vào một vấn đề machine learning, của tác giả Kevin, mục tiêu của paper là sử dụng Machine Learning để recommend counter pick trong DotA dựa trên tương quan hero 2 phe dire và radiant, lịch sử thắng thua,...</p>
+<h2 id="to-win-or-not-to-win">To Win or Not To Win</h2>
+<p>Link bài báo: <a href="http://cseweb.ucsd.edu/~jmcauley/cse255/reports/wi15/Kaushik_Kalyanaraman.pdf">http://cseweb.ucsd.edu/~jmcauley/cse255/reports/wi15/Kaushik_Kalyanaraman.pdf</a></p>
+<p>Dự đoán thắng thua dựa trên team pick, dùng chung feature vector với paper ở trên</p>
+<h2 id="dota-2-win-prediction">DotA 2 Win Prediction</h2>
+<p>Link bài báo: <a href="http://cseweb.ucsd.edu/~jmcauley/cse255/reports/fa15/018.pdf">http://cseweb.ucsd.edu/~jmcauley/cse255/reports/fa15/018.pdf</a></p>
+<p>Dự đoán thắng thua bằng 2 cách, một cách là dựa trên dữ liệu cuối trận đấu như là Gold-per-minute, Exp-per-minute, Kills-per-minutes, và một cách là dựa trên team pick</p>
+<h2 id="predicting-the-winning-side-of-dota-2">Predicting the winning side of DotA 2</h2>
+<p>Link bài báo: <a href="http://cs229.stanford.edu/proj2015/249_report.pdf">http://cs229.stanford.edu/proj2015/249_report.pdf</a></p>
+<p>Vẫn là dự đoán thắng thua dựa trên team pick, lấy cơ sở từ bài paper của Kevin ở đầu kia, sử dụng logistic regression và dùng chung 1 bộ data, dùng chung feature vector</p>
+<h2 id="result-prediction-by-mining-replays-in-dota-2">Result Prediction by Mining Replays in DotA 2</h2>
+<p>Link bài báo: <a href="https://www.diva-portal.org/smash/get/diva2:829556/FULLTEXT01.pdf">https://www.diva-portal.org/smash/get/diva2:829556/FULLTEXT01.pdf</a></p>
+<p>Phân tích replay để dự đoán kết quả trận đấu, có giới thiệu qua nhiều thuật toán nhưng cuối cùng kết luận Random Forest là cho kết quả chính xác nhất, bài này nói khá kĩ ở khúc phân tích đặc thù dữ liệu của một file replay DotA 2</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/paper-dota-2.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
