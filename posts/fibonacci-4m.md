@@ -138,13 +138,13 @@ $$\left[ \begin{array}{c} F_{n+2} \\ F_{n+1} \end{array} \right]\; =\; \left[ \b
 Nếu không tin thì các bạn cứ thử tự chứng minh đi :3, tiếp, ta cũng có thể viết lại biểu thức trên thành:
 
 <pre class="math">
-$$\left[ \begin{array}{c} F_{n} \\ F_{n-1} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]\; \left[ \begin{array}{c} F_{n-1} \\ F_{n-2} \end{array} \right]$$
+$$\left[ \begin{array}{c} F_{n+1} \\ F_{n} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]\; \left[ \begin{array}{c} F_{n} \\ F_{n-1} \end{array} \right]$$
 </pre>
 
 Và sau khi thực hiện một vài phép tính toán đơn giản trên ma trận chúng ta thu được kết quả sau:
 
 <pre class="math">
-$$\left[ \begin{array}{c} F_{n} \\ F_{n-1} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]^{^{^{^{^{^{^{^{n}}}}}}}}\; \left[ \begin{array}{c} F_{1} \\ F_{0} \end{array} \right]$$
+$$\left[ \begin{array}{c} F_{n+1} \\ F_{n} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]^{n}\; \left[ \begin{array}{c} F_{1} \\ F_{0} \end{array} \right]$$
 </pre>
 
 Với `F(1) = 1` và `F(0) = 0`. Bài toán quay trở về dạng bài toán nhân 2 ma trận 2x2 và nhân một ma trận 2x2 với một ma trận 2x1. 
