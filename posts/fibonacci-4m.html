@@ -21,6 +21,7 @@
             <div class="main">
                 <h1 id="t-nh-t-ng-c-c-s-fibonacci-t-1-t-i-4-tri-u">Tính tổng các số Fibonacci từ 1 tới 4 triệu</h1>
 <p>Cuối tuần này có nói chuyện với bác <a href="http://kipalog.com/users/nguyenduyhao1111/mypage">@haond</a> về một đề tài khá là thú vị, đó là bài toán: <strong>Tính tổng các số Fibonacci từ 1 tới 4 triệu</strong></p>
+<h2 id="gi-i-ph-p-n-gi-n">Giải pháp đơn giản</h2>
 <p>Để tính một số Fibonacci thì cực kì đơn giản, chỉ cần làm theo công thức: </p>
 <pre class="math">
 $F_{n}=F_{n-1}+F_{n-2}$
@@ -73,7 +74,8 @@ $\mbox{S}_{n}\;=\;\sum_{i=1}^{n}{F_{i}}=\;F_{n+2}\; -\; 1$
 <p>Nếu không tin tưởng vào công thức, thì các bạn có thể tham khảo <a href="https://proofwiki.org/wiki/Sum_of_Sequence_of_Fibonacci_Numbers#Proof">chứng minh công thức tại đây</a></p>
 <p>Vậy để tính tổng các số Fibonacci từ 1 tới 4 triệu, chúng ta có thể <strong>tìm số Fibonacci thứ 4 triệu lẻ 2 (4,000,002) rồi trừ giá trị này đi cho 1</strong>. Bài toán quay trở về tìm một số Fibonacci bất kì.</p>
 <p>Tuy nhiên, 4 triệu lẻ 2 vẫn là một con số quá lớn để có thể tính toán bình thường trên một máy tính cá nhân (với các yếu tố như: tốc độ xử lý, giới hạn bộ nhớ, giới hạn của kiểu dữ liệu,...). Chúng ta cần tìm một giải pháp khác ít tốn kém hơn.</p>
-<h2 id="c-ng-th-c-t-nh-s-fibonacci-b-t-k-">Công thức tính số Fibonacci bất kì</h2>
+<h2 id="c-ng-th-c-t-m-m-t-s-fibonacci-b-t-k-">Công thức tìm một số Fibonacci bất kì</h2>
+<h3 id="s-d-ng-c-ng-th-c-binet">Sử dụng công thức Binet</h3>
 <p>Chúng ta có thêm công thức <a href="http://mathworld.wolfram.com/BinetsFibonacciNumberFormula.html">Binet</a> để tìm một số Fibonacci bất kì như sau:</p>
 <pre class="math">
 $F_{n}\;=\;\frac{\phi ^{n}\; -\; \left( -\phi  \right)^{-n}}{\sqrt{5}}$
@@ -97,7 +99,78 @@ func Sum(n: Double) -&gt; Double {
   return Fibonacci(n: n + 2.0) - 1.0
 }
 </code></pre><p>Một nhược điểm duy nhất của cách này là việc tính toán với căn bậc 2 trên máy tính sẽ dẫn tới tình trạng làm tròn số và sẽ xuất hiện sai số nhất định khiến cho giá trị không thực sự chính xác.</p>
-<p>Tuy nhiên đây cũng là một trong những ví dụ cho việc ứng dụng toán học vào lập trình để giúp giải quyết vấn đề một cách hiệu quả hơn. </p>
+<h3 id="s-d-ng-ma-tr-n">Sử dụng ma trận</h3>
+<p>Sau khi viết bài này thì được a <a href="http://kipalog.com/users/kiennt/mypage">@kiennt</a> giới thiệu thêm một cách khác, đó là dùng ma trận.</p>
+<p>Quay trở lại công thức tính một số Fibonacci: </p>
+<pre class="math">$F_{n}=F_{n-1}\; +\; F_{n-2}$</pre>
+
+<p>Đồng nghĩa với: </p>
+<pre class="math">$F_{n+2}=F_{n+1}+F_{n}$</pre>
+
+<p>Vì vậy ta có thể biểu diễn dưới dạng ma trận như sau:</p>
+<pre class="math">
+$\left[ \begin{array}{c} F_{n+2} \\ F_{n+1} \end{array} \right]\; =\; \left[ \begin{array}{c} F_{n+1}\; +\; F_{n} \\ F_{n+1} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]\; \left[ \begin{array}{c} F_{n+1} \\ F_{n} \end{array} \right]$
+</pre>
+
+<p>Nếu không tin thì các bạn cứ thử tự chứng minh đi :3, tiếp, ta cũng có thể viết lại biểu thức trên thành:</p>
+<pre class="math">
+$\left[ \begin{array}{c} F_{n+1} \\ F_{n} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]\; \left[ \begin{array}{c} F_{n} \\ F_{n-1} \end{array} \right]$
+</pre>
+
+<p>Và sau khi thực hiện một vài phép tính toán đơn giản trên ma trận chúng ta thu được kết quả sau:</p>
+<pre class="math">
+$\left[ \begin{array}{c} F_{n+1} \\ F_{n} \end{array} \right]\; =\; \left[ \begin{array}{cc} 1 & 1 \\ 1 & 0 \end{array} \right]^{n}\; \left[ \begin{array}{c} F_{1} \\ F_{0} \end{array} \right]$
+</pre>
+
+<p>Với <code>F(1) = 1</code> và <code>F(0) = 0</code>. Bài toán quay trở về dạng bài toán nhân 2 ma trận 2x2 và nhân một ma trận 2x2 với một ma trận 2x1. </p>
+<p>Dưới đây là đoạn implement bằng Python của a <a href="http://kipalog.com/users/kiennt/mypage">@kiennt</a>:</p>
+<pre><code>def mul_metrix_1(m1, m2):
+    return (
+        m1[0][0] * m2[0] + m1[0][1] * m2[1],
+        m1[1][0] * m2[0] + m1[1][1] * m2[1]
+    )
+
+
+def mul_matrix(m1, m2):
+    &quot;&quot;&quot;
+    matrix m1, m2 is 2x2 matrix which is respresend like
+    ((r00, r01), (r10, r11))
+    &quot;&quot;&quot;
+
+    return (
+        (m1[0][0] * m2[0][0] + m1[0][1] * m2[1][0], m1[0][0] * m2[0][1] + m1[0][1] * m2[1][1]),
+        (m1[1][0] * m2[0][0] + m1[1][1] * m2[1][0], m1[1][0] * m2[0][1] + m1[1][1] * m2[1][1])
+    )
+
+
+def pow_matrix(m, n):
+    &quot;&quot;&quot; m is 2x2 matrix &quot;&quot;&quot;
+    if n == 1:
+        return m
+    elif n % 2 == 0:
+        a = pow_matrix(m, n / 2)
+        return mul_matrix(a, a)
+    else:
+        return mul_matrix(pow_matrix(m, n - 1), m)
+
+
+def fibo(n):
+    if n == 0:
+        return 1
+    if n == 1:
+        return 1
+
+    a = ((1, 1), (1, 0))
+    an = pow_matrix(a, n)
+    pair_0 = (1, 1)
+    pair_n = mul_metrix_1(an, pair_0)
+    return pair_n[1]
+
+
+for i in xrange(2, 10):
+    print fibo(i)
+</code></pre><p>Xin chân thành cảm ơn ae nhóm <strong>#hardcore</strong> của cộng đồng Ruby Việt Nam đã tích cực thảo luận để tổng hợp thành bài viết này.</p>
+<p>Hy vọng bài viết phần nào giúp cho các bạn nhận ra sự quan trọng của việc ứng dụng toán học, đặc biệt là việc sử dụng ma trận vào giải quyết các bài toán phức tạp. Viết xong bài tổng hợp này mình vẫn còn ngồi vắt tay lên trán mà suy nghĩ, giá mà hồi đó mình chăm học toán hơn thì tốt biết mấy :joy:</p>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/fibonacci-4m.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
