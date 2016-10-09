@@ -172,3 +172,37 @@ html, body {
     text-align: center;
     margin: 0 auto;
 }
+
+h1:before, h2:before, h3:before, h4:before, h5:before, h6:before {
+  color: #CCC;
+  margin-left: -20px;
+  margin-right: 10px;
+  content: "#";
+}
+
+body {
+  counter-reset: first;
+}
+
+h2 {
+  counter-increment: first;
+  counter-reset: second;
+}
+h2:before {
+  content: counter(first) ".";
+}
+
+h3 {
+  counter-increment: second;
+  counter-reset: third;
+}
+h3:before {
+  content: counter(first) "." counter(second) ".";
+}
+
+h4 {
+  counter-increment: third;
+}
+h4:before {
+  content: counter(first) "." counter(second) "." counter(third) ".";
+}

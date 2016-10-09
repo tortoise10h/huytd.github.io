@@ -32,12 +32,6 @@ var genPreview = function(f, res) {
         var title = '';
         if (lines.length > 0) {
           title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '');
-          if (lines[lines.length - 6].indexOf('<meta') == 0) {
-            metaData = lines.slice(lines.length - 6).join('\n');
-            markdownPost = markdownPost.split('\n');
-            markdownPost.splice(markdownPost.length - 6);
-            markdownPost = markdownPost.join('\n');
-          }
         }          
         postContent = marked(markdownPost);
         htmlContent = templateHtml.replace('{%content%}', postContent);
