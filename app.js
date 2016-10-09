@@ -2,9 +2,15 @@ const fs = require('fs');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const preview = require('./preview');
 
 app.use(bodyParser());
 app.use(express.static("admin"));
+app.use(express.static("."));
+
+app.get('/preview', function(req, res) {
+  preview(req.query.url, res);
+});
 
 app.get('/published', function (req, res) {
   let posts = require('./publish.json');
