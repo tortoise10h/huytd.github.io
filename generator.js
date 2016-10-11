@@ -21,6 +21,8 @@ templateHtml = fs.readFileSync('template.html', { encoding: 'utf8' });
 console.log('Loading index template...');
 indexTemplateHtml = fs.readFileSync('indexTemplate.html', { encoding: 'utf8' });
 
+console.log(process.argv);
+
 console.log('Generating static files...');
 fs.readdir(__dirname + '/posts/', function(err, files) {
     if (err) return;

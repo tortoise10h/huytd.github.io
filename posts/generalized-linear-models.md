@@ -87,7 +87,7 @@ The **likelihood** of parameter $\theta=0.5$ with given outcome is:
 $$L(\theta=0.5|\vec{x}=[H, H, H, T, T, H]) = \rho(\vec{x}|\theta) = 0.016$$
 </pre>
 
-![](posts/img/coin-toss.png)
+![](img/coin-toss.png)
 
 </div>
 
@@ -113,7 +113,7 @@ $$L(\theta) = \displaystyle\prod_{i=1}^{m}\frac{1}{\sqrt{2\pi\sigma}}exp(-\frac{
 
 In the coin flipping example above, we noticed that the **likelihood** reaching its maximum when `$\theta=0.6676$`
 
-![](posts/img/coin-toss-max.png)
+![](img/coin-toss-max.png)
 
 When this happen, we could say: `$\theta = 0.6676$` maximize `$L(\theta)$`, and it also make the data model has the highest probability.
 
@@ -196,7 +196,7 @@ Those two are the **special cases** of a _broader family of models_, which calle
 $$f(x)=b^{x}$$
 </pre>
 
-![](posts/img/exponential-function.png)
+![](img/exponential-function.png)
 
 Its distribution can be written in the form:
 
@@ -212,7 +212,7 @@ $$\rho(y;\eta) = b(y)exp(\eta^{T}T(y) - a(\eta))$$
 
 A _fixed_ choice of **T**, **a** and **b** defines a **family** (or set) of distributions that parameterized by `$\eta$`. As we vary `$\eta$`, we get the different distribution within the faimily.
 
-![](posts/img/vary-eta.png)
+![](img/vary-eta.png)
 
 #### Special case of exponential: Bernoulli Distribution
 
