@@ -36,6 +36,7 @@ var genPreview = function(f, res) {
         postContent = marked(markdownPost);
         htmlContent = templateHtml.replace('{%content%}', postContent);
         htmlContent = htmlContent.replace('../', '');
+        htmlContent = htmlContent.replace('img/', 'post/img/');
         htmlContent = htmlContent.replace('{%title%}', title);
         htmlContent = htmlContent.replace('{%meta%}', metaData);
         htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
