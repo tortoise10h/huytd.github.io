@@ -142,7 +142,7 @@ Dựa trên phát minh của Strassen, vào tháng 5/1987, hai nhà khoa học D
 
 ![](img/cw_compare.jpg)
 
-Vào tháng 3/2013, A. M. Davie và A. J. Stothers công bố bài báo **Improved bound for complexity of matrix multiplication** <sup>[[5]](http://www.maths.ed.ac.uk/~sandy/a11164.pdf)</sup> và cho biết họ đặt được con số `$\mathcal{O}(n^{2.37369})$` khi cải tiến và khảo sát thuật toán của Coppersmith-Williams.
+Vào tháng 3/2013, A. M. Davie và A. J. Stothers công bố bài báo **Improved bound for complexity of matrix multiplication** <sup>[[5]](http://www.maths.ed.ac.uk/~sandy/a11164.pdf)</sup> và cho biết họ đặt được con số `$\mathcal{O}(n^{2.37369})$` khi cải tiến và khảo sát thuật toán của Coppersmith-Winograd.
 
 Tháng 1/2014, François Le Gall công bố bài báo **Powers of Tensors and Fast Matrix Multiplication** <sup>[[6]](https://arxiv.org/abs/1401.7714)</sup> tiếp tục phân tích thuật toán của hai nhà khoa học này và đạt được con số `$\mathcal{O}(n^{2.3728639})$`.
 
