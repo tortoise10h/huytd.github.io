@@ -1,0 +1,252 @@
+<html>
+    <head>
+        <title> Các thuật toán nhân ma trận | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="c-c-thu-t-to-n-nh-n-ma-tr-n">Các thuật toán nhân ma trận</h1>
+<p>Ma trận và các phép toán liên quan tới nó là một phần rất quan trọng trong hầu hết mọi thuật toán liên quan đến số học. </p>
+<p>Ở <a href="https://huytd.github.io/posts/fibonacci-4m.html">bài trước</a>, chúng ta có đề cập tới việc ứng dụng phép nhân ma trận để tính số Fibonacci một cách hiệu quả. Vậy thuật toán nhân ma trận mà chúng ta sử dụng ở trong bài viết đã thực sự hiệu quả hay chưa?</p>
+<div class="cover"><img src="img/matrixmul.jpg" alt=""></div><div class="cover-holder"></div>
+
+<p>Trong quá trình tìm hiểu để viết bài này thì mình phát hiện ra một điều khá là thú vị, đó là có rất nhiều thuật toán để thực hiện nhân ma trận, tuy nhiên ngành khoa học máy tính vẫn chưa tìm ra được câu trả lời cho câu hỏi: <strong>Đâu là thuật toán tối ưu để thực hiện phép nhân ma trận?</strong> <sup><a href="https://en.m.wikipedia.org/wiki/List_of_unsolved_problems_in_computer_science#Other_algorithmic_problems">[1]</a></sup></p>
+<h2 id="-nh-ngh-a-ph-p-nh-n-ma-tr-n">Định nghĩa phép Nhân ma trận</h2>
+<p>Nhắc lại một chút kiến thức toán học về phương pháp nhân 2 ma trận $A$ và $B$, điều kiện đầu tiên để có thể thực hiện phép nhân này là <strong>khi số cột của ma trận $A$ bằng số hàng của ma trận $B$</strong>.</p>
+<p>Với $A$ là một ma trận có kích thước <code>$m \times n$</code> và $B$ là một ma trận kích thước <code>$n \times p$</code> thì tích của $A \times B$ sẽ là một ma trận <code>$m \times p$</code> được tính bằng cách sau:</p>
+<pre class="math">$
+\left( \begin{array}{ccc}
+a & b  \\
+d & e  \end{array} \right) 
+\times
+\left( \begin{array}{ccc}
+x \\
+y
+\end{array} \right)
+=
+\left( \begin{array}{ccc}
+ax + cy \\
+bx + dy
+\end{array} \right)
+$</pre>
+
+<p>Hình sau mô tả cách tính một phần tử <code>AB[i][j]</code> của ma trận tích:</p>
+<p><img src="img/matrix_mul_1.png" alt=""></p>
+<p>Một phần tử là tổng của phép nhân các phần tử trong một hàng của ma trận $A$ với các phần tử trong cột tương ứng trong ma trận $B$</p>
+<pre class="math">$
+[AB]_{i,j} = A_{i,1}B_{1,j} + A_{i,2}B_{2,j} + \ldots + A_{i,n}B_{n,j}
+$</pre>
+
+<p>Hay viết cho gọn hơn như sau:</p>
+<pre class="math">$
+[AB]_{i,j} = \displaystyle\sum_{r=1}^{n} A_{i,r}B_{r,j}
+$</pre>
+
+<div class="box-red skip" style="padding: 0 15px 0 15px;">
+<p><strong>Noob Question:</strong> Cái dấu hình zích zắc <code>$\sum$</code> kia là gì vậy???</p>
+<p><strong>Chửi trước:</strong> Ôi trời, đây là cái dấu tính tổng mà cũng không biết à? Về học lại toán cấp 3 hay năm nhất ĐH gì đó đi nhé! Tốn thời gian bm!!<br/>
+<p><strong>Đáp sau:</strong> Cái dấu zích zắc đó là kí hiệu phép tính tổng, có thể hình dung kí hiệu này giống như một vòng lặp <strong>for</strong> trong thực hiện phép tính cộng, số $n$ ở trên đỉnh chỉ tổng số lần lặp cần thiết, số $r = 1$ ở dưới cho ta biết giá trị nào cần chạy trong vòng lặp <strong>for</strong> và bắt đầu chạy từ giá trị bao nhiêu. Biểu thức đi liền sau kí hiệu <code>$\sum$</code> cho ta biết phép cộng các giá trị nào sẽ được thực hiện bên trong vòng lặp đó.
+</div>
+
+<p>Tiếp theo, hãy cùng xem chúng ta có những cách nào để implement thuật toán này trên máy tính.</p>
+<h2 id="the-naive-algorithm">The naive algorithm</h2>
+<p>Naive Algorithm là từ dùng để chỉ một thuật toán đơn giản nhất được suy luận một cách &quot;ngây thơ&quot; bằng cách xử lý thông thường, ví dụ như tìm kiếm tuần từ (sequential/linear search)</p>
+<p>Trong trường hợp này, chúng ta thường implement thuật toán nhân ma trận bằng cách áp dụng chính xác công thức từ định nghĩa toán học của nó, sử dụng vòng lặp, như sau:</p>
+<div class="box-green skip" style="padding-left: 10px; padding-right: 10px">
+<p><strong>Input:</strong> Hai ma trận A kích thước $m \times n$ và B kích thước $n \times p$</p>
+<p>
+<strong>1:</strong> Khởi tạo ma trận C có kích thước $m \times p$ </br>
+<strong>2:</strong> For i từ $1 \rightarrow n$:</br>
+<strong>3:</strong> &emsp;For j từ $1 \rightarrow p$:</br>
+<strong>4:</strong> &emsp;&emsp;Gán $sum = 0$<br/>
+<strong>5:</strong> &emsp;&emsp;For r từ $1 \rightarrow m$:<br/>
+<strong>6:</strong> &emsp;&emsp;&emsp;Gán <code>$sum = sum + A_{i,r} \times B_{r,j}$</code><br/>
+<strong>7:</strong> &emsp;&emsp;Gán <code>$C_{i,j} = sum$</code><br/>
+</p>
+<p><strong>Output:</strong> Ma trận C kích thước $m \times p$</p>
+</div>
+
+<p>Tại sao lại gọi là naive algorithm (ngây thơ)? đó là vì nó rất dễ implement, chỉ cần đi theo lối suy nghĩ thông thường, bỏ qua hết mọi yếu tố như độ phức tạp, sự tối ưu...</p>
+<p>Độ phức tạp của thuật toán trên là $\mathcal{O}(nmp)$, trong trường hợp tất cả các ma trận đều là ma trận vuông $n \times n$ thì độ phức tạp của thuật toán sẽ là <code>$\mathcal{O}(n^{3})$</code></p>
+<h2 id="chia-tr-thu-t-to-n-strassen">Chia để trị - Thuật toán Strassen</h2>
+<p>Vào năm 1969, Volker Strassen - lúc đó đang là sinh viên tại MIT - cho rằng $\mathcal{O}(n^{3})$ chưa phải là con số tối ưu cho phép nhân ma trận, và đề xuất một thuật toán mới có thời gian chạy chỉ nhanh hơn một chút nhưng về sau đã kéo theo rất nhiều nhà khoa học lao vào tiếp tục nghiên cứu và cho đến thời điểm bây giờ, đã có rất nhiều phương pháp mới được đưa ra như là thuật toán Coppersmith-Winograd (sẽ nói ở phần sau), hoặc các giải pháp tiếp cận bằng lập trình song song trên nhiều máy tính/nhiều core,... Điểm thú vị là Strassen nghĩ ra thuật toán này vì nó là bài tập trong một lớp mà ông đang học <sup><a href="http://www.procul.org/blog/2005/11/16/nhan-ma-tr%E1%BA%ADn-dft-va-ly-thuy%E1%BA%BFt-bi%E1%BB%83u-di%E1%BB%85n-nhom-1/">[2]</a></sup>.</p>
+<p>Xét lại thuật toán naive ở phần trước, để tính một phần tử $C_{i,j}$ của ma trận tích $C$, ta phải thực hiện hai phép nhân và một phép cộng. Suy ra nếu $C$ là một ma trận vuông có kích thước $2 \times 2$, thì để tính bốn phần tử của $C$, đòi hỏi phải thực hiện $2 \times 2^{2} = 2^{3} = 8$ phép nhân và $(2 - 1) \times 2^{2} = 4$ phép cộng. Nếu $A$ và $B$ là những ma trận cấp $n$ (tức là các ma trận $n \times n$) thì chúng ta cần phải thực hiện $n^{3}$ phép nhân và $(n - 1) \times n^{2}$ phép cộng.</p>
+<p>Ý tưởng thuật toán của Strassen <sup><a href="https://en.m.wikipedia.org/wiki/Strassen_algorithm">[3]</a></sup> là áp dụng chia để trị để giải quyết bài toán theo hướng của giải thuật cơ bản trên. Cụ thể là: <strong>với mỗi ma trận vuông A, B, C có kích thước $n \times n$, chúng ta chia chúng thành 4 ma trận con, và biểu diễn tích $A \times B = C$ theo các ma trận con đó</strong>:</p>
+<p><img src="img/strassen.png" alt=""></p>
+<p>Trong đó:</p>
+<pre class="math">$
+\begin{align}
+C_{1,1} & = A_{1,1}B_{1,1} + A_{1,2}B_{2,1} \\
+C_{1,2} & = A_{1,1}B_{1,2} + A_{1,2}B_{2,2} \\
+C_{2,1} & = A_{2,1}B_{1,1} + A_{2,2}B_{2,1} \\
+C_{2,2} & = A_{2,1}B_{1,2} + A_{2,2}B_{2,2} 
+\end{align}
+$</pre>
+
+<p>Tuy nhiên với cách phân tích này thì chúng ta vẫn cần 8 phép nhân để tính ra ma trận $C$. Đây là phần quan trọng nhất của vấn đề.</p>
+<p>Chúng ta định nghĩa ra các ma trận $M$ mới như sau:</p>
+<pre class="math">$
+\begin{align}
+M_{1} & = (A_{1,1} + A_{2,2})(B_{1,1} + B_{2,2}) \\
+M_{2} & = (A_{2,1} + A_{2,2}) B_{1,1} \\
+M_{3} & = A_{1,1} (B_{1,2} - B_{2,2}) \\
+M_{4} & = A_{2,2} (B_{2,1} - B_{1,1}) \\
+M_{5} & = (A_{1,1} + A_{1,2}) B_{2,2} \\
+M_{6} & = (A_{2,1} - A_{1,1})(B_{1,1} + B_{1,2}) \\
+M_{7} & = (A_{1,2} - A_{2,2})(B_{2,1} + B_{2,2})
+\end{align}
+$</pre>
+
+<p>Và biểu diễn lại các phần tử của $C$ theo $M$ như sau:</p>
+<pre class="math">$
+\begin{align}
+C_{1,1} & = M_{1} + M_{4} - M_{5} + M_{7} \\
+C_{1,2} & = M_{3} + M_{5} \\ 
+C_{2,1} & = M_{2} + M_{4} \\
+C_{2,2} & = M_{1} - M_{2} + M_{3} + M_{6}
+\end{align}
+$</pre>
+
+<p>Bằng cách này, chúng ta chỉ cần 7 phép nhân (mỗi $M$ một phép nhân) thay vì 8 như phương pháp cũ.</p>
+<p>Thực hiện đệ quy quá trình trên cho đến khi ma trận có cấp hai.</p>
+<p>Độ phức tạp của thuật toán Strassen là <code>$\mathcal{O}(n^{\log{7}}) \approx \mathcal{O}(n^{2.807})$</code></p>
+<p>Đồ thị sau so sánh sự khác nhau về độ phức tạp của hai thuật toán vừa bàn:</p>
+<p><img src="img/strassen_compare.jpg" alt=""></p>
+<h2 id="coppersmith-winograd-algorithm-v-c-c-thu-t-to-n-c-i-ti-n">Coppersmith-Winograd Algorithm và các thuật toán cải tiến</h2>
+<p>Dựa trên phát minh của Strassen, vào tháng 5/1987, hai nhà khoa học Don Coppersmith và Shmuel Winograd công bố bài báo <strong>Matrix Multiplication via Arithmetic Progression</strong> <sup><a href="https://www.cs.umd.edu/~gasarch/TOPICS/ramsey/matrixmult.pdf">[4]</a></sup> giới thiệu một phương pháp mới để tăng tốc độ nhân ma trận và cho biết độ phức tạp của thuật toán mà họ phát triển là <code>$\mathcal{O}(n^{2.376})$</code> và được đánh giá là thuật toán nhân ma trận nhanh nhất tính tới thời điểm đó.</p>
+<p><img src="img/cw_compare.jpg" alt=""></p>
+<p>Vào tháng 3/2013, A. M. Davie và A. J. Stothers công bố bài báo <strong>Improved bound for complexity of matrix multiplication</strong> <sup><a href="http://www.maths.ed.ac.uk/~sandy/a11164.pdf">[5]</a></sup> và cho biết họ đặt được con số <code>$\mathcal{O}(n^{2.37369})$</code> khi cải tiến và khảo sát thuật toán của Coppersmith-Williams.</p>
+<p>Tháng 1/2014, François Le Gall công bố bài báo <strong>Powers of Tensors and Fast Matrix Multiplication</strong> <sup><a href="https://arxiv.org/abs/1401.7714">[6]</a></sup> tiếp tục phân tích thuật toán của hai nhà khoa học này và đạt được con số <code>$\mathcal{O}(n^{2.3728639})$</code>.</p>
+<p>Vào tháng 7/2014, Virginia Vassilevska Williams thuộc đại học Standford công bố bài báo <strong>Multiplying matrices in $\mathcal{O}(n^{2.373})$ time</strong> <sup><a href="http://theory.stanford.edu/~virgi/matrixmult-f.pdf">[7]</a></sup> đưa ra phương pháp cải tiến thuật toán của Coppersmith-Winograd và công bố độ phức tạp là <code>$\mathcal{O}(n^{2.372873})$</code>.</p>
+<h2 id="k-t-lu-n">Kết luận</h2>
+<p>Tổng kết lại, với các thuật toán hiện tại, chúng ta rút ra được bảng so sánh về độ phức tạp như sau:</p>
+<table>
+<thead>
+<tr>
+<th>Thuật toán</th>
+<th>Input</th>
+<th>Độ phức tạp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naive Algorithm</td>
+<td>Ma trận vuông</td>
+<td>$\mathcal{O}(n^{3})$</td>
+</tr>
+<tr>
+<td>Naive Algorithm</td>
+<td>Ma trận bất kì</td>
+<td>$\mathcal{O}(nmp)$</td>
+</tr>
+<tr>
+<td>Strassen Algorithm</td>
+<td>Ma trận vuông</td>
+<td>$\mathcal{O}(n^{2.807})$</td>
+</tr>
+<tr>
+<td>Coppersmith-Winograd Algorithm</td>
+<td>Ma trận vuông</td>
+<td>$\mathcal{O}(n^{2.376})$</td>
+</tr>
+<tr>
+<td>Các thuật toán CW cải tiến</td>
+<td>Ma trận vuông</td>
+<td>$\mathcal{O}(n^{2.373})$</td>
+</tr>
+</tbody>
+</table>
+<p>Và các nhà khoa học vẫn đang miệt mài nghiên cứu để đưa con số này về $\mathcal{O}(n^{2})$</p>
+<p><img src="img/matrix_all_compare.jpg" alt=""></p>
+<p>Theo một bình luận của giáo sư Ngô Quang Hưng trên Procul, thì các thuật toán của Strassen và Coppersmith-Winograd chỉ mang giá trị lý thuyết là chính, trong thực tế ít ai dùng cho các ma trận lớn vì hidden-constant quá lớn và implement phức tạp, dễ bị lỗi <sup><a href="http://www.procul.org/blog/2005/11/16/nhan-ma-tr%E1%BA%ADn-dft-va-ly-thuy%E1%BA%BFt-bi%E1%BB%83u-di%E1%BB%85n-nhom-1/#comment-11070">[8]</a></sup>.</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/nhan-ma-tran.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>

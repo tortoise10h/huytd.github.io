@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Machine Learning - Máy học như cơm bình dân | Huy's Blog</title>
+        <title> Machine Learning | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -19,20 +19,47 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="machine-learning-m-y-h-c-nh-c-m-b-nh-d-n">Machine Learning - Máy học như cơm bình dân</h1>
-<p>Bắt chước slogan của tờ báo e-Chip, mình viết bài này mục đích là giúp các bạn làm quen với <strong>Machine Learning</strong> (máy học, có người dịch là học máy, tuy nhiên từ bây giờ mình sẽ gọi là Machine Learning - ML) một cách gần gũi và dễ hiểu nhất.</p>
-<h2 id="tr-c-khi-b-t-u">Trước khi bắt đầu</h2>
-<p>Trước khi bắt đầu đi vào tìm hiểu Machine Learning, có vài điểm các bạn cần lưu ý để tiện theo dõi bài viết này:</p>
+                <h1 id="machine-learning">Machine Learning</h1>
+<p><strong>Disclaimer:</strong> Đây là một lĩnh vực vô cùng rộng và sâu, cho nên tất nhiên không thể nào tóm gọn hết trong một bài viết được, cho nên ở phạm vi bài này, mình chỉ cung cấp một vài khái niệm cơ bản và đưa ra <strong>01</strong> ví dụ về một dạng vấn đề đơn giản nhất mà Machine Learning có thể giải quyết được, mục đích là giúp cho các bạn hiểu được bản chất Machine Learning là gì, và nên nghiên cứu, tiếp cận nó ra sao.</p>
+<h2 id="machine-learning-l-g-">Machine Learning là gì?</h2>
+<p>Machine Learning một số người gọi là “máy học”, có người gọi là “học máy”, nghe có vẻ khó hình dung, rốt cuộc ai học ai, máy học ai, ai học máy, máy học cái gì,… loạn quá nên thôi cứ gọi là Machine Learning cho khỏe nhé.</p>
+<p>Machine Learning là một mảng của ngành Khoa học máy tính, có nhiệm vụ nghiên cứu để giúp cho máy tính có khả năng “học hỏi” mà không cần lập trình cụ thể ngay từ đầu.</p>
+<p>Học hỏi ở đây tức là có khả năng tiếp nhận, xử lý thông tin và đưa ra nhận định, phân loại/dự đoán sau đó.</p>
+<h2 id="-ng-d-ng-trong-th-c-t-">Ứng dụng trong thực tế</h2>
+<p>Tuy là một ngành khoa học máy tính nhưng ứng dụng của Machine Learning thì xuất hiện trong mọi ngành nghề, lĩnh vực trong đời sống:</p>
 <ul>
-<li><p>Mình khởi điểm đến với ngành CNTT cũng chỉ là đam mê code rồi tự mày mò, <a href="http://huytd.github.io/posts/lap-trinh-va-toan-hoc.html">cũng khá là ghét Toán</a>, chuyên ngành mình học là Cử nhân CNTT, không phải chuyên ngành toán, vì thế cách mình giải thích về các khái niệm toán học ở trong bài có thể sẽ không bài bản lắm đối với một số người.</p>
-</li>
-<li><p>Nói là &quot;cơm bình dân&quot;, nhưng sẽ không thể tránh được việc xuất hiện một vài thuật ngữ, kí hiệu hoặc khái niệm mang yếu tố học thuật trong bài viết này, vì dù sao thì Machine Learning cũng là một môn khoa học xuất phát từ Toán học, và không phải ở mức độ dễ như ăn cháo (tức là nó cũng không tới mức quá khó để tự học), nhưng mình sẽ cố gắng đưa các nội dung đó vào một cách ít gây dị ứng nhất cho các bạn :))</p>
-</li>
-<li><p>Bài viết có thể rất dài, nhưng mình ko định chia thành nhiều post (so với việc bài dài quá scroll mỏi tay, thì việc lội qua nhiều bài post càng dễ làm nản lòng người đọc lẫn người viết hơn nữa) các bạn nên chuẩn bị tâm lý và sức khoẻ thật tốt trước khi bắt đầu đọc.</p>
-</li>
-<li><p>Trừ cái tiêu đề bài viết mình dùng chữ &quot;máy học&quot; cho nó hợp vần với cái vế &quot;như cơm bình dân&quot;, để dễ bề câu view :troll: mình sẽ không dịch bất cứ thuật ngữ nào ra tiếng Việt, nếu có thì chỉ nói lướt qua để gợi nhớ cho các bạn về sự liên quan của nó với các kiến thức phổ thông, và hết. Vì theo mình, chính việc dịch các thuật ngữ sang tiếng Việt này góp phần làm cho môn này trở nên khó hiểu hơn bao giờ hết. Cho nên các bạn hãy chịu khó đọc và nhớ các từ tiếng Anh, không riêng gì với ML mà đây là vấn đề chung của lĩnh vực CNTT.</p>
-</li>
+<li>Nhận diện kí tự, chữ viết tay</li>
+<li>Nhận diện khuông mặt</li>
+<li>Lọc Spam cho email</li>
+<li>Phân loại nội dung báo chí</li>
+<li>Xử lý ngôn ngữ tự nhiên (như Siri, Cortana,…)</li>
+<li>Xe tự lái</li>
+<li>Chẩn đoán bệnh trong y khoa</li>
+<li>Phân tích hành vi người dùng (trong siêu thị, thương mại điện tử,…)</li>
+<li>Gợi ý bài viết, gợi ý sản phẩm,…</li>
+<li>Phát hiện lừa đảo trong giao dịch ngân hàng</li>
+<li>Dự báo thời tiết</li>
+<li>Chat bot, robot,…</li>
+<li>Monitoring cho server, hệ thống phòng thủ an ninh mạng,…</li>
+<li>The Great Firewall của China</li>
+<li>Các dây chuyền sàn lọc, kiểm định chất lượng sản phẩm, trái cây,...</li>
 </ul>
+<h2 id="machine-learning-v-to-n-h-c">Machine Learning và Toán học</h2>
+<p>Machine Learning là một lĩnh vực rất gần, và đôi lúc có sự tương quan nhất định đối với toán học, điển hình như môn xác suất thống kê. Ở các phần sau của bài viết sẽ nói chi tiết về điểm này.</p>
+<p>Không cần giỏi toán, các bạn vẫn có thể theo đuổi việc nghiên cứu Machine Learning được. Tuy nhiên, nếu các bạn không chuẩn bị tinh thần để vò đầu bứt tai với một vài công thức toán học hay làm các bài đạo hàm cỡ vài chục dòng :joy: thì các bạn chỉ có thể tiếp cận Machine Learning ở phạm vi “biết đủ xài”, nhưng sẽ không thực sự “hiểu” được nó. </p>
+<h2 id="c-c-lo-i-thu-t-to-n-ml">Các loại thuật toán ML</h2>
+<p><a href="https://www.analyticsvidhya.com/blog/2015/08/common-machine-learning-algorithms/">https://www.analyticsvidhya.com/blog/2015/08/common-machine-learning-algorithms/</a></p>
+<h3 id="supervsied-learning">Supervsied Learning</h3>
+<h3 id="unsupervised-learning">Unsupervised Learning</h3>
+<h3 id="reinforcement-learning">Reinforcement Learning</h3>
+<h2 id="v-d-nh-p-m-n">Ví dụ nhập môn</h2>
+<h3 id="kh-ng-d-ng-m-y-t-nh-gi-i-nh-n-o-">Không dùng máy tính, giải như nào?</h3>
+<h3 id="d-ng-m-y-t-nh-th-gi-i-nh-n-o-">Dùng máy tính thì giải như nào?</h3>
+<h4 id="hypothesis-function">Hypothesis Function</h4>
+<h4 id="cost-function">Cost Function</h4>
+<h4 id="gradient-descent">Gradient Descent</h4>
+<h4 id="implement-nh-n-o-">Implement như nào?</h4>
+<h2 id="gi-sao-n-a-">Giờ sao nữa?</h2>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/machine-learning-com-binh-dan.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
