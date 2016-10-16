@@ -51,6 +51,14 @@ code {
     font-size: 0.8em;
 }
 
+.skip code {
+  background: none;
+  color: initial;
+  font-size: 1.0em;
+  font-family: initial;
+  padding: initial;
+}
+
 .hljs {
     background: none !important;
     overflow-x: hidden !important;
@@ -77,6 +85,7 @@ pre code, pre code * {
 pre.math {
   background: transparent !important;
   text-align: center;
+  padding-top: 20px; padding-bottom: 20px;
 }
 
 code.math {
@@ -249,3 +258,34 @@ h4:before {
   border-radius: 3px;
 }
 
+.cover {
+  position: absolute;
+  width: 100%; height: 800px;
+  left: 0;
+  overflow: hidden;
+  clear: both;
+}
+
+.cover-holder {
+  height: 800px;
+  margin-bottom: 20px;
+}
+
+.cover img {
+  width: 100%;
+  pointer-events: none;
+}
+
+@media print {
+  .cover, .cover-holder, .header, .footer {
+    display: none;
+  }
+
+  html, body {
+    font-size: 16px;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    margin: 15px 0 15px 0;
+  }
+}

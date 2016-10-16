@@ -49,6 +49,14 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  			markdownPost = markdownPost.join('\n');
 			  		}
 			  	}          
+
+
+        // Custom components
+			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover">');
+			  	markdownPost = markdownPost.replace(/<\/cover>/g, '</div><div class="cover-holder"></div>');
+			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
+			  	markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
+
 			  	postContent = marked(markdownPost);
 			  	htmlContent = templateHtml.replace('{%content%}', postContent);
 			  	htmlContent = htmlContent.replace('{%title%}', title);

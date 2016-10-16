@@ -33,10 +33,18 @@ var genPreview = function(f, res) {
         if (lines.length > 0) {
           title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '');
         }          
+
+
+        // Custom components
+			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover">');
+			  	markdownPost = markdownPost.replace(/<\/cover>/g, '</div><div class="cover-holder"></div>');
+			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
+			  	markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
+          markdownPost = markdownPost.replace(/img\//g, 'posts/img/');
+
         postContent = marked(markdownPost);
         htmlContent = templateHtml.replace('{%content%}', postContent);
         htmlContent = htmlContent.replace('../', '');
-        htmlContent = htmlContent.replace('img/', 'post/img/');
         htmlContent = htmlContent.replace('{%title%}', title);
         htmlContent = htmlContent.replace('{%meta%}', metaData);
         htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
