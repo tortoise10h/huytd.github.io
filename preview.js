@@ -16,7 +16,7 @@ marked.setOptions({
 var templateHtml = '';
 var indexTemplateHtml = '';
 
-templateHtml = fs.readFileSync('template.html', { encoding: 'utf8' });
+templateHtml = fs.readFileSync('preview.html', { encoding: 'utf8' });
 
 var genPreview = function(f, res) {
   if (f.indexOf('.md') != -1) {
