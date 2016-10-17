@@ -265,6 +265,8 @@ h4:before {
   left: 0;
   overflow: hidden;
   clear: both;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .cover-holder {

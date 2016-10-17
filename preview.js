@@ -36,8 +36,8 @@ var genPreview = function(f, res) {
 
 
         // Custom components
-			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover">');
-			  	markdownPost = markdownPost.replace(/<\/cover>/g, '</div><div class="cover-holder"></div>');
+			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover" style="background-image:url(');
+			  	markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
 			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
 			  	markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
           markdownPost = markdownPost.replace(/img\//g, 'posts/img/');

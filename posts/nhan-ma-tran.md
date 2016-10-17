@@ -4,7 +4,7 @@ Ma trận và các phép toán liên quan tới nó là một phần rất quan 
 
 Ở [bài trước](https://huytd.github.io/posts/fibonacci-4m.html), chúng ta có đề cập tới việc ứng dụng phép nhân ma trận để tính số Fibonacci một cách hiệu quả. Vậy thuật toán nhân ma trận mà chúng ta sử dụng ở trong bài viết đã thực sự hiệu quả hay chưa?
 
-<cover>![](img/matrixmul.jpg)</cover>
+<cover>img/matrixmul.jpg</cover>
 
 Trong quá trình tìm hiểu để viết bài này thì mình phát hiện ra một điều khá là thú vị, đó là có rất nhiều thuật toán để thực hiện nhân ma trận, tuy nhiên ngành khoa học máy tính vẫn chưa tìm ra được câu trả lời cho câu hỏi: **Đâu là thuật toán tối ưu để thực hiện phép nhân ma trận?** <sup>[[1]](https://en.m.wikipedia.org/wiki/List_of_unsolved_problems_in_computer_science#Other_algorithmic_problems)</sup>
 
