@@ -1,0 +1,193 @@
+<html>
+    <head>
+        <title> Nhân ma trận - Phần 2: Tính toán trên GPU | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow-night.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="nh-n-ma-tr-n-ph-n-2-t-nh-to-n-tr-n-gpu">Nhân ma trận - Phần 2: Tính toán trên GPU</h1>
+<p>Sau khi viết xong <a href="https://huytd.github.io/posts/nhan-ma-tran.html">bài đầu tiên</a>, mình tiếp tục tìm hiểu sâu hơn về ma trận và cảm thấy cần phải viết thêm một (vài) bài nữa vì có quá nhiều thứ hay ho khi đi sâu vào.</p>
+<p>Trong phần này, mình giới thiệu về phương pháp sử dụng GPU để thực hiện phép tính nhân 2 ma trận (GPU Calculation), thay cho việc dùng CPU truyền thống, để tăng tốc độ tính toán.</p>
+<h2 id="t-i-sao-l-i-l-gpu-c-c-vi-c-t-nh-to-n-tr-n-gpu-sao-">Tại sao lại là GPU? có cả việc tính toán trên GPU sao?</h2>
+<p>Câu trả lời là có, thưa các bạn. Chúng ta đều biết GPU là một thành phần trong card đồ họa, thường được giới game thủ mua về cắm vô cho máy tính xử lý đồ họa nhanh hơn. Vậy thao tác xử lý đồ họa ở đây là gì? </p>
+<p>Để hiểu được chức năng của GPU, hãy cùng lái chủ đề một tí sang lĩnh vực đồ họa máy tính, viết đến đây mình thấy hơi bị máu vì dù đã từ bỏ ngành game được hơn 1 năm rồi nhưng giờ vẫn có cơ hội quay lại viết tiếp về nó, hê hê, lạc đề tí thôi, các bạn cũng yên tâm vì mình sẽ không để bài viết này thành bài hướng dẫn làm game gì đâu =)))</p>
+<h3 id="m-y-t-nh-t-o-ra-h-nh-nh-nh-th-n-o-">Máy tính tạo ra hình ảnh như thế nào?</h3>
+<p>Một hình ảnh trên máy tính được cấu tạo thành từng pixel, điều này hẳn ai cũng biết, nhưng làm thế nào để máy tính hiểu và vẽ được một hình ảnh thành một tổ hợp các pixel đưa lên màn hình qua sự chỉ đạo của chương trình (application)?</p>
+<p><img src="http://ithare.com/wp-content/uploads/BB_part114_BookChapter014h_v3.png" alt=""></p>
+<center><em>Nguồn: <a href="http://ithare.com/game-graphics-101-rendering-pipeline/">http://ithare.com/game-graphics-101-rendering-pipeline/</a></em></center>
+
+<p>Trong trường hợp là game thì các dữ liệu hình ảnh (3d mesh, texture,...) sẽ được load từ đĩa (hard disk, file,...) và truyền vào GPU. Tại đây, GPU sẽ tiến hành phân tích và thực hiện những công việc tính toán cần thiết để chuyển chúng thành tập hợp các pixel gửi trả về CPU để vẽ ra màn hình máy tính (IO devices).</p>
+<p>Quá trình tính toán đó ở trong GPU, được gọi là <strong>Rendering Pipeline</strong>, trong hình minh họa ở trên thì dây chuyền vận chuyển các khối hộp pixel kia chính là pipeline.</p>
+<h3 id="rendering-pipeline">Rendering Pipeline</h3>
+<p>Một vật thể 3D trong máy tính được cấu thành từ nhiều đỉnh, gọi là <strong>vertex</strong>, mảng các vertex được gọi là <strong>vertices</strong> array.</p>
+<p><img src="img/mesh_1.png" alt=""></p>
+<p>Hình trên cho thấy một khối hộp được tạo từ mảng $v$ gồm các đỉnh <code>$v_{0}, v_{1}, \ldots, v_{7}$</code></p>
+<p>Trong máy tính, mọi hình ảnh từ đơn giản hay phức tạp đều được tạo thành từ các vertices như vậy.</p>
+<p><img src="img/mesh_2.png" alt=""></p>
+<p>Render Pipeline là quá trình xảy ra trong GPU, khi nó nhận một tập hợp các vertices, trải qua các bước xử lý kết nối các vertices lại với nhau (vertex processing) thành các khối 3D cơ bản (thường là các khối tam giác, gọi là 3D primitives), sau đó phân tích (rasterization) các hình khối 3D này thành từng mảnh nhỏ (fragments), thực hiện việc tính toán tô màu, đổ bóng,... cho các khối này rồi ánh xạ nó thành mảng các pixel tương ứng với màn hình máy tính, gửi trả về CPU để đưa lên màn hình.</p>
+<p>Vì quy trình này diễn ra liên tục với tốc độ cực kì cao để đảm bảo cho việc hiển thị hình ảnh lên màn hình diễn ra xuyên suốt và mượt mà, nên GPU phải làm việc với một khối lượng các phép tính cực kì lớn. Nói như vậy thì không có nghĩa là CPU không có khả năng dựng hình ảnh đồ họa trên máy tính, bản thân CPU cũng có thể làm được nhưng sẽ không đạt được performance như GPU, lý do tại sao xin mời các bạn xem tiếp.</p>
+<h3 id="gpu-vs-cpu">GPU vs CPU</h3>
+<p>Hình sau so sánh kiến trúc của một CPU so với một GPU:</p>
+<p><img src="img/cpuvsgpu1.png" alt=""></p>
+<p>Các bạn có thể thấy khối tính toán của GPU nhiều hơn CPU rất nhiều lần, vì thế làm cho GPU có khả năng tính toán cao hơn CPU.</p>
+<p>Thêm một hình ảnh nữa để so sánh sự lợi hại của GPU, nếu bạn có một máy tính có vi xử lý 4 nhân thì đây là sự khác biệt đối với GPU:</p>
+<p><img src="img/cpuvsgpu2.png" alt=""></p>
+<p>Nhưng nếu sử dụng GPU lợi hại như vậy thì tại sao người ta không dùng GPU để thay thế CPU luôn? Câu trả lời là rất khó, vì việc debug trên GPU không đơn giản như với CPU, thêm nữa là GPU code chạy song song (parallel) nên cần phải có các phương pháp để phân vùng dữ liệu, liên lạc, đồng bộ hóa giữa các core nên các thuật toán xử lý trên GPU cực kì phức tạp.</p>
+<p>Đoạn video sau đây minh họa sự khác biệt về việc dùng CPU và GPU để vẽ hình ảnh, con robot màu vàng là CPU còn cái máy bự chà bá kia là sức mạnh thực sự của một GPU.</p>
+<iframe width="700" height="400" src="https://www.youtube.com/embed/-P28LKWTzrI" frameborder="0" allowfullscreen></iframe>
+
+<h3 id="gpu-ch-d-ng-l-m-h-a-">GPU chỉ dùng làm đồ họa?</h3>
+<p>Với sự phát triển của lĩnh vực công nghệ thông tin hiện nay, những công việc yêu cầu khả năng tính toán cực kì cao đã bắt đầu cần đến các hệ thống máy tính có khả năng xử lý mạnh hơn, và người ta đã bắt đầu tìm đến sự trợ giúp của các GPU trong công việc tính toán, không phải chỉ riêng CPU nữa.</p>
+<p>Một ứng dụng thực tế có lẽ nhiều người biết đến nhất đó là việc sử dụng GPU để &quot;đào&quot; Bitcoin.</p>
+<p><img src="https://media.amazonwebservices.com/blog/2016/p2_cool_gpus_1.png" alt=""></p>
+<p>Một ứng dụng khác thường thấy nữa là trong ngành Machine Learning, người ta thường sử dụng GPU để gia tăng tốc độ tính toán đối với các vector dữ liệu, vì đây cũng là một ngành phải xử lý với lượng dữ liệu cực kì lớn.</p>
+<p>Gói EC2 P2 của AWS cũng hỗ trợ GPU <a href="https://aws.amazon.com/blogs/aws/new-p2-instance-type-for-amazon-ec2-up-to-16-gpus/">https://aws.amazon.com/blogs/aws/new-p2-instance-type-for-amazon-ec2-up-to-16-gpus/</a></p>
+<h2 id="t-nh-to-n-v-i-gpu-b-ng-c-ch-n-o-">Tính toán với GPU bằng cách nào?</h2>
+<p>Có rất nhiều cách để sử dụng GPU làm công cụ tính toán, bạn có thể khởi tạo một ứng dụng đồ họa, chuyển đổi vector dữ liệu cần tính toán thành các ma trận texture rồi nạp vào GPU, viết các Shader program (là một dạng chương trình chạy trên GPU, trong quá trình fragment processing của rendering pipeline) để tính toán và trả dữ liệu về lại CPU.</p>
+<p>Tuy nhiên cách làm trên khá là phức tạp và dư thừa (phải khởi tạo môi trường đồ họa, không cần thiết, và đó là cách làm thủ công, không có gì đảm bảo, và bị giới hạn bởi khả năng của Shader program. </p>
+<p>Ngày nay chúng ta có các giải pháp khác, có thể nói là &quot;native&quot; hơn, đó là <strong>OpenCL</strong> và <strong>CUDA</strong>.</p>
+<h3 id="cuda">CUDA</h3>
+<p>Khi mới được ra mắt, <strong>CUDA</strong> là tên viết tắt của <strong>Compute Unified Device Architecture</strong> tuy nhiên về sau thì Nvidia bỏ hẳn tên gọi này.</p>
+<p><strong>CUDA</strong> là một nền tảng lập trình song song (parallel computing platform), cung cấp cho chúng ta các API trên các ngôn ngữ như C/C++, Fortran, và về sau còn xuất hiện thêm các wrapper cho Java, Ruby, Python, Haskell... để giao tiếp với các GPU của Nvidia và thực hiện công việc tính toán giống như trên CPU.</p>
+<p>Quy trình hoạt động của một ứng dụng CUDA khá là giống với rendering pipeline:</p>
+<p><img src="img/cudaflow.png" alt=""></p>
+<ol>
+<li>Copy dữ liệu từ bộ nhớ chính vào bộ nhớ GPU</li>
+<li>CPU chỉ thị cho GPU thực hiện tính toán</li>
+<li>GPU thực hiện tính toán song song trên các core của nó</li>
+<li>Tính xong GPU gửi trả dữ liệu về lại cho bộ nhớ chính</li>
+</ol>
+<p>CUDA có một vài nhược điểm nhất định, tuy nhiên điểm yếu lớn nhất của nó là được làm ra bởi Nvidia nên chỉ hỗ trợ chạy trên phần cứng của Nvidia, và không ai muốn công nghệ mình sử dụng lại bị phụ thuộc vào một hãng sản xuất nhất định nào hết (trừ trường hợp Apple =))) vậy cho nên người ta bắt đầu tìm đến một giải pháp tổng quát hơn, đó là <strong>OpenCL</strong></p>
+<h3 id="opencl">OpenCL</h3>
+<p><strong>Open Computing Language</strong> viết tắt là <strong>OpenCL</strong> là một framework giúp các lập trình viên phát triển các ứng dụng mà chương trình có thể chạy được trên nhiều bộ xử lý như CPU, GPU, FPGA,...</p>
+<p><img src="img/opencl.png" alt=""></p>
+<p><strong>OpenCL</strong> là một chuẩn mở được Apple tạo ra và trao quyền phát triển cho tổ chức Khronos Group trứ danh (tổ chức đang nắm quyền phát triển OpenGL). <strong>OpenCL</strong> được rất nhiều hãng phần cứng hỗ trợ như là AMD, Apple, ARM, IBM, Imagination Technologies, Intel, Nvidia, Qualcomm, Samsung,... điều này khiến cho OpenCL trở thành một tiêu chuẩn chung cho cả ngành công nghiệp, giống như OpenGL vậy.</p>
+<p>Và trong bài viết này chúng ta sẽ sử dụng OpenCL để implement thuật toán nhân ma trận trên GPU. Để có thể implement được thì đầu tiên phải tìm hiểu rõ hơn về OpenCL và cách lập trình sử dụng OpenCL.</p>
+<h2 id="l-p-tr-nh-gpu-v-i-opencl">Lập trình GPU với OpenCL</h2>
+<p>Đầu tiên chúng ta cần hiểu các khái niệm sử dụng trong <strong>OpenCL</strong>.</p>
+<h3 id="c-c-thu-t-ng-trong-opencl">Các thuật ngữ trong OpenCL</h3>
+<p>Các thành phần tham gia việc tính toán trong một ứng dụng <strong>OpenCL</strong> là các <strong>Compute Device</strong>, gọi là các thiết bị tính toán. Và các thiết bị tính toán này có thể là các <strong>CPU</strong>, <strong>GPU</strong> hoặc các thiết bị khác có tính năng tương tự bên trong máy tính.</p>
+<p><img src="img/computedevice.png" alt=""></p>
+<p>Trong mỗi một <strong>Compute Device</strong> chúng ta có nhiều <strong>Compute Unit</strong>, là các core bên trong nó.</p>
+<p><img src="img/computeunits.png" alt=""></p>
+<p>Và trong mỗi <strong>Compute Unit</strong> (core) ta có nhiều <strong>Processing Element</strong> trực tiếp nhận lệnh để tính toán.</p>
+<h3 id="m-h-nh-l-m-vi-c-trong-opencl">Mô hình làm việc trong OpenCL</h3>
+<p>Mô hình xử lý của <strong>OpenCL</strong> gồm có một chương trình <strong>Host</strong> có nhiệm vụ điều khiển và liên lạc với nhiều <strong>Compute Device</strong> theo sơ đồ sau:</p>
+<p><img src="img/openclworkflow.png" alt=""></p>
+<p>Khi thực hiện xử lý, <strong>Host</strong> sẽ khởi tạo trên mỗi <strong>Compute Device</strong> một <strong>Context</strong> chứa các thành phần như là: </p>
+<ul>
+<li>Thông tin device đang chạy</li>
+<li>Kernel (là đơn vị nhỏ nhất của quá trình xử lý, như là một hàm)</li>
+<li>Program Object (là đoạn code implement của Kernel)</li>
+<li>Command Queues (là queue các lệnh được truyền vào device từ host)</li>
+<li>Memory Object (là đối tượng chứa dữ liệu sẽ được truyền/nhận qua lại giữa device và host)</li>
+</ul>
+<p>Thao tác copy dữ liệu từ <strong>Host</strong> tới <strong>Compute Device</strong> gọi là thao tác <strong>ghi</strong> (writing), và thao tác copy dữ liệu ngược lại từ <strong>Compute Device</strong> về <strong>Host</strong> gọi là <strong>đọc</strong> (reading).</p>
+<p>Đây là flow của một chương trình OpenCL thường thấy:</p>
+<ul>
+<li><strong>Bước 1:</strong> Chọn device cần dùng (ví dụ như: Toàn bộ GPU)</li>
+<li><strong>Bước 2:</strong> Khởi tạo context</li>
+<li><strong>Bước 3:</strong> Khởi tạo Command Queue cho từng device</li>
+<li><strong>Bước 4:</strong> Biên dịch chương trình</li>
+<li><strong>Bước 5:</strong> Tạo các kernel từ chương trình</li>
+<li><strong>Bước 6:</strong> Cấp phát bộ nhớ trên từng device</li>
+<li><strong>Bước 7:</strong> Ghi dữ liệu vào memory object trên device</li>
+<li><strong>Bước 8:</strong> Thực hiện xử lý các kernel trên device</li>
+<li><strong>Bước 9:</strong> Gửi dữ liệu về lại host</li>
+<li><strong>Bước 10:</strong> Giải phóng bộ nhớ trên device</li>
+</ul>
+<p>Có thể thấy mô hình trên có phần phức tạp hơn <strong>CUDA</strong>. Nhưng làm việc với <strong>OpenCL</strong> linh hoạt hơn và không bị giới hạn về mặt thiết bị như <strong>CUDA</strong>.</p>
+<p>Việc khởi động một <strong>kernel</strong> rất tốn kém, vì thế lời khuyên được đưa ra là nên thiết kế mỗi kernel làm nhiều việc nhất có thể.</p>
+<h2 id="implement-m-t-ch-ng-tr-nh-opencl-n-gi-n">Implement một chương trình OpenCL đơn giản</h2>
+<h2 id="implement-thu-t-to-n-nh-n-ma-tr-n-tr-n-gpu">Implement thuật toán nhân ma trận trên GPU</h2>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/nhan-ma-tran-2.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
