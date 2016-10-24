@@ -152,4 +152,69 @@ Việc khởi động một **kernel** rất tốn kém, vì thế lời khuyên
 
 ## Implement một chương trình OpenCL đơn giản
 
+Vậy coi như xong phần lý thuyết, giờ chúng ta đi vào phần thực hành cơ bản để hiểu kĩ hơn về cách lập trình trên GPU.
+
+Đề bài sẽ là: _Implement chương trình tính tổng từ 0 đến 100 triệu_
+
+### Implement trên CPU
+
+Với cách này thì không có gì để bàn rồi, đơn giản chúng ta sẽ implement một vòng `for` rồi cho nó chạy từ 0 đến 100 triệu, cứ thế mà cộng số vào.
+
+```
+for (unsigned long long i = 0; i < 100000000; i++) {
+  val += i;
+}
+```
+
+Chúng ta sẽ thêm vào một đoạn code để đo thời gian chương trình bỏ ra để thực hiện phép tính trên.
+
+```
+clock_t begin = clock();
+
+// Do something
+
+clock_t end = clock();
+double runtime = (double)(end - begin) / CLOCKS_PER_SEC;
+```
+
+Hàm `clock()` lấy thời gian hiện tại, có trong thư viện `time.h`, mục đích của đoạn code trên là lấy thời gian ở vị trí bắt đầu xử lý, và thời gian ở vị trí sau khi kết thúc xử lý, trừ 2 số đó với nhau ta có được thời gian cần để chạy chương trình.
+
+Đoạn implement đầy đủ sẽ như sau:
+
+```
+#include <stdio.h>
+#include <time.h>
+
+typedef unsigned long long fuckin_large;
+
+int main() {
+  clock_t begin = clock();
+
+  fuckin_large val = 0;
+  for (fuckin_large j = 0; j < 100000000; j++) {
+    val += j;
+  }
+  printf("Result: %llu\n", val);
+
+  clock_t end = clock();
+  double runtime = (double)(end - begin) / CLOCKS_PER_SEC;
+  printf("Runtime: %lfms\n", runtime);
+}
+```
+
+Chạy thử chương trình trên, output sẽ có dạng như sau:
+
+```
+Result: 4999999950000000
+Runtime: 0.225600ms
+```
+
+Dòng đầu là con số kết quả sau khi đã tính ra, dòng thứ 2 cho biết thời gian cần để thực hiện chương trình. 
+
+Mình có chạy thử chương trình này trên các máy MacBook Pro từ 2012 tới 2015, trung bình mất tầm **0.2 mili giây** để tính ra kết quả.
+
+Tiếp theo hãy thử implement chương trình này với cách xử lý tương tự nhưng chạy trên GPU xem tốc độ được cải thiện như thế nào nhé.
+
+### Implement trên GPU
+
 ## Implement thuật toán nhân ma trận trên GPU

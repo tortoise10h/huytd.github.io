@@ -113,6 +113,47 @@
 <p>Có thể thấy mô hình trên có phần phức tạp hơn <strong>CUDA</strong>. Nhưng làm việc với <strong>OpenCL</strong> linh hoạt hơn và không bị giới hạn về mặt thiết bị như <strong>CUDA</strong>.</p>
 <p>Việc khởi động một <strong>kernel</strong> rất tốn kém, vì thế lời khuyên được đưa ra là nên thiết kế mỗi kernel làm nhiều việc nhất có thể.</p>
 <h2 id="implement-m-t-ch-ng-tr-nh-opencl-n-gi-n">Implement một chương trình OpenCL đơn giản</h2>
+<p>Vậy coi như xong phần lý thuyết, giờ chúng ta đi vào phần thực hành cơ bản để hiểu kĩ hơn về cách lập trình trên GPU.</p>
+<p>Đề bài sẽ là: <em>Implement chương trình tính tổng từ 0 đến 100 triệu</em></p>
+<h3 id="implement-tr-n-cpu">Implement trên CPU</h3>
+<p>Với cách này thì không có gì để bàn rồi, đơn giản chúng ta sẽ implement một vòng <code>for</code> rồi cho nó chạy từ 0 đến 100 triệu, cứ thế mà cộng số vào.</p>
+<pre><code>for (unsigned long long i = 0; i &lt; 100000000; i++) {
+  val += i;
+}
+</code></pre><p>Chúng ta sẽ thêm vào một đoạn code để đo thời gian chương trình bỏ ra để thực hiện phép tính trên.</p>
+<pre><code>clock_t begin = clock();
+
+// Do something
+
+clock_t end = clock();
+double runtime = (double)(end - begin) / CLOCKS_PER_SEC;
+</code></pre><p>Hàm <code>clock()</code> lấy thời gian hiện tại, có trong thư viện <code>time.h</code>, mục đích của đoạn code trên là lấy thời gian ở vị trí bắt đầu xử lý, và thời gian ở vị trí sau khi kết thúc xử lý, trừ 2 số đó với nhau ta có được thời gian cần để chạy chương trình.</p>
+<p>Đoạn implement đầy đủ sẽ như sau:</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+typedef unsigned long long fuckin_large;
+
+int main() {
+  clock_t begin = clock();
+
+  fuckin_large val = 0;
+  for (fuckin_large j = 0; j &lt; 100000000; j++) {
+    val += j;
+  }
+  printf(&quot;Result: %llu\n&quot;, val);
+
+  clock_t end = clock();
+  double runtime = (double)(end - begin) / CLOCKS_PER_SEC;
+  printf(&quot;Runtime: %lfms\n&quot;, runtime);
+}
+</code></pre><p>Chạy thử chương trình trên, output sẽ có dạng như sau:</p>
+<pre><code>Result: 4999999950000000
+Runtime: 0.225600ms
+</code></pre><p>Dòng đầu là con số kết quả sau khi đã tính ra, dòng thứ 2 cho biết thời gian cần để thực hiện chương trình. </p>
+<p>Mình có chạy thử chương trình này trên các máy MacBook Pro từ 2012 tới 2015, trung bình mất tầm <strong>0.2 mili giây</strong> để tính ra kết quả.</p>
+<p>Tiếp theo hãy thử implement chương trình này với cách xử lý tương tự nhưng chạy trên GPU xem tốc độ được cải thiện như thế nào nhé.</p>
+<h3 id="implement-tr-n-gpu">Implement trên GPU</h3>
 <h2 id="implement-thu-t-to-n-nh-n-ma-tr-n-tr-n-gpu">Implement thuật toán nhân ma trận trên GPU</h2>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/nhan-ma-tran-2.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
