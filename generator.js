@@ -104,6 +104,7 @@ fs.readdir(__dirname + '/posts/algorithms/', function(err, files) {
 
 
         // Custom components
+          markdownPost = markdownPost.replace(/\.\.\//g, '../../');
 			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover" style="background-image:url(');
 			  	markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
 			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
