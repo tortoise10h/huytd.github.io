@@ -1,4 +1,4 @@
-# Algorithm Study Journal: For the job!
+# Algorithm Study Journal
 
 ## How to learn?
 
