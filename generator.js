@@ -104,7 +104,6 @@ fs.readdir(__dirname + '/posts/algorithms/', function(err, files) {
 
 
         // Custom components
-          markdownPost = markdownPost.replace(/\.\.\//g, '../../');
 			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover" style="background-image:url(');
 			  	markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
 			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
@@ -115,6 +114,8 @@ fs.readdir(__dirname + '/posts/algorithms/', function(err, files) {
 			  	htmlContent = htmlContent.replace('{%title%}', title);
 			  	htmlContent = htmlContent.replace('{%meta%}', metaData);
 			  	htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
+
+          htmlContent = htmlContent.replace(/\.\.\//g, '../../');
 
 			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
 				     if (err)

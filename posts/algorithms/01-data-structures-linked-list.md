@@ -18,7 +18,7 @@
 - no need to define an **initial size** for linked list
 - used **more memory** than array because of pointers
 - difficult in **reverse travelling** linked list
-- linked lít há no [cache locality](https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md) since the elements are not contiguosly
+- linked list has no [cache locality](https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md) since the elements are not contiguosly
 
 ## Singly Linked List
 
