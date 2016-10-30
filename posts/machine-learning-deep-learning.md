@@ -8,7 +8,7 @@ Deep Learning chỉ là 1 mảng con của Machine Learning, và để tiếp c�
 
 Sau gần 1 năm theo đuổi việc tự học Machine Learning và thử nghiệm hết các thể loại course online, mình trích lược lại thành lộ trình học như sau, hy vọng sẽ giúp ích được cho nhiều bạn đang quan tâm và muốn bắt đầu tìm hiểu:
 
-### Học lý thuyết
+## Học lý thuyết
 
 **Đầu tiên:** Học course ML trên Coursera của Andrew Ng kết hợp đọc tài liệu course [CS299](http://cs229.stanford.edu/) (đây là course chính của Andrew, cái course trên Coursera chỉ là trích lược từ course này)
 
@@ -27,7 +27,7 @@ Và 4 cái trên nó được cover trong course CS299.
 
 **Sau cùng:**  Học tiếp course [CS231n](http://cs231n.stanford.edu/), vì course này chỉ nói về CNN dùng cho nhận diện hình ảnh (tức là một ngách hẹp hơn nữa của Neural Network)
 
-### Học thực hành
+## Học thực hành
 
 Tất nhiên các khóa trên đều thuộc phạm trù Machine Learning Lý Thuyết (theo như phân loại trên [lộ trình học Machine Learning](https://daynhauhoc.com/t/lo-trinh-hoc-machine-learning-deep-learning-tu-dau-cho-cac-ban-lap-trinh-vien/37264) của a [@ZuzooVn](https://github.com/zuzoovn)), trong thời gian ôn luyện lý thuyết, bạn có thể order vài cuốn sách thiên về Machine Learning thực hành để làm quen ví dụ như cuốn:
 
