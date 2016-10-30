@@ -112,6 +112,7 @@
 </ul>
 <p>Có thể thấy mô hình trên có phần phức tạp hơn <strong>CUDA</strong>. Nhưng làm việc với <strong>OpenCL</strong> linh hoạt hơn và không bị giới hạn về mặt thiết bị như <strong>CUDA</strong>.</p>
 <p>Việc khởi động một <strong>kernel</strong> rất tốn kém, vì thế lời khuyên được đưa ra là nên thiết kế mỗi kernel làm nhiều việc nhất có thể.</p>
+<h3 id="m-h-nh-qu-n-l-b-nh-c-a-opencl">Mô hình quản lý bộ nhớ của OpenCL</h3>
 <h2 id="implement-m-t-ch-ng-tr-nh-opencl-n-gi-n">Implement một chương trình OpenCL đơn giản</h2>
 <p>Vậy coi như xong phần lý thuyết, giờ chúng ta đi vào phần thực hành cơ bản để hiểu kĩ hơn về cách lập trình trên GPU.</p>
 <p>Đề bài sẽ là: <em>Implement chương trình tính tổng từ 0 đến 100 triệu</em></p>
@@ -154,7 +155,160 @@ Runtime: 0.225600ms
 <p>Mình có chạy thử chương trình này trên các máy MacBook Pro từ 2012 tới 2015, trung bình mất tầm <strong>0.2 mili giây</strong> để tính ra kết quả.</p>
 <p>Tiếp theo hãy thử implement chương trình này với cách xử lý tương tự nhưng chạy trên GPU xem tốc độ được cải thiện như thế nào nhé.</p>
 <h3 id="implement-tr-n-gpu">Implement trên GPU</h3>
+<p>Để implement một chương trình dùng OpenCL thì ta cần implement 2 phần: <strong>Host</strong> program và <strong>Kernel</strong> program.</p>
+<p><img src="img/hostkernelsrc.png" alt=""></p>
+<p><strong>Host</strong> là một chương trình C/C++ có nhiệm vụ đọc file chương trình <strong>Kernel</strong> (đuôi <code>*.cl</code>) và làm các công việc khác như là khởi tạo context, chọn device, build program object, memory object, thực thi kernel,... như đã nói ở phần trên.</p>
+<h4 id="host-program">Host Program</h4>
+<p><strong>Bước 1: Khởi tạo</strong></p>
+<p>Đầu tiên <strong>Host</strong> cần khởi tạo các biến để chứa các đối tượng cần thiết như là <strong>Device</strong>, <strong>Context</strong>, <strong>Command Queue</strong>,...:</p>
+<pre><code>cl_device_id device_id          = NULL;
+cl_context context              = NULL;
+cl_command_queue command_queue  = NULL;
+cl_mem memobj                   = NULL;
+cl_program program              = NULL;
+cl_kernel kernel                = NULL;
+cl_platform_id platform_id      = NULL;
+cl_uint ret_num_devices;
+cl_uint ret_num_platforms;
+cl_int ret;
+</code></pre><p><strong>Bước 2: Đọc Kernel Source</strong></p>
+<p>Tiếp theo chúng ta đọc file <strong>Kernel</strong> source và lưu vào một file pointer:</p>
+<pre><code>FILE *fp;
+char fileName[]   = &quot;./sum.cl&quot;;
+char *source_str;
+size_t source_size;
+
+fp = fopen(fileName, &quot;r&quot;);
+if (!fp) {
+  fprintf(stderr, &quot;Failed to load kernel\n&quot;);
+  exit(1);
+}
+source_str  = (char*)malloc(MAX_SOURCE_SIZE);
+source_size = fread(source_str, 1, MAX_SOURCE_SIZE, fp);
+fclose(fp);
+</code></pre><p>Trong ví dụ này thì file <strong>Kernel</strong> của chúng ta là <code>sum.cl</code></p>
+<p><strong>Bước 3: Khởi tạo Context và các thành phần liên quan</strong></p>
+<p>Sau khi đã có source code của <strong>Kernel</strong>, ta tiến hành chọn device và khởi tạo context, biên dịch source code của kernel thành <strong>Program Object</strong> </p>
+<pre><code>ret = clGetPlatformIDs(1, &amp;platform_id, &amp;ret_num_platforms);
+ret = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_DEFAULT, 1, &amp;device_id, &amp;ret_num_devices);
+
+context       = clCreateContext(NULL, 1, &amp;device_id, NULL, NULL, &amp;ret);
+command_queue = clCreateCommandQueue(context, device_id, 0, &amp;ret);
+program       = clCreateProgramWithSource(context, 1, 
+                                         (const char **)&amp;source_str, 
+                                         (const size_t *)&amp;source_size, 
+                                         &amp;ret);
+ret           = clBuildProgram(program, 1, &amp;device_id, 
+                                           NULL, NULL, NULL);
+kernel        = clCreateKernel(program, &quot;hello&quot;, &amp;ret);
+</code></pre><p><strong>Bước 4: Cấp phát bộ nhớ trên Compute Device</strong></p>
+<p>Sau đó cấp phát bộ nhớ cho Compute Device trong Context thông qua hàm <code>clCreateBuffer</code> và <code>clSetKernelArg</code> để chỉ định vùng nhớ này tương ứng với tham số nào khi truyền vào kernel.</p>
+<pre><code>memobj = clCreateBuffer(context, CL_MEM_READ_WRITE, 
+                        sizeof(cl_mem), NULL, &amp;ret);
+ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void*)&amp;memobj);
+</code></pre><p>Ngoài ra, chúng ta có thể truyền giá trị vào cho các tham số thông qua hàm <code>clEnqueueWriteBuffer</code>:</p>
+<pre><code>ret = clEnqueueWriteBuffer(command_queue, memobj_A, CL_TRUE, 0, MATRIX_SIZE * MATRIX_SIZE * sizeof(cl_mem), A, 0, NULL, NULL);
+</code></pre><p><strong>Bước 5: Chạy Kernel và Đọc kết quả</strong></p>
+<p>Đến bước này chúng ta sử dụng hàm <code>clEnqueueTask</code> để gán <strong>Command Queue</strong> đã tạo vào cho <strong>Kernel</strong>. Sau khi được gán thì <strong>Kernel</strong> sẽ khởi động và bắt đầu xử lý trên các <strong>Processing Elements</strong> trên <strong>Compute Device</strong> (ở đây có thể là GPU của chúng ta).</p>
+<pre><code>ret = clEnqueueTask(command_queue, kernel, 0, NULL, NULL);
+</code></pre><p>Để lấy dữ liệu ra sau khi <strong>Kernel</strong> hoàn thành việc tính toán, chúng ta dùng hàm <code>clEnqueueReadBuffer</code>:</p>
+<pre><code>ret = clEnqueueReadBuffer(command_queue, memobj, CL_TRUE, 0, sizeof(cl_mem), val, 0, NULL, NULL);
+</code></pre><p>Giá trị <code>CL_TRUE</code> truyền vào hàm này là cho tham số <code>cl_bool blocking_read</code>, tham số này cho biết hàm <code>clEnqueueReadBuffer</code> sẽ block không cho <strong>Host</strong> program thực hiện tiếp cho đến khi nó nhận được giá trị trả về sau khi <strong>Kernel</strong> hoàn thành.</p>
+<p>Đây cũng là bước mà chúng ta cần sử dụng hàm <code>clock()</code> để tính toán thời gian xử lý của <strong>Kernel</strong>.</p>
+<pre><code>clock_t begin = clock();
+
+// Do something
+
+clock_t end = clock();
+double runtime = (double)(end - begin) / CLOCKS_PER_SEC;
+</code></pre><p><strong>Bước 6: Giải phóng bộ nhớ</strong></p>
+<p>Kết thúc chương trình, chúng ta giải phóng tất cả các đối tượng đã tạo ra để tránh bị memory leak.</p>
+<pre><code>ret = clFlush(command_queue);
+ret = clFinish(command_queue);
+ret = clReleaseKernel(kernel);
+ret = clReleaseProgram(program);
+ret = clReleaseMemObject(memobj);
+ret = clReleaseCommandQueue(command_queue);
+ret = clReleaseContext(context);
+
+free(source_str);
+</code></pre><p>Đây là đoạn code implement đầy đủ của <strong>Host</strong> program làm công việc tính tổng theo đề bài đã cho:</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;OpenCL/opencl.h&gt;
+#include &lt;time.h&gt;
+
+#define MAX_SOURCE_SIZE (0x100000)
+
+int main() {
+  cl_device_id device_id = NULL;
+  cl_context context = NULL;
+  cl_command_queue command_queue = NULL;
+  cl_mem memobj = NULL;
+  cl_program program = NULL;
+  cl_kernel kernel = NULL;
+  cl_platform_id platform_id = NULL;
+  cl_uint ret_num_devices;
+  cl_uint ret_num_platforms;
+  cl_int ret;
+
+  cl_ulong val[1];
+
+  FILE *fp;
+  char fileName[] = &quot;./sum.cl&quot;;
+  char *source_str;
+  size_t source_size;
+
+  fp = fopen(fileName, &quot;r&quot;);
+  if (!fp) {
+    fprintf(stderr, &quot;Failed to load kernel\n&quot;);
+    exit(1);
+  }
+  source_str = (char*)malloc(MAX_SOURCE_SIZE);
+  source_size = fread(source_str, 1, MAX_SOURCE_SIZE, fp);
+  fclose(fp);
+
+  ret = clGetPlatformIDs(1, &amp;platform_id, &amp;ret_num_platforms);
+  ret = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_DEFAULT, 1, &amp;device_id, &amp;ret_num_devices);
+
+  context = clCreateContext(NULL, 1, &amp;device_id, NULL, NULL, &amp;ret);
+  command_queue = clCreateCommandQueue(context, device_id, 0, &amp;ret);
+  memobj = clCreateBuffer(context, CL_MEM_READ_WRITE, sizeof(cl_mem), NULL, &amp;ret);
+  program = clCreateProgramWithSource(context, 1, (const char **)&amp;source_str, (const size_t *)&amp;source_size, &amp;ret);
+  ret = clBuildProgram(program, 1, &amp;device_id, NULL, NULL, NULL);
+  kernel = clCreateKernel(program, &quot;hello&quot;, &amp;ret);
+
+  ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void*)&amp;memobj);
+
+  clock_t begin = clock();
+
+  ret = clEnqueueTask(command_queue, kernel, 0, NULL, NULL);
+
+  ret = clEnqueueReadBuffer(command_queue, memobj, CL_TRUE, 0, sizeof(cl_mem), val, 0, NULL, NULL);
+
+  clock_t end = clock();
+  double runtime = (double)(end - begin) / CLOCKS_PER_SEC;
+
+  ret = clFlush(command_queue);
+  ret = clFinish(command_queue);
+  ret = clReleaseKernel(kernel);
+  ret = clReleaseProgram(program);
+  ret = clReleaseMemObject(memobj);
+  ret = clReleaseCommandQueue(command_queue);
+  ret = clReleaseContext(context);
+
+  printf(&quot;Result: %llu\n&quot;, val[0]);
+  printf(&quot;Runtime: %lfms\n&quot;, runtime);
+
+  free(source_str);
+
+  return 0;
+}
+</code></pre><h4 id="kernel-program">Kernel Program</h4>
+<p>Tiếp đến chúng ta implement <strong>Kernel</strong>, đây là đoạn chương trình sẽ được <strong>Host</strong> nạp vào <strong>Program Object</strong> để thực hiện xử lý trên GPU.</p>
+<p>Chương trình này sẽ được định nghĩa bằng các từ khóa <code>kernel</code></p>
 <h2 id="implement-thu-t-to-n-nh-n-ma-tr-n-tr-n-gpu">Implement thuật toán nhân ma trận trên GPU</h2>
+<p>(Coming soon...)</p>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/nhan-ma-tran-2.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
