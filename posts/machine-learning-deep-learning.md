@@ -12,7 +12,7 @@ Sau gần 1 năm theo đuổi việc tự học Machine Learning và thử nghi�
 
 **Đầu tiên:** Học course ML trên Coursera của Andrew Ng kết hợp đọc tài liệu course [CS299](http://cs229.stanford.edu/) (đây là course chính của Andrew, cái course trên Coursera chỉ là trích lược từ course này)
 
-**Tiếp theo:** Học tiếp course [Deep Learning của Google](https://www.udacity.com/course/deep-learning--ud730), và nếu muốn đi sâu vào Neural Network thì đọc trước cái link bác @Th_nh_Le đã đưa http://neuralnetworksanddeeplearning.com/chap1.html để nắm kiến thức cơ bản về Neural Network 
+**Tiếp theo:** Học tiếp course [Deep Learning của Google](https://www.udacity.com/course/deep-learning--ud730), và nếu muốn đi sâu vào Neural Network thì đọc trước bài [Neural Network And Deep Learning](http://neuralnetworksanddeeplearning.com/chap1.html) để nắm kiến thức cơ bản về Neural Network.
 
 Để học được course này bạn cần có kiến thức về (trích nguyên văn trên udacity luôn nha):
 
