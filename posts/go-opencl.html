@@ -90,11 +90,13 @@ func main(){
 ...
 cl.CreateKernel(program, cl.Str(&quot;hello&quot;), errptr)
 </code></pre><p>Các bạn có thể xem qua đoạn chương trình mẫu <a href="https://github.com/go-gl/cl/blob/master/sample/square/square.go">tính bình phương một số</a> để hiểu thêm về cách dùng, cũng tương tự như với C/C++:</p>
+<p>Mình lượt bỏ các phần linh tinh và ghi lại các phần chính cần lưu ý trong chương trình:</p>
+<p>Import thư viện <strong>go-gl/cl</strong>:</p>
 <pre><code>package main
 
 import &quot;github.com/go-gl/cl/v1.2/cl&quot;
-
-var KernelSource = `
+</code></pre><p>Khai báo và biên dịch <strong>Kernel</strong>:</p>
+<pre><code>var KernelSource = `
 __kernel void square(
    __global float* input,
    __global float* output,
@@ -105,53 +107,44 @@ __kernel void square(
        output[i] = input[i] * input[i];
 }` + &quot;\x00&quot;
 
-func main() {
-  ...
-  // Lấy thông tin device
-  err := cl.GetDeviceIDs(nil, cl.DEVICE_TYPE_GPU, 1, &amp;device, nil)
+...
 
-  // Khởi tạo context
-  context := cl.CreateContext(nil, 1, &amp;device, nil, nil, errptr)
-  defer cl.ReleaseContext(context)
 
-  // Khởi tạo command queue
-  cq := cl.CreateCommandQueue(context, device, 0, errptr)
-  defer cl.ReleaseCommandQueue(cq)
+// Đọc và biên dịch kernel program
+srcptr := cl.Str(KernelSource)
+program := cl.CreateProgramWithSource(context, 1, &amp;srcptr, nil, errptr)
+defer cl.ReleaseProgram(program)
 
-  // Đọc và biên dịch kernel program
-  srcptr := cl.Str(KernelSource)
-  program := cl.CreateProgramWithSource(context, 1, &amp;srcptr, nil, errptr)
-  defer cl.ReleaseProgram(program)
+err = cl.BuildProgram(program, 1, &amp;device, nil, nil, nil)
+</code></pre><p>Lấy thông tin <strong>Compute Device</strong>:</p>
+<pre><code>err := cl.GetDeviceIDs(nil, cl.DEVICE_TYPE_GPU, 1, &amp;device, nil)
+</code></pre><p>Khởi tạo <strong>Context</strong>:</p>
+<pre><code>context := cl.CreateContext(nil, 1, &amp;device, nil, nil, errptr)
+defer cl.ReleaseContext(context)
+</code></pre><p>Khởi tạo <strong>Command Queue</strong>:</p>
+<pre><code>cq := cl.CreateCommandQueue(context, device, 0, errptr)
+defer cl.ReleaseCommandQueue(cq)
+</code></pre><p>Khởi tạo <strong>Kernel Object</strong>:</p>
+<pre><code>kernel := cl.CreateKernel(program, cl.Str(&quot;square&quot;+&quot;\x00&quot;), errptr)
+defer cl.ReleaseKernel(kernel)
+</code></pre><p>Khởi tạo <strong>Memory Object</strong>:</p>
+<pre><code>input := cl.CreateBuffer(context, cl.MEM_READ_ONLY, 4*DataSize, nil, errptr)
+defer cl.ReleaseMemObject(input)
 
-  err = cl.BuildProgram(program, 1, &amp;device, nil, nil, nil)
-
-  // Khởi tạo kernel object
-  kernel := cl.CreateKernel(program, cl.Str(&quot;square&quot;+&quot;\x00&quot;), errptr)
-  defer cl.ReleaseKernel(kernel)
-
-  // Khởi tạo memory object
-  input := cl.CreateBuffer(context, cl.MEM_READ_ONLY, 4*DataSize, nil, errptr)
-  defer cl.ReleaseMemObject(input)
-
-  output := cl.CreateBuffer(context, cl.MEM_WRITE_ONLY, 4*DataSize, nil, errptr)
-  defer cl.ReleaseMemObject(output)
-
-  // Ghi dữ liệu vào memory object trong device
-  err = cl.EnqueueWriteBuffer(cq, input, cl.TRUE, 0, 4*DataSize, unsafe.Pointer(&amp;data[0]), 0, nil, nil)
-  err = cl.SetKernelArg(kernel, 0, 8, unsafe.Pointer(&amp;input))
-  err = cl.SetKernelArg(kernel, 1, 8, unsafe.Pointer(&amp;output))
-  err = cl.SetKernelArg(kernel, 2, 4, unsafe.Pointer(&amp;count))
-
-  // Khởi tạo work group để bắt đầu chạy kernel
-  err = cl.GetKernelWorkGroupInfo(kernel, device, cl.KERNEL_WORK_GROUP_SIZE, 8, unsafe.Pointer(&amp;local), nil)
-  err = cl.EnqueueNDRangeKernel(cq, kernel, 1, nil, &amp;global, &amp;local, 0, nil, nil)
-  cl.Finish(cq)
-
-  // Đọc dữ liệu ra bằng channel
-  results := make([]float32, DataSize)
-  err = cl.EnqueueReadBuffer(cq, output, cl.TRUE, 0, 4*1024, unsafe.Pointer(&amp;results[0]), 0, nil, nil)
-  ...
-}
+output := cl.CreateBuffer(context, cl.MEM_WRITE_ONLY, 4*DataSize, nil, errptr)
+defer cl.ReleaseMemObject(output)
+</code></pre><p>Ghi dữ liệu vào <strong>Memory Object</strong> trong <strong>Device</strong>:</p>
+<pre><code>err = cl.EnqueueWriteBuffer(cq, input, cl.TRUE, 0, 4*DataSize, unsafe.Pointer(&amp;data[0]), 0, nil, nil)
+err = cl.SetKernelArg(kernel, 0, 8, unsafe.Pointer(&amp;input))
+err = cl.SetKernelArg(kernel, 1, 8, unsafe.Pointer(&amp;output))
+err = cl.SetKernelArg(kernel, 2, 4, unsafe.Pointer(&amp;count))
+</code></pre><p>Khởi tạo <strong>Work Group</strong> để bắt đầu chạy <strong>Kernel</strong>: </p>
+<pre><code>err = cl.GetKernelWorkGroupInfo(kernel, device, cl.KERNEL_WORK_GROUP_SIZE, 8, unsafe.Pointer(&amp;local), nil)
+err = cl.EnqueueNDRangeKernel(cq, kernel, 1, nil, &amp;global, &amp;local, 0, nil, nil)
+cl.Finish(cq)
+</code></pre><p>Đọc dữ liệu ra bằng <strong>Channel</strong>:</p>
+<pre><code>results := make([]float32, DataSize)
+err = cl.EnqueueReadBuffer(cq, output, cl.TRUE, 0, 4*1024, unsafe.Pointer(&amp;results[0]), 0, nil, nil)
 </code></pre><p>Ở chương trình trên thì có sự xuất hiện của kí tự <code>\x00</code> ở phần <code>kernel source</code>, đây là kí tự <a href="https://en.m.wikipedia.org/wiki/Null_character">NULL</a> dùng để báo hiệu kết thúc string. </p>
 <p>Và chúng ta cũng thấy, ở đây ta có thể tận dụng luôn các chức năng mà Go cung cấp một cách rất hiệu quả như là <code>defer</code> hoặc <code>channel</code>,...</p>
 
