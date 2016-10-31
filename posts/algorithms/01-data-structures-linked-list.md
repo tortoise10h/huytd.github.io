@@ -1,5 +1,8 @@
 # Linked List
 
+## Overview
+
+Linked List:
 - is a linear **collection of data elements**
 - each element called a **node**
 - nodes a **linked** to each other
@@ -7,9 +10,20 @@
 
 ![](http://www.techeuler.com/wp-content/uploads/2016/07/Tail-linked-list.png)
 
-- linked list allows **efficient insertion and removal** of elements from any position in sequence **during iteration**
-- linked list can be used to implement other common data types such as **list**, **stack**, **queue**, **associative array**,...
-- linked list vs. array: list elements can easily be inserted or removed **without reallocation or reorganization** of the entrie data structure, because data items **need not to be stored contiguosly in memory**
+## Pros and Cons
+
+Pros:
+- allows **efficient insertion and removal** of elements from any position in sequence **during iteration**
+- can be used to implement other common data types such as **list**, **stack**, **queue**, **associative array**,...
+
+Cons:
+- has no [cache locality](https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md) since the elements are not contiguosly
+- difficult in **reverse travelling** linked list
+
+## Comparision with Array
+
+Linked List vs. Array:
+- linked list elements can easily be inserted or removed **without reallocation or reorganization** of the entrie data structure, because data items **need not to be stored contiguosly in memory**
 
 ![](http://www.programcreek.com/wp-content/uploads/2013/03/arraylist-vs-linkedlist-complexity.png)
 
@@ -17,15 +31,15 @@
 - linked list can be allocating or deallocating in **runtime**, array is allocated in **compiling time**
 - no need to define an **initial size** for linked list
 - used **more memory** than array because of pointers
-- difficult in **reverse travelling** linked list
-- linked list has no [cache locality](https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md) since the elements are not contiguosly
 
-## Singly Linked List
+## Different Linked List Types
 
-## Doubly Linked List
+### Singly Linked List
 
-## Multiply Linked List
+### Doubly Linked List
 
-## Circular Linked List
+### Multiply Linked List
 
-## Misc
+### Circular Linked List
+
+## Solving Linked List Problems
