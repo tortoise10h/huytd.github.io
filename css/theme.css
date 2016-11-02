@@ -292,3 +292,11 @@ h4:before {
     margin: 15px 0 15px 0;
   }
 }
+
+::selection {
+  background: #FFF5B8;
+  display: block; }
+
+::-moz-selection {
+  background: #FFF5B8;
+  display: block; }
