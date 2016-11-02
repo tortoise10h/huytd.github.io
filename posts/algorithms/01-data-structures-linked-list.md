@@ -3,11 +3,11 @@
 ## Overview
 
 Linked List:
-- is a linear **collection of data elements**
-- each element called a **node**
-- nodes a **linked** to each other
-- each node is composed by a **data** and a **reference (link)** to a next node in sequence
-- A **node** will be defined in **Heap** memory, but the **Head** (pointer to the first node) will be stored in **Stack**
+- Is a linear **collection of data elements**
+- Each element called a **node**
+- Nodes a **linked** to each other
+- Each node is composed by a **data** and a **reference (link)** to a next node in sequence
+- A **Node** will be defined in **Heap** memory, but the **Head** (pointer to the first node) will be stored in **Stack**
 
 ![](../img/linkedlistmemory.png)
 
@@ -24,33 +24,87 @@ Use stack if you know exactly how much data you need to allocate before compile 
 ## Pros and Cons
 
 Pros:
-- allows **efficient insertion and removal** of elements from any position in sequence **during iteration**
-- can be used to implement other common data types such as **list**, **stack**, **queue**, **associative array**,...
+- Allows **efficient insertion and removal** of elements from any position in sequence **during iteration**
+- Can be used to implement other common data types such as **list**, **stack**, **queue**, **associative array**,...
 
 Cons:
-- has no [cache locality](https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md) since the elements are not contiguosly
-- difficult in **reverse travelling** linked list
+- Has no [cache locality](https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md) since the elements are not contiguosly
+- Difficult in **reverse travelling** linked list
 
 ## Comparision with Array
 
 Linked List vs. Array:
-- linked list elements can easily be inserted or removed **without reallocation or reorganization** of the entrie data structure, because data items **need not to be stored contiguosly in memory**
+- Linked list elements can easily be inserted or removed **without reallocation or reorganization** of the entrie data structure, because data items **need not to be stored contiguosly in memory**
 
 ![](http://www.programcreek.com/wp-content/uploads/2013/03/arraylist-vs-linkedlist-complexity.png)
 
-- therefore, **no random access** on linked list (index). need to scan the list all the time.
-- linked list can be allocating or deallocating in **runtime**, array is allocated in **compiling time**
-- no need to define an **initial size** for linked list
-- used **more memory** than array because of pointers
+- Therefore, **no random access** on linked list (index). need to scan the list all the time.
+- Linked list can be allocating or deallocating in **runtime**, array is allocated in **compiling time**
+- No need to define an **initial size** for linked list
+- Used **more memory** than array because of pointers
 
 ## Different Linked List Types
 
+There are 4 types of Linked List:
+
 ### Singly Linked List
+
+Singly Linked List is type of list that each node contains a **data** field and a **next** field, which is a pointer that points to the next node in the sequence.
+
+Operations that can be performed on singly linked list is: **insertion**, **deletion** and **travelsal**.
+
+![](../img/linkedlistsingly.png)
+
+An implementation of a node of Singly Linked List is very simple:
+
+```
+struct node {
+  int data;
+  struct node* next;
+};
+```
 
 ### Doubly Linked List
 
+A node in Doubly Linked list has one **data** field and two pointers, the **forward** pointer that points to the next node, and **previous** pointer will points to the previous node in the sequence, or you can call it next/prev.
+
+![](../img/linkedlistdoubly.png)
+
+<div class="box-red" style="padding: 15px">
+If you don't want to implement 2 pointers for each node, you can use [XOR-linking](https://en.m.wikipedia.org/wiki/XOR_linked_list) technique to implement the double link with just a single pointer. This technique required some bit operation.
+</div>
+<br/>
+<div class="box-yellow" style="padding: 15px">
+Many modern operating systems use doubly linked list to maintain references to active processes, threads and other dynamic objects. To see more detail, please refer the article: [Kernel-Mode Basics: Windows Linked Lists](http://www.osronline.com/article.cfm?article=499)
+</div>
+
+An implementation for a node in Doubly Linked List could be:
+
+```
+struct node {
+  int data;
+  struct node* next;
+  struct node* prev;
+};
+```
+
 ### Multiply Linked List
 
+In Multiply Linked List, each node contains two or more link fields. Doubly Linked List can be seen as a special case of multiply linked list.
+
+A node for multiply should be implement like this:
+
+```
+struct node {
+  int data;
+  struct node** links;
+};
+```
+
 ### Circular Linked List
+
+If the tail node of the list has a link to **Head** or any other **Node** in the list, we call it is a Circular Linked List:
+
+![](../img/linkedlistcircular.png)
 
 ## Solving Linked List Problems

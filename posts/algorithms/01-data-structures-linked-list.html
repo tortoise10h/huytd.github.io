@@ -23,11 +23,11 @@
 <h2 id="overview">Overview</h2>
 <p>Linked List:</p>
 <ul>
-<li>is a linear <strong>collection of data elements</strong></li>
-<li>each element called a <strong>node</strong></li>
-<li>nodes a <strong>linked</strong> to each other</li>
-<li>each node is composed by a <strong>data</strong> and a <strong>reference (link)</strong> to a next node in sequence</li>
-<li>A <strong>node</strong> will be defined in <strong>Heap</strong> memory, but the <strong>Head</strong> (pointer to the first node) will be stored in <strong>Stack</strong></li>
+<li>Is a linear <strong>collection of data elements</strong></li>
+<li>Each element called a <strong>node</strong></li>
+<li>Nodes a <strong>linked</strong> to each other</li>
+<li>Each node is composed by a <strong>data</strong> and a <strong>reference (link)</strong> to a next node in sequence</li>
+<li>A <strong>Node</strong> will be defined in <strong>Heap</strong> memory, but the <strong>Head</strong> (pointer to the first node) will be stored in <strong>Stack</strong></li>
 </ul>
 <p><img src="../img/linkedlistmemory.png" alt=""></p>
 <div class="box-orange" style="padding: 15px">
@@ -43,31 +43,64 @@ Use stack if you know exactly how much data you need to allocate before compile 
 <h2 id="pros-and-cons">Pros and Cons</h2>
 <p>Pros:</p>
 <ul>
-<li>allows <strong>efficient insertion and removal</strong> of elements from any position in sequence <strong>during iteration</strong></li>
-<li>can be used to implement other common data types such as <strong>list</strong>, <strong>stack</strong>, <strong>queue</strong>, <strong>associative array</strong>,...</li>
+<li>Allows <strong>efficient insertion and removal</strong> of elements from any position in sequence <strong>during iteration</strong></li>
+<li>Can be used to implement other common data types such as <strong>list</strong>, <strong>stack</strong>, <strong>queue</strong>, <strong>associative array</strong>,...</li>
 </ul>
 <p>Cons:</p>
 <ul>
-<li>has no <a href="https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md">cache locality</a> since the elements are not contiguosly</li>
-<li>difficult in <strong>reverse travelling</strong> linked list</li>
+<li>Has no <a href="https://github.com/unrealhoang/hardcore/blob/master/cache_locality/post.md">cache locality</a> since the elements are not contiguosly</li>
+<li>Difficult in <strong>reverse travelling</strong> linked list</li>
 </ul>
 <h2 id="comparision-with-array">Comparision with Array</h2>
 <p>Linked List vs. Array:</p>
 <ul>
-<li>linked list elements can easily be inserted or removed <strong>without reallocation or reorganization</strong> of the entrie data structure, because data items <strong>need not to be stored contiguosly in memory</strong></li>
+<li>Linked list elements can easily be inserted or removed <strong>without reallocation or reorganization</strong> of the entrie data structure, because data items <strong>need not to be stored contiguosly in memory</strong></li>
 </ul>
 <p><img src="http://www.programcreek.com/wp-content/uploads/2013/03/arraylist-vs-linkedlist-complexity.png" alt=""></p>
 <ul>
-<li>therefore, <strong>no random access</strong> on linked list (index). need to scan the list all the time.</li>
-<li>linked list can be allocating or deallocating in <strong>runtime</strong>, array is allocated in <strong>compiling time</strong></li>
-<li>no need to define an <strong>initial size</strong> for linked list</li>
-<li>used <strong>more memory</strong> than array because of pointers</li>
+<li>Therefore, <strong>no random access</strong> on linked list (index). need to scan the list all the time.</li>
+<li>Linked list can be allocating or deallocating in <strong>runtime</strong>, array is allocated in <strong>compiling time</strong></li>
+<li>No need to define an <strong>initial size</strong> for linked list</li>
+<li>Used <strong>more memory</strong> than array because of pointers</li>
 </ul>
 <h2 id="different-linked-list-types">Different Linked List Types</h2>
+<p>There are 4 types of Linked List:</p>
 <h3 id="singly-linked-list">Singly Linked List</h3>
-<h3 id="doubly-linked-list">Doubly Linked List</h3>
-<h3 id="multiply-linked-list">Multiply Linked List</h3>
-<h3 id="circular-linked-list">Circular Linked List</h3>
+<p>Singly Linked List is type of list that each node contains a <strong>data</strong> field and a <strong>next</strong> field, which is a pointer that points to the next node in the sequence.</p>
+<p>Operations that can be performed on singly linked list is: <strong>insertion</strong>, <strong>deletion</strong> and <strong>travelsal</strong>.</p>
+<p><img src="../img/linkedlistsingly.png" alt=""></p>
+<p>An implementation of a node of Singly Linked List is very simple:</p>
+<pre><code>struct node {
+  int data;
+  struct node* next;
+};
+</code></pre><h3 id="doubly-linked-list">Doubly Linked List</h3>
+<p>A node in Doubly Linked list has one <strong>data</strong> field and two pointers, the <strong>forward</strong> pointer that points to the next node, and <strong>previous</strong> pointer will points to the previous node in the sequence, or you can call it next/prev.</p>
+<p><img src="../img/linkedlistdoubly.png" alt=""></p>
+<div class="box-red" style="padding: 15px">
+If you don&#39;t want to implement 2 pointers for each node, you can use <a href="https://en.m.wikipedia.org/wiki/XOR_linked_list">XOR-linking</a> technique to implement the double link with just a single pointer. This technique required some bit operation.
+</div>
+<br/>
+<div class="box-yellow" style="padding: 15px">
+Many modern operating systems use doubly linked list to maintain references to active processes, threads and other dynamic objects. To see more detail, please refer the article: <a href="http://www.osronline.com/article.cfm?article=499">Kernel-Mode Basics: Windows Linked Lists</a>
+</div>
+
+<p>An implementation for a node in Doubly Linked List could be:</p>
+<pre><code>struct node {
+  int data;
+  struct node* next;
+  struct node* prev;
+};
+</code></pre><h3 id="multiply-linked-list">Multiply Linked List</h3>
+<p>In Multiply Linked List, each node contains two or more link fields. Doubly Linked List can be seen as a special case of multiply linked list.</p>
+<p>A node for multiply should be implement like this:</p>
+<pre><code>struct node {
+  int data;
+  struct node** links;
+};
+</code></pre><h3 id="circular-linked-list">Circular Linked List</h3>
+<p>If the tail node of the list has a link to <strong>Head</strong> or any other <strong>Node</strong> in the list, we call it is a Circular Linked List:</p>
+<p><img src="../img/linkedlistcircular.png" alt=""></p>
 <h2 id="solving-linked-list-problems">Solving Linked List Problems</h2>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/01-data-structures-linked-list.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
