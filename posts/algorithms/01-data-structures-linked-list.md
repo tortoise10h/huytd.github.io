@@ -7,8 +7,19 @@ Linked List:
 - each element called a **node**
 - nodes a **linked** to each other
 - each node is composed by a **data** and a **reference (link)** to a next node in sequence
+- A **node** will be defined in **Heap** memory, but the **Head** (pointer to the first node) will be stored in **Stack**
 
-![](http://www.techeuler.com/wp-content/uploads/2016/07/Tail-linked-list.png)
+![](../img/linkedlistmemory.png)
+
+<div class="box-orange" style="padding: 15px">
+**Side Note**<br/>
+<hr/>
+Both of **Stack** and **Heap** are stored in computer's RAM.<br/><br/>
+- **Stack:** is used for static memory allocation during compiling. Value of stack are stored directly to the memory and access to this memory is very fast.<br/>
+- **Heap:** is used for dynamic memory allocation during run time. Access to this memory is a bit slower but the Heap size only limited by the size of virtual memory.<br/>
+<br/>
+Use stack if you know exactly how much data you need to allocate before compile and it's not too big. Use heap if you don't.
+</div>
 
 ## Pros and Cons
 

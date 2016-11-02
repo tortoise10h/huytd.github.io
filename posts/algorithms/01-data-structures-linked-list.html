@@ -27,8 +27,19 @@
 <li>each element called a <strong>node</strong></li>
 <li>nodes a <strong>linked</strong> to each other</li>
 <li>each node is composed by a <strong>data</strong> and a <strong>reference (link)</strong> to a next node in sequence</li>
+<li>A <strong>node</strong> will be defined in <strong>Heap</strong> memory, but the <strong>Head</strong> (pointer to the first node) will be stored in <strong>Stack</strong></li>
 </ul>
-<p><img src="http://www.techeuler.com/wp-content/uploads/2016/07/Tail-linked-list.png" alt=""></p>
+<p><img src="../../img/linkedlistmemory.png" alt=""></p>
+<div class="box-orange" style="padding: 15px">
+<strong>Side Note</strong><br/>
+<hr/>
+Both of <strong>Stack</strong> and <strong>Heap</strong> are stored in computer&#39;s RAM.<br/><br/>
+- <strong>Stack:</strong> is used for static memory allocation during compiling. Value of stack are stored directly to the memory and access to this memory is very fast.<br/>
+- <strong>Heap:</strong> is used for dynamic memory allocation during run time. Access to this memory is a bit slower but the Heap size only limited by the size of virtual memory.<br/>
+<br/>
+Use stack if you know exactly how much data you need to allocate before compile and it&#39;s not too big. Use heap if you don&#39;t.
+</div>
+
 <h2 id="pros-and-cons">Pros and Cons</h2>
 <p>Pros:</p>
 <ul>
