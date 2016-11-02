@@ -116,6 +116,7 @@ fs.readdir(__dirname + '/posts/algorithms/', function(err, files) {
 			  	htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
 
           htmlContent = htmlContent.replace(/\.\.\//g, '../../');
+          htmlContent = htmlContent.replace(/\.\.\/\.\.\/img/g, '../img');
 
 			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
 				     if (err)
