@@ -424,7 +424,20 @@ int main() {
 
 Tiếp đến chúng ta implement **Kernel**, đây là đoạn chương trình sẽ được **Host** nạp vào **Program Object** để thực hiện xử lý trên GPU.
 
-Chương trình này sẽ được định nghĩa bằng các từ khóa `kernel`
+Chương trình này sẽ được định nghĩa bằng các từ khóa `kernel`. Ta truyền vào một biến con trỏ để tiếp nhận dữ liệu đầu ra, chương trình này sử dụng phương pháp tính bằng cách chạy một vòng lặp for, có thể implement như sau:
+
+```
+kernel void hello(global ulong *val) {
+  size_t i = get_global_id(0);
+  for (ulong j = 0; j < 100000000; j++) {
+    val[i] += j;
+  }
+}
+```
+
+Biến `i` trong chương trình trên là id của tiến trình kernel được khởi tạo trong lúc thực thi, chúng ta cần phải lấy chính xác id này để gửi trả dữ liệu về cho **Host**.
+
+Đặc điểm của kernel là các biến, tham số truyền vào đều mutable và chúng ta không cần return dữ liệu (vì ở host đã có một bước đọc dữ liệu từ memory object ra rồi).
 
 ## Implement thuật toán nhân ma trận trên GPU
 

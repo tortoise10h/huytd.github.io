@@ -108,3 +108,55 @@ If the tail node of the list has a link to **Head** or any other **Node** in the
 ![](../img/linkedlistcircular.png)
 
 ## Solving Linked List Problems
+
+### Count 
+
+Count number of times a given int occurs in a list:
+
+### Get value of a node
+
+Given a number `n`, write a function that returns the value stored in the n<sup>th</sup> node of a list:
+
+### Delete List
+
+Given a list, write a function to deallocate all of its memory and set it head to NULL (empty list)
+
+### Pop
+
+Write a function to return the last node, after remove it from the non-empty list.
+
+### Insert
+
+Write a function to insert a node in the middle of the list:
+
+### Sorted Insert
+
+Given a list that is sorted in increasing order, write a function to insert a node to the correct sorted possition in the list.
+
+### Sort
+
+Write a function to rearrange the node of a list in increasing order:
+
+### Append
+
+Write a function that takes `two` lists A and B, append the list B to the end of A, then set B to an empty list.
+
+### Split
+
+Given a list, write a function to split it into two sublists, one from the front half and one from the back half. 
+
+If the given list has odd length, the extra element should go to the front list.
+
+### Remove Duplicates
+
+Write a function which takes a list that sorted in increasing order, and delete any duplicate nodes in the list.
+
+The list should only be traversed once.
+
+### Alternating Split
+
+Write a function that takes one list and divides up its nodes to make two smaller lists.
+
+The sublists should be made from alternating elements in the original list. So, if the list is $\( a, b, a, b, a \)$, then one sublist should be $\( a, a, a \)$ and another should be $\( b, b \)$.
+
+
