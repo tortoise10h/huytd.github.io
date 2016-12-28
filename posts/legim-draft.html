@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <title> Legim Draft | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="legim-draft">Legim Draft</h1>
+<p><strong>Legim</strong> có nghĩa là <strong>LEGO Image Server</strong>, mang ý nghĩa là một app server ảnh có khả năng hoạt động độc lập hoặc có thể ghép nối lại một cách dễ dàng để tạo thành một hệ thống một cách dễ dàng giống như trò chơi LEGO.</p>
+<h2 id="t-ng-quan-h-th-ng">Tổng quan hệ thông</h2>
+<p>Một cách tổng quát, cấu trúc hoạt động của <strong>Legim</strong> như hình sau:</p>
+<p><img src="img/legim_01.PNG" alt=""></p>
+<p>Trong đó, server application là chương trình chính, sẽ kết nổi và quản lý các file hình ảnh nằm trên đĩa cứng, đồng thời cung cấp RESTful API để user có thể tương tác (upload hình ảnh, download hình ảnh,...)</p>
+<h2 id="m-t-node-server">Một node server</h2>
+<p>Node ở đây gọi là một nút, một khối gồm có: Server app và Đĩa cứng cấu thành một node trên hệ thống.</p>
+<p><img src="img/legim_02.PNG" alt=""></p>
+<p>Và đây cũng là đơn vị cơ bản nhất của hệ thống.</p>
+<p>Có 3 loại node tồn tại trong hệ thống, như hình sau:</p>
+<p><img src="img/legim_03.PNG" alt=""></p>
+<h3 id="gateway-node">Gateway Node</h3>
+<p>Các node không có <strong>node cha</strong> (parent node) sẽ được hiểu mặc định là các <strong>Gateway</strong>.</p>
+<p>Trong một hệ thống Legim thì chỉ có <strong>Gateway</strong> node là có thể cung cấp REST API để giao tiếp với user.</p>
+<p>Mặc định khi khởi tạo một server chỉ gồm một Legim node, thì node này sẽ được nhận diện là <strong>Gateway</strong>.</p>
+<h3 id="cluster-node-v-leaf-node">Cluster Node và Leaf Node</h3>
+<p>Các node con của <strong>gateway</strong> node có thể là <strong>Leaf Node</strong> (node lá), là các node không có node con hoặc các <strong>Cluster Node</strong> (là các node có chứa các node lá bên trong).</p>
+<p>Cluster Node và Leaf Node sẽ không được quyền cung cấp REST API.</p>
+<p>Các Cluster node sẽ kết nối trực tiếp tới Gateway.</p>
+<p>Các Leaf Node sẽ kết nối trực tiếp tới Cluster Node.</p>
+<p>Một node có thể chứa không, một hoặc nhiều (hoặc rất nhiều) node con, và tất cả sẽ tạo thành một đồ thị hình cây.</p>
+<p>Khi một node lá được tạo ra, thì nó phải được chỉ định địa chỉ của node cha cần kết nối đến.</p>
+<h2 id="h-th-ng-h-nh-c-y">Hệ thống hình cây</h2>
+<p>Dựa vào cấu trúc hình cây, chúng ta có thể tạo ra một hệ thống gồm một gateway node ở trung tâm, và rất nhiều node con phân bố khắp nơi (về mặt địa lý) như hình sau: </p>
+<p><img src="img/legim_04.PNG" alt=""></p>
+<p>Các cluster có thể được tạo ra ở nhiều địa điểm trên thế giới để đảm bảo tối ưu về mặt phục vụ.</p>
+<h2 id="c-ch-tr-o-ng-c-gi-p-backup-d-li-u">Cơ chế &quot;trào ngược&quot; giúp backup dữ liệu</h2>
+<p>Giả sử ta có một hệ thống với các file <code>A, B, C, D, E</code> được phân bố như hính sau:</p>
+<p><img src="img/legim_05.PNG" alt=""></p>
+<p>Khi một node bị tắt đi, hệ thống sẽ tiến hành tắt toàn bộ các node con của nó sẽ bị tắt trước, sau đó mới đến chính node đó bị tắt.</p>
+<p>Trong quá trình tắt node, hệ thống sẽ tiến hành &quot;trào ngược&quot; (phun ngược =))) dữ liệu từ node bị tắt lên node cao hơn (node cha), như hình sau:</p>
+<p><img src="img/legim_07.PNG" alt=""></p>
+<p>Node <code>San Francisco</code> bị tắt đi, file <code>E</code> của node này sẽ được chuyển lên node <code>USA</code>. Nếu cần thiết, node <code>USA</code> có thể chuyển file <code>E</code> về các node <code>Chicago</code> hoặc <code>Florida</code> để giảm tải.</p>
+<h2 id="load-balancing">Load balancing</h2>
+<p>Khi một user request một hình ảnh, request sẽ đi qua REST API và đi vào Gateway server, tại đây, request sẽ được phân phối về server nào có chứa hình ảnh cần load và có độ trễ (latency) thấp nhất (để đảm bảo tốc độ), thường là server nằm gần nhất.</p>
+<p>Ví dụ hình sau, một user từ Đà Nẵng có thể request tới hệ thống và nhận được file nằm tại server Hà Nội, còn một user từ San Jose có thể nhận được file từ server San Francisco.</p>
+<p><img src="img/legim_06.PNG" alt=""></p>
+<h2 id="scaling">Scaling</h2>
+<p>Legim được thiết kế để giúp cho việc scaling diễn ra một cách it tốn kém nhất. </p>
+<p>Khi cần loại bớt server, chúng ta có thể dễ dàng thực hiện bằng cách tắt bớt các leaf node hoặc cả một cụm cluster. Cơ chế backup dữ liệu theo kiểu &quot;trào ngược&quot; (dữ liệu từ node con sẽ đi hết lên node cha trước khi node con bị tắt) sẽ đảm bảo tính toàn vẹn dữ liệu.</p>
+<p>Khi cần thêm vào một server, chúng ta chỉ cần khởi động legim trên một máy tính mới, và chỉ định file config cho server mới có dạng như sau:</p>
+<pre><code>node:
+  port: 8888
+
+parent:
+  ip: 10.0.0.6
+  port: 3333
+</code></pre><p>Trong đó, máy tính ở địa chỉ <code>10.0.0.6:3333</code> là server cha cần kết nối tới, và server hiện tại chạy trên cổng <code>8888</code>.</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/legim-draft.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
