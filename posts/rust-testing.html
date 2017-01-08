@@ -1,0 +1,201 @@
+<html>
+    <head>
+        <title> Viết test trong Rust the idiomatic way | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="vi-t-test-trong-rust-the-idiomatic-way">Viết test trong Rust the idiomatic way</h1>
+<p><strong>Chống chỉ định:</strong> cái tiêu đề đặt nữa tây nữa việt là cố ý, để câu view, chứ thực ra không phải tại mình không biết dịch chữ <code>idiomatic</code> ra đâu :v À nhân tiện nói luôn, <code>idiomatic way</code> có nghĩa là <code>một cách chính thống</code>, ở đây bàn về cách viết test được cộng đồng Rustlang công nhận và khuyến khích.</p>
+<p><img src="img/rustlang-vietnam-comic.png" alt=""></p>
+<p>Testing là một chức năng quan trọng mà bất kì ngôn ngữ nào cũng cần phải có, viết unit test cũng là một việc mà bất kì lập trình viên nào cũng cần phải làm, thậm chí với một vài cộng đồng như Golang và Ruby thì người ta bảo thủ tới mức xem việc publish một project không có unit test giống như là một cái tội luôn vậy đó :)) </p>
+<p>Đối với Go thì chúng ta có <code>go test</code>, đối với Ruby chúng ta có thể chạy test thông qua <code>rake</code> (đúng không nhỉ? một thanh niên không code Ruby cho hay), Node thì thôi không nên nhắc tới làm gì :( và tất nhiên là Rust cũng có công cụ testing built-in thông qua lệnh <code>cargo test</code>.</p>
+<h2 id="c-ch-test-trong-rust">Cách test trong Rust</h2>
+<p>Để viết test trong Rust thì khá là đơn giản, chỉ cần tại bất kì đâu trong chương trình, viết một hàm theo dạng:</p>
+<pre><code>#[test]
+fn minh_thich_thi_minh_test_thoi() {
+  ...
+}
+</code></pre><p>Hàm này có attribute <code>#[test]</code> (dân Java, C#, thường gọi cái này là annotation) để báo cho Rust compiler biết rằng đây là một hàm test, các hàm này sẽ được chạy khi chúng ta gọi lệnh:</p>
+<pre><code>cargo test
+</code></pre><p>Ví dụ, ta viết một hàm test như sau:</p>
+<pre><code>#[test]
+fn this_function_should_drop_all_tables() {
+    assert!(1 + 1 == 2)
+}
+</code></pre><p>Và chạy test, ta thu được kết quả:</p>
+<pre><code>➜  kipalog git:(master) ✗ cargo test
+   Compiling testrun v0.1.0 (file:///Users/huy/code/kipalog)
+    Finished debug [unoptimized + debuginfo] target(s) in 0.27 secs
+     Running target/debug/kipalog-90d752c0679f22d9
+
+running 1 test
+test this_function_should_drop_all_tables ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+</code></pre><h2 id="idiomatic-way-vi-t-test-trong-rust">Idiomatic way để viết test trong Rust</h2>
+<p>Theo cuốn sách <a href="https://doc.rust-lang.org/book/testing.html">The Rust Programming Language</a>, cộng đồng Rust khuyến khích 2 cách viết test &quot;chuẩn&quot; đó là: <strong>Viết trong <code>tests</code> module</strong> và <strong>Viết trong thư mục <code>tests</code></strong>. Vậy tại sao lại có 2 cách viết?</p>
+<h3 id="d-ng-tests-module-vi-t-unit-test">Dùng <code>tests</code> module để viết Unit Test</h3>
+<p>Để tạo <code>tests</code> module thì chúng ta có thể viết code sau ở bất kì đâu:</p>
+<pre><code>#[cfg(test)]
+mod tests {
+
+}
+</code></pre><p>Từ khóa <code>mod</code> để tạo một module mới, và khi gặp attribute <code>#[cfg(test)]</code>, Rust compiler sẽ chỉ compile module này khi chạy test, khi build bình thường thì module này sẽ bị bỏ qua để tiết kiệm thời gian compile.</p>
+<p>Giả sử chương trình của chúng ta có một hàm cần test là <code>sum()</code>, chúng ta sẽ viết test cho hàm này như sau:</p>
+<pre><code>fn sum(a: i32, b: i32) -&gt; i32 {
+    a + b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::sum;
+
+    #[test]
+    fn sum_should_return_something() {
+        assert!(sum(1, 2) == 3)
+    }
+}
+</code></pre><p>Lưu ý lệnh:</p>
+<pre><code>use super::sum;
+</code></pre><p>Vì hàm <code>sum</code> của chúng ta không được khai báo bên trong module <code>tests</code> nên trước khi sử dụng nó trong hàm test, chúng ta phải đưa nó vào scope của module hiện hành bằng lệnh <code>use</code>.</p>
+<p>Chạy thử bộ test trên sẽ cho kết quả như sau:</p>
+<pre><code>➜  kipalog git:(master) ✗ cargo test
+    Finished debug [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running target/debug/kipalog-e90e21d36164f8bb
+
+running 1 test
+test tests::sum_should_return_something ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+</code></pre><p>Bạn sẽ thấy test case được chạy bây giờ là <code>tests::sum_should_return_something</code>, tức là Rust đã chạy test cho hàm <code>sum_should_return_something</code> thuộc module <code>tests</code>, khác với kết quả được in ra ở ví dụ test một hàm đơn lẻ ở đầu bài.</p>
+<p>Các test được viết trong module này thường sẽ là các <strong>unit test</strong>.</p>
+<h3 id="d-ng-th-m-c-tests-vi-t-integration-tests">Dùng thư mục <code>tests</code> để viết integration tests</h3>
+<p>Ngoài cách test ở trên, chúng ta có thể tạo thư mục <code>tests</code> nằm cùng cấp với thư mục <code>src</code> của dự án, và viết các file test ở trong này. Mỗi một file <code>*.rs</code> nằm trong thư mục này được xem như là một crate riêng, và khi compile cũng sẽ nằm ở một target riêng, các bạn lưu ý chỗ này.</p>
+<p>Để viết các integration test thì chúng ta tạo file <code>tests/integration_tests.rs</code>. </p>
+<p>Giả sử chúng ta có module <code>kipalog</code> và có hàm <code>sum()</code> như đã khai báo ở phần trước, nội dung file test của chúng ta sẽ có dạng:</p>
+<pre><code>extern crate kipalog;
+
+#[test]
+fn test_sum_one_and_two() {
+    assert!(kipalog::sum(1, 2) == 3);
+}
+</code></pre><p>Như đã nói ở trên, vì bên trong thư mục <code>tests</code>, mỗi file là một crate riêng, điều này có nghĩa là chúng ta phải import module <code>kipalog</code> vào, giống với cách sử dụng crate trong thực tế, vì vậy cách này thích hợp để viết integration test.</p>
+<p>Chạy test trên thì output sẽ có dạng:</p>
+<pre><code>➜  kipalog git:(master) ✗ cargo test
+   Compiling kipalog v0.1.0 (file:///Users/huy/Desktop/Code/kipalog)
+    Finished debug [unoptimized + debuginfo] target(s) in 0.41 secs
+     Running target/debug/integration_tests-e2d20617c9c89446
+
+running 1 test
+test test_sum_one_and_two ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+     Running target/debug/deps/kipalog-f232ef2295608ede
+
+running 1 test
+test tests::sum_should_return_something ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured
+
+   Doc-tests kipalog
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
+</code></pre><p>Có thể thấy trong output chia làm 3 phần, phần đầu tiên là kết quả chạy test được viết trong <code>integration_tests.rs</code> của chúng ta, phần 2 là phần code test trong module <code>tests</code> đã viết ở phần trước. Phần cuối cùng là <code>Doc-tests</code>, là một chức năng của Rust cho phép test luôn code trong document, các bạn có thể xem chi tiết tại bài <a href="https://doc.rust-lang.org/book/testing.html">The Rust Programming Language - Testing</a>.</p>
+<hr>
+<p>Một phút dành cho quảng cáo: Cộng đồng Rustlang Việt Nam đã được thành lập, các bạn có thể tham gia tại các địa chỉ sau:</p>
+<p><img src="img/rustlang-vietnam-social.png" alt=""></p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/rust-testing.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
