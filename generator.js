@@ -132,12 +132,23 @@ fs.readdir(__dirname + '/posts/algorithms/', function(err, files) {
 
 console.log('Generating index page...');
 var publishedPosts = Array.from(require('./publish.json').published);
+var publishYears = Array.from(require('./publish.json').years);
 var htmlOutput = __dirname + '/index.html';
-var postContent = "# Nơi tổng hợp những ghi chép linh tinh\n\n";
+var postContent = "";
 var htmlContent = '';
 
-for (var i = publishedPosts.length - 1; i >= 0; i--) {
-  postContent += "\n---\n[" + publishedPosts[i].title  + "](" + publishedPosts[i].url + ")\n\n" + publishedPosts[i].desc + "\n";
+console.log('Posts: ', publishedPosts.length, ' Years: ', publishYears.length);
+for (var y = 0; y < publishYears.length; y++) {
+  var year = publishYears[y];
+  console.log('Processing year: ', year);
+  postContent += "\n# " + year + "\n";
+  var posts = publishedPosts.filter(function(item) {
+    return parseInt(item.year) === parseInt(year);
+  });
+  console.log('Found', posts.length, 'posts!');
+  for (var i = posts.length - 1; i >= 0; i--) {
+    postContent += "\n[" + posts[i].title  + "](" + posts[i].url + ")\n";
+  }
 }
 
 htmlContent = indexTemplateHtml.replace('{%content%}', marked(postContent));

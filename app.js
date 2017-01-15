@@ -4,6 +4,13 @@ const app = express();
 const bodyParser = require('body-parser');
 const preview = require('./preview');
 
+let logOptions = {
+    weekday: "long", year: "numeric", month: "short",
+    day: "numeric", hour: "2-digit", minute: "2-digit"
+};
+
+let yearList = ['2017', '2016', '2015'];
+
 app.use(bodyParser());
 app.use(express.static("admin"));
 app.use(express.static("."));
@@ -14,17 +21,28 @@ app.get('/preview', function(req, res) {
 
 app.get('/published', function (req, res) {
   let posts = require('./publish.json');
+  if (!posts.years) {
+    posts.years = yearList;
+  }
+  console.log('GET /published', (new Date()).toLocaleTimeString("en-US",logOptions));
   res.json(posts);
 });
 
 app.post('/update', function(req, res) {
+  console.log('POST /update', (new Date()).toLocaleTimeString("en-US",logOptions));
   let saveData = { published: req.body.data };
+  if (!saveData.years) {
+    saveData.years = yearList;
+  }
   fs.writeFile('./publish.json', JSON.stringify(saveData), function(err) {
+    if (err) console.log("FAILED!", err);
+    else console.log("UPDATE SUCCESS!");
     res.json({ error: err });
   });
 });
 
 app.get('/unpublished', function(req, res) {
+  console.log('GET /unpublished', (new Date()).toLocaleTimeString("en-US",logOptions));
   let publishedPosts = Array.from(require('./publish.json').published);
   let posts = [];
   fs.readdir(__dirname + '/posts/', function(err, files) {
@@ -41,11 +59,10 @@ app.get('/unpublished', function(req, res) {
             let lines = fileData.split('\n');
             if (lines.length > 0) {
               let title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '').trim();
-              let desc = lines.slice(1).join('').substr(0, 300).replace(/#/g, '') + '...';
               posts.push({
                 title: title,
                 url: postUrl,
-                desc: desc
+                year: "" + (new Date()).getFullYear()
               });
             }
           }

@@ -45,10 +45,10 @@
       font-size: 1.2em;
     }
 
-    ul li:hover {
+    ul li.sub:hover {
       background: #e74c3c;
     }
-    ul li:hover .postDesc textarea, ul li:hover .postTitle a {
+    ul li.sub:hover .postDesc textarea, ul li.sub:hover .postTitle a {
       color: #FFF;
     }
 
@@ -118,12 +118,19 @@
     </div>
     <div class="published">
       <ul>
-        <li ng-repeat="post in publishedPosts">
-          <div class="moveUp" ng-click="moveUp($index)">+</div>
-          <div class="moveDown" ng-click="moveDown($index)">-</div>
-          <div class="postTitle"><a href="{{post.url}}">{{post.title}}</a></div>
-          <div class="postDesc"><textarea ng-change="updateAll()" type="text" ng-model="post.desc"></textarea></div>
-          <button ng-click="unpublishPost(post, $index)">UNPUBLISH</button>
+        <li ng-repeat="year in publishYears">
+          <h2>{{ year }}</h2>
+          <ul>
+            <li class="sub" ng-repeat="post in publishedPosts | filter: { year: year }">
+              <div class="moveUp" ng-click="moveUp(post)">+</div>
+              <div class="moveDown" ng-click="moveDown(post)">-</div>
+              <div class="postTitle"><a href="{{post.url}}">{{post.title}}</a></div>
+              <div class="postDesc">
+                <select ng-change="updateAll()" ng-options="year as year for year in publishYears" ng-model="post.year"></select>
+              </div>
+              <button ng-click="unpublishPost(post)">UNPUBLISH</button>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

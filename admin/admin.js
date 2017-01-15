@@ -6,6 +6,7 @@ app.controller('admin', function($scope, $http) {
 
   $scope.refresh = () => {
     $http.get('/published').success((data) => {
+      $scope.publishYears = Array.from(data.years);
       $scope.publishedPosts = Array.from(data.published);
     });
 
@@ -22,13 +23,23 @@ app.controller('admin', function($scope, $http) {
     $scope.updateAll();
   }
 
-  $scope.unpublishPost = (post, index) => {
-    $scope.publishedPosts.splice(index, 1);
-    $scope.unpublishedPosts.push(post);
-    $scope.updateAll();
+  $scope.findPostIndex = (post) => {
+    return $scope.publishedPosts.findIndex((item) => {
+      return (item.title === post.title && item.year === post.year);
+    });
+  }
+
+  $scope.unpublishPost = (post) => {
+    var delIndex = $scope.findPostIndex(post);
+    if (delIndex != -1) {
+      $scope.publishedPosts.splice(delIndex, 1);
+      $scope.unpublishedPosts.push(post);
+      $scope.updateAll();
+    }
   }
 
   $scope.updateAll = () => {
+    console.log('Update: ', $scope.publishedPosts);
     $http.post('/update', { data: $scope.publishedPosts })
       .success(function(data) {
       });
@@ -40,12 +51,14 @@ app.controller('admin', function($scope, $http) {
     $scope.publishedPosts[b] = temp;
   }
 
-  $scope.moveUp = (idx) => {
+  $scope.moveUp = (post) => {
+    let idx = $scope.findPostIndex(post);
     $scope.swap(idx, idx-1);
     $scope.updateAll();
   }
 
-  $scope.moveDown = (idx) => {
+  $scope.moveDown = (post) => {
+    let idx = $scope.findPostIndex(post);
     $scope.swap(idx, idx+1);
     $scope.updateAll();
   }
