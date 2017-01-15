@@ -147,7 +147,7 @@ for (var y = 0; y < publishYears.length; y++) {
   });
   console.log('Found', posts.length, 'posts!');
   for (var i = posts.length - 1; i >= 0; i--) {
-    postContent += "\n[" + posts[i].title  + "](" + posts[i].url + ")\n";
+    postContent += "\n&#8211; [" + posts[i].title  + "](" + posts[i].url + ")\n";
   }
 }
 
