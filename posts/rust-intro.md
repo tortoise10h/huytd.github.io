@@ -44,6 +44,7 @@ Cũng giống như C hay Go (và khác với Ruby, NodeJS hay Python,...), một
 Khi so sánh với các ngôn ngữ khác, thực sự thì đây là một việc không cần thiết, nhưng chúng ta có thể tham khảo, bảng so sánh tốc độ thực thi [tính tổng dãy số Fibonacci](https://huytd.github.io/posts/fibonacci-4m.html) giữa các ngôn ngữ Rust, Go, NodeJS và Swift:
 
 ![](img/rust-performance.jpg)
+<center style="font-size: 0.7em;">Bảng so sánh thời gian thực hiện, càng nhỏ thì càng xịn</center>
 
 Bạn có thể xem bảng so sánh performance của Rust và một số ngôn ngữ khác tại:
 
@@ -137,6 +138,7 @@ Mặc dù là một ngôn ngữ lập trình hệ thống (system programming la
 ## Giờ bắt đầu học Rust như thế nào?
 
 ![](img/rustconf-2016-illustrated-adventure-guide-22-638.jpg)
+<center style="font-size: 0.7em;">Ảnh lấy từ: [http://www.slideshare.net/LizBaillie/rustconf-2016-illustrated-adventure-guide-65894363](http://www.slideshare.net/LizBaillie/rustconf-2016-illustrated-adventure-guide-65894363)</center>
 
 Để bắt đầu, các bạn có thể tham khảo một số tài liệu sau:
 
