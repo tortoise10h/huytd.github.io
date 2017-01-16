@@ -66,8 +66,9 @@ Thông thường, phần lớn lỗi của một chương trình C/C++ sẽ liê
 - Mọi biến mặc định đều là immutable, và không được mang giá trị null (nên không có lỗi `NullReferenceException`)
 - Trong Rust, một vùng nhớ luôn có **một** biến **sỡ hữu** nó.
 - Gán một biến vào một biến khác, tức là bạn chuyển **quyền sở hữu** vùng nhớ của biến đó cho biến mới. Biến cũ không được quyền truy xuất tới đó nữa.
-- **Nhiều** biến khác có thể **mượn** vùng nhớ đó **chỉ để đọc** (read only).
-- Nhưng **chỉ có một** biến có quyền **mượn** để **ghi** giá trị lên đó.
+- Trong một thời điểm, chỉ có **một** trong hai trường hợp có thể xảy ra, đó là:
+  - **Nhiều** biến khác có thể **mượn** vùng nhớ đó **chỉ để đọc** (read only).
+  - Nhưng **chỉ có một** biến có quyền **mượn** để **ghi** giá trị lên đó.
 - Một biến chỉ có thể tồn tại bên trong scope của nó, ra khỏi scope đó nó sẽ bị giải phóng **ngay lập tức**.
 
 Bất cứ khi nào lập trình viên vi phạm các quy tắc này, Rust sẽ báo cho bạn biết ngay khi biên dịch, chứ không để lọt lỗi.

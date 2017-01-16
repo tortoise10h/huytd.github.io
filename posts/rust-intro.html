@@ -68,8 +68,11 @@
 <li>Mọi biến mặc định đều là immutable, và không được mang giá trị null (nên không có lỗi <code>NullReferenceException</code>)</li>
 <li>Trong Rust, một vùng nhớ luôn có <strong>một</strong> biến <strong>sỡ hữu</strong> nó.</li>
 <li>Gán một biến vào một biến khác, tức là bạn chuyển <strong>quyền sở hữu</strong> vùng nhớ của biến đó cho biến mới. Biến cũ không được quyền truy xuất tới đó nữa.</li>
+<li>Trong một thời điểm, chỉ có <strong>một</strong> trong hai trường hợp có thể xảy ra, đó là:<ul>
 <li><strong>Nhiều</strong> biến khác có thể <strong>mượn</strong> vùng nhớ đó <strong>chỉ để đọc</strong> (read only).</li>
 <li>Nhưng <strong>chỉ có một</strong> biến có quyền <strong>mượn</strong> để <strong>ghi</strong> giá trị lên đó.</li>
+</ul>
+</li>
 <li>Một biến chỉ có thể tồn tại bên trong scope của nó, ra khỏi scope đó nó sẽ bị giải phóng <strong>ngay lập tức</strong>.</li>
 </ul>
 <p>Bất cứ khi nào lập trình viên vi phạm các quy tắc này, Rust sẽ báo cho bạn biết ngay khi biên dịch, chứ không để lọt lỗi.</p>
