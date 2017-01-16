@@ -73,7 +73,7 @@ Thông thường, phần lớn lỗi của một chương trình C/C++ sẽ liê
 
 Bất cứ khi nào lập trình viên vi phạm các quy tắc này, Rust sẽ báo cho bạn biết ngay khi biên dịch, chứ không để lọt lỗi.
 
-Trong số các quy tắc được liệt kê ở trên, 5 quy tắc cuối cùng chính là [Ownership, Borrowing & Lifetime System](https://doc.rust-lang.org/book/ownership.html) của Rust.
+Trong số các quy tắc được liệt kê ở trên, trừ quy tắc đầu tiên ra, thì những mục còn lại chính là [Ownership, Borrowing & Lifetime System](https://doc.rust-lang.org/book/ownership.html) của Rust.
 
 Ví dụ với đoạn code sau minh họa cho vấn đề **chuyển quyền sở hữu** đề cập ở trên:
 
