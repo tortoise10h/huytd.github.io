@@ -57,6 +57,15 @@ nnoremap \ :Find&lt;SPACE&gt;
 <pre><code>alias slow=&quot;sudo rm /private/var/log/asl/*.asl&quot;
 </code></pre><p>Whenever it slow, just type:</p>
 <pre><code>slow
+</code></pre><h2 id="add-some-color-to-man-page">Add some color to man page</h2>
+<p>Add these lines to <code>.bash_profile</code>:</p>
+<pre><code>export LESS_TERMCAP_mb=$(printf &#39;\e[01;31m&#39;) # enter blinking mode
+export LESS_TERMCAP_md=$(printf &#39;\e[01;38;5;75m&#39;) # enter double-bright mode
+export LESS_TERMCAP_me=$(printf &#39;\e[0m&#39;) # turn off all appearance modes (mb, md, so, us)
+export LESS_TERMCAP_se=$(printf &#39;\e[0m&#39;) # leave standout mode
+export LESS_TERMCAP_so=$(printf &#39;\e[01;33m&#39;) # enter standout mode
+export LESS_TERMCAP_ue=$(printf &#39;\e[0m&#39;) # leave underline mode
+export LESS_TERMCAP_us=$(printf &#39;\e[04;38;5;200m&#39;) # enter underline mode
 </code></pre>
                 <div class="fb-like" data-href="http://huytd.github.io/posts/random.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
