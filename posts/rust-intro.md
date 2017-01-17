@@ -28,7 +28,7 @@ Với C/C++, bạn được:
 
 Rust là giải pháp kết hợp cho ưu điểm của cả 2 loại ngôn ngữ trên, khi làm việc với Rust, bạn không cần phải quan tâm tới việc bị `memory leak` hay `segfault`, khi làm multi thread, bạn không còn sợ `data race` vì `rust compiler` đã lo hết chuyện đó cho bạn, để đảm bảo trong lúc chạy (runtime) thì chương trình sẽ luôn hoạt động một cách an toàn và vẫn đảm bảo được tốc độ và performance tối ưu nhất.
 
-À! Chắc sẽ có bạn hỏi: **Rust và Go thì nên chọn ai?** Nếu có cùng thắc mắc, thì [xin mời bạn xem bài này nhé](https://dave.cheney.net/2015/07/02/why-go-and-rust-are-not-competitors)
+À! Chắc sẽ có bạn hỏi: **Rust và Go thì nên chọn ai?** Nếu có cùng thắc mắc, thì ~đương nhiên là chọn Rust rồi, vì mình đang quảng cáo Rust mà :))~ [xin mời bạn xem bài này nhé](https://dave.cheney.net/2015/07/02/why-go-and-rust-are-not-competitors).
 
 ## Rust nhanh tới mức nào?
 

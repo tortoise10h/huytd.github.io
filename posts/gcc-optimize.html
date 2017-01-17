@@ -1,0 +1,172 @@
+<html>
+    <head>
+        <title> Code optimization nó làm cái gì? | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="code-optimization-n-l-m-c-i-g-">Code optimization nó làm cái gì?</h1>
+<p>Khi làm việc với bất kì ngôn ngữ nào, chúng ta thường thấy sẽ có 2 chế độ build chạy chương trình khác nhau là: <strong>Debug mode</strong> và <strong>Release mode</strong>.</p>
+<p>Khác biệt giữa 2 chế độ này là, khi build chương trình ở <strong>Release mode</strong>, compiler sẽ thực hiện một số phương pháp để tối ưu hóa code được sinh ra. </p>
+<p>Để hiểu được các phương pháp tối ưu hóa này hoạt động như thế nào, chúng ta hãy cùng xem qua một ví dụ đơn giản.</p>
+<p>Sau đây là một đoạn chương trình C có nhiệm vụ tạo ra một biến <code>a</code> có giá trị ban đầu là <code>10</code>, chạy một vòng lặp <code>10</code> lần và liên tục cộng giá trị cho biến này, cuối cùng trả về kết quả là chính biến <code>a</code> đó:</p>
+<pre><code>int main() {
+  int a = 10;
+  for (int i = 0; i &lt; 10; i++) {
+    a++;
+  }
+  return a;
+}
+</code></pre><p>Thử biên dịch nó bằng <code>gcc</code> không kèm thêm bất cứ option nào ngoài <code>-S</code> để sinh ra Assembly code:</p>
+<pre><code>gcc -S main.c
+</code></pre><p>Lệnh trên sinh ra file <code>main.s</code>, thử mở file này ra chúng ta thấy đoạn code sau:</p>
+<pre><code>    .section    __TEXT,__text,regular,pure_instructions
+    .macosx_version_min 10, 12
+    .globl    _main
+    .align    4, 0x90
+_main:                                  ## @main
+    .cfi_startproc
+## BB#0:
+    pushq    %rbp
+Ltmp0:
+    .cfi_def_cfa_offset 16
+Ltmp1:
+    .cfi_offset %rbp, -16
+    movq    %rsp, %rbp
+Ltmp2:
+    .cfi_def_cfa_register %rbp
+    movl    $0, -4(%rbp)
+    movl    $10, -8(%rbp)
+    movl    $0, -12(%rbp)
+LBB0_1:                                 ## =&gt;This Inner Loop Header: Depth=1
+    cmpl    $10, -12(%rbp)
+    jge    LBB0_4
+## BB#2:                                ##   in Loop: Header=BB0_1 Depth=1
+    movl    -8(%rbp), %eax
+    addl    $1, %eax
+    movl    %eax, -8(%rbp)
+## BB#3:                                ##   in Loop: Header=BB0_1 Depth=1
+    movl    -12(%rbp), %eax
+    addl    $1, %eax
+    movl    %eax, -12(%rbp)
+    jmp    LBB0_1
+LBB0_4:
+    movl    -8(%rbp), %eax
+    popq    %rbp
+    retq
+    .cfi_endproc
+
+
+.subsections_via_symbols
+</code></pre><p>Khá phức tạp, chúng ta chỉ cần quan tâm tới phần nôi dung chính, là:</p>
+<pre><code>LBB0_1:                                 ## =&gt;This Inner Loop Header: Depth=1
+    cmpl    $10, -12(%rbp)
+    jge    LBB0_4
+</code></pre><p>Khởi tạo một vòng lặp, gọi là <code>LBB0_1</code>, chạy <code>10</code> </p>
+<h2 id="bb-2-in-loop-header-bb0_1-depth-1">BB#2:                                ##   in Loop: Header=BB0_1 Depth=1</h2>
+<pre><code>movl    -8(%rbp), %eax
+addl    $1, %eax
+movl    %eax, -8(%rbp)
+</code></pre><h2 id="bb-3-in-loop-header-bb0_1-depth-1">BB#3:                                ##   in Loop: Header=BB0_1 Depth=1</h2>
+<pre><code>movl    -12(%rbp), %eax
+addl    $1, %eax
+movl    %eax, -12(%rbp)
+jmp    LBB0_1
+</code></pre><p>LBB0_4:
+    movl    -8(%rbp), %eax
+    popq    %rbp
+    retq
+    .cfi_endproc
+```</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/gcc-optimize.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
