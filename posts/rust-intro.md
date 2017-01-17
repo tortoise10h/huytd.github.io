@@ -1,4 +1,4 @@
-# Giới thiệu về Rust
+# Rust là gì? Có ăn được không?
 
 [Rust](https://rust-lang.vn/) (đọc là **rớt-xtờ** /rʌst/) là một ngôn ngữ lập trình hệ thống (system programming language) được quảng bá là có tốc độ cực kì nhanh, ngăn chặn được phần lớn mọi bug crash ([segfaults](https://en.m.wikipedia.org/wiki/Segmentation_fault)), ngăn chặn được [data race](http://docs.oracle.com/cd/E19205-01/820-0619/geojs/index.html), rất memory safe mà lại không cần tới garbage collector!
 
