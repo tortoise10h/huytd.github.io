@@ -2,6 +2,12 @@
 
 This is just a clipboard for myself.
 
+## Map jk as ESC in VIM
+
+```
+imap jk <ESC>
+```
+
 ## Start tmux and auto attach to any exists session
 
 Put this script to `.bash_profile` or anything equivalent:
@@ -90,4 +96,20 @@ export LESS_TERMCAP_se=$(printf '\e[0m') # leave standout mode
 export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode
 export LESS_TERMCAP_ue=$(printf '\e[0m') # leave underline mode
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;200m') # enter underline mode
+```
+
+## Color highlight for tmux window indicator
+
+In `.tmux.conf`:
+
+```
+set -g status-justify left
+set -g status-bg default
+set -g status-fg colour3
+set -g window-status-current-bg colour3
+set -g window-status-current-fg colour0
+set -g window-status-bell-style none
+set -g window-status-bell-bg colour1
+set -g window-status-bell-fg colour0
+set -g window-status-current-format "#{?window_zoomed_flag,#[bg=colour4],} #W #{?window_zoomed_flag,#[bg=colour4],}"
 ```

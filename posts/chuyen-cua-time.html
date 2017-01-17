@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Random Notes | Huy's Blog</title>
+        <title> Chuyện của &lt;time&gt; | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -20,67 +20,23 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="random-notes">Random Notes</h1>
-<p>This is just a clipboard for myself.</p>
-<h2 id="map-jk-as-esc-in-vim">Map jk as ESC in VIM</h2>
-<pre><code>imap jk &lt;ESC&gt;
-</code></pre><h2 id="start-tmux-and-auto-attach-to-any-exists-session">Start tmux and auto attach to any exists session</h2>
-<p>Put this script to <code>.bash_profile</code> or anything equivalent:</p>
-<pre><code>if [ -z &quot;$TMUX&quot; ]; then
-  tmux a || tmux new
-fi
-</code></pre><h2 id="use-the-same-clipboard-for-tmux-and-vim">Use the same clipboard for tmux and vim</h2>
-<p>Install <code>reattach-to-user-namespace</code> with <code>brew</code>:</p>
-<pre><code>brew install reattach-to-user-namespace
-</code></pre><p>Put this config to <code>.tmux.conf</code>:</p>
-<pre><code>set-option -g default-command &quot;reattach-to-user-namespace -l zsh&quot;
-setw -g mode-keys vi
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe &quot;reattach-to-user-namespace pbcopy&quot;
-unbind -t vi-copy Enter
-bind-key -t vi-copy Enter copy-pipe &quot;reattach-to-user-namespace pbcopy&quot;
-bind ] run &quot;reattach-to-user-namespace pbpaste | tmux load-buffer - &amp;&amp; tmux paste-buffer&quot;
-</code></pre><p>Set VIM&#39;s clipboard to <code>unamed</code> in <code>.vimrc</code>:</p>
-<pre><code>set clipboard=unnamed
-</code></pre><h2 id="use-fzf-with-ripgrep-in-vim">Use fzf with ripgrep in Vim</h2>
-<p>In case you don&#39;t have <code>fzf</code>, install it with:</p>
-<pre><code>Plug &#39;junegunn/fzf&#39;, { &#39;dir&#39;: &#39;~/.fzf&#39;, &#39;do&#39;: &#39;./install --bin&#39; }
-Plug &#39;junegunn/fzf.vim&#39;
-</code></pre><p>In <code>.vimrc</code>, put this:</p>
-<pre><code>let $FZF_DEFAULT_COMMAND=&#39;rg --files --no-ignore --hidden --follow --glob &quot;!.git/*&quot;&#39;
-let $FZF_DEFAULT_OPTS = &#39;-m --bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all&#39;
-</code></pre><p>And bind the <code>\</code> key with <code>ripgrep</code> search command:</p>
-<pre><code>command! -bang -nargs=* Find call fzf#vim#grep(&#39;rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob &quot;!.git/*&quot; --color &quot;always&quot; &#39;.shellescape(&lt;q-args&gt;).&#39;| tr -d &quot;\017&quot;&#39;, 1, &lt;bang&gt;0)
-set grepprg=rg\ --vimgrep
-nnoremap \ :Find&lt;SPACE&gt;
-</code></pre><p>This also force <code>ripgrep</code> to respect the <code>.gitignore</code>.</p>
-<h2 id="clear-cache-files-when-terminal-starts-slow">Clear cache files when terminal starts slow</h2>
-<p>Put this alias to <code>.bash_profile</code>:</p>
-<pre><code>alias slow=&quot;sudo rm /private/var/log/asl/*.asl&quot;
-</code></pre><p>Whenever it slow, just type:</p>
-<pre><code>slow
-</code></pre><h2 id="add-some-color-to-man-page">Add some color to man page</h2>
-<p>Add these lines to <code>.bash_profile</code>:</p>
-<pre><code>export LESS_TERMCAP_mb=$(printf &#39;\e[01;31m&#39;) # enter blinking mode
-export LESS_TERMCAP_md=$(printf &#39;\e[01;38;5;75m&#39;) # enter double-bright mode
-export LESS_TERMCAP_me=$(printf &#39;\e[0m&#39;) # turn off all appearance modes (mb, md, so, us)
-export LESS_TERMCAP_se=$(printf &#39;\e[0m&#39;) # leave standout mode
-export LESS_TERMCAP_so=$(printf &#39;\e[01;33m&#39;) # enter standout mode
-export LESS_TERMCAP_ue=$(printf &#39;\e[0m&#39;) # leave underline mode
-export LESS_TERMCAP_us=$(printf &#39;\e[04;38;5;200m&#39;) # enter underline mode
-</code></pre><h2 id="color-highlight-for-tmux-window-indicator">Color highlight for tmux window indicator</h2>
-<p>In <code>.tmux.conf</code>:</p>
-<pre><code>set -g status-justify left
-set -g status-bg default
-set -g status-fg colour3
-set -g window-status-current-bg colour3
-set -g window-status-current-fg colour0
-set -g window-status-bell-style none
-set -g window-status-bell-bg colour1
-set -g window-status-bell-fg colour0
-set -g window-status-current-format &quot;#{?window_zoomed_flag,#[bg=colour4],} #W #{?window_zoomed_flag,#[bg=colour4],}&quot;
-</code></pre>
-                <div class="fb-like" data-href="http://huytd.github.io/posts/random.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <h1 id="chuy-n-c-a-lt-time-gt-">Chuyện của &lt;time&gt;</h1>
+<p>Hôm nay tình cờ thấy trong code có một thẻ HTML cực kì &quot;vô dụng&quot; đó là thẻ <code>&lt;time&gt;</code>, ban đầu cứ nghĩ là directive nào đó của Angular nữa mới ghê chớ.</p>
+<p>Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft
+Draft</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/chuyen-cua-time.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**

@@ -32,14 +32,91 @@ Rust là giải pháp kết hợp cho ưu điểm của cả 2 loại ngôn ng�
 
 ## Rust nhanh tới mức nào?
 
-OK. Đầu tiên phải nói ngay là Rust không phải ngôn ngữ lập trình nhanh nhất, không có cái nào như thế cả.
+OK. Đầu tiên phải nói ngay là Rust không phải ngôn ngữ lập trình nhanh nhất, trong số các ngôn ngữ lập trình bậc cao (high level programming language), không có cái nào như thế cả.
 
-Cũng giống như C hay Go (và khác với Ruby, NodeJS hay Python,...), một chương trình Rust sẽ được compile trực tiếp ra file binary để chạy.
+Vậy **ngôn ngữ nào mới là nhanh nhất?** và **vì sao nó nhanh?**
 
-![](img/rustconf-2016-illustrated-adventure-guide-33-638.jpg)
-<center style="font-size: 0.7em;">Ảnh lấy từ: [http://www.slideshare.net/LizBaillie/rustconf-2016-illustrated-adventure-guide-65894363](http://www.slideshare.net/LizBaillie/rustconf-2016-illustrated-adventure-guide-65894363)</center>
+Kẻ đạt danh hiệu đó chắc phải nói đến Assembly, đó là nơi bạn toàn quyền kiểm soát một biến được tạo ra ở đâu, khi nào. Thích tạo ra trong stack hay trong heap là tùy bạn. Bạn được quyền cấp phát từng ô nhớ cũng như giải phóng chúng bất cứ lúc nào bạn cần. 
 
-Ưu điểm của việc này đó là tốc độ thực thi nhanh chóng, vì được thực thi trực tiếp bởi máy tính chứ không phải trình thông dịch (interpreter) hay JIT (Just-In-Time) execution (như Java hay C#).
+### Mà khoan đã! Khả năng kiểm soát liên quan gì tới tốc độ?
+
+Trong Assembly, mỗi instruction (lệnh) được viết ra đều được map chính xác với binary code/machine opcode mà từng loại CPU cung cấp (_"close to the metal"_). 
+
+![](img/machine-code.png)
+
+Khi làm việc với Assembly, bạn phải nắm được **tập lệnh** (instruction set) của loại CPU mà bạn đang làm việc - **và với mỗi loại CPU khác nhau thì lại có một tập lệnh khác nhau** - và nó một loại cú pháp hết sức gần gũi với máy tính (nhưng xa lạ với con người :)))
+
+![](img/assembly-map.png)
+
+C ra đời để khắc phục nhược điểm này của Assembly, đưa sức mạnh kiểm soát của Assembly vào chung với cú pháp thân thiện hơn với các lập trình viên. 
+
+Bằng cách lượt bỏ hết những dòng lệnh phức tạp của mã máy, C thay thế bằng các câu lệnh đơn giản hơn (syntax sugar). Ví dụ:
+
+```
+	.section	__TEXT,__text,regular,pure_instructions
+	.macosx_version_min 10, 12
+	.globl	_main
+	.align	4, 0x90
+_main:                                  ## @main
+	.cfi_startproc
+## BB#0:
+	pushq	%rbp
+Ltmp0:
+	.cfi_def_cfa_offset 16
+Ltmp1:
+	.cfi_offset %rbp, -16
+	movq	%rsp, %rbp
+Ltmp2:
+	.cfi_def_cfa_register %rbp
+	xorl	%eax, %eax
+	movl	$100, -4(%rbp)
+	popq	%rbp
+	retq
+	.cfi_endproc
+
+
+.subsections_via_symbols
+```
+
+Đoạn mã Assembly trên là những gì sẽ được compiler dịch ra cho đoạn chương trình C sau:
+
+```
+int main() {
+  int number = 100;
+}
+```
+
+Chỉ với 3 dòng code C (mid level language), bạn sẽ không còn phải vật vã viết từng lệnh để cấp phát bộ nhớ, move giá trị vào từng ô nhớ, giải phóng nó khi kết thúc chương trình trong Assembly nữa. Vì C đã đơn giản hóa vấn đề bằng cách "giấu" đi tất cả những thao tác đó và đưa ra cho bạn một cú pháp vô cùng đơn giản là `int number = 100;`.
+
+Việc "giấu" bớt các thao tác rườm rà và cung cấp một phương pháp đơn giản hơn để thực hiện một vấn đề được gọi là **abstraction**, và điều này diễn ra càng nhiều hơn ở các ngôn ngữ lập trình bậc cao như C#, Java, Ruby, JavaScript, Python,... 
+
+![](img/c-programmer.png)
+
+Lợi thế của **abstraction** đó là giúp cho lập trình viên rảnh tay để còn tập trung vào những thứ khác quan trọng hơn như code logic, business của chương trình. Nhưng thực chất thì các thao tác phức tạp bên dưới vẫn phải được thực hiện, và compiler của từng ngôn ngữ sẽ có nhiệm vụ "viết" các đoạn code đó ra thay cho bạn. Kết quả là gì? 
+
+Như đã nói ở trên thì mỗi nền tảng phần cứng lại có một tập lệnh khác nhau, vậy nên phần code được compiler "thêm" vào phải được viết theo một cách không thể phụ thuộc vào từng loại phần cứng cụ thể. Ví dụ nó không thể chắc chắn được phải truy cập vào đâu để lấy thông tin về chuột/bàn phím, thế là nó phải tốn thêm một bước đó là: _Hỏi máy tính xem con chuột nó nằm ở đâu để truy vấn tới._ Và thế là, thay vì chỉ làm mỗi nhiệm vụ _đọc xem nút nào trên con chuột vừa được nhấn xuống_, nó phải làm thêm một vài việc nữa như là _chạy tới hỏi anh kernel của hệ điều hành xem nhà anh chuột nằm ở đâu_, rồi _chạy qua nhà anh chuột gõ cửa xem ảnh có nhà không_,... và những việc lôi thôi đó tốn thêm một ít thời gian nữa.
+
+![](img/rubymotion-factory.gif)
+
+Những gì ở bên dưới thì bạn sẽ không thể kiểm soát hay can thiệp vào để tối ưu hóa nó được, ví dụ: Bạn không bao giờ có thể chủ động giải phóng một vùng nhớ khi dùng Garbage Collector, bạn không thể yêu cầu JavaScript tạo ra một biến nằm trong stack hay heap theo ý bạn được,... và bạn phải chấp nhận với cái cách nó đốt thời gian như là một sự thật hiển nhiên.
+
+Đánh đổi **tốc độ**, gia tăng các lớp **abstraction**, giúp cho lập trình viên có thể viết code một cách thoải mái hơn, xây dựng sản phẩm nhanh hơn. Đó là bản chất xấu xa của các high level programming languages :)) 
+
+### Zero-cost Abstraction
+
+Cũng giống như C/C++, bên cạnh khả năng kiểm soát gần như tuyệt đối (vâng, Rust cũng có thể cho bạn kiểm soát đến từng ô nhớ!), Rust chọn **zero-cost abstraction** làm một trong những nguyên tắc nền tảng của nó. 
+
+> C++ implementations obey the zero-overhead principle: What you don't use, you don't pay for [Stroustrup, 1994]. And further: What you do use, you couldn't hand code any better.
+>
+> – Stroustrup
+
+![](img/assembly-code-image.png)
+
+Rust design ra các abstraction dễ dùng, nhưng được compile về machine code một cách rất hiệu quả và không làm ảnh hưởng đến tốc độ của toàn chương trình, các high-level API được compile về machine code một cách ít nhất và tối ưu nhất (you pay for the features you actually use).
+
+Ngoài ra Rust còn giới thiệu khái niệm [Traits](https://blog.rust-lang.org/2015/05/11/traits.html) giúp bạn được làm việc giống như trên các ngôn ngữ lập trình bậc cao nhưng vẫn đảm bảo được khả năng kiểm soát code và tài nguyên như các ngôn ngữ lập trình bậc thấp!
+
+### Tốc độ của Rust
 
 Khi so sánh với các ngôn ngữ khác, thực sự thì đây là một việc không cần thiết, nhưng chúng ta có thể tham khảo, bảng so sánh tốc độ thực thi [tính tổng dãy số Fibonacci](https://huytd.github.io/posts/fibonacci-4m.html) giữa các ngôn ngữ Rust, Go, NodeJS và Swift:
 
