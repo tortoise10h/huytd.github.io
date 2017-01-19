@@ -36,7 +36,7 @@ OK. Đầu tiên phải nói ngay là Rust không phải ngôn ngữ lập trìn
 
 Vậy **ngôn ngữ nào mới là nhanh nhất?** và **vì sao nó nhanh?**
 
-Kẻ đạt danh hiệu đó chắc phải nói đến Assembly, đó là nơi bạn toàn quyền kiểm soát một biến được tạo ra ở đâu, khi nào. Thích tạo ra trong stack hay trong heap là tùy bạn. Bạn được quyền cấp phát từng ô nhớ cũng như giải phóng chúng bất cứ lúc nào bạn cần. 
+Kẻ đạt danh hiệu đó chắc phải nói đến Assembly, đó là nơi bạn toàn quyền kiểm soát một biến được tạo ra ở đâu, khi nào. Thích tạo ra trong stack hay trong heap là tùy bạn. Bạn được toàn quyền với bộ nhớ, vì bộ nhớ là của nó luôn, thích xài lúc nào là xài.
 
 ### Mà khoan đã! Khả năng kiểm soát liên quan gì tới tốc độ?
 
