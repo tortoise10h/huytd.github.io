@@ -152,6 +152,17 @@ OK, vậy nãy giờ đọc mấy cái này để làm gì ta?
 
 Quay lại bài toán John's PIN, rõ ràng một cách đơn giản nhất để vị giáo sư có thể tìm ra được mã PIN là bruteforce, thử tất cả mọi phân số có dạng $\frac{abc}{def}$, tuy nhiên bruteforce là giải pháp tệ nhất, đơn giản vì không biết nó chạy đến khi nào mới xong.
 
+Vì vậy chúng ta sẽ giải bài toán này theo cách khác.
+
+Trước hết, chúng ta có thể đồng ý rằng, **nếu $\frac{p}{q}$ và $\frac{r}{s}$ là hai phân số có tử số, mẫu số đều là các số có 3 chữ số, và giống nhau ít nhất đến chữ số thứ 6 sau dấu phẩy** thì $\bigg| \frac{p}{q} - \frac{r}{s} \bigg| < 10^{-6}$. Từ đó suy ra:
+
+<math>
+|ps - qr| \leqslant qs \cdot 10^{-6} < 10^3 \cdot 10^3 \cdot 10^{-6} = 1
+</math>
+
+Vì $p, s, q, r$ là các số nguyên và $0 \leqslant |ps - qr| < 1|$, từ đó suy ra $ps - qr = 0$. Điều này tương đương với $\frac{p}{q} = \frac{r}{s}$.
+
+
 ## Tham khảo 
 
 [1] Nguyễn Hùng Sơn, _"Thuật toán phục hồi số hữu tỉ"_, [Epsilon số 1](https://www.dropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdf?dl=0) (2015), pp. 21-30.

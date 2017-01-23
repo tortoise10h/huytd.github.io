@@ -237,6 +237,13 @@ $</pre>
 </code></pre><p>OK, vậy nãy giờ đọc mấy cái này để làm gì ta?</p>
 <h3 id="ph-c-h-i-s-h-u-t-">Phục hồi số hữu tỉ</h3>
 <p>Quay lại bài toán John&#39;s PIN, rõ ràng một cách đơn giản nhất để vị giáo sư có thể tìm ra được mã PIN là bruteforce, thử tất cả mọi phân số có dạng $\frac{abc}{def}$, tuy nhiên bruteforce là giải pháp tệ nhất, đơn giản vì không biết nó chạy đến khi nào mới xong.</p>
+<p>Vì vậy chúng ta sẽ giải bài toán này theo cách khác.</p>
+<p>Trước hết, chúng ta có thể đồng ý rằng, <strong>nếu $\frac{p}{q}$ và $\frac{r}{s}$ là hai phân số có tử số, mẫu số đều là các số có 3 chữ số, và giống nhau ít nhất đến chữ số thứ 6 sau dấu phẩy</strong> thì $\bigg| \frac{p}{q} - \frac{r}{s} \bigg| &lt; 10^{-6}$. Từ đó suy ra:</p>
+<pre class="math">$
+|ps - qr| \leqslant qs \cdot 10^{-6} < 10^3 \cdot 10^3 \cdot 10^{-6} = 1
+$</pre>
+
+<p>Vì $p, s, q, r$ là các số nguyên và $0 \leqslant |ps - qr| &lt; 1|$, từ đó suy ra $ps - qr = 0$. Điều này tương đương với $\frac{p}{q} = \frac{r}{s}$.</p>
 <h2 id="tham-kh-o">Tham khảo</h2>
 <p>[1] Nguyễn Hùng Sơn, <em>&quot;Thuật toán phục hồi số hữu tỉ&quot;</em>, <a href="https://www.dropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdf?dl=0">Epsilon số 1</a> (2015), pp. 21-30.</p>
 <p>[2] Miguel A. Lerma, <em>&quot;John&#39;s PIN&quot;</em>, <a href="http://www.math.northwestern.edu/~mlerma/problem_solving/">Northwestern University Math Problem Solving Group</a> (2003)</p>
