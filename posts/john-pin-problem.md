@@ -1,6 +1,6 @@
 # Thuật toán phục hồi số hữu tỉ và bài toán John's PIN
 
-Hôm qua đọc blog của giáo sư Ngô Bảo Châu, thấy có giới thiệu về [tạp chí Pi](http://pi.edu.vn/) và [tạp chí Epsilon](http://diendantoanhoc.net/forum/488-t%E1%BA%A1p-ch%C3%AD-epsilon/), dù ghét học toán nhưng mình rất có hứng với mấy bài toán mang tính thực dụng một tí (bạn bè mình thì toàn bảo là: _"Mày thì cái gì không thích =)))"_), nên rất là ấn tượng khi thấy trong cuốn [Epsilon số đầu tiên](https://www.dropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdf?dl=0) có ngay một bài toán rất là thú vị và rất thực tế, đó là bài **Thuật toán phục hồi số hữu tỉ** do giáo sư Nguyễn Hùng Sơn viết.
+Hôm qua đọc blog của giáo sư Ngô Bảo Châu, thấy có giới thiệu về [tạp chí Pi](http://pi.edu.vn/) và [tạp chí Epsilon](http://diendantoanhoc.net/forum/488-t%E1%BA%A1p-ch%C3%AD-epsilon/), dù ghét học toán nhưng mình rất có hứng với mấy bài toán mang tính thực dụng một tí (bạn bè mình thì toàn bảo là: _"Mày thì cái gì không thích =)))"_), nên rất là ấn tượng khi thấy trong cuốn [Epsilon số đầu tiên](https://www.Numbersdropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdfNumbers?dl=0) có ngay một bài toán rất là thú vị và rất thực tế, đó là bài **Thuật toán phục hồi số hữu tỉ** do giáo sư Nguyễn Hùng Sơn viết.
 
 ## Bài toán John's PIN
 
@@ -76,10 +76,11 @@ Liên phân số trên được kí hiệu là `$[a_0 ; a_1, a_2, \cdots, a_{n-1
 
 #### Biểu diễn số hữu tỉ bằng liên phân số 
 
-Như ta đã biết, mọi số hữu tỉ đều có thể được viết dưới dạng phân số `$\frac{a}{b}$` trong đó `$a \in \mathbb{Z}$` là số nguyên, còn `$b \in \mathbb{N} - \{ 0 \}$` là số nguyên dương.
+Mọi số hữu tỉ đều có thể được viết dưới dạng $\frac{a}{b}$ trong đó $a \in \mathbb{Z}$ là số nguyên còn $b \in \mathbb{N}^+$ là số nguyên dương.
 
-Một phân số có thể được chuyển thành liên phân số bằng cách lặp đi lặp lại 2 bước sau: 
-- **Bước 1:** Tách ra phần nguyên
+Một phân số có thể chuyển thành liên phân số theo phương pháp lặp đi lặp lại 2  bước sau:
+
+- **Bước 1:** Tách phần nguyên
 - **Bước 2:** Nghịch đảo phần phân số 
 
 **Ví dụ:** Chuyển phân số $\frac{1517}{1073}$ thành liên phân số:
@@ -131,7 +132,9 @@ Có một sự liên quan thú vị giữa thuật toán Euclid và phương ph�
 | 5    | 74    | 37    | 2     | 0      |   -    |
 | 6    | 37    | `0`   | -     | -      |**`37`**|
 
-Nhìn vào bảng trên ta có thể thấy ngay luôn, cột **a / b** của thuật toán Euclid chính là liên phân số $[1; 2, 2, 2, 2]$ mà chúng ta cần tìm. Vì thế, ta có thể dễ dàng implement thuật toán **tìm liên phân số** bằng cách áp dụng thuật toán Euclid nhưng ở mỗi bước, thì ta viết ra giá trị của **a / b**:
+Nhìn vào bảng trên ta có thể thấy ngay luôn, cột **a / b** của thuật toán Euclid chính là liên phân số $[1; 2, 2, 2, 2]$ mà chúng ta cần tìm. Vì thế, ta có thể dễ dàng implement thuật toán **tìm liên phân số** bằng cách áp dụng thuật toán Euclid nhưng ở mỗi bước, thì ta viết ra giá trị của **a / b**.
+
+Ví dụ, implement của thuật toán **tìm liên phân số cho phân số $\frac{a}{b}$**:
 
 ```
 std::vector<int> lien_phan_so(int a, int b) {
@@ -150,18 +153,64 @@ OK, vậy nãy giờ đọc mấy cái này để làm gì ta?
 
 ### Phục hồi số hữu tỉ
 
-Quay lại bài toán John's PIN, rõ ràng một cách đơn giản nhất để vị giáo sư có thể tìm ra được mã PIN là bruteforce, thử tất cả mọi phân số có dạng $\frac{abc}{def}$, tuy nhiên bruteforce là giải pháp tệ nhất, đơn giản vì không biết nó chạy đến khi nào mới xong.
-
-Vì vậy chúng ta sẽ giải bài toán này theo cách khác.
-
 Trước hết, chúng ta có thể đồng ý rằng, **nếu $\frac{p}{q}$ và $\frac{r}{s}$ là hai phân số có tử số, mẫu số đều là các số có 3 chữ số, và giống nhau ít nhất đến chữ số thứ 6 sau dấu phẩy** thì $\bigg| \frac{p}{q} - \frac{r}{s} \bigg| < 10^{-6}$. Từ đó suy ra:
 
 <math>
 |ps - qr| \leqslant qs \cdot 10^{-6} < 10^3 \cdot 10^3 \cdot 10^{-6} = 1
 </math>
 
-Vì $p, s, q, r$ là các số nguyên và $0 \leqslant |ps - qr| < 1|$, từ đó suy ra $ps - qr = 0$. Điều này tương đương với $\frac{p}{q} = \frac{r}{s}$.
+Vì $p, s, q, r$ là các số nguyên và $0 \leqslant |ps - qr| < 1|$, từ đó suy ra: 
 
+<math>
+\begin{aligned}
+ps - qr &= 0 \\
+\\
+\Rightarrow \displaystyle \frac{p}{q} &= \displaystyle \frac{r}{s}
+\end{aligned}
+\tag{4}
+</math>
+
+Quay lại bài toán John's PIN, rõ ràng một cách đơn giản nhất để vị giáo sư có thể tìm ra được mã PIN là bruteforce, thử tất cả mọi phân số có dạng $\frac{abc}{def}$, tuy nhiên bruteforce là giải pháp tệ nhất, đơn giản vì không biết nó chạy đến khi nào mới xong.
+
+Vì vậy chúng ta sẽ giải bài toán này theo cách khác hiệu quả hơn đó là khai triển mã PIN (tạm gọi là $r$) cần tìm thành dạng liên phân số:
+
+<math>
+r = [a_0; a_1, a_2, a_3, \cdots] = a_0 + \displaystyle \frac{1}{
+                                   a_1 + \displaystyle \frac{1}{
+                                   a_2 + \displaystyle \frac{1}{
+                                   a_3 + \cdots }}}
+</math>
+
+Với mỗi phần tử $a_k$ là mỗi số nguyên và được tính bằng thuật toán Euclid chuyển số thực thành liên phân số:
+
+<math>
+r_0 = r \text{,  } a_n = \lfloor r_n \rfloor \text{,  } r_{n+1} = \displaystyle \frac{1}{r_n - a_n} \tag{5}
+</math>
+
+Vì số hữu tỉ luôn chuyển được về dạng liên phân số hữu hạn, nên cuối cùng ta sẽ có $a_n = r_n$, tại lúc đó ta sẽ dừng tính toán và thu thập kết quả. Trong một số trường hợp do bị làm tròn số, kết quả $r_n - a_n$ có thể không chính xác bằng 0 được, nhưng ta có thể biết khi nào thì giá trị này đủ nhỏ để có thể dừng tính toán.
+
+Đối với $r$ = 0.195323246, ta sẽ tính được các giá trị $a_0$ = 0, $a_1$ = 5, $a_2$ = 8, $a_3$ = 2, $a_4$ = 1, $a_5$ = 5, lúc này, kết quả $r_5 - a_5$ = 0.00011475..., đã là đủ nhỏ để có thể dừng tính toán, nên ta sẽ thu được kết quả:
+
+<math>
+r = [0; 5, 8, 2, 1, 5] = \displaystyle \frac{1}{
+                     5 + \displaystyle \frac{1}{
+                     8 + \displaystyle \frac{1}{
+                     2 + \displaystyle \frac{1}{
+                     1 + \displaystyle \frac{1}{5} }}}} = \displaystyle \frac{142}{727}
+</math>
+
+Cuối cùng, chúng ta kiểm chứng kết quả thu được cho thấy kết quả gần chính xác:
+
+<math>
+\displaystyle \frac{142}{727} = 0.195323246\cdots
+</math>
+
+Dựa vào điều $(4)$ đã chứng minh ở trên, chúng ta có thể kết luận $\frac{142}{727}$ chính là $\frac{abc}{def}$ và mã PIN cần tìm chính là **`142727`**.
+
+## Một số điểm cần bổ sung 
+
+- Tìm thêm thông tin cho thuật toán Euclid $(5)$ dùng để chuyển một số thực thành liên phân số.
+- Implement thuật toán $(5)$
 
 ## Tham khảo 
 

@@ -22,7 +22,7 @@
         <div class="container">
             <div class="main">
                 <h1 id="thu-t-to-n-ph-c-h-i-s-h-u-t-v-b-i-to-n-john-s-pin">Thuật toán phục hồi số hữu tỉ và bài toán John&#39;s PIN</h1>
-<p>Hôm qua đọc blog của giáo sư Ngô Bảo Châu, thấy có giới thiệu về <a href="http://pi.edu.vn/">tạp chí Pi</a> và <a href="http://diendantoanhoc.net/forum/488-t%E1%BA%A1p-ch%C3%AD-epsilon/">tạp chí Epsilon</a>, dù ghét học toán nhưng mình rất có hứng với mấy bài toán mang tính thực dụng một tí (bạn bè mình thì toàn bảo là: <em>&quot;Mày thì cái gì không thích =)))&quot;</em>), nên rất là ấn tượng khi thấy trong cuốn <a href="https://www.dropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdf?dl=0">Epsilon số đầu tiên</a> có ngay một bài toán rất là thú vị và rất thực tế, đó là bài <strong>Thuật toán phục hồi số hữu tỉ</strong> do giáo sư Nguyễn Hùng Sơn viết.</p>
+<p>Hôm qua đọc blog của giáo sư Ngô Bảo Châu, thấy có giới thiệu về <a href="http://pi.edu.vn/">tạp chí Pi</a> và <a href="http://diendantoanhoc.net/forum/488-t%E1%BA%A1p-ch%C3%AD-epsilon/">tạp chí Epsilon</a>, dù ghét học toán nhưng mình rất có hứng với mấy bài toán mang tính thực dụng một tí (bạn bè mình thì toàn bảo là: <em>&quot;Mày thì cái gì không thích =)))&quot;</em>), nên rất là ấn tượng khi thấy trong cuốn <a href="https://www.Numbersdropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdfNumbers?dl=0">Epsilon số đầu tiên</a> có ngay một bài toán rất là thú vị và rất thực tế, đó là bài <strong>Thuật toán phục hồi số hữu tỉ</strong> do giáo sư Nguyễn Hùng Sơn viết.</p>
 <h2 id="b-i-to-n-john-s-pin">Bài toán John&#39;s PIN</h2>
 <p>Bài toán được đăng trong cuốn tạp chí như sau:</p>
 <div class="box-white" style="padding: 10px;">
@@ -123,10 +123,10 @@ $</pre>
 <p>Trong đó $a_0 \in \mathbb{Z}$ và $a_1, \cdots, a_n$ là các số nguyên dương, $a_n &gt; 1$.</p>
 <p>Liên phân số trên được kí hiệu là <code>$[a_0 ; a_1, a_2, \cdots, a_{n-1}, a_n]$</code> hoặc <code>$[a_0 ; a_1, a_2, \cdots, a_{n-1}, a_n - 1, 1]$</code> trong đó <code>$n$</code> chính là độ dài của liên phân số.</p>
 <h4 id="bi-u-di-n-s-h-u-t-b-ng-li-n-ph-n-s-">Biểu diễn số hữu tỉ bằng liên phân số</h4>
-<p>Như ta đã biết, mọi số hữu tỉ đều có thể được viết dưới dạng phân số <code>$\frac{a}{b}$</code> trong đó <code>$a \in \mathbb{Z}$</code> là số nguyên, còn <code>$b \in \mathbb{N} - \{ 0 \}$</code> là số nguyên dương.</p>
-<p>Một phân số có thể được chuyển thành liên phân số bằng cách lặp đi lặp lại 2 bước sau: </p>
+<p>Mọi số hữu tỉ đều có thể được viết dưới dạng $\frac{a}{b}$ trong đó $a \in \mathbb{Z}$ là số nguyên còn $b \in \mathbb{N}^+$ là số nguyên dương.</p>
+<p>Một phân số có thể chuyển thành liên phân số theo phương pháp lặp đi lặp lại 2  bước sau:</p>
 <ul>
-<li><strong>Bước 1:</strong> Tách ra phần nguyên</li>
+<li><strong>Bước 1:</strong> Tách phần nguyên</li>
 <li><strong>Bước 2:</strong> Nghịch đảo phần phân số </li>
 </ul>
 <p><strong>Ví dụ:</strong> Chuyển phân số $\frac{1517}{1073}$ thành liên phân số:</p>
@@ -223,7 +223,8 @@ $</pre>
 </tr>
 </tbody>
 </table>
-<p>Nhìn vào bảng trên ta có thể thấy ngay luôn, cột <strong>a / b</strong> của thuật toán Euclid chính là liên phân số $[1; 2, 2, 2, 2]$ mà chúng ta cần tìm. Vì thế, ta có thể dễ dàng implement thuật toán <strong>tìm liên phân số</strong> bằng cách áp dụng thuật toán Euclid nhưng ở mỗi bước, thì ta viết ra giá trị của <strong>a / b</strong>:</p>
+<p>Nhìn vào bảng trên ta có thể thấy ngay luôn, cột <strong>a / b</strong> của thuật toán Euclid chính là liên phân số $[1; 2, 2, 2, 2]$ mà chúng ta cần tìm. Vì thế, ta có thể dễ dàng implement thuật toán <strong>tìm liên phân số</strong> bằng cách áp dụng thuật toán Euclid nhưng ở mỗi bước, thì ta viết ra giá trị của <strong>a / b</strong>.</p>
+<p>Ví dụ, implement của thuật toán <strong>tìm liên phân số cho phân số $\frac{a}{b}$</strong>:</p>
 <pre><code>std::vector&lt;int&gt; lien_phan_so(int a, int b) {
   std::vector&lt;int&gt; result;
   int r;
@@ -236,14 +237,56 @@ $</pre>
 }
 </code></pre><p>OK, vậy nãy giờ đọc mấy cái này để làm gì ta?</p>
 <h3 id="ph-c-h-i-s-h-u-t-">Phục hồi số hữu tỉ</h3>
-<p>Quay lại bài toán John&#39;s PIN, rõ ràng một cách đơn giản nhất để vị giáo sư có thể tìm ra được mã PIN là bruteforce, thử tất cả mọi phân số có dạng $\frac{abc}{def}$, tuy nhiên bruteforce là giải pháp tệ nhất, đơn giản vì không biết nó chạy đến khi nào mới xong.</p>
-<p>Vì vậy chúng ta sẽ giải bài toán này theo cách khác.</p>
 <p>Trước hết, chúng ta có thể đồng ý rằng, <strong>nếu $\frac{p}{q}$ và $\frac{r}{s}$ là hai phân số có tử số, mẫu số đều là các số có 3 chữ số, và giống nhau ít nhất đến chữ số thứ 6 sau dấu phẩy</strong> thì $\bigg| \frac{p}{q} - \frac{r}{s} \bigg| &lt; 10^{-6}$. Từ đó suy ra:</p>
 <pre class="math">$
 |ps - qr| \leqslant qs \cdot 10^{-6} < 10^3 \cdot 10^3 \cdot 10^{-6} = 1
 $</pre>
 
-<p>Vì $p, s, q, r$ là các số nguyên và $0 \leqslant |ps - qr| &lt; 1|$, từ đó suy ra $ps - qr = 0$. Điều này tương đương với $\frac{p}{q} = \frac{r}{s}$.</p>
+<p>Vì $p, s, q, r$ là các số nguyên và $0 \leqslant |ps - qr| &lt; 1|$, từ đó suy ra: </p>
+<pre class="math">$
+\begin{aligned}
+ps - qr &= 0 \\
+\\
+\Rightarrow \displaystyle \frac{p}{q} &= \displaystyle \frac{r}{s}
+\end{aligned}
+\tag{4}
+$</pre>
+
+<p>Quay lại bài toán John&#39;s PIN, rõ ràng một cách đơn giản nhất để vị giáo sư có thể tìm ra được mã PIN là bruteforce, thử tất cả mọi phân số có dạng $\frac{abc}{def}$, tuy nhiên bruteforce là giải pháp tệ nhất, đơn giản vì không biết nó chạy đến khi nào mới xong.</p>
+<p>Vì vậy chúng ta sẽ giải bài toán này theo cách khác hiệu quả hơn đó là khai triển mã PIN (tạm gọi là $r$) cần tìm thành dạng liên phân số:</p>
+<pre class="math">$
+r = [a_0; a_1, a_2, a_3, \cdots] = a_0 + \displaystyle \frac{1}{
+                                   a_1 + \displaystyle \frac{1}{
+                                   a_2 + \displaystyle \frac{1}{
+                                   a_3 + \cdots }}}
+$</pre>
+
+<p>Với mỗi phần tử $a_k$ là mỗi số nguyên và được tính bằng thuật toán Euclid chuyển số thực thành liên phân số:</p>
+<pre class="math">$
+r_0 = r \text{,  } a_n = \lfloor r_n \rfloor \text{,  } r_{n+1} = \displaystyle \frac{1}{r_n - a_n} \tag{5}
+$</pre>
+
+<p>Vì số hữu tỉ luôn chuyển được về dạng liên phân số hữu hạn, nên cuối cùng ta sẽ có $a_n = r_n$, tại lúc đó ta sẽ dừng tính toán và thu thập kết quả. Trong một số trường hợp do bị làm tròn số, kết quả $r_n - a_n$ có thể không chính xác bằng 0 được, nhưng ta có thể biết khi nào thì giá trị này đủ nhỏ để có thể dừng tính toán.</p>
+<p>Đối với $r$ = 0.195323246, ta sẽ tính được các giá trị $a_0$ = 0, $a_1$ = 5, $a_2$ = 8, $a_3$ = 2, $a_4$ = 1, $a_5$ = 5, lúc này, kết quả $r_5 - a_5$ = 0.00011475..., đã là đủ nhỏ để có thể dừng tính toán, nên ta sẽ thu được kết quả:</p>
+<pre class="math">$
+r = [0; 5, 8, 2, 1, 5] = \displaystyle \frac{1}{
+                     5 + \displaystyle \frac{1}{
+                     8 + \displaystyle \frac{1}{
+                     2 + \displaystyle \frac{1}{
+                     1 + \displaystyle \frac{1}{5} }}}} = \displaystyle \frac{142}{727}
+$</pre>
+
+<p>Cuối cùng, chúng ta kiểm chứng kết quả thu được cho thấy kết quả gần chính xác:</p>
+<pre class="math">$
+\displaystyle \frac{142}{727} = 0.195323246\cdots
+$</pre>
+
+<p>Dựa vào điều $(4)$ đã chứng minh ở trên, chúng ta có thể kết luận $\frac{142}{727}$ chính là $\frac{abc}{def}$ và mã PIN cần tìm chính là <strong><code>142727</code></strong>.</p>
+<h2 id="m-t-s-i-m-c-n-b-sung">Một số điểm cần bổ sung</h2>
+<ul>
+<li>Tìm thêm thông tin cho thuật toán Euclid $(5)$ dùng để chuyển một số thực thành liên phân số.</li>
+<li>Implement thuật toán $(5)$</li>
+</ul>
 <h2 id="tham-kh-o">Tham khảo</h2>
 <p>[1] Nguyễn Hùng Sơn, <em>&quot;Thuật toán phục hồi số hữu tỉ&quot;</em>, <a href="https://www.dropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdf?dl=0">Epsilon số 1</a> (2015), pp. 21-30.</p>
 <p>[2] Miguel A. Lerma, <em>&quot;John&#39;s PIN&quot;</em>, <a href="http://www.math.northwestern.edu/~mlerma/problem_solving/">Northwestern University Math Problem Solving Group</a> (2003)</p>
