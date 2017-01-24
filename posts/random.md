@@ -2,6 +2,20 @@
 
 This is just a clipboard for myself.
 
+## Save VIM session
+
+Save current split layout to `$(CWD)/.work` file:
+
+```
+nnoremap <Leader>ss :mksession .work<CR>
+```
+
+Load saved session with:
+
+```
+vim -S .work
+```
+
 ## Map jk as ESC in VIM
 
 ```

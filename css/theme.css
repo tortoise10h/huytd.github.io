@@ -1,5 +1,11 @@
 * {
-    font-family: 'Inconsolata', serif;
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
+html, body {
+    margin: 0; padding: 0;
+    font-size: 15px;
+    font-weight: 100;
 }
 
 .fb_iframe_widget {
@@ -104,7 +110,7 @@ pre > code {
 }
 
 pre code, pre code * {
-    font-size: 16px !important;
+    font-size: 1.0em !important;
 }
 
 pre.math {
@@ -154,12 +160,6 @@ table td {
 
 table tr:nth-last-child(1) td {
     border-bottom: none;
-}
-
-html, body {
-    margin: 0; padding: 0;
-    font-size: 18px;
-    font-weight: 100;
 }
 
 .container {

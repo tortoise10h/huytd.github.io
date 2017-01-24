@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
-        <link href='https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700,700italic&subset=latin,vietnamese' rel='stylesheet' type='text/css'>
         <link href="../css/theme.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="../css/highlight/tomorrow.css">
         <link rel="stylesheet" href="../css/fontello.css">
@@ -23,7 +21,12 @@
             <div class="main">
                 <h1 id="random-notes">Random Notes</h1>
 <p>This is just a clipboard for myself.</p>
-<h2 id="map-jk-as-esc-in-vim">Map jk as ESC in VIM</h2>
+<h2 id="save-vim-session">Save VIM session</h2>
+<p>Save current split layout to <code>$(CWD)/.work</code> file:</p>
+<pre><code>nnoremap &lt;Leader&gt;ss :mksession .work&lt;CR&gt;
+</code></pre><p>Load saved session with:</p>
+<pre><code>vim -S .work
+</code></pre><h2 id="map-jk-as-esc-in-vim">Map jk as ESC in VIM</h2>
 <pre><code>imap jk &lt;ESC&gt;
 </code></pre><h2 id="start-tmux-and-auto-attach-to-any-exists-session">Start tmux and auto attach to any exists session</h2>
 <p>Put this script to <code>.bash_profile</code> or anything equivalent:</p>
