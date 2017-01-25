@@ -22,8 +22,8 @@ Các thông tin khác như passphrase có thể nhập vào hay để trống t�
 
 Sau khi chạy xong, truy cập vào thư mục `~/.ssh~` sẽ thấy có 2 file:
 
-- **gariim**: &tbsp; đây chính là private key, cần lưu kĩ trong máy, không để lộ ra ngoài.
-- **gariim.pub**: &tbsp; đây là public key, có thể đem copy lên bất kì server nào để nó có thể nhận diện ra máy tính của mình.
+- **gariim**: &#9; đây chính là private key, cần lưu kĩ trong máy, không để lộ ra ngoài.
+- **gariim.pub**: &#9; đây là public key, có thể đem copy lên bất kì server nào để nó có thể nhận diện ra máy tính của mình.
 
 ## Bước 2: Copy public key lên server
 
