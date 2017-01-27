@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
-        <link href="../css/theme.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="../css/highlight/tomorrow.css">
-        <link rel="stylesheet" href="../css/fontello.css">
-        <script src="../js/highlight.pack.js"></script>
+        <link href="../../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../../css/highlight/tomorrow.css">
+        <link rel="stylesheet" href="../../css/fontello.css">
+        <script src="../../js/highlight.pack.js"></script>
         <script>
         hljs.initHighlightingOnLoad();
         </script>
@@ -23,14 +23,14 @@
 <p><strong>Legim</strong> có nghĩa là <strong>LEGO Image Server</strong>, mang ý nghĩa là một app server ảnh có khả năng hoạt động độc lập hoặc có thể ghép nối lại một cách dễ dàng để tạo thành một hệ thống một cách dễ dàng giống như trò chơi LEGO.</p>
 <h2 id="t-ng-quan-h-th-ng">Tổng quan hệ thông</h2>
 <p>Một cách tổng quát, cấu trúc hoạt động của <strong>Legim</strong> như hình sau:</p>
-<p><img src="img/legim_01.PNG" alt=""></p>
+<p><img src="../img/legim_01.PNG" alt=""></p>
 <p>Trong đó, server application là chương trình chính, sẽ kết nổi và quản lý các file hình ảnh nằm trên đĩa cứng, đồng thời cung cấp RESTful API để user có thể tương tác (upload hình ảnh, download hình ảnh,...)</p>
 <h2 id="m-t-node-server">Một node server</h2>
 <p>Node ở đây gọi là một nút, một khối gồm có: Server app và Đĩa cứng cấu thành một node trên hệ thống.</p>
-<p><img src="img/legim_02.PNG" alt=""></p>
+<p><img src="../img/legim_02.PNG" alt=""></p>
 <p>Và đây cũng là đơn vị cơ bản nhất của hệ thống.</p>
 <p>Có 3 loại node tồn tại trong hệ thống, như hình sau:</p>
-<p><img src="img/legim_03.PNG" alt=""></p>
+<p><img src="../img/legim_03.PNG" alt=""></p>
 <h3 id="gateway-node">Gateway Node</h3>
 <p>Các node không có <strong>node cha</strong> (parent node) sẽ được hiểu mặc định là các <strong>Gateway</strong>.</p>
 <p>Trong một hệ thống Legim thì chỉ có <strong>Gateway</strong> node là có thể cung cấp REST API để giao tiếp với user.</p>
@@ -44,19 +44,19 @@
 <p>Khi một node lá được tạo ra, thì nó phải được chỉ định địa chỉ của node cha cần kết nối đến.</p>
 <h2 id="h-th-ng-h-nh-c-y">Hệ thống hình cây</h2>
 <p>Dựa vào cấu trúc hình cây, chúng ta có thể tạo ra một hệ thống gồm một gateway node ở trung tâm, và rất nhiều node con phân bố khắp nơi (về mặt địa lý) như hình sau: </p>
-<p><img src="img/legim_04.PNG" alt=""></p>
+<p><img src="../img/legim_04.PNG" alt=""></p>
 <p>Các cluster có thể được tạo ra ở nhiều địa điểm trên thế giới để đảm bảo tối ưu về mặt phục vụ.</p>
 <h2 id="c-ch-tr-o-ng-c-gi-p-backup-d-li-u">Cơ chế &quot;trào ngược&quot; giúp backup dữ liệu</h2>
 <p>Giả sử ta có một hệ thống với các file <code>A, B, C, D, E</code> được phân bố như hính sau:</p>
-<p><img src="img/legim_05.PNG" alt=""></p>
+<p><img src="../img/legim_05.PNG" alt=""></p>
 <p>Khi một node bị tắt đi, hệ thống sẽ tiến hành tắt toàn bộ các node con của nó sẽ bị tắt trước, sau đó mới đến chính node đó bị tắt.</p>
 <p>Trong quá trình tắt node, hệ thống sẽ tiến hành &quot;trào ngược&quot; (phun ngược =))) dữ liệu từ node bị tắt lên node cao hơn (node cha), như hình sau:</p>
-<p><img src="img/legim_07.PNG" alt=""></p>
+<p><img src="../img/legim_07.PNG" alt=""></p>
 <p>Node <code>San Francisco</code> bị tắt đi, file <code>E</code> của node này sẽ được chuyển lên node <code>USA</code>. Nếu cần thiết, node <code>USA</code> có thể chuyển file <code>E</code> về các node <code>Chicago</code> hoặc <code>Florida</code> để giảm tải.</p>
 <h2 id="load-balancing">Load balancing</h2>
 <p>Khi một user request một hình ảnh, request sẽ đi qua REST API và đi vào Gateway server, tại đây, request sẽ được phân phối về server nào có chứa hình ảnh cần load và có độ trễ (latency) thấp nhất (để đảm bảo tốc độ), thường là server nằm gần nhất.</p>
 <p>Ví dụ hình sau, một user từ Đà Nẵng có thể request tới hệ thống và nhận được file nằm tại server Hà Nội, còn một user từ San Jose có thể nhận được file từ server San Francisco.</p>
-<p><img src="img/legim_06.PNG" alt=""></p>
+<p><img src="../img/legim_06.PNG" alt=""></p>
 <h2 id="scaling">Scaling</h2>
 <p>Legim được thiết kế để giúp cho việc scaling diễn ra một cách it tốn kém nhất. </p>
 <p>Khi cần loại bớt server, chúng ta có thể dễ dàng thực hiện bằng cách tắt bớt các leaf node hoặc cả một cụm cluster. Cơ chế backup dữ liệu theo kiểu &quot;trào ngược&quot; (dữ liệu từ node con sẽ đi hết lên node cha trước khi node con bị tắt) sẽ đảm bảo tính toàn vẹn dữ liệu.</p>

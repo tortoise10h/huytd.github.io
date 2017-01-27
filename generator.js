@@ -87,6 +87,10 @@ for (var i = 0; i < subfolders.length; i++) {
   if (subfolders[i] === 'img') continue;
   var currentSubFolder = subfolders[i];
   // Generate sub folders
+  generateForSubFolder(currentSubFolder);
+}
+
+function generateForSubFolder(currentSubFolder) {
   fs.readdir(__dirname + '/posts/' + currentSubFolder, function(err, files) {
     if (err) return;
     files.forEach(function(f) {
