@@ -83,17 +83,19 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 
 var subfolders = getDirectories(__dirname + '/posts/');
 for (var i = 0; i < subfolders.length; i++) {
+  if (!subfolders) return;
   if (subfolders[i] === 'img') continue;
+  var currentSubFolder = subfolders[i];
   // Generate sub folders
-  fs.readdir(__dirname + '/posts/' + subfolders[i], function(err, files) {
+  fs.readdir(__dirname + '/posts/' + currentSubFolder, function(err, files) {
     if (err) return;
     files.forEach(function(f) {
       if (f.indexOf('.md') != -1) {
-        var htmlOutput = __dirname + '/posts/' + subfolders[i] + '/' + f.replace('.md', '.html');
+        var htmlOutput = __dirname + '/posts/' + currentSubFolder + '/' + f.replace('.md', '.html');
         var postContent = '';
         var htmlContent = '';
         var metaData = '';
-        fs.readFile(__dirname + '/posts/' + subfolders[i] + '/' + f, function (err, data) {
+        fs.readFile(__dirname + '/posts/' + currentSubFolder + '/' + f, function (err, data) {
           if (err)
             throw err;
           console.log("Reading: ", f);
