@@ -1,5 +1,11 @@
 var fs = require('fs');
+var path = require('path');
 var marked = require('./js/marked.js');
+
+function getDirectories (srcpath) {
+  return fs.readdirSync(srcpath)
+    .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory())
+}
 
 marked.setOptions({
   renderer: new marked.Renderer(),
@@ -75,60 +81,64 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
     });
 });
 
-// Generate sub folders
-fs.readdir(__dirname + '/posts/algorithms/', function(err, files) {
+var subfolders = getDirectories(__dirname + '/posts/');
+for (var i = 0; i < subfolders.length; i++) {
+  if (subfolders[i] === 'img') continue;
+  // Generate sub folders
+  fs.readdir(__dirname + '/posts/' + subfolders[i], function(err, files) {
     if (err) return;
     files.forEach(function(f) {
-        if (f.indexOf('.md') != -1) {
-        	var htmlOutput = __dirname + '/posts/algorithms/' + f.replace('.md', '.html');
-	        var postContent = '';
-	        var htmlContent = '';
-	        var metaData = '';
-	        fs.readFile(__dirname + '/posts/algorithms/' + f, function (err, data) {
-			  if (err)
-			    throw err;
-        console.log("Reading: ", f);
-			  if (data) {
-			  	var markdownPost = data.toString('utf8');
-			  	var lines = markdownPost.split('\n');
-			  	var title = '';
-			  	if (lines.length > 0) {
-			  		title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '');
-			  		if (lines[lines.length - 6].indexOf('<meta') == 0) {
-			  			metaData = lines.slice(lines.length - 6).join('\n');
-			  			markdownPost = markdownPost.split('\n');
-			  			markdownPost.splice(markdownPost.length - 6);
-			  			markdownPost = markdownPost.join('\n');
-			  		}
-			  	}          
+      if (f.indexOf('.md') != -1) {
+        var htmlOutput = __dirname + '/posts/' + subfolders[i] + '/' + f.replace('.md', '.html');
+        var postContent = '';
+        var htmlContent = '';
+        var metaData = '';
+        fs.readFile(__dirname + '/posts/' + subfolders[i] + '/' + f, function (err, data) {
+          if (err)
+            throw err;
+          console.log("Reading: ", f);
+          if (data) {
+            var markdownPost = data.toString('utf8');
+            var lines = markdownPost.split('\n');
+            var title = '';
+            if (lines.length > 0) {
+              title = lines[0].replace(/#/g, '').replace("\r\n", '').replace("\n", '');
+              if (lines[lines.length - 6].indexOf('<meta') == 0) {
+                metaData = lines.slice(lines.length - 6).join('\n');
+                markdownPost = markdownPost.split('\n');
+                markdownPost.splice(markdownPost.length - 6);
+                markdownPost = markdownPost.join('\n');
+              }
+            }          
 
 
-        // Custom components
-			  	markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover" style="background-image:url(');
-			  	markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
-			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
-			  	markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
+            // Custom components
+            markdownPost = markdownPost.replace(/<cover>/g, '<div class="cover" style="background-image:url(');
+            markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
+            markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
+            markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
 
-			  	postContent = marked(markdownPost);
-			  	htmlContent = templateHtml.replace('{%content%}', postContent);
-			  	htmlContent = htmlContent.replace('{%title%}', title);
-			  	htmlContent = htmlContent.replace('{%meta%}', metaData);
-			  	htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
+            postContent = marked(markdownPost);
+            htmlContent = templateHtml.replace('{%content%}', postContent);
+            htmlContent = htmlContent.replace('{%title%}', title);
+            htmlContent = htmlContent.replace('{%meta%}', metaData);
+            htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
 
-          htmlContent = htmlContent.replace(/\.\.\//g, '../../');
-          htmlContent = htmlContent.replace(/\.\.\/\.\.\/img/g, '../img');
+            htmlContent = htmlContent.replace(/\.\.\//g, '../../');
+            htmlContent = htmlContent.replace(/\.\.\/\.\.\/img/g, '../img');
 
-			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
-				     if (err)
-				       throw err;
-				     else
-				     	console.log('>>', htmlOutput);
-				});
-			  }
-			});
-        }
+            fs.writeFile(htmlOutput, htmlContent, function (err) {
+              if (err)
+                throw err;
+              else
+                console.log('>>', htmlOutput);
+            });
+          }
+        });
+      }
     });
-});
+  });
+}
 
 console.log('Generating index page...');
 var publishedPosts = Array.from(require('./publish.json').published);
