@@ -1,6 +1,8 @@
 # Gariim Busy
 
 - Là mobile app dạng Chat UI, nhân vật là con gà
+- Hướng đến đối tượng user dùng mobile, bận rộn và không có nhiều thời gian để lướt bản tin
+- Mục đích chính của app là gợi ý các tin quan trọng đáng chú ý trong toàn bộ các chủ đề mà user đó follow. Một lần sử dụng, một user có thể dành ra 3 đến 5 phút mở app ra và đọc nhanh tin tức để nắm hết mọi thông tin cần biết.
 - User có thể type, nhưng không cần thiết, sẽ hiện các lựa chọn để bấm nhanh
 
 ![](img/chat_ui.png)
