@@ -83,6 +83,23 @@ set -g window-status-bell-style none
 set -g window-status-bell-bg colour1
 set -g window-status-bell-fg colour0
 set -g window-status-current-format &quot;#{?window_zoomed_flag,#[bg=colour4],} #W #{?window_zoomed_flag,#[bg=colour4],}&quot;
+</code></pre><h2 id="some-git-alias-to-speed-up-your-workflow">Some git alias to speed up your workflow</h2>
+<p>For example, type <code>st</code> instead of <code>git status</code>, or <code>ad</code> instead of <code>git add -A</code>,...</p>
+<pre><code>alias ad=&quot;git add -A&quot;
+alias add=&quot;git add&quot;
+alias cm=&quot;git commit -m ${1}&quot;
+alias am=&quot;git commit --amend&quot;
+alias rb=&quot;git rebase&quot;
+alias push=&#39;git push&#39;
+alias st=&quot;git status&quot;
+alias dff=&quot;git diff&quot;
+alias df=&quot;git diff --name-status ${1}&quot;
+alias dft=&quot;git difftool ${1}&quot;
+alias lg=&quot;git log --oneline --decorate ${1}&quot;
+alias brr=&quot;git branch --all&quot;
+alias br=&quot;git branch&quot;
+alias gc=&quot;git checkout&quot;
+alias stash=&quot;git stash&quot;
 </code></pre>
                 <div class="fb-like" data-href="http://huytd.github.io/posts/random.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>

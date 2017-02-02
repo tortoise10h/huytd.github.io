@@ -127,3 +127,25 @@ set -g window-status-bell-bg colour1
 set -g window-status-bell-fg colour0
 set -g window-status-current-format "#{?window_zoomed_flag,#[bg=colour4],} #W #{?window_zoomed_flag,#[bg=colour4],}"
 ```
+
+## Some git alias to speed up your workflow
+
+For example, type `st` instead of `git status`, or `ad` instead of `git add -A`,...
+
+```
+alias ad="git add -A"
+alias add="git add"
+alias cm="git commit -m ${1}"
+alias am="git commit --amend"
+alias rb="git rebase"
+alias push='git push'
+alias st="git status"
+alias dff="git diff"
+alias df="git diff --name-status ${1}"
+alias dft="git difftool ${1}"
+alias lg="git log --oneline --decorate ${1}"
+alias brr="git branch --all"
+alias br="git branch"
+alias gc="git checkout"
+alias stash="git stash"
+```
