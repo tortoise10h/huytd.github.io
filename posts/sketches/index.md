@@ -7,3 +7,7 @@
 **Day 2:** A knight and baby dragon
 
 ![](img/day002.jpg)
+
+**Day 02 (cont):** King of Clash Royale
+
+![](img/day002_02.jpg)
