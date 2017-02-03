@@ -11,3 +11,11 @@
 **Day 02 (cont):** King of Clash Royale
 
 ![](img/day002_02.jpg)
+
+**Day 03:** Tiny in Dota 2... with cloth
+
+![](img/day003.jpg)
+
+**Day 03 (cont):** Hanzo (Kubo's father) in Kubo and the two strings
+
+![](img/day003_02.JPG)
