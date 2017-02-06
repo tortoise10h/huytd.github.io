@@ -22,6 +22,7 @@ ul {
 ul > li:before {
   content: "- ";
   margin-left: -18px;
+  display: inline; float: left;
 }
 
 ul > li > ul > li:before {

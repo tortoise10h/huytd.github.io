@@ -1,0 +1,321 @@
+<html>
+    <head>
+        <title> Implement bài toán duyệt cây nhị phân với Rust | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="implement-b-i-to-n-duy-t-c-y-nh-ph-n-v-i-rust">Implement bài toán duyệt cây nhị phân với Rust</h1>
+<p>Các bài giới thiệu về Rust <sup><a href="#tham-kh-o">[1]</a></sup> thì nhiều quá rồi <sup><a href="#tham-kh-o">[2]</a></sup> nhưng chưa thấy bài nào nói về việc sử dụng Rust hết, nên hôm nay mình sẽ bắt đầu viết một vài bài áp dụng Rust để implement một số thuật toán cơ bản, mở đầu sẽ là: <strong>Thuật toán duyệt cây nhị phân.</strong></p>
+<h2 id="ki-n-th-c-c-b-n">Kiến thức cơ bản</h2>
+<p>Nói sơ qua một chút kiến thức cơ bản, <strong>cây nhị phân</strong> (binary tree) là một loại cấu trúc dữ liệu dạng <strong>cây</strong> (tree), mỗi một node có từ một đến hai node con.</p>
+<p>Các tên gọi quy ước trong một node của cây nhị phân:</p>
+<ul>
+<li><strong>Root:</strong> là node hiện tại đang xét.</li>
+<li><strong>Left:</strong> là node con bên trái của node đang xét.</li>
+<li><strong>Right:</strong> là node con bên phải của node đang xét.</li>
+</ul>
+<p><img src="img/binary-tree-example.png" alt=""></p>
+<p><strong>Duyệt cây nhị phân</strong> (binary tree traversal) là một trong các thuật toán cơ bản khi làm việc với kiểu dữ liệu này. Có 2 cách để duyệt một cây nhị phân đó là <strong>duyệt sâu</strong> (depth first traversal) và <strong>duyệt rộng</strong> (breadth first traversal).</p>
+<p>Đối với cách <strong>duyệt sâu</strong>, chúng ta có 3 phương pháp khác nhau, phân loại dựa theo thứ tự thăm (visit) các node con của cây:</p>
+<ul>
+<li><p><strong>In-order:</strong> Duyệt theo thứ tự <strong>Left -&gt; Root -&gt; Right</strong>. Ví dụ cây ở hình trên, thứ tự duyệt sẽ là: <code>2, 7, 5, 6, 11, 1, 8, 4, 9</code>.</p>
+</li>
+<li><p><strong>Pre-order:</strong> Duyệt theo thứ tự <strong>Root -&gt; Left -&gt; Right</strong>. Ví dụ ở cây trên, thứ tự duyệt là: <code>1, 7, 2, 6, 5, 11, 8, 9, 4</code>.</p>
+</li>
+<li><p><strong>Post-order:</strong> Duyệt theo thứ tự <strong>Left -&gt; Right -&gt; Root</strong>. Ví dụ ở cây trên, thứ tự duyệt là: <code>2, 5, 11, 6, 7, 4, 9, 8, 1</code>.</p>
+</li>
+</ul>
+<p><strong>Duyệt rộng</strong> thì chúng ta sẽ đi từng level của cây, và duyệt hết tất cả các node ở từng level. Ví dụ cây trên thứ tự duyệt sẽ là: <code>1, 7, 8, 2, 6, 9, 5, 11, 4</code>.</p>
+<h2 id="implementation">Implementation</h2>
+<p>Chúng ta sẽ implement kiểu dữ liệu binary tree trong Rust, sau đó sẽ implement thuật toán duyệt cây cho kiểu dữ liệu này.</p>
+<p>Trong quá trình implement, mình sẽ chỉ ra một số lỗi mà người mới học Rust thường gặp phải, và Rust compiler sẽ giúp chúng ta nhận ra và giải quyết các lỗi đó rất hiệu quả.</p>
+<p>Còn bây giờ thì chúng ta bắt đầu thôi.</p>
+<h3 id="kh-i-t-o-d-n">Khởi tạo dự án</h3>
+<p>Vì đây là một chương trình nhỏ, chúng ta không nhất thiết phải sử dụng <code>cargo</code> để tạo project mới, mà có thể tạo trực tiếp file <code>*.rs</code> và biên dịch nó bằng <code>rustc</code>.</p>
+<p>Ở đây mình sẽ đặt tên source file của chúng ta là <code>binary_tree.rs</code> nằm trong thư mục <code>~/code/playground/</code>.</p>
+<pre><code>$ mkdir -p ~/code/playground
+$ cd ~/code/playground
+$ touch binary_tree.rs
+</code></pre><p>Chúng ta có thể chạy thử một chương trình nhỏ, ví dụ gõ vào file <code>binary_tree.rs</code> nội dung sau:</p>
+<pre><code>fn main() {
+    println!(&quot;Hello World!&quot;);
+}
+</code></pre><p>Biên dịch và chạy đoạn code trên bằng lệnh:</p>
+<pre><code>$ rustc binary_tree.rs -o binary_tree
+$ ./binary_tree
+</code></pre><p>Bạn có thể viết 2 lệnh này vào một <code>makefile</code> và chạy bằng lệnh <code>make</code>. Hoặc nếu xài vim, bạn có thể sử dụng plugin <a href="https://github.com/huytd/vim-quickrun">vim-quickrun</a> (do mình viết, shameless PR :v) để chạy nhanh bằng tổ hợp phím <code>&lt;Leader&gt;e</code>.</p>
+<p>Xong rồi, giờ zô code thiệt nè.</p>
+<h3 id="khai-b-o-c-u-tr-c-d-li-u-c-a-m-t-node">Khai báo cấu trúc dữ liệu của một node</h3>
+<p>Thông thường khi implement kiểu tree, chúng ta sẽ bắt đầu implement từ một node của tree đó.</p>
+<p>Theo như định nghĩa ở trên, một node mà chúng ta implement sẽ có các trường (fields) sau:</p>
+<ul>
+<li>Value: Giá trị của node này, ở đây chúng ta dùng kiểu <code>i32</code> (số nguyên)</li>
+<li>Left: Reference tới node bên trái, giá trị này có thể rỗng (optional)</li>
+<li>Right: Reference tới node bên phải, giá trị này cũng có thể rỗng (optional)</li>
+</ul>
+<p>Vậy chúng ta sẽ khai báo một struct mới, gồm có 3 fields như trên:</p>
+<pre><code>struct Node {
+    value: i32,
+    left: Option&lt;Node&gt;,
+    right: Option&lt;Node&gt;
+}
+</code></pre><p>Ở đây <code>i32</code> là kiểu dữ liệu số nguyên, tương tự như <code>int</code> ở mấy ngôn ngữ khác vậy. <code>Option</code> tức là kiểu optional, nghĩa là nó có thể có giá trị tham chiếu tới đâu đó, hoặc có thể không có. Compile thử xem nào:</p>
+<pre><code>$ rustc binary_tree.rs -o binary_tree
+
+error[E0072]: recursive type `Node` has infinite size
+ --&gt; walkthrough_binary_tree.rs:1:1
+  |
+1 | struct Node {
+  | ^ recursive type has infinite size
+  |
+  = help: insert indirection (e.g., a `Box`, `Rc`, or `&amp;`) at some point to make `Node` representable
+
+error: aborting due to previous error
+</code></pre><p>É, lỗi rồi. Lỗi ngay từ shot đầu tiên luôn :)) để xem lỗi gì nào.</p>
+<h4 id="v-n-recursive-type-trong-rust">Vấn đề recursive type trong Rust</h4>
+<p>Nội dung thông báo lỗi nó ghi là: <code>recursive type Node has infinite size</code>, tức là: <code>Node</code> là kiểu dữ liệu đệ quy (vì chúng ta tham chiếu tới <code>Node</code> bên trong chính nó), nên Rust không xác định được kích thước của nó -- quá bự, vô hạn. Tại sao vậy? OK, dừng lại để nói về vấn đề này một chút nhé.</p>
+<p>Cũng giống như C/C++, kích thước của một <code>struct</code> sẽ được xác định bằng tổng số kích thước các field bên trong nó. Lấy ví dụ đơn giản, nếu ta có một <code>struct</code> như sau:</p>
+<pre><code>struct Point {
+    x: i32,
+    y: u8
+}
+</code></pre><p>Thì kích thước của <code>Point</code> sẽ bằng kích thước của <code>x</code> (kiểu <code>i32</code>, có <code>4 bytes</code>) cộng với kích thước của biến <code>y</code> (kiểu <code>u8</code> có <code>1 byte</code>), là <code>5 bytes</code> cả thảy.</p>
+<p>Quay trở lại với <code>Node</code> struct của chúng ta, kiểu <code>i32</code> có <code>4 bytes</code>, kiểu <code>Option</code> có <code>1 byte</code>, kích thước của <code>Node</code> sẽ được tính bằng công thức:</p>
+<pre class="math">$
+\begin{align}
+\text{Node} &= \text{i32} + 2 \times \text{Option} + 2 \times \text{Node} \\
+            &= 4 + 2 \times 1 + 2 \times \text{Node} \\
+            &= 6 + 2 \times \text{Node} \\ 
+            &= 6 + 2 \times ( 6 + 2 \times \text{Node}) \\
+            &= 6 + 2 \times ( 6 + 2 \times ( 6 + 2 \times \text{Node})) \\
+            &= 6 + 2 \times ( 6 + 2 \times ( 6 + 2 \times (6 + 2 \times \text{Node}))) \\
+            &= \cdots
+\end{align}
+$</pre>
+
+<p>:))</p>
+<p>Kết quả là tính mãi không ra nổi :)) vì cứ đệ quy mãi ở khúc lấy size của <code>Node</code>.</p>
+<h4 id="boxed-value-v-heap">Boxed value và heap</h4>
+<p>Rồi, vậy cách giải quyết là gì nào? Nếu xem kĩ trong thông báo lỗi, bạn sẽ thấy 1 dòng:</p>
+<pre><code>  ...
+  = help: insert indirection (e.g., a `Box`, `Rc`, or `&amp;`) at some point to make `Node` representable
+  ...
+</code></pre><p>Xem nào, nó bảo nếu thêm <code>Box</code> hoặc <code>Rc</code> hoặc <code>&amp;</code> các kiểu vào những chỗ tham chiếu tới <code>Node</code> thì sẽ giải quyết được. Vậy thử xem:</p>
+<pre><code>struct Node {
+    value: i32,
+    left: Option&lt;Box&lt;Node&gt;&gt;,
+    right: Option&lt;Box&lt;Node&gt;&gt;
+}
+</code></pre><p>Compile lại thì sẽ thấy lỗi đó đã hết, ngon lành! Có một cái warning xuất hiện, nhưng bây giờ chúng ta chưa cần nói tới nó, để nói tiếp về vụ <code>Box</code> cái đã.</p>
+<p>Tại sao dùng <code>Box&lt;&gt;</code> lại giải quyết được vấn đề recursive struct? Đầu tiên cần hiểu <code>Box&lt;&gt;</code> là gì.</p>
+<p>Trong Rust, mặc định mọi giá trị đều được khai báo trong <strong>stack</strong> <sup><a href="#tham-kh-o">[3]</a></sup>, chúng ta sử dụng <code>Box&lt;T&gt;</code> khi cần khai báo một biến kiểu <code>T</code> trong <strong>heap</strong>. Một <strong>box</strong> thực chất là một smart pointer trỏ tới một giá trị đã được tạo ra trong <strong>heap</strong>.</p>
+<p>Trong trường hợp này, chúng ta đặt <code>Node</code> vào trong <code>Box&lt;&gt;</code> để khai báo dạng <code>Box&lt;Node&gt;</code>, thì thực chất chúng ta đang khai báo một <strong>pointer trỏ tới một vùng nhớ kiểu <code>Node</code> trong heap</strong>, vậy nên bên trong <code>Node</code> struct của chúng ta lúc này, kích thước của <code>left</code> và <code>right</code> thực chất là <strong>kích thước của pointer <code>Box&lt;Node&gt;</code></strong>, và pointer này có kiểu <code>Option</code>.</p>
+<p>Trên StackOverflow cũng có một câu hỏi được trả lời khá kĩ về vấn đề <code>Box</code> trong recursive struct, các bạn có thể tham khảo <a href="http://stackoverflow.com/a/25296420/1567340">tại đây</a>.</p>
+<h4 id="dead-code-warning-khi-compile">Dead code warning khi compile</h4>
+<p>Okay, bây giờ quay về lại với cái warning mà <code>rustc</code> đưa ra lúc nãy nhé. Nội dung warning như sau:</p>
+<pre><code>warning: struct is never used: `Node`, #[warn(dead_code)] on by default
+ --&gt; walkthrough_binary_tree.rs:1:1
+  |
+1 | struct Node {
+  | ^
+</code></pre><p><code>rustc</code> nói cho chúng ta biết là cái <code>Node</code> struct mà chúng ta tạo ra chưa bao giờ được sử dụng cả. Và thông báo này được đưa ra vì attribute <code>#[warn(dead_code)]</code> được bật sẵn khi biên dịch.</p>
+<p>Điều này rất có ích để viết code đẹp, code chuẩn, có thể hạn chế được lượng mỡ thừa không cần thiết... à nhầm, code thừa.</p>
+<p>Tuy nhiên vì chúng ta đang học, cho nên có thể tạm tắt thông báo này đi bằng cách thêm attribute <code>#[allow(dead_code)]</code> ở trước phần khai báo struct để báo cho compiler biết rằng <code>dead_code</code> là người quen biết, và việc cho anh ấy đi qua khỏi khâu kiểm duyệt là đúng quy trình, không cần phải lo gì cả:</p>
+<pre><code>#[allow(dead_code)]
+struct Node {
+    value: i32,
+    left: Option&lt;Box&lt;Node&gt;&gt;,
+    right: Option&lt;Box&lt;Node&gt;&gt;
+}
+</code></pre><p>Giờ compile lại sẽ ko còn lỗi nào xảy ra nữa.</p>
+<h3 id="t-o-binary-tree-t-node">Tạo binary tree từ node</h3>
+<p>Vậy là chúng ta đã khai báo thành công thành phần cơ bản nhất của một binary tree, giờ chúng ta thử dùng kiểu <code>Node</code> này để tạo ra một binary tree xem sao nhé.</p>
+<p>Lấy ví dụ với cây sau:</p>
+<p><img src="img/binary-tree-try.png" alt=""></p>
+<p>Chúng ta sẽ đi từng bước, tạo từng node một. Đầu tiên là root node của cây trên, khai báo một biến <code>tree</code>, kiểu <code>Node</code>, có 2 nhánh left và right đều là <code>None</code>.</p>
+<pre><code>#[allow(unused_variables)]
+fn main() {
+    let tree = Node {
+        value: 1,
+        left: None,
+        right: None
+    };
+}
+</code></pre><p>Đây là trạng thái cây của chúng ta lúc này:</p>
+<p><img src="img/binary-tree-try-01.png" alt=""></p>
+<p>Chúng ta cũng chèn thêm vào attribute <code>#[allow(unused_variables)]</code> để rust compiler không warning vì chúng ta chưa cần sử dụng biến <code>tree</code> này.</p>
+<h4 id="gi-tr-c-a-m-t-bi-n-option-v-box">Giá trị của một biến Option và Box</h4>
+<p>Vậy là chúng ta đã tạo được một node đầu tiên của cây, có giá trị là <code>1</code> và 2 node con chưa có gì cả. Giờ mình sẽ giải thích tại sao lại xuất hiện giá trị <code>None</code>, và phải làm gì nếu muốn gán <code>left</code> hoặc <code>right</code> thành một node khác.</p>
+<p>Một biến kiểu <a href="https://doc.rust-lang.org/std/option/index.html">Option</a> có thể mang giá trị <code>Some(T)</code> (trả về giá trị của <code>T</code>) hoặc mang giá trị <code>None</code> (không trả về gì cả). </p>
+<p>Vậy để gán một giá trị không <code>None</code> vào cho một biến <code>Option</code>, chúng ta dùng lệnh <code>Some(...)</code>, ví dụ:</p>
+<pre><code>let optional: Option&lt;T&gt; = Some(T);
+</code></pre><p>Tiếp, đối với kiểu <code>Box&lt;T&gt;</code>, chúng ta có method <code>Box::new(...)</code> để khởi tạo giá trị cho nó, ví dụ:</p>
+<pre><code>let value: Box&lt;i32&gt; = Box::new(5);
+</code></pre><p>Kết hợp 2 cú pháp trên lại, đối với kiểu <code>Option&lt;Box&lt;Node&gt;&gt;</code> của các node <code>left</code> và <code>right</code>, chúng ta sẽ có cách khai báo như sau:</p>
+<pre><code>...
+left: Some(Box::new(Node { ... })),
+...
+</code></pre><p>Giờ thử chèn tiếp 2 node số <code>7</code> và <code>8</code> vào cây trên nào:</p>
+<pre><code>    ...
+    let tree = Node {
+        value: 1,
+        left: Some(Box::new(Node {
+            value: 7,
+            left: None,
+            right: None
+        })),
+        right: Some(Box::new(Node {
+            value: 8,
+            left: None,
+            right: None
+        }))
+    };
+    ...
+</code></pre><p>Trạng thái cây lúc này sẽ như thế này:</p>
+<p><img src="img/binary-tree-try-02.png" alt=""></p>
+<h4 id="s-d-ng-macro-r-t-g-n-c-ph-p">Sử dụng macro để rút gọn cú pháp</h4>
+<p>Hẳn là bạn cũng cảm thấy khó chịu với câu lệnh dài dòng <code>Some(Box::new(Node { ... }))</code> cứ lặp đi lặp lại liên tục ở trong code. </p>
+<p>Rust cho phép chúng ta tạo ra các <strong>macro</strong> để rút gọn các thao tác dài dòng, lặp đi lặp lại. Bạn có thể coi <strong>macro</strong> tương tự như <code>#define</code> của C/C++ nhưng lợi hại hơn rất nhiều. <sup><a href="#tham-kh-o">[4]</a></sup></p>
+<p>Thực ra ngay từ đầu chúng ta đã dùng <strong>macro</strong> rồi, đó chính là lệnh <code>println!</code>, lệnh này cũng là một <strong>macro</strong>, bạn có thể tham khảo <a href="https://github.com/rust-lang/rust/blob/47965f51e6d91ae33bf2b0da0f5510f03766feac/src/libstd/macros.rs#L119-L125">source của Rust</a> để xem nó được khai báo thế nào.</p>
+<p>Sẽ rất dài dòng nếu nói chi tiết về <strong>macro</strong> ở đây, nên bạn có thể tham khảo thêm tài liệu của Rust nhé. </p>
+<p>Chúng ta sẽ tạo ra một <strong>macro</strong> để rút gọn thao tác tạo optional Node ở trên:</p>
+<pre><code>macro_rules! node {
+    ( $($props:ident : $value:expr),* ) =&gt; { 
+        Some(Box::new(Node {
+            $($props: $value),*
+        })) 
+    }
+}
+</code></pre><p>Từ giờ chúng ta có thể tạo ra các <code>Node</code> với cú pháp mới là:</p>
+<pre><code>...
+left: node!(
+        value: 5,
+        left: None,
+        right: None
+      );
+...
+</code></pre><p>Gọn và rõ ràng hơn rất nhiều. Thử áp dụng <strong>macro</strong> <code>node!</code> vừa tạo để hoàn thành nốt cây nhị phân của chúng ta nào:</p>
+<pre><code>    ...
+    let tree = Node {
+        value: 1,
+        left: node!(
+            value: 7,
+            left: node!(
+                value: 2,
+                left: None,
+                right: None
+            ),
+            right: node!(
+                value: 6,
+                left: None,
+                right: None
+            )
+        ),
+        right: node!(
+            value: 8,
+            left: None,
+            right: None
+        )
+    };
+    ...
+</code></pre><p>Giờ chúng ta đã có một cây nhị phân hoàn chỉnh đúng với yêu cầu ban đầu.</p>
+<p><img src="img/binary-tree-try-03.png" alt=""></p>
+<h2 id="tham-kh-o">Tham khảo</h2>
+<ul>
+<li>[1] Huy Trần, <em><a href="https://huytd.github.io/posts/rust-intro.html">Rust là gì, có ăn được không?</a></em>, Huy&#39;s Blog</li>
+<li>[2] Thạch Lê, <em><a href="https://kipalog.com/posts/MIR---Su-tinh-tuy-cua-chu-cua-be-nho-Rust">MIR - Sự tinh túy của chú cua bé nhỏ Rust</a></em>, Kipalog</li>
+<li>[3] <em><a href="https://doc.rust-lang.org/book/the-stack-and-the-heap.html">The Stack and The Heap</a></em>, The Rust Programming Language Book, Ch. 5.1</li>
+<li>[4] <em><a href="https://doc.rust-lang.org/book/macros.html">Macros</a></em>, The Rust Programming Language Book, Ch. 4.34</li>
+</ul>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/rust-binary-tree-traversal.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
