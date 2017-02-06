@@ -339,6 +339,10 @@ Giờ chúng ta đã có một cây nhị phân hoàn chỉnh đúng với yêu 
 
 ![](img/binary-tree-try-03.png)
 
+### Duyệt cây
+
+Giờ chúng ta sẽ implement thuật toán duyệt cây, vì bài viết cũng khá dài rồi nên mình sẽ chỉ trình bày thuật toán duyệt DFS 
+
 ## Tham khảo
 
 - [1] Huy Trần, _[Rust là gì, có ăn được không?][rust-la-gi]_, Huy's Blog
