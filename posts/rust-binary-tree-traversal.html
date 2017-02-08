@@ -317,6 +317,69 @@ error: aborting due to previous error
 }
 </code></pre><p>Kết quả sẽ là: </p>
 <pre><code>2 7 6 1 8
+</code></pre><p>Code đầy đủ của chúng ta sẽ là:</p>
+<pre><code>struct Node {
+    value: i32,
+    left: Option&lt;Box&lt;Node&gt;&gt;,
+    right: Option&lt;Box&lt;Node&gt;&gt;
+}
+
+macro_rules! node {
+    ( $($props:ident : $value:expr),* ) =&gt; { 
+        Some(Box::new(Node {
+            $($props: $value),*
+        })) 
+    }
+}
+
+impl Node {
+    fn traversal(&amp;self) -&gt; String {
+        let mut output = String::new();
+
+        match self.left {
+            Some(ref node) =&gt; { 
+                output += node.traversal().as_str();
+            },
+            None =&gt; { }
+        }
+
+        output += self.value.to_string().as_str();
+
+        match self.right {
+            Some(ref node) =&gt; { 
+                output += node.traversal().as_str();
+            },
+            None =&gt; { }
+        }
+
+        return output;
+    }
+}
+
+fn main() {
+    let tree = Node {
+        value: 1,
+        left: node!(
+            value: 7,
+            left: node!(
+                value: 2,
+                left: None,
+                right: None
+            ),
+            right: node!(
+                value: 6,
+                left: None,
+                right: None
+            )
+        ),
+        right: node!(
+            value: 8,
+            left: None,
+            right: None
+        )
+    };
+    println!(&quot;{}&quot;, tree.traversal());
+}
 </code></pre><h2 id="k-t-th-c">Kết thúc</h2>
 <p>Vậy là chúng ta đã implement thành công một thuật toán đơn giản trong Rust. Và học được khá là nhiều thứ trong quá trình implement.</p>
 <p>Các bạn có thể thử thay đổi chương trình trên để implement tiếp các kiểu <strong>Pre-order</strong>, <strong>Post-order</strong> hoặc suy nghĩ để implement thuật toán duyệt <strong>BFS</strong> xem nhé.</p>

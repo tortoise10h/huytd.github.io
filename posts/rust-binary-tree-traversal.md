@@ -460,6 +460,73 @@ Kết quả sẽ là:
 2 7 6 1 8
 ```
 
+Code đầy đủ của chúng ta sẽ là:
+
+```
+struct Node {
+    value: i32,
+    left: Option<Box<Node>>,
+    right: Option<Box<Node>>
+}
+
+macro_rules! node {
+    ( $($props:ident : $value:expr),* ) => { 
+        Some(Box::new(Node {
+            $($props: $value),*
+        })) 
+    }
+}
+
+impl Node {
+    fn traversal(&self) -> String {
+        let mut output = String::new();
+
+        match self.left {
+            Some(ref node) => { 
+                output += node.traversal().as_str();
+            },
+            None => { }
+        }
+
+        output += self.value.to_string().as_str();
+
+        match self.right {
+            Some(ref node) => { 
+                output += node.traversal().as_str();
+            },
+            None => { }
+        }
+
+        return output;
+    }
+}
+
+fn main() {
+    let tree = Node {
+        value: 1,
+        left: node!(
+            value: 7,
+            left: node!(
+                value: 2,
+                left: None,
+                right: None
+            ),
+            right: node!(
+                value: 6,
+                left: None,
+                right: None
+            )
+        ),
+        right: node!(
+            value: 8,
+            left: None,
+            right: None
+        )
+    };
+    println!("{}", tree.traversal());
+}
+```
+
 ## Kết thúc
 
 Vậy là chúng ta đã implement thành công một thuật toán đơn giản trong Rust. Và học được khá là nhiều thứ trong quá trình implement.
