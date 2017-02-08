@@ -21,6 +21,20 @@
             <div class="main">
                 <h1 id="implement-b-i-to-n-duy-t-c-y-nh-ph-n-v-i-rust">Implement bài toán duyệt cây nhị phân với Rust</h1>
 <p>Các bài giới thiệu về Rust <sup><a href="#tham-kh-o">[1]</a></sup> thì nhiều quá rồi <sup><a href="#tham-kh-o">[2]</a></sup> nhưng chưa thấy bài nào nói về việc sử dụng Rust hết, nên hôm nay mình sẽ bắt đầu viết một vài bài áp dụng Rust để implement một số thuật toán cơ bản, mở đầu sẽ là: <strong>Thuật toán duyệt cây nhị phân.</strong></p>
+<p><img src="img/ok_meme.png" alt=""></p>
+<p>Sao? Không thích thuật toán à? Từ từ, đừng bỏ đi vội, mặc dù đề bài có vẻ khô khan nhưng qua bài viết này các bạn sẽ học được kha khá kiến thức quan trọng trong Rust:</p>
+<ul>
+<li>Làm việc với <code>struct</code></li>
+<li>Sử dụng kiểu <code>Option&lt;&gt;</code></li>
+<li>Sử dụng kiểu <code>Box&lt;&gt;</code> </li>
+<li>Khai báo biến trong Heap và Stack</li>
+<li>Sử dụng các <code>attribute</code> để tùy biến Rust compiler</li>
+<li>Sử dụng <code>pattern matching</code></li>
+<li>Làm việc với <code>macro</code></li>
+<li>Khai báo method dùng <code>impl</code></li>
+<li>Thao tác cơ bản với <code>String</code></li>
+</ul>
+<p>Và quan trọng nhất là cách sử dụng các thông báo lỗi của Rust compiler để tìm manh mối giải quyết vấn đề một cách hiệu quả.</p>
 <h2 id="ki-n-th-c-c-b-n">Kiến thức cơ bản</h2>
 <p>Nói sơ qua một chút kiến thức cơ bản, <strong>cây nhị phân</strong> (binary tree) là một loại cấu trúc dữ liệu dạng <strong>cây</strong> (tree), mỗi một node có từ một đến hai node con.</p>
 <p>Các tên gọi quy ước trong một node của cây nhị phân:</p>
@@ -43,6 +57,7 @@
 <p><strong>Duyệt rộng</strong> thì chúng ta sẽ đi từng level của cây, và duyệt hết tất cả các node ở từng level. Ví dụ cây trên thứ tự duyệt sẽ là: <code>1, 7, 8, 2, 6, 9, 5, 11, 4</code>.</p>
 <h2 id="implementation">Implementation</h2>
 <p>Chúng ta sẽ implement kiểu dữ liệu binary tree trong Rust, sau đó sẽ implement thuật toán duyệt cây cho kiểu dữ liệu này.</p>
+<p><img src="img/stepbystep.jpg" alt=""></p>
 <p>Trong quá trình implement, mình sẽ chỉ ra một số lỗi mà người mới học Rust thường gặp phải, và Rust compiler sẽ giúp chúng ta nhận ra và giải quyết các lỗi đó rất hiệu quả.</p>
 <p>Còn bây giờ thì chúng ta bắt đầu thôi.</p>
 <h3 id="kh-i-t-o-d-n">Khởi tạo dự án</h3>
@@ -61,6 +76,7 @@ $ ./binary_tree
 </code></pre><p>Bạn có thể viết 2 lệnh này vào một <code>makefile</code> và chạy bằng lệnh <code>make</code>. Hoặc nếu xài vim, bạn có thể sử dụng plugin <a href="https://github.com/huytd/vim-quickrun">vim-quickrun</a> (do mình viết, shameless PR :v) để chạy nhanh bằng tổ hợp phím <code>&lt;Leader&gt;e</code>.</p>
 <p>Xong rồi, giờ zô code thiệt nè.</p>
 <h3 id="khai-b-o-c-u-tr-c-d-li-u-c-a-m-t-node">Khai báo cấu trúc dữ liệu của một node</h3>
+<p><img src="img/datastruct.png" alt=""></p>
 <p>Thông thường khi implement kiểu tree, chúng ta sẽ bắt đầu implement từ một node của tree đó.</p>
 <p>Theo như định nghĩa ở trên, một node mà chúng ta implement sẽ có các trường (fields) sau:</p>
 <ul>
@@ -88,6 +104,7 @@ error[E0072]: recursive type `Node` has infinite size
 error: aborting due to previous error
 </code></pre><p>É, lỗi rồi. Lỗi ngay từ shot đầu tiên luôn :)) để xem lỗi gì nào.</p>
 <h4 id="v-n-recursive-type-trong-rust">Vấn đề recursive type trong Rust</h4>
+<p><img src="img/recursion.jpg" alt=""></p>
 <p>Nội dung thông báo lỗi nó ghi là: <code>recursive type Node has infinite size</code>, tức là: <code>Node</code> là kiểu dữ liệu đệ quy (vì chúng ta tham chiếu tới <code>Node</code> bên trong chính nó), nên Rust không xác định được kích thước của nó -- quá bự, vô hạn. Tại sao vậy? OK, dừng lại để nói về vấn đề này một chút nhé.</p>
 <p>Cũng giống như C/C++, kích thước của một <code>struct</code> sẽ được xác định bằng tổng số kích thước các field bên trong nó. Lấy ví dụ đơn giản, nếu ta có một <code>struct</code> như sau:</p>
 <pre><code>struct Point {
@@ -122,6 +139,7 @@ $</pre>
     right: Option&lt;Box&lt;Node&gt;&gt;
 }
 </code></pre><p>Compile lại thì sẽ thấy lỗi đó đã hết, ngon lành! Có một cái warning xuất hiện, nhưng bây giờ chúng ta chưa cần nói tới nó, để nói tiếp về vụ <code>Box</code> cái đã.</p>
+<p><img src="img/boxes.jpg" alt=""></p>
 <p>Tại sao dùng <code>Box&lt;&gt;</code> lại giải quyết được vấn đề recursive struct? Đầu tiên cần hiểu <code>Box&lt;&gt;</code> là gì.</p>
 <p>Trong Rust, mặc định mọi giá trị đều được khai báo trong <strong>stack</strong> <sup><a href="#tham-kh-o">[3]</a></sup>, chúng ta sử dụng <code>Box&lt;T&gt;</code> khi cần khai báo một biến kiểu <code>T</code> trong <strong>heap</strong>. Một <strong>box</strong> thực chất là một smart pointer trỏ tới một giá trị đã được tạo ra trong <strong>heap</strong>.</p>
 <p>Trong trường hợp này, chúng ta đặt <code>Node</code> vào trong <code>Box&lt;&gt;</code> để khai báo dạng <code>Box&lt;Node&gt;</code>, thì thực chất chúng ta đang khai báo một <strong>pointer trỏ tới một vùng nhớ kiểu <code>Node</code> trong heap</strong>, vậy nên bên trong <code>Node</code> struct của chúng ta lúc này, kích thước của <code>left</code> và <code>right</code> thực chất là <strong>kích thước của pointer <code>Box&lt;Node&gt;</code></strong>, và pointer này có kiểu <code>Option</code>.</p>
@@ -235,12 +253,82 @@ left: node!(
     ...
 </code></pre><p>Giờ chúng ta đã có một cây nhị phân hoàn chỉnh đúng với yêu cầu ban đầu.</p>
 <p><img src="img/binary-tree-try-03.png" alt=""></p>
+<h3 id="duy-t-c-y">Duyệt cây</h3>
+<p>Giờ chúng ta sẽ implement thuật toán duyệt cây, vì bài viết cũng khá dài rồi nên mình sẽ chỉ trình bày một loại của thuật toán duyệt <strong>DFS</strong>, cụ thể là <strong>In-order</strong>.</p>
+<p>Nhắc lại lý thuyết: chúng ta sẽ duyệt theo thứ tự <strong>Left -&gt; Root -&gt; Right</strong>.</p>
+<p>Ý tưởng để implement thuật toán này là tạo ra một hàm trả về một chuỗi, chuỗi này lưu lại quá trình duyệt từ Node hiện tại đến các node con bên trong nó theo thứ tự của <strong>In-order</strong>.</p>
+<h4 id="t-o-methods-v-i-impl">Tạo methods với impl</h4>
+<p>Như vậy là chúng ta cần tạo ra một method cho kiểu dữ liệu <code>Node</code>, trong Rust chúng ta có thể sử dụng từ khóa <code>impl</code> để định nghĩa ra các method cho một kiểu. <sup><a href="#tham-kh-o">[5]</a></sup></p>
+<pre><code>impl Node {
+    fn traversal(&amp;self) -&gt; String {
+        let mut output = String::new();
+        // Implement here
+        return output;
+    }
+}
+</code></pre><p>Bằng cách sử dụng <code>impl</code>, chúng ta đã khai báo một hàm <code>traversal()</code> cho kiểu <code>Node</code>, hàm này không nhận tham số nào cả, đối vối tham số <code>&amp;self</code> trong lệnh khai báo, chúng ta có thể xem nó như là từ khóa <code>this</code> trong các ngôn ngữ như JavaScript để xác định context của hàm hiện tại. Bạn có thể đọc thêm tài liệu về vấn đề này ở phần cuối.</p>
+<h4 id="s-d-ng-matching-ki-m-tra-node-r-ng">Sử dụng matching để kiểm tra Node rỗng</h4>
+<p>Giải pháp của chúng ta khá là đơn giản, duyệt từng node và trả về giá trị của node đó nếu có, cộng dồn lại và trả về 1 string để in ra.</p>
+<p>Vậy thì việc tiếp theo phải làm đó là kiểm tra xem các node con có tồn tại hay không. Nhớ lại ở trên có đề cập, một biến kiểu <code>Option</code> luôn trả về một trong 2 giá trị <code>Some(...)</code> hoặc <code>None</code>, vậy để kiểm tra ta có thể dùng <code>match</code>, cú pháp của <code>match</code> cũng na ná giống như <code>switch</code> ở các ngôn ngữ khác nên chắc không cần giải thích nhiều <sup><a href="#tham-kh-o">[6]</a></sup>:</p>
+<pre><code>match self.left {
+    Some(ref node) =&gt; { },
+    None =&gt; { }
+}
+</code></pre><p>Chắc không cần giải thích các bạn cũng sẽ hiểu là việc tiếp theo chúng ta có thể sử dụng được biến <code>node</code> ở trong scope của trường hợp <code>Some(...)</code> để tương tác với node hiện tại rồi đúng không nào? Còn trường hợp <code>None</code>, mặc dù không làm gì cả nhưng chúng ta vẫn phải handle nó, nếu không sẽ gặp lỗi khi compile như thế này: </p>
+<pre><code>error[E0004]: non-exhaustive patterns: `None` not covered
+  --&gt; binary_tree.rs:21:15
+   |
+21 |         match self.left {
+   |               ^^^^^^^^^ pattern `None` not covered
+
+error: aborting due to previous error
+</code></pre><p>Thông báo lỗi nói rằng: Trường hợp <code>None</code> chưa được cover. Đây cũng là một ví dụ cho thấy sự khắt khe của Rust để đảm bảo không lọt bất kì trường hợp khả nghi nào có khả năng trở thành bug trong lúc runtime cả.</p>
+<p>Đối với giá trị của một node, là kiểu <code>i32</code>, chúng ta có thể chuyển về kiểu <code>String</code> bằng lệnh <code>.to_string()</code>, và để thực hiện việc cộng chuỗi, ta cần đưa nó về kiểu <code>&amp;str</code>, vậy cần thêm vào lệnh <code>.as_str()</code>, như vậy ta có đoạn code implement đầy đủ của hàm <code>traversal()</code> như sau:</p>
+<pre><code>impl Node {
+    fn traversal(&amp;self) -&gt; String {
+        let mut output = String::new();
+
+        // Left
+        match self.left {
+            Some(ref node) =&gt; { 
+                output += node.traversal().as_str();
+            },
+            None =&gt; { }
+        }
+
+        // Root
+        output += self.value.to_string().as_str();
+
+        // Right
+        match self.right {
+            Some(ref node) =&gt; { 
+                output += node.traversal().as_str();
+            },
+            None =&gt; { }
+        }
+
+        return output;
+    }
+}
+</code></pre><p>Cuối cùng, chúng ta có thể gọi hàm này để in ra nội dung của cây:</p>
+<pre><code>fn main() {
+    ...
+    println!(&quot;{}&quot;, tree.traversal());
+}
+</code></pre><p>Kết quả sẽ là: </p>
+<pre><code>2 7 6 1 8
+</code></pre><h2 id="k-t-th-c">Kết thúc</h2>
+<p>Vậy là chúng ta đã implement thành công một thuật toán đơn giản trong Rust. Và học được khá là nhiều thứ trong quá trình implement.</p>
+<p>Các bạn có thể thử thay đổi chương trình trên để implement tiếp các kiểu <strong>Pre-order</strong>, <strong>Post-order</strong> hoặc suy nghĩ để implement thuật toán duyệt <strong>BFS</strong> xem nhé.</p>
+<p>Và đừng quên đọc thêm các link tham khảo mình tổng hợp lại ở bên dưới. Hy vọng qua bài viết khá dài này, các bạn cũng làm quen được các điểm đặc biệt trong Rust so với các ngôn ngữ khác, và có thể tiếp tục tìm hiểu thêm về ngôn ngữ thú vị này.</p>
 <h2 id="tham-kh-o">Tham khảo</h2>
 <ul>
 <li>[1] Huy Trần, <em><a href="https://huytd.github.io/posts/rust-intro.html">Rust là gì, có ăn được không?</a></em>, Huy&#39;s Blog</li>
 <li>[2] Thạch Lê, <em><a href="https://kipalog.com/posts/MIR---Su-tinh-tuy-cua-chu-cua-be-nho-Rust">MIR - Sự tinh túy của chú cua bé nhỏ Rust</a></em>, Kipalog</li>
 <li>[3] <em><a href="https://doc.rust-lang.org/book/the-stack-and-the-heap.html">The Stack and The Heap</a></em>, The Rust Programming Language Book, Ch. 5.1</li>
 <li>[4] <em><a href="https://doc.rust-lang.org/book/macros.html">Macros</a></em>, The Rust Programming Language Book, Ch. 4.34</li>
+<li>[5] <em><a href="https://doc.rust-lang.org/book/method-syntax.html">Method Syntax</a></em>, The Rust Programming Language Book, Ch. 4.16</li>
+<li>[6] <em><a href="https://doc.rust-lang.org/book/match.html">Pattern Matching</a></em>, The Rust Programming Language Book, Ch. 4.14</li>
 </ul>
 
                 <div class="fb-like" data-href="http://huytd.github.io/posts/rust-binary-tree-traversal.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>

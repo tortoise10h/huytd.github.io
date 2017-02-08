@@ -2,6 +2,22 @@
 
 Các bài giới thiệu về Rust <sup>[[1]][ref]</sup> thì nhiều quá rồi <sup>[[2]][ref]</sup> nhưng chưa thấy bài nào nói về việc sử dụng Rust hết, nên hôm nay mình sẽ bắt đầu viết một vài bài áp dụng Rust để implement một số thuật toán cơ bản, mở đầu sẽ là: **Thuật toán duyệt cây nhị phân.**
 
+![](img/ok_meme.png)
+
+Sao? Không thích thuật toán à? Từ từ, đừng bỏ đi vội, mặc dù đề bài có vẻ khô khan nhưng qua bài viết này các bạn sẽ học được kha khá kiến thức quan trọng trong Rust:
+
+- Làm việc với `struct`
+- Sử dụng kiểu `Option<>`
+- Sử dụng kiểu `Box<>` 
+- Khai báo biến trong Heap và Stack
+- Sử dụng các `attribute` để tùy biến Rust compiler
+- Sử dụng `pattern matching`
+- Làm việc với `macro`
+- Khai báo method dùng `impl`
+- Thao tác cơ bản với `String`
+
+Và quan trọng nhất là cách sử dụng các thông báo lỗi của Rust compiler để tìm manh mối giải quyết vấn đề một cách hiệu quả.
+
 ## Kiến thức cơ bản  
 
 Nói sơ qua một chút kiến thức cơ bản, **cây nhị phân** (binary tree) là một loại cấu trúc dữ liệu dạng **cây** (tree), mỗi một node có từ một đến hai node con.
@@ -29,6 +45,8 @@ Các tên gọi quy ước trong một node của cây nhị phân:
 ## Implementation
 
 Chúng ta sẽ implement kiểu dữ liệu binary tree trong Rust, sau đó sẽ implement thuật toán duyệt cây cho kiểu dữ liệu này.
+
+![](img/stepbystep.jpg)
 
 Trong quá trình implement, mình sẽ chỉ ra một số lỗi mà người mới học Rust thường gặp phải, và Rust compiler sẽ giúp chúng ta nhận ra và giải quyết các lỗi đó rất hiệu quả.
 
@@ -67,6 +85,8 @@ Xong rồi, giờ zô code thiệt nè.
 
 ### Khai báo cấu trúc dữ liệu của một node
 
+![](img/datastruct.png)
+
 Thông thường khi implement kiểu tree, chúng ta sẽ bắt đầu implement từ một node của tree đó.
 
 Theo như định nghĩa ở trên, một node mà chúng ta implement sẽ có các trường (fields) sau:
@@ -104,6 +124,8 @@ error: aborting due to previous error
 É, lỗi rồi. Lỗi ngay từ shot đầu tiên luôn :)) để xem lỗi gì nào.
 
 #### Vấn đề recursive type trong Rust
+
+![](img/recursion.jpg)
 
 Nội dung thông báo lỗi nó ghi là: `recursive type Node has infinite size`, tức là: `Node` là kiểu dữ liệu đệ quy (vì chúng ta tham chiếu tới `Node` bên trong chính nó), nên Rust không xác định được kích thước của nó -- quá bự, vô hạn. Tại sao vậy? OK, dừng lại để nói về vấn đề này một chút nhé.
 
@@ -158,6 +180,8 @@ struct Node {
 ```
 
 Compile lại thì sẽ thấy lỗi đó đã hết, ngon lành! Có một cái warning xuất hiện, nhưng bây giờ chúng ta chưa cần nói tới nó, để nói tiếp về vụ `Box` cái đã.
+
+![](img/boxes.jpg)
 
 Tại sao dùng `Box<>` lại giải quyết được vấn đề recursive struct? Đầu tiên cần hiểu `Box<>` là gì.
 
@@ -341,7 +365,108 @@ Giờ chúng ta đã có một cây nhị phân hoàn chỉnh đúng với yêu 
 
 ### Duyệt cây
 
-Giờ chúng ta sẽ implement thuật toán duyệt cây, vì bài viết cũng khá dài rồi nên mình sẽ chỉ trình bày thuật toán duyệt DFS 
+Giờ chúng ta sẽ implement thuật toán duyệt cây, vì bài viết cũng khá dài rồi nên mình sẽ chỉ trình bày một loại của thuật toán duyệt **DFS**, cụ thể là **In-order**.
+
+Nhắc lại lý thuyết: chúng ta sẽ duyệt theo thứ tự **Left -> Root -> Right**.
+
+Ý tưởng để implement thuật toán này là tạo ra một hàm trả về một chuỗi, chuỗi này lưu lại quá trình duyệt từ Node hiện tại đến các node con bên trong nó theo thứ tự của **In-order**.
+
+#### Tạo methods với impl
+
+Như vậy là chúng ta cần tạo ra một method cho kiểu dữ liệu `Node`, trong Rust chúng ta có thể sử dụng từ khóa `impl` để định nghĩa ra các method cho một kiểu. <sup>[[5]][ref]</sup>
+
+```
+impl Node {
+    fn traversal(&self) -> String {
+        let mut output = String::new();
+        // Implement here
+        return output;
+    }
+}
+```
+
+Bằng cách sử dụng `impl`, chúng ta đã khai báo một hàm `traversal()` cho kiểu `Node`, hàm này không nhận tham số nào cả, đối vối tham số `&self` trong lệnh khai báo, chúng ta có thể xem nó như là từ khóa `this` trong các ngôn ngữ như JavaScript để xác định context của hàm hiện tại. Bạn có thể đọc thêm tài liệu về vấn đề này ở phần cuối.
+
+#### Sử dụng matching để kiểm tra Node rỗng
+
+Giải pháp của chúng ta khá là đơn giản, duyệt từng node và trả về giá trị của node đó nếu có, cộng dồn lại và trả về 1 string để in ra.
+
+Vậy thì việc tiếp theo phải làm đó là kiểm tra xem các node con có tồn tại hay không. Nhớ lại ở trên có đề cập, một biến kiểu `Option` luôn trả về một trong 2 giá trị `Some(...)` hoặc `None`, vậy để kiểm tra ta có thể dùng `match`, cú pháp của `match` cũng na ná giống như `switch` ở các ngôn ngữ khác nên chắc không cần giải thích nhiều <sup>[[6]][ref]</sup>:
+
+```
+match self.left {
+    Some(ref node) => { },
+    None => { }
+}
+```
+
+Chắc không cần giải thích các bạn cũng sẽ hiểu là việc tiếp theo chúng ta có thể sử dụng được biến `node` ở trong scope của trường hợp `Some(...)` để tương tác với node hiện tại rồi đúng không nào? Còn trường hợp `None`, mặc dù không làm gì cả nhưng chúng ta vẫn phải handle nó, nếu không sẽ gặp lỗi khi compile như thế này: 
+
+```
+error[E0004]: non-exhaustive patterns: `None` not covered
+  --> binary_tree.rs:21:15
+   |
+21 |         match self.left {
+   |               ^^^^^^^^^ pattern `None` not covered
+
+error: aborting due to previous error
+```
+
+Thông báo lỗi nói rằng: Trường hợp `None` chưa được cover. Đây cũng là một ví dụ cho thấy sự khắt khe của Rust để đảm bảo không lọt bất kì trường hợp khả nghi nào có khả năng trở thành bug trong lúc runtime cả.
+
+Đối với giá trị của một node, là kiểu `i32`, chúng ta có thể chuyển về kiểu `String` bằng lệnh `.to_string()`, và để thực hiện việc cộng chuỗi, ta cần đưa nó về kiểu `&str`, vậy cần thêm vào lệnh `.as_str()`, như vậy ta có đoạn code implement đầy đủ của hàm `traversal()` như sau:
+
+```
+impl Node {
+    fn traversal(&self) -> String {
+        let mut output = String::new();
+
+        // Left
+        match self.left {
+            Some(ref node) => { 
+                output += node.traversal().as_str();
+            },
+            None => { }
+        }
+
+        // Root
+        output += self.value.to_string().as_str();
+
+        // Right
+        match self.right {
+            Some(ref node) => { 
+                output += node.traversal().as_str();
+            },
+            None => { }
+        }
+
+        return output;
+    }
+}
+```
+
+Cuối cùng, chúng ta có thể gọi hàm này để in ra nội dung của cây:
+
+```
+fn main() {
+    ...
+    println!("{}", tree.traversal());
+}
+```
+
+Kết quả sẽ là: 
+
+```
+2 7 6 1 8
+```
+
+## Kết thúc
+
+Vậy là chúng ta đã implement thành công một thuật toán đơn giản trong Rust. Và học được khá là nhiều thứ trong quá trình implement.
+
+Các bạn có thể thử thay đổi chương trình trên để implement tiếp các kiểu **Pre-order**, **Post-order** hoặc suy nghĩ để implement thuật toán duyệt **BFS** xem nhé.
+
+Và đừng quên đọc thêm các link tham khảo mình tổng hợp lại ở bên dưới. Hy vọng qua bài viết khá dài này, các bạn cũng làm quen được các điểm đặc biệt trong Rust so với các ngôn ngữ khác, và có thể tiếp tục tìm hiểu thêm về ngôn ngữ thú vị này.
 
 ## Tham khảo
 
@@ -349,6 +474,8 @@ Giờ chúng ta sẽ implement thuật toán duyệt cây, vì bài viết cũng
 - [2] Thạch Lê, _[MIR - Sự tinh túy của chú cua bé nhỏ Rust][rust-mir]_, Kipalog
 - [3] _[The Stack and The Heap][stack-and-heap]_, The Rust Programming Language Book, Ch. 5.1
 - [4] _[Macros][macro]_, The Rust Programming Language Book, Ch. 4.34
+- [5] _[Method Syntax][methods]_, The Rust Programming Language Book, Ch. 4.16
+- [6] _[Pattern Matching][matching]_, The Rust Programming Language Book, Ch. 4.14
 
 [ref]: #tham-kh-o
 [rust-la-gi]: https://huytd.github.io/posts/rust-intro.html
@@ -356,3 +483,5 @@ Giờ chúng ta sẽ implement thuật toán duyệt cây, vì bài viết cũng
 [stack-and-heap]: https://doc.rust-lang.org/book/the-stack-and-the-heap.html 
 [trait-object-why-pointer]: https://doc.rust-lang.org/book/trait-objects.html#why-pointers
 [macro]: https://doc.rust-lang.org/book/macros.html
+[methods]: https://doc.rust-lang.org/book/method-syntax.html
+[matching]: https://doc.rust-lang.org/book/match.html
