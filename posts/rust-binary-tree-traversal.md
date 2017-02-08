@@ -533,6 +533,8 @@ Vậy là chúng ta đã implement thành công một thuật toán đơn giản
 
 Các bạn có thể thử thay đổi chương trình trên để implement tiếp các kiểu **Pre-order**, **Post-order** hoặc suy nghĩ để implement thuật toán duyệt **BFS** xem nhé.
 
+Vì bài viết có mục đích dẫn các bạn đi từng bước để ứng dụng Rust vào giải quyết các vấn đề thường gặp, nên thuật toán đưa ra trong bài không phải là giải pháp tối ưu cho bài toán duyệt cây nhị phân, ở phần tiếp theo chúng ta sẽ bàn về các kĩ thuật tối ưu thuật toán này.
+
 Và đừng quên đọc thêm các link tham khảo mình tổng hợp lại ở bên dưới. Hy vọng qua bài viết khá dài này, các bạn cũng làm quen được các điểm đặc biệt trong Rust so với các ngôn ngữ khác, và có thể tiếp tục tìm hiểu thêm về ngôn ngữ thú vị này.
 
 ## Tham khảo
