@@ -149,3 +149,11 @@ alias br="git branch"
 alias gc="git checkout"
 alias stash="git stash"
 ```
+
+## Validate Domain SSL certificate
+
+Run this command:
+
+```
+echo | openssl s_client -showcerts -servername <domain> -connect <domain>:443 2>/dev/null | openssl x509 -inform pem -noout -text
+```

@@ -100,6 +100,9 @@ alias brr=&quot;git branch --all&quot;
 alias br=&quot;git branch&quot;
 alias gc=&quot;git checkout&quot;
 alias stash=&quot;git stash&quot;
+</code></pre><h2 id="validate-domain-ssl-certificate">Validate Domain SSL certificate</h2>
+<p>Run this command:</p>
+<pre><code>echo | openssl s_client -showcerts -servername &lt;domain&gt; -connect &lt;domain&gt;:443 2&gt;/dev/null | openssl x509 -inform pem -noout -text
 </code></pre>
                 <div class="fb-like" data-href="http://huytd.github.io/posts/random.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
