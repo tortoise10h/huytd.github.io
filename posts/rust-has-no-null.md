@@ -4,13 +4,13 @@ Có lẽ đây là thắc mắc được đưa ra nhiều nhất khi mới tiế
 
 ## NULL trong các ngôn ngữ lập trình 
 
-Đã là lập trình viên, thì dù là loại dỏm <sup>[[1]][ref]</sup>  hay loại không dỏm<sup>[[2]][ref]</sup> thì chắc hẳn ai cũng quá quen thuộc với `NULL`, hay `nil`.
+Đã là lập trình viên, chắc hẳn ai cũng quá quen thuộc với `NULL`, hay `nil`.
 
 Thậm chí trong phiên bản Pokemon Sun & Pokemon Moon mới nhất (ở thời điểm viết bài này), cũng xuất hiện một Pokemon mới tên là **Type: Null** ([タイプ：ヌル][pkmnull]).
 
 ![](img/typenull.jpg)
 
-Thật không thể tin được!!! Mới ngày nào mình còn hóng xem phim Pokemon trên truyền hình mỗi buổi chiều lúc 5h, chơi Pokemon trên Gameboy giả lập, lúc đó là gen 1 và gen 2, bản Indigo và Johto đấy, giờ đã là gen 7 và The Pokemon Company vẫn đang rất là ăn nên làm ra... À, quên, tí thì lạc đề... Quay về nói chuyện code tiếp nhé.
+=)) lạc đề, quay lại chủ đề chính.
 
 `NULL` là một giá trị diễn tả trạng thái không có gì cả, một giá trị chưa biết. Trong trường hợp là một con trỏ thì `NULL` cho biết con trỏ này không trỏ tới đâu cả.
 
@@ -38,7 +38,7 @@ if err != nil {
 // Tới được đây thì không tạch nhá 
 ```
 
-Tuy nhiên, dù được dùng rất phổ biến, việc tạo ra giá tri NULL vẫn bị chính cha đẻ của nó coi là một sai lầm "trị giá tỉ đô"<sup>[[3]][ref]</sup>.
+Tuy nhiên, dù được dùng rất phổ biến, việc tạo ra giá tri `NULL` vẫn bị chính cha đẻ của nó coi là một sai lầm "trị giá tỉ đô"<sup>[[1]][ref]</sup>.
 
 Trong suốt lịch sử phát triển của nền khoa học máy tính, đã có vô số chương trình máy tính tỏi không lý do, bởi cùng một hung thủ đó là `Null Pointer Exception`. =))
 
@@ -58,21 +58,39 @@ isNaN(1 + null)       // false
 isNaN(1 + undefined)  // true
 ```
 
-## Rust và NULL 
+Hoặc đối với SQL, chúng ta không thể so sánh giá trị `NULL` với các field trong một bảng một cách trực tiếp bằng các toán tử `=` hay `<>` được, mà phải dùng các toán tử đặc biệt, là `IS` và `IS NOT` để làm việc với chúng.<sup>[[2]][ref]</sup>
 
-Rust không khuyến khích việc sử dụng `NULL` bằng cách hạn chế nó lại (có nghĩa là Rust vẫn có `NULL`, nhưng không tự nhiên mà dùng được).
+## Tại sao lại phải check NULL?
 
-Để làm được điều này, đầu tiên, Rust không cho bạn gán bất kì giá trị nào là `NULL` cả, thay vào đó, Rust cung cấp một kiểu gọi là `Option<T>`. Ở [bài trước](https://huytd.github.io/posts/rust-binary-tree-traversal.html) mình cũng đã giới thiệu cách sử dụng `Option<T>`.
+Trong hầu hết mọi trường hợp, chúng ta thực hiện thao tác kiểm tra một biến có phải là `NULL` không, là vì chúng ta cần dùng tới giá trị của biến đó, nhưng lại sợ rằng nó không mang giá trị. Và vì sợ nên cứ phải check.
 
-### Kiểu Option thay thế cho NULL
+![](img/nullpointer.jpeg)
 
-Nói là thay thế thì cũng không đúng lắm, nhưng kiểu `Option<T>` cung cấp cho chúng ta cách giải quyết vấn đề tốt hơn mà không phải dùng `NULL`.
+Giống như cứ bước ra khỏi nhà là cho tay vào sờ cái quần, à, cái túi quần, để kiểm tra xem mình có đem theo điện thoại không. Riết rồi thành quen, đưa tay sờ quần như một phản xạ tự nhiên.
 
-Một biến kiểu `Option<T>` sẽ luôn luôn tồn tại một trong hai giá trị `None` (không có giá trị nào cả) hoặc `Some(T)` (trả về giá trị kiểu `T` của biến đó).
+Vậy làm sao để khỏi phải đưa tay sờ quần liên tục nữa? Phải có một cách gì đó để chắc chắn rằng cái điện thoại luôn luôn nằm trong túi, đúng không?
 
-Khi gặp một vấn đề mà ta chưa biết chắc chắn kết quả trả về của vấn đề đó như thế nào, chúng ta có thể sử dụng `Option<T>`, ví dụ:
+Tương tự như thế đối với lập trình, để thoát khỏi việc check `NULL` liên tục thì ta phải có cách gì đó để đảm bảo rằng một giá trị không bao giờ bị `NULL`.
 
-Implement một hàm chia hai số `a` và `b`:
+Để làm được điều này, Rust không cho bạn gán bất kì giá trị nào là `NULL` cả (dữ dội chưa, quản không được thì cấm luôn cho khỏe :))) và Rust không phải là ngôn ngữ đầu tiên hoặc duy nhất áp dụng phương pháp này, một số ngôn ngữ lập trình hàm như Haskell cũng cấm không cho một biến mang giá trị `NULL`. <sup>[[3]][maybe-monad]</sup>
+
+(Nói như vậy không có nghĩa Rust là một ngôn ngữ lập trình hàm nhé)
+
+## Không cho xài NULL thì giờ xài gì?
+
+Và cũng giống như Haskell, Rust cung cấp một kiểu gọi là `Option<T>` (trong Haskell là `Maybe` và trong Swift là `Optional`), cho chúng ta một phương pháp khác để giải quyết vấn đề mà không cần dùng tới `NULL`. 
+
+Ở [bài trước](https://huytd.github.io/posts/rust-binary-tree-traversal.html) mình cũng đã giới thiệu cách sử dụng `Option<T>`.
+
+Bây giờ là lúc nói rõ hơn về vấn đề này.
+
+### Bản chất của kiểu Option
+
+Bằng việc bỏ `NULl`, từ bây giờ mỗi khi sử dụng một biến, bạn có thể yên tâm rằng biến đó luôn có giá trị, không bị `NULL` nữa.
+
+Khi gặp một vấn đề mà ta chưa biết chắc chắn kết quả trả về của vấn đề đó như thế nào, nó có thể chứa giá trị hoặc không, ví dụ như trong linked list, hoặc khi implement một hàm chia hai số `a` và `b`, thì ta có thể dùng kiểu `Option<T>`.
+
+Một biến kiểu `Option<T>` sẽ luôn luôn tồn tại một trong hai giá trị `None` (không có giá trị nào cả) hoặc `Some(T)` (trả về giá trị kiểu `T` của biến đó). Ví dụ:
 
 ```
 fn divide(a: f64, b: f64) -> Option<f64> {
@@ -86,6 +104,8 @@ fn divide(a: f64, b: f64) -> Option<f64> {
 
 Trong đoạn code trên, chúng ta kiểm tra nếu mẫu số `b` bằng `0` thì phép chia không thực hiện được, và hàm `divide(a,b)` trả về giá trị `None`, ngược lại thì trả về giá trị `Some(a / b)`.
 
+Vậy chúng ta sẽ làm gì với một trong 2 giá trị trả về này? Chúng ta sẽ lấy nó ra như thế nào?
+
 ### Dùng match để handle các giá trị trả về
 
 Khi nhận được một giá trị kiểu `Option<T>`, chúng ta có thể đọc giá trị từ biến này ra bằng cách dùng `match`:
@@ -97,7 +117,15 @@ match result {
 }
 ```
 
-Tất nhiên đến đây thì chưa có gì đáng nói, điều đáng nói ở đây là khi bạn không handle đủ các khả năng sẽ có, Rust sẽ báo lỗi.
+Tất nhiên đến đây thì chưa có gì đáng nói, nghe có vẻ giống với câu lệnh `switch()` ở các ngôn ngữ khác.
+
+Điều đáng nói ở đây là `match` bắt buộc bạn **phải kiểm tra hết tất cả mọi trường hợp có thể xảy ra** (exhaustiveness checking), ví dụ như ở đoạn code trên mà bạn không handle trường hợp `None` thì sẽ nhận thông báo lỗi:
+
+```
+error: non-exhaustive patterns: `None` not covered
+```
+
+Vì chúng ta sử dụng kiểu `Option<T>` cho một biến khi chúng ta không chắc chắn giá trị của nó là gì, nên bắt buộc chúng ta phải kiểm tra đầy đủ mọi khả năng có thể có của nó. 
 
 ### Dùng if let để lấy giá trị trả về 
 
@@ -142,21 +170,19 @@ Tóm lại, bằng cách từ bỏ việc sử dụng `NULL`, Rust cung cấp ch
 
 Và luôn luôn, sẽ có một anh bạn Rust compiler đẹp zai và khó tính luôn chực chờ bật ra để bắt nạt chúng ta mỗi khi chúng ta để lọt các trường hợp nguy hiểm.
 
-![](img/nullpointer.jpeg)
 
 Có thể bạn sẽ thấy các cách mà Rust đưa ra để chúng ta có thể từ bỏ việc sử dụng `NULL` nó chẳng có gì mới mẻ, hay thậm chí là chúng ta có thể dễ dàng sử dụng những cách này (hoặc tương tự như những cách này) trong các ngôn ngữ khác như C/C++ hay Java, JavaScript. Điều này đúng. Vấn đề là nếu không bắt buộc thì bạn sẽ chẳng bao giờ dùng tới những cách này, mọi lập trình viên đều như vậy (trừ một vài người kĩ tính), những gì Rust làm chỉ đơn giản là bắt bẻ và khắt khe hơn để chúng ta buộc phải sử dụng những cách đó vào mà thôi.
 
-
 ## Đọc thêm
 
-- [1]: [Unhappy Developers: Bad for Themselves, Bad for Process, and Bad for Software Product][unhappy-programmer]
-- [2]: Huy Đỗ, [Happy Programmer][happy-programmer], Kipalog
-- [3]: Tony Hoare, [Null References: The Billion Dollar Mistake][billion-dollar-mistake], Infoq
+- [1]: Tony Hoare, [Null References: The Billion Dollar Mistake][billion-dollar-mistake], Infoq
+- [2]: Huy Đỗ, [SQL and NULL][sql-null], Kipalog
+- [3]: Justin Le, ["Có Không?" Functional idioms để dùng nullable values với functions như normal values][maybe-monad], Kipalog
 - [4]: Neil Brown, [A taste of Rust][taste-of-rust], LWN.net
 
-[ref]: #d-c-th-m
+[ref]: #-c-th-m
 [pkmnull]: http://bulbapedia.bulbagarden.net/wiki/Type:_Null_(Pok%C3%A9mon)
-[unhappy-programmer]: https://news.ycombinator.com/item?id=13534018
-[happy-programmer]: https://kipalog.com/posts/Happy-Programmer
+[sql-null]: https://kipalog.com/posts/SQL-and-NULL
 [billion-dollar-mistake]: https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare
+[maybe-monad]: https://kipalog.com/posts/Co-Khong---Functional-idioms-de-dung-nullable-values-voi-functions-nhu-normal-values--Phan-1
 [taste-of-rust]: https://lwn.net/Articles/547145/

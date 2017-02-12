@@ -22,10 +22,10 @@
                 <h1 id="rust-kh-ng-c-null-th-code-ki-u-g-">Rust không có NULL thì code kiểu gì?</h1>
 <p>Có lẽ đây là thắc mắc được đưa ra nhiều nhất khi mới tiếp cận với Rust. Hẳn là các bạn đã biết, hoặc nghe đâu đó là: <strong>Trong Rust không có NULL</strong>. Bài viết này sẽ giúp cho các bạn hiểu rõ hơn về vấn đề này.</p>
 <h2 id="null-trong-c-c-ng-n-ng-l-p-tr-nh">NULL trong các ngôn ngữ lập trình</h2>
-<p>Đã là lập trình viên, thì dù là loại dỏm <sup><a href="#d-c-th-m">[1]</a></sup>  hay loại không dỏm<sup><a href="#d-c-th-m">[2]</a></sup> thì chắc hẳn ai cũng quá quen thuộc với <code>NULL</code>, hay <code>nil</code>.</p>
+<p>Đã là lập trình viên, chắc hẳn ai cũng quá quen thuộc với <code>NULL</code>, hay <code>nil</code>.</p>
 <p>Thậm chí trong phiên bản Pokemon Sun &amp; Pokemon Moon mới nhất (ở thời điểm viết bài này), cũng xuất hiện một Pokemon mới tên là <strong>Type: Null</strong> (<a href="http://bulbapedia.bulbagarden.net/wiki/Type:_Null_(Pok%C3%A9mon)">タイプ：ヌル</a>).</p>
 <p><img src="img/typenull.jpg" alt=""></p>
-<p>Thật không thể tin được!!! Mới ngày nào mình còn hóng xem phim Pokemon trên truyền hình mỗi buổi chiều lúc 5h, chơi Pokemon trên Gameboy giả lập, lúc đó là gen 1 và gen 2, bản Indigo và Johto đấy, giờ đã là gen 7 và The Pokemon Company vẫn đang rất là ăn nên làm ra... À, quên, tí thì lạc đề... Quay về nói chuyện code tiếp nhé.</p>
+<p>=)) lạc đề, quay lại chủ đề chính.</p>
 <p><code>NULL</code> là một giá trị diễn tả trạng thái không có gì cả, một giá trị chưa biết. Trong trường hợp là một con trỏ thì <code>NULL</code> cho biết con trỏ này không trỏ tới đâu cả.</p>
 <p>Việc sử dụng <code>NULL</code> là rất phổ biến, ví dụ một trong những best practices khi lập trình C đó là kiểm tra giá trị <code>NULL</code> khi sử dụng hàm <code>malloc</code> để cấp phát bộ nhớ:</p>
 <pre><code>#include &lt;stdlib.h&gt;
@@ -43,7 +43,7 @@ if err != nil {
   log.Fatal(err)
 }
 // Tới được đây thì không tạch nhá
-</code></pre><p>Tuy nhiên, dù được dùng rất phổ biến, việc tạo ra giá tri NULL vẫn bị chính cha đẻ của nó coi là một sai lầm &quot;trị giá tỉ đô&quot;<sup><a href="#d-c-th-m">[3]</a></sup>.</p>
+</code></pre><p>Tuy nhiên, dù được dùng rất phổ biến, việc tạo ra giá tri <code>NULL</code> vẫn bị chính cha đẻ của nó coi là một sai lầm &quot;trị giá tỉ đô&quot;<sup><a href="#-c-th-m">[1]</a></sup>.</p>
 <p>Trong suốt lịch sử phát triển của nền khoa học máy tính, đã có vô số chương trình máy tính tỏi không lý do, bởi cùng một hung thủ đó là <code>Null Pointer Exception</code>. =))</p>
 <p><img src="img/nullpointermeme.jpeg" alt=""></p>
 <p>Hoặc có thể kể đến mối quan hệ nhập nhằng mù mờ giữa <code>null</code> và <code>undefined</code> đã khiến bao nhiêu thế hệ lập trình viên JavaScript phải vò đầu bứt tai:</p>
@@ -56,14 +56,23 @@ null == null          // true
 !null                 // true
 isNaN(1 + null)       // false
 isNaN(1 + undefined)  // true
-</code></pre><h2 id="rust-v-null">Rust và NULL</h2>
-<p>Rust không khuyến khích việc sử dụng <code>NULL</code> bằng cách hạn chế nó lại (có nghĩa là Rust vẫn có <code>NULL</code>, nhưng không tự nhiên mà dùng được).</p>
-<p>Để làm được điều này, đầu tiên, Rust không cho bạn gán bất kì giá trị nào là <code>NULL</code> cả, thay vào đó, Rust cung cấp một kiểu gọi là <code>Option&lt;T&gt;</code>. Ở <a href="https://huytd.github.io/posts/rust-binary-tree-traversal.html">bài trước</a> mình cũng đã giới thiệu cách sử dụng <code>Option&lt;T&gt;</code>.</p>
-<h3 id="ki-u-option-thay-th-cho-null">Kiểu Option thay thế cho NULL</h3>
-<p>Nói là thay thế thì cũng không đúng lắm, nhưng kiểu <code>Option&lt;T&gt;</code> cung cấp cho chúng ta cách giải quyết vấn đề tốt hơn mà không phải dùng <code>NULL</code>.</p>
-<p>Một biến kiểu <code>Option&lt;T&gt;</code> sẽ luôn luôn tồn tại một trong hai giá trị <code>None</code> (không có giá trị nào cả) hoặc <code>Some(T)</code> (trả về giá trị kiểu <code>T</code> của biến đó).</p>
-<p>Khi gặp một vấn đề mà ta chưa biết chắc chắn kết quả trả về của vấn đề đó như thế nào, chúng ta có thể sử dụng <code>Option&lt;T&gt;</code>, ví dụ:</p>
-<p>Implement một hàm chia hai số <code>a</code> và <code>b</code>:</p>
+</code></pre><p>Hoặc đối với SQL, chúng ta không thể so sánh giá trị <code>NULL</code> với các field trong một bảng một cách trực tiếp bằng các toán tử <code>=</code> hay <code>&lt;&gt;</code> được, mà phải dùng các toán tử đặc biệt, là <code>IS</code> và <code>IS NOT</code> để làm việc với chúng.<sup><a href="#-c-th-m">[2]</a></sup></p>
+<h2 id="t-i-sao-l-i-ph-i-check-null-">Tại sao lại phải check NULL?</h2>
+<p>Trong hầu hết mọi trường hợp, chúng ta thực hiện thao tác kiểm tra một biến có phải là <code>NULL</code> không, là vì chúng ta cần dùng tới giá trị của biến đó, nhưng lại sợ rằng nó không mang giá trị. Và vì sợ nên cứ phải check.</p>
+<p><img src="img/nullpointer.jpeg" alt=""></p>
+<p>Giống như cứ bước ra khỏi nhà là cho tay vào sờ cái quần, à, cái túi quần, để kiểm tra xem mình có đem theo điện thoại không. Riết rồi thành quen, đưa tay sờ quần như một phản xạ tự nhiên.</p>
+<p>Vậy làm sao để khỏi phải đưa tay sờ quần liên tục nữa? Phải có một cách gì đó để chắc chắn rằng cái điện thoại luôn luôn nằm trong túi, đúng không?</p>
+<p>Tương tự như thế đối với lập trình, để thoát khỏi việc check <code>NULL</code> liên tục thì ta phải có cách gì đó để đảm bảo rằng một giá trị không bao giờ bị <code>NULL</code>.</p>
+<p>Để làm được điều này, Rust không cho bạn gán bất kì giá trị nào là <code>NULL</code> cả (dữ dội chưa, quản không được thì cấm luôn cho khỏe :))) và Rust không phải là ngôn ngữ đầu tiên hoặc duy nhất áp dụng phương pháp này, một số ngôn ngữ lập trình hàm như Haskell cũng cấm không cho một biến mang giá trị <code>NULL</code>. <sup><a href="https://kipalog.com/posts/Co-Khong---Functional-idioms-de-dung-nullable-values-voi-functions-nhu-normal-values--Phan-1">[3]</a></sup></p>
+<p>(Nói như vậy không có nghĩa Rust là một ngôn ngữ lập trình hàm nhé)</p>
+<h2 id="kh-ng-cho-x-i-null-th-gi-x-i-g-">Không cho xài NULL thì giờ xài gì?</h2>
+<p>Và cũng giống như Haskell, Rust cung cấp một kiểu gọi là <code>Option&lt;T&gt;</code> (trong Haskell là <code>Maybe</code> và trong Swift là <code>Optional</code>), cho chúng ta một phương pháp khác để giải quyết vấn đề mà không cần dùng tới <code>NULL</code>. </p>
+<p>Ở <a href="https://huytd.github.io/posts/rust-binary-tree-traversal.html">bài trước</a> mình cũng đã giới thiệu cách sử dụng <code>Option&lt;T&gt;</code>.</p>
+<p>Bây giờ là lúc nói rõ hơn về vấn đề này.</p>
+<h3 id="b-n-ch-t-c-a-ki-u-option">Bản chất của kiểu Option</h3>
+<p>Bằng việc bỏ <code>NULl</code>, từ bây giờ mỗi khi sử dụng một biến, bạn có thể yên tâm rằng biến đó luôn có giá trị, không bị <code>NULL</code> nữa.</p>
+<p>Khi gặp một vấn đề mà ta chưa biết chắc chắn kết quả trả về của vấn đề đó như thế nào, nó có thể chứa giá trị hoặc không, ví dụ như trong linked list, hoặc khi implement một hàm chia hai số <code>a</code> và <code>b</code>, thì ta có thể dùng kiểu <code>Option&lt;T&gt;</code>.</p>
+<p>Một biến kiểu <code>Option&lt;T&gt;</code> sẽ luôn luôn tồn tại một trong hai giá trị <code>None</code> (không có giá trị nào cả) hoặc <code>Some(T)</code> (trả về giá trị kiểu <code>T</code> của biến đó). Ví dụ:</p>
 <pre><code>fn divide(a: f64, b: f64) -&gt; Option&lt;f64&gt; {
   if b == 0.0 {
     None
@@ -72,13 +81,17 @@ isNaN(1 + undefined)  // true
   }
 }
 </code></pre><p>Trong đoạn code trên, chúng ta kiểm tra nếu mẫu số <code>b</code> bằng <code>0</code> thì phép chia không thực hiện được, và hàm <code>divide(a,b)</code> trả về giá trị <code>None</code>, ngược lại thì trả về giá trị <code>Some(a / b)</code>.</p>
+<p>Vậy chúng ta sẽ làm gì với một trong 2 giá trị trả về này? Chúng ta sẽ lấy nó ra như thế nào?</p>
 <h3 id="d-ng-match-handle-c-c-gi-tr-tr-v-">Dùng match để handle các giá trị trả về</h3>
 <p>Khi nhận được một giá trị kiểu <code>Option&lt;T&gt;</code>, chúng ta có thể đọc giá trị từ biến này ra bằng cách dùng <code>match</code>:</p>
 <pre><code>match result {
   Some(c) =&gt; println!(&quot;Kết quả là: {}&quot;, c),
   None    =&gt; println!(&quot;Không chia được cho 0 đâu nhá!&quot;)
 }
-</code></pre><p>Tất nhiên đến đây thì chưa có gì đáng nói, điều đáng nói ở đây là khi bạn không handle đủ các khả năng sẽ có, Rust sẽ báo lỗi.</p>
+</code></pre><p>Tất nhiên đến đây thì chưa có gì đáng nói, nghe có vẻ giống với câu lệnh <code>switch()</code> ở các ngôn ngữ khác.</p>
+<p>Điều đáng nói ở đây là <code>match</code> bắt buộc bạn <strong>phải kiểm tra hết tất cả mọi trường hợp có thể xảy ra</strong> (exhaustiveness checking), ví dụ như ở đoạn code trên mà bạn không handle trường hợp <code>None</code> thì sẽ nhận thông báo lỗi:</p>
+<pre><code>error: non-exhaustive patterns: `None` not covered
+</code></pre><p>Vì chúng ta sử dụng kiểu <code>Option&lt;T&gt;</code> cho một biến khi chúng ta không chắc chắn giá trị của nó là gì, nên bắt buộc chúng ta phải kiểm tra đầy đủ mọi khả năng có thể có của nó. </p>
 <h3 id="d-ng-if-let-l-y-gi-tr-tr-v-">Dùng if let để lấy giá trị trả về</h3>
 <p>Một cách khác đó là dùng <code>if let</code> để lấy ra đúng giá trị cần dùng, cả cách này lẫn cách trên đều là các ứng dụng của pattern matching trong Rust.</p>
 <pre><code>if let Some(ref c) = result {
@@ -108,17 +121,16 @@ let e = result.unwrap(); // Panic :(
 </code></pre><h2 id="k-t-lu-n">Kết luận</h2>
 <p>Tóm lại, bằng cách từ bỏ việc sử dụng <code>NULL</code>, Rust cung cấp cho chúng ta rất nhiều cách khác để khiến ta khó viết code xấu (bad code, unsafe, ẩu) hơn, an toàn hơn và đảm bảo rằng không bao giờ chúng ta để lọt một trường hợp nguy hiểm nào ra ngoài. Từ đó sẽ giảm thiểu được tối đa nguy cơ xảy ra lỗi khi chạy chương trình.</p>
 <p>Và luôn luôn, sẽ có một anh bạn Rust compiler đẹp zai và khó tính luôn chực chờ bật ra để bắt nạt chúng ta mỗi khi chúng ta để lọt các trường hợp nguy hiểm.</p>
-<p><img src="img/nullpointer.jpeg" alt=""></p>
 <p>Có thể bạn sẽ thấy các cách mà Rust đưa ra để chúng ta có thể từ bỏ việc sử dụng <code>NULL</code> nó chẳng có gì mới mẻ, hay thậm chí là chúng ta có thể dễ dàng sử dụng những cách này (hoặc tương tự như những cách này) trong các ngôn ngữ khác như C/C++ hay Java, JavaScript. Điều này đúng. Vấn đề là nếu không bắt buộc thì bạn sẽ chẳng bao giờ dùng tới những cách này, mọi lập trình viên đều như vậy (trừ một vài người kĩ tính), những gì Rust làm chỉ đơn giản là bắt bẻ và khắt khe hơn để chúng ta buộc phải sử dụng những cách đó vào mà thôi.</p>
 <h2 id="-c-th-m">Đọc thêm</h2>
 <ul>
-<li>[1]: <a href="https://news.ycombinator.com/item?id=13534018">Unhappy Developers: Bad for Themselves, Bad for Process, and Bad for Software Product</a></li>
-<li>[2]: Huy Đỗ, <a href="https://kipalog.com/posts/Happy-Programmer">Happy Programmer</a>, Kipalog</li>
-<li>[3]: Tony Hoare, <a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">Null References: The Billion Dollar Mistake</a>, Infoq</li>
+<li>[1]: Tony Hoare, <a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">Null References: The Billion Dollar Mistake</a>, Infoq</li>
+<li>[2]: Huy Đỗ, <a href="https://kipalog.com/posts/SQL-and-NULL">SQL and NULL</a>, Kipalog</li>
+<li>[3]: Justin Le, <a href="https://kipalog.com/posts/Co-Khong---Functional-idioms-de-dung-nullable-values-voi-functions-nhu-normal-values--Phan-1">&quot;Có Không?&quot; Functional idioms để dùng nullable values với functions như normal values</a>, Kipalog</li>
 <li>[4]: Neil Brown, <a href="https://lwn.net/Articles/547145/">A taste of Rust</a>, LWN.net</li>
 </ul>
 
-                <div class="fb-like" data-href="http://huytd.github.io/posts/rust-have-no-null.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div class="fb-like" data-href="http://huytd.github.io/posts/rust-has-no-null.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**
