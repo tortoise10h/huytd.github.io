@@ -20,7 +20,7 @@
         <div class="container">
             <div class="main">
                 <h1 id="rust-kh-ng-c-null-th-code-ki-u-g-">Rust không có NULL thì code kiểu gì?</h1>
-<p>Có lẽ đây là thắc mắc được đưa ra nhiều nhất khi mới tiếp cận với Rust. Hẳn là các bạn đã biết, hoặc nghe đâu đó là: <strong>Trong Rust không có NULL</strong>. Bài viết này sẽ giúp cho các bạn hiểu rõ hơn về vấn đề này.</p>
+<p>Có lẽ một số bạn sẽ có thắc mắc như tiêu đề khi mới tìm hiểu về Rust. Hẳn là các bạn đã biết, hoặc nghe đâu đó là: <strong>Trong Rust không có NULL</strong>. Bài viết này sẽ giúp cho các bạn hiểu rõ hơn về vấn đề này. </p>
 <h2 id="null-trong-c-c-ng-n-ng-l-p-tr-nh">NULL trong các ngôn ngữ lập trình</h2>
 <p>Đã là lập trình viên, chắc hẳn ai cũng quá quen thuộc với <code>NULL</code>, hay <code>nil</code>.</p>
 <p>Thậm chí trong phiên bản Pokemon Sun &amp; Pokemon Moon mới nhất (ở thời điểm viết bài này), cũng xuất hiện một Pokemon mới tên là <strong>Type: Null</strong> (<a href="http://bulbapedia.bulbagarden.net/wiki/Type:_Null_(Pok%C3%A9mon)">タイプ：ヌル</a>).</p>
@@ -66,7 +66,7 @@ isNaN(1 + undefined)  // true
 <p>Để làm được điều này, Rust không cho bạn gán bất kì giá trị nào là <code>NULL</code> cả (dữ dội chưa, quản không được thì cấm luôn cho khỏe :))) và Rust không phải là ngôn ngữ đầu tiên hoặc duy nhất áp dụng phương pháp này, một số ngôn ngữ lập trình hàm như Haskell cũng cấm không cho một biến mang giá trị <code>NULL</code>. <sup><a href="https://kipalog.com/posts/Co-Khong---Functional-idioms-de-dung-nullable-values-voi-functions-nhu-normal-values--Phan-1">[3]</a></sup></p>
 <p>(Nói như vậy không có nghĩa Rust là một ngôn ngữ lập trình hàm nhé)</p>
 <h2 id="kh-ng-cho-x-i-null-th-gi-x-i-g-">Không cho xài NULL thì giờ xài gì?</h2>
-<p>Và cũng giống như Haskell, Rust cung cấp một kiểu gọi là <code>Option&lt;T&gt;</code> (trong Haskell là <code>Maybe</code> và trong Swift là <code>Optional</code>), cho chúng ta một phương pháp khác để giải quyết vấn đề mà không cần dùng tới <code>NULL</code>. </p>
+<p>Và cũng giống như Haskell, Rust cung cấp một kiểu gọi là <code>Option&lt;T&gt;</code> (trong Haskell là <code>Maybe</code> và trong Swift là <code>Optional</code>, giờ thì trong Java cũng có nốt), cho chúng ta một phương pháp khác để giải quyết vấn đề mà không cần dùng tới <code>NULL</code>. </p>
 <p>Ở <a href="https://huytd.github.io/posts/rust-binary-tree-traversal.html">bài trước</a> mình cũng đã giới thiệu cách sử dụng <code>Option&lt;T&gt;</code>.</p>
 <p>Bây giờ là lúc nói rõ hơn về vấn đề này.</p>
 <h3 id="b-n-ch-t-c-a-ki-u-option">Bản chất của kiểu Option</h3>

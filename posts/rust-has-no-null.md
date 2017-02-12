@@ -1,6 +1,6 @@
 # Rust không có NULL thì code kiểu gì?
 
-Có lẽ đây là thắc mắc được đưa ra nhiều nhất khi mới tiếp cận với Rust. Hẳn là các bạn đã biết, hoặc nghe đâu đó là: **Trong Rust không có NULL**. Bài viết này sẽ giúp cho các bạn hiểu rõ hơn về vấn đề này.
+Có lẽ một số bạn sẽ có thắc mắc như tiêu đề khi mới tìm hiểu về Rust. Hẳn là các bạn đã biết, hoặc nghe đâu đó là: **Trong Rust không có NULL**. Bài viết này sẽ giúp cho các bạn hiểu rõ hơn về vấn đề này. 
 
 ## NULL trong các ngôn ngữ lập trình 
 
@@ -78,7 +78,7 @@ Tương tự như thế đối với lập trình, để thoát khỏi việc ch
 
 ## Không cho xài NULL thì giờ xài gì?
 
-Và cũng giống như Haskell, Rust cung cấp một kiểu gọi là `Option<T>` (trong Haskell là `Maybe` và trong Swift là `Optional`), cho chúng ta một phương pháp khác để giải quyết vấn đề mà không cần dùng tới `NULL`. 
+Và cũng giống như Haskell, Rust cung cấp một kiểu gọi là `Option<T>` (trong Haskell là `Maybe` và trong Swift là `Optional`, giờ thì trong Java cũng có nốt), cho chúng ta một phương pháp khác để giải quyết vấn đề mà không cần dùng tới `NULL`. 
 
 Ở [bài trước](https://huytd.github.io/posts/rust-binary-tree-traversal.html) mình cũng đã giới thiệu cách sử dụng `Option<T>`.
 

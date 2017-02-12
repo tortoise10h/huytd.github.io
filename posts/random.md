@@ -157,3 +157,21 @@ Run this command:
 ```
 echo | openssl s_client -showcerts -servername <domain> -connect <domain>:443 2>/dev/null | openssl x509 -inform pem -noout -text
 ```
+
+## Some useful IRC client (Weechat) settings
+
+**Plugins:**
+
+```
+/script install buffers.pl autosort.pl colorize_nicks.py shortenurl.py
+```
+
+**Disable annoying join channel messages:**
+
+```
+/set weechat.look.buffer_notify_default message
+/set irc.look.smart_filter on
+/filter add irc_smart * irc_smart_filter *
+/filter add irc_join_names * irc_366,irc_332,irc_333,irc_329,irc_324 *
+```
+
