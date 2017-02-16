@@ -6,12 +6,17 @@
 
 * Introduction
 ** Why MOS 6502?
-** History
+   Writing emulators always a great way to learn how machines work. It's not
+   trivial and you have to research a lot in order to do it.
+
+   Emulating *MOS 6502* is a good way to start because it's the processor of
+   many well-known devices such as Atari, Apple II, NES, Commodore 64, Tamagotchi... so, if
+   you're about to implement a NES emulator, let's start with 6502.
 ** MOS 6502 Specs
 * Implement MOS 6502 emulator
 ** Assembler
 ** Registers and Program Counter
 ** Instruction set
-** Loading the Program
+** Loading the Test Program
 ** Memory Inspector
 * References

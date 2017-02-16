@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2017-02-16 Thu 11:12 -->
+<!-- 2017-02-16 Thu 13:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Writing MOS 6502 Emulator</title>
@@ -234,67 +234,75 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9201a0a">1. Introduction</a>
+<li><a href="#org42eb992">1. Introduction</a>
 <ul>
-<li><a href="#orga79243a">1.1. Why MOS 6502?</a></li>
-<li><a href="#org331366c">1.2. History</a></li>
-<li><a href="#org417230d">1.3. MOS 6502 Specs</a></li>
+<li><a href="#orgd316c6f">1.1. Why MOS 6502?</a></li>
+<li><a href="#org51c28c3">1.2. MOS 6502 Specs</a></li>
 </ul>
 </li>
-<li><a href="#org04ebb75">2. Implement MOS 6502 emulator</a>
+<li><a href="#org8e96edb">2. Implement MOS 6502 emulator</a>
 <ul>
-<li><a href="#orgfabca31">2.1. Assembler</a></li>
-<li><a href="#org89ab9b9">2.2. Registers and Program Counter</a></li>
-<li><a href="#org8d7e544">2.3. Instruction set</a></li>
-<li><a href="#org89976b8">2.4. Loading the Program</a></li>
-<li><a href="#org754729f">2.5. Memory Inspector</a></li>
+<li><a href="#org865be03">2.1. Assembler</a></li>
+<li><a href="#org17dea1e">2.2. Registers and Program Counter</a></li>
+<li><a href="#org63fe0d4">2.3. Instruction set</a></li>
+<li><a href="#org16cc457">2.4. Loading the Test Program</a></li>
+<li><a href="#org47d5a44">2.5. Memory Inspector</a></li>
 </ul>
 </li>
-<li><a href="#orga644ed2">3. References</a></li>
+<li><a href="#org9aea17c">3. References</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9201a0a" class="outline-2">
-<h2 id="org9201a0a"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-org42eb992" class="outline-2">
+<h2 id="org42eb992"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
-</div><div id="outline-container-orga79243a" class="outline-3">
-<h3 id="orga79243a"><span class="section-number-3">1.1</span> Why MOS 6502?</h3>
+</div><div id="outline-container-orgd316c6f" class="outline-3">
+<h3 id="orgd316c6f"><span class="section-number-3">1.1</span> Why MOS 6502?</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Writing emulators always a great way to learn how machines work. It's not
+trivial and you have to research a lot in order to do it.
+</p>
+
+<p>
+Emulating <b>MOS 6502</b> is a good way to start because it's the processor of
+many well-known devices such as Atari, Apple II, NES, Commodore 64, Tamagotchi&#x2026; so, if
+you're about to implement a NES emulator, let's start with 6502.
+</p>
 </div>
-<div id="outline-container-org331366c" class="outline-3">
-<h3 id="org331366c"><span class="section-number-3">1.2</span> History</h3>
 </div>
-<div id="outline-container-org417230d" class="outline-3">
-<h3 id="org417230d"><span class="section-number-3">1.3</span> MOS 6502 Specs</h3>
+<div id="outline-container-org51c28c3" class="outline-3">
+<h3 id="org51c28c3"><span class="section-number-3">1.2</span> MOS 6502 Specs</h3>
 </div>
 </div>
-<div id="outline-container-org04ebb75" class="outline-2">
-<h2 id="org04ebb75"><span class="section-number-2">2</span> Implement MOS 6502 emulator</h2>
+<div id="outline-container-org8e96edb" class="outline-2">
+<h2 id="org8e96edb"><span class="section-number-2">2</span> Implement MOS 6502 emulator</h2>
 <div class="outline-text-2" id="text-2">
-</div><div id="outline-container-orgfabca31" class="outline-3">
-<h3 id="orgfabca31"><span class="section-number-3">2.1</span> Assembler</h3>
+</div><div id="outline-container-org865be03" class="outline-3">
+<h3 id="org865be03"><span class="section-number-3">2.1</span> Assembler</h3>
 </div>
-<div id="outline-container-org89ab9b9" class="outline-3">
-<h3 id="org89ab9b9"><span class="section-number-3">2.2</span> Registers and Program Counter</h3>
+<div id="outline-container-org17dea1e" class="outline-3">
+<h3 id="org17dea1e"><span class="section-number-3">2.2</span> Registers and Program Counter</h3>
 </div>
-<div id="outline-container-org8d7e544" class="outline-3">
-<h3 id="org8d7e544"><span class="section-number-3">2.3</span> Instruction set</h3>
+<div id="outline-container-org63fe0d4" class="outline-3">
+<h3 id="org63fe0d4"><span class="section-number-3">2.3</span> Instruction set</h3>
 </div>
-<div id="outline-container-org89976b8" class="outline-3">
-<h3 id="org89976b8"><span class="section-number-3">2.4</span> Loading the Program</h3>
+<div id="outline-container-org16cc457" class="outline-3">
+<h3 id="org16cc457"><span class="section-number-3">2.4</span> Loading the Test Program</h3>
 </div>
-<div id="outline-container-org754729f" class="outline-3">
-<h3 id="org754729f"><span class="section-number-3">2.5</span> Memory Inspector</h3>
+<div id="outline-container-org47d5a44" class="outline-3">
+<h3 id="org47d5a44"><span class="section-number-3">2.5</span> Memory Inspector</h3>
 </div>
 </div>
-<div id="outline-container-orga644ed2" class="outline-2">
-<h2 id="orga644ed2"><span class="section-number-2">3</span> References</h2>
+<div id="outline-container-org9aea17c" class="outline-2">
+<h2 id="org9aea17c"><span class="section-number-2">3</span> References</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2017-02-16 Thu 11:12</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2017-02-16 Thu 13:58</p>
+<p class="validation"></p>
 </div>
 </body>
 </html>
