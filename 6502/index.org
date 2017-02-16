@@ -1,0 +1,17 @@
+#+TITLE: Writing MOS 6502 Emulator
+#+AUTHOR: Huy Tran
+#+EMAIL: huytd189@gmail.com
+#+LANGUAGE: en
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="styles/main.css" />
+
+* Introduction
+** Why MOS 6502?
+** History
+** MOS 6502 Specs
+* Implement MOS 6502 emulator
+** Assembler
+** Registers and Program Counter
+** Instruction set
+** Loading the Program
+** Memory Inspector
+* References
