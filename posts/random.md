@@ -58,6 +58,16 @@ Set VIM's clipboard to `unamed` in `.vimrc`:
 set clipboard=unnamed
 ```
 
+## Get rid of pressing G when jump to lines
+
+Use this config:
+
+```
+nnoremap <CR> G
+```
+
+From now on, just type `10<Enter>` to jump, no more `<SHIFT>g` which can break your wrist :))
+
 ## Use fzf with ripgrep in Vim
 
 In case you don't have `fzf`, install it with:

@@ -46,7 +46,11 @@ bind-key -t vi-copy Enter copy-pipe &quot;reattach-to-user-namespace pbcopy&quot
 bind ] run &quot;reattach-to-user-namespace pbpaste | tmux load-buffer - &amp;&amp; tmux paste-buffer&quot;
 </code></pre><p>Set VIM&#39;s clipboard to <code>unamed</code> in <code>.vimrc</code>:</p>
 <pre><code>set clipboard=unnamed
-</code></pre><h2 id="use-fzf-with-ripgrep-in-vim">Use fzf with ripgrep in Vim</h2>
+</code></pre><h2 id="get-rid-of-pressing-g-when-jump-to-lines">Get rid of pressing G when jump to lines</h2>
+<p>Use this config:</p>
+<pre><code>nnoremap &lt;CR&gt; G
+</code></pre><p>From now on, just type <code>10&lt;Enter&gt;</code> to jump, no more <code>&lt;SHIFT&gt;g</code> which can break your wrist :))</p>
+<h2 id="use-fzf-with-ripgrep-in-vim">Use fzf with ripgrep in Vim</h2>
 <p>In case you don&#39;t have <code>fzf</code>, install it with:</p>
 <pre><code>Plug &#39;junegunn/fzf&#39;, { &#39;dir&#39;: &#39;~/.fzf&#39;, &#39;do&#39;: &#39;./install --bin&#39; }
 Plug &#39;junegunn/fzf.vim&#39;
