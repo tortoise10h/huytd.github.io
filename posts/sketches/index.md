@@ -19,3 +19,7 @@
 **Day 03 (cont):** Hanzo (Kubo's father) in Kubo and the two strings
 
 ![](img/day003_02.JPG)
+
+**Day 04:** Coffee in Vietnam vs. Coffee in the US
+
+![](img/day004.jpg)
