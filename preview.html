@@ -17,7 +17,11 @@
           socket.on('connect', function(data) {
             console.log('Socket server inited');
             socket.on('reload', function() {
-              window.location = window.location;
+              if (window.location.indexOf("#reload") != -1) {
+                window.location = window.location;
+              } else {
+                window.location = window.location + "#reload";
+              }
             });
           });
         </script>
@@ -31,7 +35,7 @@
                 {%content%}
             </div>
         </div>
-	    <div class="footer">
+	    <div id="reload" class="footer">
             <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
             <div class="social">
                 <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
