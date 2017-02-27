@@ -17,10 +17,10 @@
           socket.on('connect', function(data) {
             console.log('Socket server inited');
             socket.on('reload', function() {
-              if (window.location.indexOf("#reload") != -1) {
+              if (window.location.toString().indexOf("#reload") != -1) {
                 window.location = window.location;
               } else {
-                window.location = window.location + "#reload";
+                window.location = window.location.toString() + "#reload";
               }
             });
           });

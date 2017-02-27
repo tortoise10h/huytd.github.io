@@ -32,3 +32,6 @@ error[E0133]: dereference of raw pointer requires unsafe function or block
 // The right way:
 let n = unsafe { *p_raw };
 ```
+
+Just test
+asdf
