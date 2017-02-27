@@ -107,7 +107,6 @@ pre {
 pre > code {
     padding: 0 !important; margin: 0 !important;
     background: none;
-    color: #FFF;
 }
 
 pre code, pre code * {
