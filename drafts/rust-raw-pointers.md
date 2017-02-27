@@ -32,3 +32,23 @@ error[E0133]: dereference of raw pointer requires unsafe function or block
 // The right way:
 let n = unsafe { *p_raw };
 ```
+
+We can make a raw pointers in an implicit or explicit way from a reference safety:
+
+```
+let gr: f32 = 1.618;
+let p_imm: *const f32 = &gr as *const f32; // explicit cast
+let mut m: f32 = 3.14;
+let p_mut: *mut f32 = &mut m; // implicit cast
+```
+
+However, converting a raw pointer to a reference using `&*` (address of a deref) need to be done in `unsafe` block:
+
+```
+unsafe {
+  let ref_imm: &f32 = &*p_imm;
+  let ref_mut: &mut f32 = &mut *p_mut;
+}
+```
+
+Raw pointers are used to implement `Rc` and `Arc` pointer types.
