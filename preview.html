@@ -11,6 +11,16 @@
         <script>
         hljs.initHighlightingOnLoad();
         </script>
+        <script src="/socket.io/socket.io.js"></script>    
+        <script>
+          var socket = io.connect('http://localhost:3000');
+          socket.on('connect', function(data) {
+            console.log('Socket server inited');
+            socket.on('reload', function() {
+              window.location = window.location;
+            });
+          });
+        </script>
     </head>
     <body>
         <div class="header">

@@ -23,7 +23,11 @@ var genPreview = function(f, res) {
     var postContent = '';
     var htmlContent = '';
     var metaData = '';
-    fs.readFile(__dirname + '/posts/' + f, function (err, data) {
+    var additionalPath = '';
+    if (f.match(/\//g) === null) { 
+      additionalPath = 'posts/';
+    }
+    fs.readFile(__dirname + '/' + additionalPath + f, function (err, data) {
       if (err)
         throw err;
       if (data) {

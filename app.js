@@ -3,6 +3,9 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const preview = require('./preview');
+const socketio = require('socket.io');
+
+let currentSocket = null;
 
 let logOptions = {
     weekday: "long", year: "numeric", month: "short",
@@ -16,6 +19,13 @@ app.use(express.static("admin"));
 app.use(express.static("."));
 
 app.get('/preview', function(req, res) {
+  fs.watch(req.query.url, (event) => {
+    console.log('Change detected');
+    if (currentSocket) {
+      currentSocket.emit('reload');
+    }
+  });
+
   preview(req.query.url, res);
 });
 
@@ -74,4 +84,10 @@ app.get('/unpublished', function(req, res) {
 });
 
 console.log("Server is running at: http://localhost:3000");
-app.listen(3000);
+let http = app.listen(3000);
+let io = socketio(http);
+
+io.on('connect', (socket) => {
+  console.log('client connected');
+  currentSocket = socket;
+});
