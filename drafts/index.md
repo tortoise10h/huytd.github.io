@@ -6,3 +6,4 @@ So, feel free to read it.
 
 - [Rust FFI in C](./rust-ffi-c.html)
 - [Rust Raw Pointers](./rust-raw-pointers.html)
+- [Rust Pointers and Memory safety](./rust-pointers.html)
