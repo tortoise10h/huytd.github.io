@@ -1,0 +1,37 @@
+<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 800px; }</style></head><body class='hack'><h1 id="raw-pointers-in-rust">Raw pointers in Rust</h1>
+<p><em>Raw pointers</em> are pointers which has no built-in security in Rust.</p>
+<p>They are only available in <code>unsafe</code> code blocks.</p>
+<p>You can work with them with the same freedom as C. That mean they&#39;re risky and it&#39;s your responsibilty to ensure the safety of them.</p>
+<p>There are 2 types of <em>raw pointers</em>:</p>
+<ul>
+<li><code>*const T</code>: Immutable pointer.</li>
+<li><code>*mut T</code>: Mutable poineter.</li>
+</ul>
+<p>They can point to invalid memory. The memory resource needs to be manually freed.</p>
+<p>Multiple concurrent threads have nonexclusive access to <code>mutable</code> raw pointers.</p>
+<p>Dereferencing <em>raw pointers</em> are risky because it has no compiler guarantee, it must be done in <code>unsafe</code> blocks:</p>
+<pre><code>// The wrong way:
+let p_raw: *const u32 = &amp;10;
+let n = *p_raw;
+
+// Compile error:
+error[E0133]: dereference of raw pointer requires unsafe function or block
+ --&gt; pointer.rs:3:13
+  |
+3 |     let n = *p_raw;
+  |             ^^^^^^ dereference of raw pointer
+
+// The right way:
+let n = unsafe { *p_raw };
+</code></pre><p>We can make a raw pointers in an implicit or explicit way from a reference safety:</p>
+<pre><code>let gr: f32 = 1.618;
+let p_imm: *const f32 = &amp;gr as *const f32; // explicit cast
+let mut m: f32 = 3.14;
+let p_mut: *mut f32 = &amp;mut m; // implicit cast
+</code></pre><p>However, converting a raw pointer to a reference using <code>&amp;*</code> (address of a deref) need to be done in <code>unsafe</code> block:</p>
+<pre><code>unsafe {
+  let ref_imm: &amp;f32 = &amp;*p_imm;
+  let ref_mut: &amp;mut f32 = &amp;mut *p_mut;
+}
+</code></pre><p>Raw pointers are used to implement <code>Rc</code> and <code>Arc</code> pointer types.</p>
+</body></html>

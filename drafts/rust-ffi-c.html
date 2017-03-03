@@ -1,0 +1,21 @@
+<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 800px; }</style></head><body class='hack'><h1 id="ffi-with-c">FFI with C</h1>
+<p>You can call Rust code in other languages like C by <code>std::ffi</code>.</p>
+<p>You can also call C functions in Rust by using <code>libc</code> crate.</p>
+<pre><code>use libc::*;
+</code></pre><p>For example, to print a Rust string with C&#39;s <code>puts</code> function:</p>
+<pre><code>extern crate libc;
+
+use libc::puts;
+use std::ffi::CString;
+
+fn main() {
+  let s = &quot;Hello World!&quot;;
+  let to_c = CString::new(s).unwrap();
+  unsafe {
+    puts(to_c.as_ptr());
+  }
+}
+</code></pre><p><code>CString::new()</code> produces a string with NULL byte ending <code>\0</code> that is compatible with C.</p>
+<p><code>as_ptr()</code> function returns a pointer to this C string.</p>
+<p>When write Rust code for other language, it&#39;s neccessary to use <code>#[no_mangle]</code>. This attribute help you keep your function name from being renamed during the compilation.</p>
+</body></html>

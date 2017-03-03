@@ -4,6 +4,6 @@ let marked = require('../js/marked.js');
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', function(data) {
-  let compiled = "<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /></head><body class='hack'>" + marked(data) + "</body></html>";
+  let compiled = "<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 800px; }</style></head><body class='hack'>" + marked(data) + "</body></html>";
   process.stdout.write(compiled);
 });
