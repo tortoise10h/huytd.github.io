@@ -1,0 +1,10 @@
+#!/bin/bash
+
+rm -f index.html
+for file in ./*.md; do
+  name=${file%.md}
+  if [ ! -f ./$name.html ]; then
+    echo "Converting $file"
+    cat $file | genmd > $name.html
+  fi
+done
