@@ -8,3 +8,4 @@ So, feel free to read it.
 - [Rust Raw Pointers](./rust-raw-pointers.html)
 - [Rust Pointers and Memory safety](./rust-pointers.html)
 - [Install and browse Rust docs offline](./rust-doc.html)
+- [Rust mem::forget](./rust-mem-forget.html)
