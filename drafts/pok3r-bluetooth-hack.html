@@ -1,0 +1,32 @@
+<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Wed Mar 08 2017 10:36:49 GMT-0800 (PST)</i><br/><h1 id="pok3r-blueooth-hack">Pok3r Blueooth Hack</h1>
+<p>The idea of this draft is to create a Blueooth dongle that will work as the power supply and bluetooth connection device for Pok3r keyboard.</p>
+<h2 id="device-requirements">Device Requirements</h2>
+<ul>
+<li>Vortex Pok3r Keyboard</li>
+<li>Li-Po battery pack</li>
+<li>Teensy with Bluetooth connection (or something equivalent)</li>
+</ul>
+<h2 id="diagrams">Diagrams</h2>
+<p>The current state of Pok3r:</p>
+<pre><code>
+ ----- 
+|     |&gt;----------------- PC
+|  P  |
+|  O  |
+|  K  |
+|  3  |
+|  R  |
+|     |
+ -----
+</code></pre><p>The diagram for this hack:</p>
+<pre><code>
+ -----  ---                                 
+|     ||   |-AC 5V     |                   
+|  P  || β |-Bluetooth | . . . . . . . . . PC
+|  O  ||   |
+|  K  | ---
+|  3  |
+|  R  |
+|     |
+ -----
+</code></pre></body></html>

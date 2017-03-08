@@ -1,0 +1,20 @@
+<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Sat Mar 04 2017 03:04:39 GMT-0800 (PST)</i><br/><h1 id="async-await-in-node">Async/await in Node</h1>
+<p><code>async/await</code> has officially landed in Node 7.6.0. It&#39;s not something to replace the Promise, but it&#39;s something that make Promise great again.</p>
+<p>An <code>async</code> function will returns a Promise when it&#39;s called. Returning a value inside an <code>async</code> function will <code>resolve</code> the Promise with that value. And <code>throw</code> an exception in an <code>async</code> function will <code>reject</code> the Promise.</p>
+<p>An <code>await</code> expression can be used inside an <code>async</code> function, which will pause the execution until the expression returns data.</p>
+<p>For example, this is how we use <code>fetch</code> API with Promises:</p>
+<pre><code>let get = (url) =&gt; {
+  return new Promise(resolve =&gt; {
+    fetch(url)
+      .then(res =&gt; res.text())
+      .then(body =&gt; resolve(body));
+  });
+};
+</code></pre><p>With <code>async</code> and <code>await</code>, life is easier:</p>
+<pre><code>let get = async (url) =&gt; {
+  let response = await fetch(url);
+  let body = await response.text();
+  return body;
+};
+</code></pre><p>With the Promise <code>resolve</code>, you don&#39;t know when will your <code>fetch</code> returns the data, but with <code>async</code>/<code>await</code>, you can easily know when will your data be back. It&#39;s easier to write asynchronous codes with <code>async</code>/<code>await</code>.</p>
+</body></html>

@@ -9,3 +9,4 @@ So, feel free to read it.
 - [Rust Pointers and Memory safety](./rust-pointers.html)
 - [Install and browse Rust docs offline](./rust-doc.html)
 - [Rust mem::forget](./rust-mem-forget.html)
+- [Pok3r Bluetooth Hack](./pok3r-bluetooth-hack.html)
