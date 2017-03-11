@@ -1,0 +1,177 @@
+<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Sat Mar 11 2017 00:31:07 GMT-0800 (PST)</i><br/><h1 id="setup-multiple-accounts-with-mutt">Setup multiple accounts with Mutt</h1>
+<p>This is a guideline to setup Mutt with multiple accounts:</p>
+<ul>
+<li>Work email (Office 365)</li>
+<li>Personal email (Gmail)</li>
+</ul>
+<p>The mail fetcher will be <code>isync</code> and the mail sender is Mutt itself (built-in SMTP support).</p>
+<h2 id="install-and-setup-isync-to-fetch-mail">Install and setup <code>isync</code> to fetch mail</h2>
+<p>Install <code>isync</code> from brew:</p>
+<pre><code>$ brew install isync
+</code></pre><p>Create <code>~/.mbsyncrc</code> file.</p>
+<h3 id="config-office-365-email">Config Office 365 email</h3>
+<p>Config for <code>Office 365</code> account, use <code>~/.mail/work</code> as an inbox folder:</p>
+<pre><code># First account: Office 365
+
+IMAPAccount work
+Host outlook.office365.com
+user &lt;user&gt;@&lt;domain&gt;
+pass &lt;password&gt;
+
+IMAPStore work-remote
+Account work
+
+MaildirStore work-local
+Path ~/.mail/work
+Inbox ~/.mail/work/Inbox
+
+Channel work
+Master :work-remote:
+Slave :work-local:
+
+Create Both
+SyncState *
+</code></pre><h3 id="config-gmail">Config Gmail</h3>
+<p>For <code>Gmail</code>, use <code>~/.mail/personal</code> as an inbox folder, the config should be:</p>
+<pre><code># Second account: Gmail
+
+IMAPAccount personal
+Host imap.gmail.com
+user &lt;username&gt;@gmail.com
+pass &lt;password&gt;
+SSLType IMAPS
+CertificateFile ~/.cert/imap.gmail.com.pem
+AuthMechs LOGIN
+
+IMAPStore personal-remote
+Account personal
+
+MaildirStore personal-local
+Path ~/.mail/personal
+Inbox ~/.mail/personal/Inbox
+
+Channel personal
+Master :personal-remote:
+Slave :personal-local:
+
+Create Both
+SyncState *
+</code></pre><p>To obtain the private key <code>~/.cert/imap.gmail.com.pem</code>:</p>
+<pre><code>$ mkdir ~/.cert
+$ openssl s_client -connect imap.gmail.com:993 -showcerts 2&gt;&amp;1 &lt; /dev/null | sed -ne &#39;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#39; | sed -ne &#39;1,/-END CERTIFICATE-/p&#39; &gt; imap.gmail.com.pem
+</code></pre><h3 id="start-fetching-mail">Start fetching mail</h3>
+<p>Now you will be able to fetch mail with:</p>
+<pre><code>$ mbsync work
+$ mbsync personal
+</code></pre><p>Or fetch all accounts at the same time:</p>
+<pre><code>$ mbsync -a
+</code></pre><h3 id="auto-fetch-mail-with-cron-job">Auto fetch mail with <code>cron</code> job</h3>
+<p>You already able to fetch email. But typing the command everytime is annoying, we can use <code>cron</code> to fetch automatically after few minutes.</p>
+<p>Open <code>crontab</code> in edit mode to setup a new job:</p>
+<pre><code>$ crontab -e
+</code></pre><p>Enter the following:</p>
+<pre><code>*/5 * * * * killall mbsync &amp;&gt;/dev/null; date &gt;&gt; mail.log; /usr/local/bin/mbsync -qqa &gt;&gt; ~/mail.log 2&gt;&amp;1
+</code></pre><p>This command will call <code>mbsync</code> to fetch all profiles, save the log to <code>~/mail.log</code> and automatically kill the previous running <code>mbsync</code> process if something taking too long to run.</p>
+<h2 id="setup-mutt-to-read-and-send-mail">Setup <code>mutt</code> to read and send mail</h2>
+<p>Install <code>mutt</code> with:</p>
+<pre><code>$ brew install mutt
+</code></pre><p>Create the <code>.muttrc</code> config file and <code>.mutt</code> folder to store configs:</p>
+<pre><code>$ mkdir ~/.mutt
+$ touch ~/.muttrc
+</code></pre><h3 id="setup-mutt-profiles">Setup <code>mutt</code> profiles</h3>
+<p>Create two profile config files in <code>.mutt</code> folder: <code>~/.mutt/email.personal</code> and <code>~/.mutt/email.work</code>.</p>
+<p><strong>Gmail account:</strong> <code>~/.mutt/email.personal</code></p>
+<pre><code># vim: ft=muttrc
+set folder    = &quot;~/.mail/personal&quot;
+set mbox      = &quot;+Inbox&quot;
+set record    = &quot;+Inbox&quot;
+set postponed = &quot;+Inbox&quot;
+set spoolfile = &quot;~/.mail/personal/Inbox&quot;
+set timeout=360  #Check for mail every minute
+set mail_check=360
+set smtp_authenticators=&quot;login&quot;
+set ssl_use_sslv3=yes
+set smtp_url=&quot;smtp://&lt;user&gt;@smtp.gmail.com:587/&quot;
+set smtp_pass=&quot;&lt;password&gt;&quot;
+set from=&quot;&lt;user&gt;@gmail.com&quot;
+set realname=&quot;&lt;your name&gt;&quot;
+</code></pre><p><strong>Office 365 account:</strong> <code>~/.mutt/email.work</code></p>
+<pre><code># vim: ft=muttrc
+set folder    = &quot;~/.mail/work&quot;
+set mbox      = &quot;+Inbox&quot;
+set record    = &quot;+Inbox&quot;
+set postponed = &quot;+Inbox&quot;
+set spoolfile = &quot;~/.mail/work/Inbox&quot;
+set timeout=360  #Check for mail every minute
+set mail_check=360
+set smtp_authenticators=&quot;login&quot;
+set ssl_use_sslv3=yes
+set smtp_url=&quot;smtp://&lt;user&gt;@&lt;domain&gt;@smtp.office365.com:587/&quot;
+set smtp_pass=&quot;&lt;password&gt;&quot;
+set from=&quot;&lt;user&gt;@&lt;domain&gt;&quot;
+set realname=&quot;&lt;your name&gt;&quot;
+</code></pre><h3 id="setup-muttrc-config">Setup <code>.muttrc</code> config</h3>
+<p>Now config your <code>.muttrc</code> as follow:</p>
+<pre><code>source ~/.mutt/email.work
+
+macro index &lt;f1&gt; &#39;&lt;enter-command&gt;source ~/.mutt/email.work&lt;enter&gt;&lt;change-folder&gt;!&lt;enter&gt;&#39;
+macro index &lt;f2&gt; &#39;&lt;enter-command&gt;source ~/.mutt/email.personal&lt;enter&gt;&lt;change-folder&gt;!&lt;enter&gt;&#39;
+
+macro index,pager d &quot;&lt;save-message&gt;=trash&lt;enter&gt;&quot; &quot;Trash&quot;
+</code></pre><p>By default, we will open work email profile, we also bind <strong>F1</strong> and <strong>F2</strong> key to switch between accounts.</p>
+<p>Some other useful configs:</p>
+<pre><code># Useful customizations
+set smart_wrap = yes
+set sort = &#39;threads&#39;
+set sort_aux = &#39;last-date-received&#39;
+set imap_check_subscribed
+#
+hdr_order Date From To Cc
+#
+set signature=&quot;~/.signature&quot;
+set pager_stop = yes
+set markers = no
+set include = yes
+set reply_to = yes
+set fast_reply = yes
+
+set index_format        = &#39;%4C [%Z] %{%D} %-25.25L (%?l?%4l&amp;%4c?) %s&#39;    # Customize the messaage index display
+color index_author color12 default &#39;.*&#39;
+color index_subject color1 default &#39;.*&#39;
+color index_subject white default &#39;\[(Bitbucket|JIRA|Confluence)\].*&#39;
+color index_date yellow default
+color index_flags white color12 &#39;~F&#39;
+color index_flags white red &#39;~N&#39;
+
+# Key Bindings ------------------------------------------------------------------
+bind index gg                first-entry
+bind index 0                first-entry
+bind index G                last-entry
+bind index,pager R    group-reply
+bind index &lt;space&gt;    collapse-thread
+bind pager k            previous-line
+bind pager j              next-line
+bind pager gg             top
+bind pager 0                 top
+bind pager G              bottom
+bind compose p             postpone-message
+bind index p                 recall-message
+bind index,pager \Cf        next-page
+bind index,pager \Cb        previous-page
+bind index $                imap-fetch-mail
+bind index S        sync-mailbox
+
+macro index,pager I   &quot;&lt;change-folder&gt;!&lt;enter&gt;&quot;   &quot;go to Inbox&quot;
+
+# Editor Information
+set editor=vim
+</code></pre><p>To view HTML emails in <code>mutt</code>, put this config to <code>~/.muttrc</code>:</p>
+<pre><code>auto_view text/html
+alternative_order text/plain text/enriched text/html
+</code></pre><p>And <code>~/.mailcap</code> file:</p>
+<pre><code>text/html; w3m -I %{charset} -T text/html; copiousoutput;
+</code></pre><hr>
+<p>Now you can open <code>mutt</code> with:</p>
+<pre><code>mutt
+</code></pre><p>Use <code>F1</code> or <code>F2</code> to switch between accounts. Send mail in each account using built-in SMTP support of mutt.</p>
+</body></html>
