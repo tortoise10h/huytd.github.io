@@ -203,16 +203,24 @@ set markers = no
 set include = yes
 set reply_to = yes
 set fast_reply = yes
+```
 
-set index_format		= '%4C [%Z] %{%D} %-25.25L (%?l?%4l&%4c?) %s'	# Customize the messaage index display
+Format the index display:
+
+```
+set index_format = '%4C [%Z] %D %-25.25L (%?l?%4l&%4c?) %s'
 color index_author color12 default '.*'
 color index_subject color1 default '.*'
 color index_subject white default '\[(Bitbucket|JIRA|Confluence)\].*'
 color index_date yellow default
 color index_flags white color12 '~F'
 color index_flags white red '~N'
+```
 
-# Key Bindings ------------------------------------------------------------------
+Some useful key binding:
+
+```
+# Key Bindings 
 bind index gg				first-entry
 bind index 0				first-entry
 bind index G				last-entry

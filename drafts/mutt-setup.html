@@ -1,4 +1,4 @@
-<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Sat Mar 11 2017 00:31:07 GMT-0800 (PST)</i><br/><h1 id="setup-multiple-accounts-with-mutt">Setup multiple accounts with Mutt</h1>
+<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Sat Mar 11 2017 00:45:54 GMT-0800 (PST)</i><br/><h1 id="setup-multiple-accounts-with-mutt">Setup multiple accounts with Mutt</h1>
 <p>This is a guideline to setup Mutt with multiple accounts:</p>
 <ul>
 <li>Work email (Office 365)</li>
@@ -134,16 +134,16 @@ set markers = no
 set include = yes
 set reply_to = yes
 set fast_reply = yes
-
-set index_format        = &#39;%4C [%Z] %{%D} %-25.25L (%?l?%4l&amp;%4c?) %s&#39;    # Customize the messaage index display
+</code></pre><p>Format the index display:</p>
+<pre><code>set index_format = &#39;%4C [%Z] %D %-25.25L (%?l?%4l&amp;%4c?) %s&#39;
 color index_author color12 default &#39;.*&#39;
 color index_subject color1 default &#39;.*&#39;
 color index_subject white default &#39;\[(Bitbucket|JIRA|Confluence)\].*&#39;
 color index_date yellow default
 color index_flags white color12 &#39;~F&#39;
 color index_flags white red &#39;~N&#39;
-
-# Key Bindings ------------------------------------------------------------------
+</code></pre><p>Some useful key binding:</p>
+<pre><code># Key Bindings 
 bind index gg                first-entry
 bind index 0                first-entry
 bind index G                last-entry
