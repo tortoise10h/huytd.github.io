@@ -1,4 +1,31 @@
-<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Fri Mar 03 2017 16:34:02 GMT-0800 (PST)</i><br/><h1 id="rust-s-std-mem-forget">Rust&#39;s std::mem::forget</h1>
+
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: Sat Mar 11 2017 18:13:09 GMT-0800 (PST)</i>
+      <br/>
+      
+      <h1 id="rust-s-std-mem-forget">Rust&#39;s std::mem::forget</h1>
 <p><code>std::mem::forget</code> is used when you want to keep the value from being automatically freed by Rust.</p>
 <p>What it does is: Take the ownership and forget about the value <strong>without running its destructor</strong>.</p>
 <p>It&#39;s really helpful if you&#39;re using <a href="rust-ffi-c.html">FFI</a> and need to return a pointer to something that might be freed by Rust automatically.</p>
@@ -18,4 +45,7 @@
 </code></pre><p>You may surprised but it&#39;s obiviously that <code>mem::forget</code> is safe in Rust, it doesn&#39;t need to be wrapped in <code>unsafe</code> block.</p>
 <p>The reason is, it&#39;s ok to leak some memory in Rust. Not calling the destructor of a value is not something that violate the Rust safey rules.</p>
 <p>But leaking memory or I/O objects is usually undesirable, so use <code>forget</code> for specialized use cases only.</p>
-</body></html>
+
+    </body>
+  </html>
+  

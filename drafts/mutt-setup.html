@@ -1,4 +1,31 @@
-<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Sat Mar 11 2017 00:45:54 GMT-0800 (PST)</i><br/><h1 id="setup-multiple-accounts-with-mutt">Setup multiple accounts with Mutt</h1>
+
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: Sat Mar 11 2017 18:13:08 GMT-0800 (PST)</i>
+      <br/>
+      <h1>Table of Contents</h1><li class='toc-item'><a href='#setup-multiple-accounts-with-mutt'> Setup multiple accounts with Mutt</a></li><ul class='toc'><li class='toc-item'><a href='#install-and-setup-isync-to-fetch-mail'>1. Install and setup `isync` to fetch mail</a></li><ul class='toc'><li class='toc-item'><a href='#config-office-365-email'>1.1. Config Office 365 email</a></li><li class='toc-item'><a href='#config-gmail'>1.2. Config Gmail</a></li><li class='toc-item'><a href='#start-fetching-mail'>1.3. Start fetching mail</a></li><li class='toc-item'><a href='#auto-fetch-mail-with-cron-job'>1.4. Auto fetch mail with `cron` job</a></li></ul><li class='toc-item'><a href='#setup-mutt-to-read-and-send-mail'>2. Setup `mutt` to read and send mail</a></li><ul class='toc'><li class='toc-item'><a href='#setup-mutt-profiles'>2.1. Setup `mutt` profiles</a></li><li class='toc-item'><a href='#setup-muttrc-config'>2.2. Setup `.muttrc` config</a></li></ul></ul>
+      <h1 id="setup-multiple-accounts-with-mutt">Setup multiple accounts with Mutt</h1>
 <p>This is a guideline to setup Mutt with multiple accounts:</p>
 <ul>
 <li>Work email (Office 365)</li>
@@ -174,4 +201,7 @@ alternative_order text/plain text/enriched text/html
 <p>Now you can open <code>mutt</code> with:</p>
 <pre><code>mutt
 </code></pre><p>Use <code>F1</code> or <code>F2</code> to switch between accounts. Send mail in each account using built-in SMTP support of mutt.</p>
-</body></html>
+
+    </body>
+  </html>
+  

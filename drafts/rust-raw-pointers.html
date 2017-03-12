@@ -1,4 +1,31 @@
-<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: Fri Mar 03 2017 02:28:49 GMT-0800 (PST)</i><br/><h1 id="raw-pointers-in-rust">Raw pointers in Rust</h1>
+
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: Sat Mar 11 2017 18:13:09 GMT-0800 (PST)</i>
+      <br/>
+      
+      <h1 id="raw-pointers-in-rust">Raw pointers in Rust</h1>
 <p><em>Raw pointers</em> are pointers which has no built-in security in Rust.</p>
 <p>They are only available in <code>unsafe</code> code blocks.</p>
 <p>You can work with them with the same freedom as C. That mean they&#39;re risky and it&#39;s your responsibilty to ensure the safety of them.</p>
@@ -34,4 +61,7 @@ let p_mut: *mut f32 = &amp;mut m; // implicit cast
   let ref_mut: &amp;mut f32 = &amp;mut *p_mut;
 }
 </code></pre><p>Raw pointers are used to implement <code>Rc</code> and <code>Arc</code> pointer types.</p>
-</body></html>
+
+    </body>
+  </html>
+  

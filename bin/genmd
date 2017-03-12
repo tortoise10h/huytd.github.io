@@ -1,10 +1,114 @@
 #!/usr/bin/env node
 let marked = require('../js/marked.js');
 
+let getLevel = (line) => {
+  return line.split('').reduce((total, c) => {
+    total += (c === '#') ? 1 : 0;
+    return total;
+  }, 0);
+};
+
+let insideCodeBlock = false;
+
+let buildTOC = (data) => {
+  let lines = data.split("\n");
+  let prevLevel = 0;
+  let tree = { text: '', childs: [] };
+      tree.parent = tree;
+  let prevNode = tree;
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    if (!insideCodeBlock && line == '```') {
+      insideCodeBlock = true;
+    } else if (insideCodeBlock && line == '```') {
+      insideCodeBlock = false;
+    }
+    if (!insideCodeBlock) {
+      let count = getLevel(line);
+      if (count > 0) {
+        if (count > prevLevel) {
+          prevNode = prevNode;
+        } else if (count < prevLevel) {
+          prevNode = prevNode.parent.parent;
+        } else {
+          prevNode = prevNode.parent;
+        }
+        let node = {
+          text: line,
+          childs: [],
+          parent: prevNode
+        };
+        prevNode.childs.push(node);
+        prevNode = node;
+        prevLevel = count;
+      }
+    }
+  }
+  if (tree.childs[0].childs.length > 0) {
+    return tree;
+  } else {
+    return null;
+  }
+};
+
+let toSlug = (text) => {
+  let regex = /[a-zA-Z0-9\s]/g;
+  return text.match(regex).join('').replace(/\s/g, '-').toLowerCase();
+};
+
+let printTree = (tree, level) => {
+  if (tree === null) return "";
+  let text = tree.text.replace(/#/g, '').trim();
+  let result = "";
+  if (text) {
+    result += "<li class='toc-item'><a href='#" + toSlug(text) + "'>" + (level ? level + ". " : " ") + text + "</a></li>";
+  }
+  if (tree.childs.length > 0) {
+    result += "<ul class='toc'>";
+    for (let i = 0; i < tree.childs.length; i++) {
+      result += printTree(tree.childs[i], level ? (level + "." + (i + 1)) : (level + (i + 1)));
+    }
+    result += "</ul>";
+  }
+  return result;
+};
+
 process.stdin.resume();
 process.stdin.setEncoding('utf8');
 process.stdin.on('data', function(data) {
+  let tree = buildTOC(data);
+  let menu = printTree(tree ? tree.childs[0] : null, "");
   let date = (new Date()).toString();
-  let compiled = "<html><head><link href='https://huytd.github.io/css/hack.css' rel='stylesheet' /><style>body { padding: 50px; margin: 0 auto; width: 700px; }</style></head><body class='hack'><i>Published: " + date + "</i><br/>" + marked(data) + "</body></html>";
+  let compiled = `
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: ${date}</i>
+      <br/>
+      ${(menu) ? ("<h1>Table of Contents</h1>" + menu) : ""}
+      ${marked(data)}
+    </body>
+  </html>
+  `;
   process.stdout.write(compiled);
 });
