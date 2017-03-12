@@ -2,6 +2,7 @@
 let marked = require('../js/marked.js');
 
 let getLevel = (line) => {
+  if (line[0] != '#') return 0;
   return line.split('').reduce((total, c) => {
     total += (c === '#') ? 1 : 0;
     return total;
