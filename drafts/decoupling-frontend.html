@@ -1,0 +1,42 @@
+
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: Tue Mar 14 2017 00:38:50 GMT-0700 (PDT)</i>
+      <br/>
+      <h1>Table of Contents</h1><li class='toc-item'><a href='#decoupling-frontend'> Decoupling Frontend</a></li><ul class='toc'><li class='toc-item'><a href='#the-sample-application'>1. The sample application</a></li><li class='toc-item'><a href='#decoupling'>2. Decoupling</a></li><ul class='toc'><li class='toc-item'><a href='#decoupling-angular'>2.1. Decoupling Angular</a></li><li class='toc-item'><a href='#decoupling-react'>2.2. Decoupling React</a></li><li class='toc-item'><a href='#decoupling-react-with-redux'>2.3. Decoupling React with Redux</a></li></ul></ul>
+      <h1 id="decoupling-frontend">Decoupling Frontend</h1>
+<p>This document talks about decoupling your frontend code with the framework (Angular, React,...) code.</p>
+<p>The goal is to have it more easy to test.</p>
+<h2 id="the-sample-application">The sample application</h2>
+<p>Build the sample application using Angular, React, React/Redux,...</p>
+<h2 id="decoupling">Decoupling</h2>
+<p>Frontend frameworks are deeply involved in frontend code logic, and make it harder to test, this guide show us how to separate them and have the testable code.</p>
+<h3 id="decoupling-angular">Decoupling Angular</h3>
+<p>Move the logic to another file, create a class and initalize it in framework logic later.</p>
+<h3 id="decoupling-react">Decoupling React</h3>
+<h3 id="decoupling-react-with-redux">Decoupling React with Redux</h3>
+
+    </body>
+  </html>
+  

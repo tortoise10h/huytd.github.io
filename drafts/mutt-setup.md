@@ -4,7 +4,6 @@ This is a guideline to setup Mutt with multiple accounts:
 
 - Work email (Office 365)
 - Personal email (Gmail)
-
 The mail fetcher will be `isync` and the mail sender is Mutt itself (built-in SMTP support).
 
 ## Install and setup `isync` to fetch mail
@@ -264,3 +263,5 @@ mutt
 ```
 
 Use `F1` or `F2` to switch between accounts. Send mail in each account using built-in SMTP support of mutt.
+
+## Autocomplete email address

@@ -11,3 +11,4 @@ So, feel free to read it.
 - [Rust mem::forget](./rust-mem-forget.html)
 - [Pok3r Bluetooth Hack](./pok3r-bluetooth-hack.html)
 - [Setup multiple account email in mutt](./mutt-setup.html)
+- [Markdown TOC generator in Rust](./rust-markdown-toc.html)

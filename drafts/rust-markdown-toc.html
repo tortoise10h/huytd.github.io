@@ -1,0 +1,53 @@
+
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: Thu Mar 16 2017 13:20:38 GMT-0700 (PDT)</i>
+      <br/>
+      <h1>Table of Contents</h1><li class='toc-item'><a href='#build-markdown-toc-generator-with-rust'> Build Markdown TOC generator with Rust</a></li><ul class='toc'><li class='toc-item'><a href='#the-idea'>1. The idea</a></li><li class='toc-item'><a href='#coding'>2. Coding</a></li><ul class='toc'><li class='toc-item'><a href='#read-file'>2.1. Read file</a></li><li class='toc-item'><a href='#filter-the-headers'>2.2. Filter the headers</a></li><li class='toc-item'><a href='#represent-menu-with-tree-data'>2.3. Represent menu with tree data</a></li><ul class='toc'><li class='toc-item'><a href='#building-the-tree-data-structure'>2.3.1. Building the tree data structure</a></li><li class='toc-item'><a href='#read-the-markdown-headers-to-tree'>2.3.2. Read the markdown headers to tree</a></li></ul><li class='toc-item'><a href='#generate-html-table-of-contents'>2.4. Generate HTML table of contents</a></li></ul></ul>
+      <h1 id="build-markdown-toc-generator-with-rust">Build Markdown TOC generator with Rust</h1>
+<p>One of the interesting features of emacs&#39;s Org-mode is it automatically generates the table of contents for your document.</p>
+<p>I want this feature for my Markdown generator as well, so I spent my Sunday for this.</p>
+<h2 id="the-idea">The idea</h2>
+<p>To generate the TOC, we need to list all the headers in a Markdown document, but need to represent its hierarchy as well.</p>
+<p>Tree is the best data structure to help us do this.</p>
+<p>The idea is to write a Rust program that read the markdown file line by line, at each line, we check if it&#39;s a header or not, then put that header to the tree.</p>
+<p>In the end, we parse the tree data into an HTML string, which we can insert to the Markdown generator or any HTML pages.</p>
+<h2 id="coding">Coding</h2>
+<h3 id="read-file">Read file</h3>
+<p>Read the whole file with <code>f.read_to_string()</code> would be slow.</p>
+<p>Use <code>reader.lines().enumerate()</code> to read line by line instead. This is good for parsing the large file.</p>
+<h3 id="filter-the-headers">Filter the headers</h3>
+<p>The first idea is to get all the lines starts with <code>#</code>, this is the correct idea but not enough.</p>
+<p>If you&#39;re writing documents about <code>bash</code> or <code>ruby</code>, you may see some of your code comment goes with the headers. It&#39;s because they&#39;re using <code>#</code> character at the beginning of the line for commenting.</p>
+<p>The better idea is put a flag to check if the current line is in a code block or not.</p>
+<p><code>let mut is_in_codeblock = false;</code></p>
+<h3 id="represent-menu-with-tree-data">Represent menu with tree data</h3>
+<h4 id="building-the-tree-data-structure">Building the tree data structure</h4>
+<h4 id="read-the-markdown-headers-to-tree">Read the markdown headers to tree</h4>
+<h3 id="generate-html-table-of-contents">Generate HTML table of contents</h3>
+<p>Just read the tree and populate the menu, with <code>&lt;ul&gt;</code> embed.</p>
+
+    </body>
+  </html>
+  
