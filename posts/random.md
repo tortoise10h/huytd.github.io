@@ -16,10 +16,13 @@ Load saved session with:
 vim -S .work
 ```
 
-## Map jk as ESC in VIM
+## Map jk as ESC, ESC as backtick in VIM
+
+For insert mode only:
 
 ```
-imap jk <ESC>
+inoremap jk <ESC>
+inoremap <ESC> `
 ```
 
 ## Start tmux and auto attach to any exists session

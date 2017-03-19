@@ -26,8 +26,10 @@
 <pre><code>nnoremap &lt;Leader&gt;ss :mksession .work&lt;CR&gt;
 </code></pre><p>Load saved session with:</p>
 <pre><code>vim -S .work
-</code></pre><h2 id="map-jk-as-esc-in-vim">Map jk as ESC in VIM</h2>
-<pre><code>imap jk &lt;ESC&gt;
+</code></pre><h2 id="map-jk-as-esc-esc-as-backtick-in-vim">Map jk as ESC, ESC as backtick in VIM</h2>
+<p>For insert mode only:</p>
+<pre><code>inoremap jk &lt;ESC&gt;
+inoremap &lt;ESC&gt; `
 </code></pre><h2 id="start-tmux-and-auto-attach-to-any-exists-session">Start tmux and auto attach to any exists session</h2>
 <p>Put this script to <code>.bash_profile</code> or anything equivalent:</p>
 <pre><code>if [ -z &quot;$TMUX&quot; ]; then

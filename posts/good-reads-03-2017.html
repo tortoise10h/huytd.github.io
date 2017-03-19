@@ -1,0 +1,160 @@
+<html>
+    <head>
+        <title> Weekend Reading - 03/2017 | Huy's Blog</title>
+        <meta charset="utf-8">
+        <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
+        
+        <link href="../css/theme.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="../css/highlight/tomorrow.css">
+        <link rel="stylesheet" href="../css/fontello.css">
+        <script src="../js/highlight.pack.js"></script>
+        <script>
+        hljs.initHighlightingOnLoad();
+        </script>
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <a href="/"><i class="icon icon-emo-coffee"></i> Huy's Blog</a>
+        </div>
+        <div class="container">
+            <div class="main">
+                <h1 id="weekend-reading-03-2017">Weekend Reading - 03/2017</h1>
+<p>Bài viết này tổng hợp lại một vài vấn đề hay ho mà mình đọc được trong cuối tuần này. Từ giờ mình sẽ cố gắng note lại những nội dung mình đọc được trong những cái weekend như này, một phần để cho khỏi bị quên, một phần hy vọng có thể chia sẽ được cho những ai quan tâm.</p>
+<h2 id="-a-tutorial-introduction-to-the-lambda-calculus-https-arxiv-org-abs-1503-09060-"><a href="https://arxiv.org/abs/1503.09060">A Tutorial Introduction to the Lambda Calculus</a></h2>
+<p>Paper này được giới thiệu là một &quot;painless introduction về $\lambda$-calculus&quot;. Trước khi đọc thì cũng nghe nhiều ae nói qua về lambda calculus nhưng vẫn chưa hình dung ra được nó là gì và tại sao nó lại khá hay ho.</p>
+<p>Lamda calculus là &quot;ngôn ngữ lập trình&quot; dựa trên việc tạo ra các annonymous function, có dạng:</p>
+<pre class="math">$
+\lambda x.x
+$</pre>
+
+<p>Trong đó $\lambda$ là ký hiệu định nghĩa hàm, kí hiệu $x$ đầu tiên giúp xác định biến truyền vào hàm và kí hiệu $x$ thứ hai là phần thân hàm.</p>
+<p>Ví dụ rõ ràng hơn, ta có thể viết lại hàm số $f(x) = x^2$ dưới dạng cú pháp của lambda calculus như sau:</p>
+<pre class="math">$
+f = \lambda x.x^2
+$</pre>
+
+<p>Thao tác &quot;sử dụng&quot; hàm này được gọi là <em>apply</em>, ví dụ:</p>
+<pre class="math">$
+f(7) = (\lambda x.x^2) 7 = 7^2 = 49
+$</pre>
+
+<p>Ở ví dụ trên ta <em>apply</em> giá trị số 7 vào hàm $\lambda x.x^2$ bằng cách thay thế toàn bộ kí hiệu $x$ ở phần thân hàm thành số 7.</p>
+<p>Các tài liệu liên quan (có cả những cái mình chưa đọc :)) note lại để khi nào có thời gian lại lôi ra đọc)</p>
+<ul>
+<li><a href="https://arxiv.org/abs/1503.09060">A Tutorial Introduction to the Lambda Calculus</a>, Raul Rojas, 2015.</li>
+<li><a href="http://wiki.c2.com/?LambdaCalculus">Lambda Calculus</a>, Ward Cunningham, 2013.</li>
+<li><a href="http://www.cse.chalmers.se/research/group/logic/TypesSS05/Extra/geuvers.pdf">Introduction to Lambda Calculus</a>, Henk Barendregt &amp; Erik Barendsen, 2000.</li>
+<li><a href="https://brilliant.org/wiki/lambda-calculus/">Lambda Calculus</a>, Brilliant.org, 2017.</li>
+<li><a href="http://dev.stephendiehl.com/fun/lambda_calculus.html">Lambda Calculus Implement in Haskell</a>, Stephen Diehl</li>
+</ul>
+<h2 id="-regular-expression-matching-with-a-trigram-index-https-swtch-com-rsc-regexp-regexp4-html-"><a href="https://swtch.com/~rsc/regexp/regexp4.html">Regular Expression Matching with a Trigram Index</a></h2>
+<p>Bài này nói về cơ chế tìm kiếm sử dụng regex trên một lương dữ liệu cực kì lớn (ví dụ source code của toàn bộ các project open source trên toàn thế giới) bằng cách build một bộ <em>n</em>-grams index dựa trên toàn bộ nội dung đống source đó, mà ở đây bài báo chọn <em>3</em>-grams.</p>
+<p>Ví dụ có 3 document sau:</p>
+<pre><code>(1) Google Code Search
+(2) Google Code Project Hosting
+(3) Google Web Search
+</code></pre><p>Bộ trigram index sẽ có dạng:</p>
+<pre><code>_Co: {1, 2}     Sea: {1, 3}     e_W: {3}        ogl: {1, 2, 3}
+_Ho: {2}        Web: {3}        ear: {1, 3}     oje: {2}
+_Pr: {2}        arc: {1, 3}     eb_: {3}        oog: {1, 2, 3}
+_Se: {1, 3}     b_S: {3}        ect: {2}        ost: {2}
+_We: {3}        ct_: {2}        gle: {1, 2, 3}  rch: {1, 3}
+Cod: {1, 2}     de_: {1, 2}     ing: {2}        roj: {2}
+Goo: {1, 2, 3}  e_C: {1, 2}     jec: {2}        sti: {2}
+Hos: {2}        e_P: {2}        le_: {1, 2, 3}  t_H: {2}
+Pro: {2}        e_S: {1}        ode: {1, 1}     tin: {2}
+</code></pre><p>Là một bảng tham chiếu dựa trên từng cụm substring 3 kí tự của mỗi từ trong từng document, giá trị tham chiếu là số thứ tự của tài liệu có chứa trigram đó.</p>
+<p>Khi tìm kiếm thì chúng ta sẽ build một query sử dụng các phép <em>AND</em> hoặc <em>OR</em> để tìm kiếm, ví dụ với input là <code>/Google.*Search/</code>, ta build được query sau:</p>
+<pre><code>Goo AND oog AND ogl AND gle AND Sea AND ear AND arc AND rch
+</code></pre><p>Kết quả tìm kiếm sẽ là kết quả thu được từ việc thực hiện các phép <code>AND</code> trên các tập hợp tương ứng ở index.</p>
+<p>Khi đọc title thì mình mang một cái thắc mắc là: Tại sao lại là 3 mà không phải là một con số khác? Tác giả trả lời trong bài: vì 2 là quá ít, 4 thì lại quá nhiều, nên cứ lấy số 3 thôi...</p>
+<h2 id="-method-syntax-self-self-v-mut-self-trong-rust-https-doc-rust-lang-org-book-method-syntax-html-"><a href="https://doc.rust-lang.org/book/method-syntax.html">Method Syntax: self, &amp;self và &amp;mut self trong Rust</a></h2>
+<p>Trong Rust, khi implement một method cho một <code>struct</code> với từ khóa <code>impl</code>, chúng ta có 3 chỉ định tham số <code>self</code> (tương tự như <code>this</code> trong các ngôn ngữ khác) vào cho một method là: </p>
+<ul>
+<li><code>self</code>: khi chúng ta cần sử dụng <code>self</code> bên trong hàm như là giá trị của chính nó trên stack (take luôn ownership).</li>
+<li><code>&amp;self</code>: khi chúng ta cần <code>self</code> là một reference (borrow thôi, không take ownership).</li>
+<li><code>&amp;mut self</code>: khi chúng ta cần <code>self</code> là một mutable reference.</li>
+</ul>
+<p>Và mặc định thì chúng ta nên sử dụng <code>&amp;self</code>.</p>
+<h2 id="-applications-of-tree-discrete-mathematics-and-its-applications-https-www-amazon-com-discrete-mathematics-its-applications-seventh-dp-0073383090-ref-pd_sbs_14_t_0-_encoding-utf8-psc-1-refrid-1tcgjv0xwwwj9qshsnnh-"><a href="https://www.amazon.com/Discrete-Mathematics-Its-Applications-Seventh/dp/0073383090/ref=pd_sbs_14_t_0?_encoding=UTF8&amp;psc=1&amp;refRID=1TCGJV0XWWWJ9QSHSNNH">Applications of Tree, Discrete Mathematics and Its Applications</a></h2>
+<p>Vì đang làm một ứng dụng liên quan đến kiểu dữ liệu cây (Tree) nên mình cũng muốn tìm hiểu bài bản về nó một tí, nên đọc qua chương này trong cuốn <em>Discrete Mathematics and Its Applications</em>.</p>
+<p>Mặc dù đã đọc một vài phiên bản tiếng Việt, dịch ra từ cuốn này như cuốn <em>&quot;Toán rời rạc ứng dụng trong tin học&quot;, NXB Giáo Dục</em> hay các cuốn có nội dung tương tự như <em>&quot;Thuật toán trong Máy tính&quot;, NXB Thống Kê</em>, nhưng mình thật sự bất ngờ vì lượng kiến thức mà bản gốc này cung cấp, bên cạnh việc trình bày các khái niệm lý thuyết rất khoa học, cuốn sách còn đưa thêm rất nhiều ví dụ cụ thể, từ đơn giản đến phức tạp. </p>
+<p>Quay trở lại vụ Tree, phần <em>&quot;Applications of Tree&quot;</em> trong cuốn sách có đưa ra các ví dụ minh họa như xây dựng cây tìm kiếm nhị phân cho một tập hợp các chuỗi (string) dựa trên thứ tự alphabet, sử dụng cây quyết định (decision tree) để giải bài toán cân 8 đồng xu, giới thiệu thuật toán Huffman coding, cây trò chơi,... một cách cực kì chi tiết và dễ hiểu.</p>
+
+                <div class="fb-like" data-href="http://huytd.github.io/posts/good-reads-03-2017.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                /**
+                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+                */
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+
+                s.src = '//huysblog.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+            </div>
+        </div>
+	    <div class="footer">
+            <p>Created with <a href="http://github.com/huytd/azeroth-js">azeroth.js</a></p>
+            <div class="social">
+                <a target="_blank" href="http://facebook.com/kingbazoka"><i class="icon-facebook-squared"></i></a>
+                <a target="_blank" href="http://twitter.com/huydotnet"><i class="icon-twitter-squared"></i></a>
+                <a target="_blank" href="http://github.com/huytd"><i class="icon-github-squared"></i></a>
+                <a target="_blank" href="https://thefullsnack.com"><i class="icon-emo-coffee"></i></a>
+            </div>
+        </div>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-71353335-1', 'auto');
+          ga('send', 'pageview');
+        </script>
+        <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '462066520669072',
+              xfbml      : true,
+              version    : 'v2.6'
+            });
+
+            FB.Event.subscribe('edge.create', function(url) {
+              ga('send', 'social', 'facebook', 'like', url);
+            });
+          };
+
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <script id="dsq-count-scr" src="//huysblog.disqus.com/count.js" async></script>
+        <script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$'], ['\\(','\\)']],
+            skipTags: ["script","noscript","style","textarea"]
+          }
+        });
+        </script>
+    </body>
+</html>
