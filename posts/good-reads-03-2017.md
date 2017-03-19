@@ -91,3 +91,15 @@ Vì đang làm một ứng dụng liên quan đến kiểu dữ liệu cây (Tre
 Mặc dù đã đọc một vài phiên bản tiếng Việt, dịch ra từ cuốn này như cuốn _"Toán rời rạc ứng dụng trong tin học", NXB Giáo Dục_ hay các cuốn có nội dung tương tự như _"Thuật toán trong Máy tính", NXB Thống Kê_, nhưng mình thật sự bất ngờ vì lượng kiến thức mà bản gốc này cung cấp, bên cạnh việc trình bày các khái niệm lý thuyết rất khoa học, cuốn sách còn đưa thêm rất nhiều ví dụ cụ thể, từ đơn giản đến phức tạp. 
 
 Quay trở lại vụ Tree, phần _"Applications of Tree"_ trong cuốn sách có đưa ra các ví dụ minh họa như xây dựng cây tìm kiếm nhị phân cho một tập hợp các chuỗi (string) dựa trên thứ tự alphabet, sử dụng cây quyết định (decision tree) để giải bài toán cân 8 đồng xu, giới thiệu thuật toán Huffman coding, cây trò chơi,... một cách cực kì chi tiết và dễ hiểu.
+
+## Koudan: Miyamoto Musashi
+
+Không tìm thấy link sách gốc, tuy nhiên bản dịch tiếng Việt thì rất nhiều trên mạng, các bạn có thể tìm đọc. 
+
+Koudan (講談) là lối kể chuyện truyền thống của Nhật Bản dưới hình thức diễn thuyết, diễn giả ngồi trên một bục cao và sử dụng giọng đọc truyền cảm của mình để kể lại các giai thoại lịch sử, thường là những mẫu truyện có thêm bớt vài phần hư cấu và chỉ dùng các yếu tố lịch sử để làm bối cảnh, tình tiết cho câu chuyện.
+
+Bản dịch _"Koudan: Miyamoto Musashi"_ là phiên bản "viết" được nhà xuất bản Kodansha đóng lại thành sách từ bản koudan của diễn giả Ito Ryocho thời kì trước Thế chiến thứ II.
+
+Quyển sách kể về cuộc đời của Miyamoto Musashi, một nhân vật lịch sử có thật và cực kì nổi tiếng, được đông đảo người Việt nam biết đến qua các ấn phẩm văn hóa Nhật như tiểu thuyết, truyện tranh, phim ảnh,... 
+
+Mặc dù người dịch đã khuyến cáo là thể loại Koudan rất khó để dịch ra thứ ngôn ngữ khác, vì nó sử dụng các âm điệu, vần, từ ngữ cổ của Nhật Bản, dịch ra sẽ mất hầu hết những cái tinh hoa đặc sắc của Koudan, tuy nhiên mình thấy đây là một bản dịch không tồi, thật tình là rất cảm phục người dịch giả, bỏ công sức ra dịch miễn phí nhưng từng câu từng chữ đều được viết ra một cách rất cẩn thận và có đầu tư, không như vô số các dịch giả khác, dịch xong nhiều khi phá hỏng luôn cả bộ truyện :D 
