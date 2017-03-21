@@ -1,11 +1,12 @@
-@font-face {
-    font-family: 'fallback-unicode';
-    src: local('Helvetica');
-    unicode-range: U+26;
+* {
+  font-family: Menlo, Monaco, Consolas, 'Andale Mono', Helvetica, monospace;
 }
 
-* {
-  font-family: 'fallback-unicode', Menlo, Monaco, Consolas, 'Andale Mono', Helvetica, monospace;
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html, body {
