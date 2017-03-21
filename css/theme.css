@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'fallback-unicode';
-    src: local('Andale Mono');
+    src: local('Helvetica');
     unicode-range: U+26;
 }
 
 * {
-  font-family: Menlo, Monaco, Consolas, 'fallback-unicode', 'Andale Mono', Helvetica, monospace;
+  font-family: 'fallback-unicode', Menlo, Monaco, Consolas, 'Andale Mono', Helvetica, monospace;
 }
 
 html, body {
