@@ -2,6 +2,11 @@
   font-family: Menlo, Monaco, Consolas, 'Andale Mono', Helvetica, monospace;
 }
 
+.copyright {
+  font-size: 0.5em;
+  color: #DDD;
+}
+
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 480px)
