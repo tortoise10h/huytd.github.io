@@ -125,3 +125,57 @@ Chạy thử hàm `memfibo` vừa tạo với tham số `n = 100` luôn coi sao:
 ```
 
 Quá xịn :D
+
+## Các implement khác của memoize
+
+Trong thực tế, có thể bạn sẽ không đủ tự tin để sử dụng hàm `memoize` do chính mình implement, hoặc team/sếp không tin tưỏng bạn, ok, không sao, mặc dù bị tổn thưong nhưng không nên vì thế mà nản.
+
+Chúng ta có thể sử dụng một vài implement khác như:
+
+
+- Lodash Memoize ([https://npmjs.com/package/lodash.memoize](https://npmjs.com/package/lodash.memoize))
+- Fast-memoize ([https://npmjs.com/package/fast-memoize](https://npmjs.com/package/fast-memoize))
+
+Ngoài ra, các bạn có thể tham khảo thêm bài viết [How I wrote the fastest JavaScript memoization library](https://community.risingstack.com/the-worlds-fastest-javascript-memoization-library/) để có cái nhìn sâu hơn về các kĩ thuật implement/tối ưu hóa cho memoize.
+
+## Bonus: Sử dụng memoize trong Angular filter
+
+Một trưòng hợp mà bạn có thể sử dụng memoize khá là hiệu quả đó là khi implement một `filter` trong Angular. Ví dụ:
+
+```
+angular.module('app').filter('evenNumbers', function() {
+  return function(items) {
+    return items.reduce(function(result, item) {
+      return (item % 2 === 0);
+    }, []);
+  };
+});
+```
+
+Filter trên nhận vào một mảng và trả về một mảng mới, nhưng khi sử dụng filter trên bạn sẽ gặp lỗi:
+
+```
+Error: [$rootScope:infdig] 10 $digest() iterations reached. Aborting!
+```
+
+Nguyên nhân của lỗi trên là vì: hàm `reduce` trả về một mảng mới mỗi lần bạn chạy filter `evenNumbers`, khiến cho Angular "hiểu lầm" kết quả trả về đã đưọc thay đổi và nó phải chạy một digest cycle mới để kiểm tra, và việc chạy này xảy ra liên tục.
+
+Khi gặp những trưòng hợp như vậy, bản chỉ cần đặt hàm filter vào bên trong `memoize` để cache lại giá trị trả về là xong:
+
+```
+angular.module('app').filter('evenNumbers', function() {
+  return function(items) {
+    return items.reduce(function(result, item) {
+      return (item % 2 === 0);
+    }, []);
+  };
+});
+```
+
+## Lời cuối: đồ xịn nhưng dùng nhiều thì hết xịn
+
+Có một trưòng hợp mà dù có sử dụng memoize thì cũng vô dụng, đó là khi dữ liệu trả về của một hàm nó thay đổi không phụ thuộc vào tham số truyền vào của hàm đó. Ví dụ dữ liệu tracking dạng time series, hay giá chứng khoán, hay danh sách status trên tưòng nhà đứa bạn thích trên Facebook chẳn hạn.
+
+Và thêm nữa, vì memoize cũng là caching, tức là dữ liệu tính toán xong được lưu lại và nằm đó luôn, không mất đi đâu cả, cho nên bạn phải nghĩ tới vấn đề khi app chạy trong một khoản thời gian dài, thì dung lưọng bộ nhớ cũng vì thế mà tăng lên. Cho nên cần phải giải phóng bộ nhớ cache của hàm memoize sau một khoản thời gian nhất định, nếu không sẽ dẫn tới tràn bộ nhớ hoặc memleak.
+
+Vì sử dụng memoize tức là bạn đang đánh đổi memory để lấy tốc độ, chứ không có cái gì là free cả, nên nếu biết chừng mực và dùng đúng lúc đúng chỗ thì sẽ đem lại hiệu quả cao, còn ngược lại, lạm dụng quá mức thì hậu quả sẽ khó lường. Cho nên gì gì thì cũng phải hiểu để xài nhau cho tốt hơn, nhé :D 
