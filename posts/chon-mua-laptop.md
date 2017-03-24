@@ -23,7 +23,15 @@ Với thân hình mảnh mai nhưng không kém phần nồi đồng cối đá,
 Thôi lan man chút chơi, vì là máy cá nhân, công việc chính là viết blog và lập trình, nên đây là setup của mình cho con laptop:
 
 - **Hệ điều hành:** Arch Linux
-- **Window Manager:** i3 + Polybar (xem thêm cách cấu hình bên dưới)
+- **Window Manager:** i3 + Polybar
 - **Mail:** mutt ([xem cách cấu hình mutt tại đây](https://huytd.github.io/drafts/mutt-setup.html))
 - **Editor:** neovim ([dùng theme tự bịa ra](https://gist.github.com/huytd/10e490955d344ea1a2af7ebc28e2a8e1))
-- **Browser:**
+- **Browser:** Firefox, hôm nào mát trời thì xài Surf ([xem cách xài surf kết hợp với tabbed tại đây](https://huytd.github.io/drafts/til.html#use-surf-with-tabbed))
+- **Chat:** weechat kết hợp ZNC trên server để giữ session cho cả IRC lẫn Slack
+- **Map phím:** Vì chuyển từ Mac qua nên vẫn còn thói quen xài phims CMD, có thể dùng Xmodmap để đổi vị trí phím Ctrl và Alt trên Linux.
+
+Chốt cái hình minh họa:
+
+![](img/x220arch.png)
+
+Hình ảnh chỉ mang tính chất thời vụ, vì có thể trong tương lai (tính bằng đơn vị ngày hoặc giờ) mình sẽ lại đổi màu nó sang cái gì đó mới hơn, chính tác giả cũng không biết trước được 😂 
