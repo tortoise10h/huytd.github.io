@@ -1,0 +1,57 @@
+
+  <html>
+    <head>
+      <link href='https://huytd.github.io/css/hack.css' rel='stylesheet' />
+      <style>
+        body { 
+          padding: 50px; 
+          margin: 0 auto; 
+          width: 700px; 
+        } 
+        .toc {
+          margin: 0 !important;
+          padding-left: 20px !important;
+        }
+        .toc li { 
+          padding-left: 20px !important; 
+          margin: 5px 0 5px 0 !important;
+        } 
+        .toc li::after {
+          content: "" !important;
+        }
+      </style>
+    </head>
+    <body class='hack'>
+      <i>Published: Fri Mar 24 2017 11:35:08 GMT-0700 (PDT)</i>
+      <br/>
+      <h1>Table of Contents</h1><li class='toc-item'><a href='#til'> TIL</a></li><ul class='toc'><li class='toc-item'><a href='#use-surf-with-tabbed'>1. Use surf with tabbed</a></li><li class='toc-item'><a href='#rename-files-with-regex'>2. Rename files with regex</a></li></ul>
+      <h1 id="til">TIL</h1>
+<h2 id="use-surf-with-tabbed">Use surf with tabbed</h2>
+<p><code>surf</code> is a lightweight and embedable web browser based on WebKit, it can be embed into any X application.</p>
+<p>You can use <code>surf</code> with <code>tabbed</code> to have multitab browsing.</p>
+<p>Some useful shortcut to use with <code>surf</code>:</p>
+<ul>
+<li><strong>Ctrl-h</strong>: Back</li>
+<li><strong>Ctrl-l</strong>: Forward</li>
+<li><strong>Ctrl-g</strong>: Enter URL</li>
+</ul>
+<p>To start <code>surf</code> embed in <code>tabbed</code>, use this command:</p>
+<pre><code>tabbed surf -e
+</code></pre><h2 id="rename-files-with-regex">Rename files with regex</h2>
+<p>Given a folder with 3 files:</p>
+<pre><code>├── squared-checkbox-directive.js
+├── squared-checkbox-style.scss
+└── squared-checkbox-template.html
+</code></pre><p>Now you want to rename them to <code>circle-checkbox-*.*</code>, you can&#39;t use the <code>mv</code> command.</p>
+<p>To do this, you need to use <code>rename</code> command:</p>
+<pre><code>rename &#39;s/squared/circle/&#39; *.*
+</code></pre><p>Now you got what you need:</p>
+<pre><code>├── circle-checkbox-directive.js
+├── circle-checkbox-style.scss
+└── circle-checkbox-template.html
+</code></pre><p>On Mac, you need to install <code>rename</code> via <code>brew</code>:</p>
+<pre><code>brew install rename
+</code></pre>
+    </body>
+  </html>
+  
