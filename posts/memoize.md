@@ -164,11 +164,11 @@ Khi gặp những trưòng hợp như vậy, bản chỉ cần đặt hàm filte
 
 ```
 angular.module('app').filter('evenNumbers', function() {
-  return function(items) {
+  return memoize(function(items) {
     return items.reduce(function(result, item) {
       return (item % 2 === 0);
     }, []);
-  };
+  });
 });
 ```
 

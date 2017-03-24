@@ -127,11 +127,11 @@ const fibo = (n) =&gt; {
 </code></pre><p>Nguyên nhân của lỗi trên là vì: hàm <code>reduce</code> trả về một mảng mới mỗi lần bạn chạy filter <code>evenNumbers</code>, khiến cho Angular &quot;hiểu lầm&quot; kết quả trả về đã đưọc thay đổi và nó phải chạy một digest cycle mới để kiểm tra, và việc chạy này xảy ra liên tục.</p>
 <p>Khi gặp những trưòng hợp như vậy, bản chỉ cần đặt hàm filter vào bên trong <code>memoize</code> để cache lại giá trị trả về là xong:</p>
 <pre><code>angular.module(&#39;app&#39;).filter(&#39;evenNumbers&#39;, function() {
-  return function(items) {
+  return memoize(function(items) {
     return items.reduce(function(result, item) {
       return (item % 2 === 0);
     }, []);
-  };
+  });
 });
 </code></pre><h2 id="l-i-cu-i-x-n-nh-ng-d-ng-nhi-u-th-h-t-x-n">Lời cuối: đồ xịn nhưng dùng nhiều thì hết xịn</h2>
 <p>Có một trưòng hợp mà dù có sử dụng memoize thì cũng vô dụng, đó là khi dữ liệu trả về của một hàm nó thay đổi không phụ thuộc vào tham số truyền vào của hàm đó. Ví dụ dữ liệu tracking dạng time series, hay giá chứng khoán, hay danh sách status trên tưòng nhà đứa bạn thích trên Facebook chẳn hạn.</p>
