@@ -33,7 +33,7 @@ F_{n}=F_{n-1}+F_{n-2}
 $</pre>
 
 <p>Hay diễn giải bằng code như sau:</p>
-<pre><code>let fibo = (n) =&gt; {
+<pre><code>const fibo = (n) =&gt; {
   if (n === 0) return 0;
   if (n === 1) return 1;
   return fibo(n - 1) + fibo(n - 2);
@@ -49,9 +49,9 @@ $</pre>
 3:15.24 total
 </code></pre><p>Và như ta đã nhận thấy, thì phần lớn thời gian tiêu tốn vào việc tính đi tính lại các giá trị trùng lặp, vậy để cải thiện, ta cần tìm một cách nào đó để lưu lại giá trị của từng phép tính <code>fibo(n)</code>, và tránh việc tính lại từ đầu mỗi khi chạy. Cách này gọi là <strong>caching</strong>.</p>
 <p>Vì đối với mỗi số <code>n</code> bất kì, ta luôn luôn chỉ có duy nhất một giá trị sau khi tính toán với hàm <code>fibo(n)</code>. Vậy nên ta có thể tạo ra một mảng tên là <code>cache</code> để lưu lại các giá trị <code>fibo(n)</code> đã tính toán, ở lần chạy tiếp theo, chỉ việc lấy nó ra và sử dụng, không cần phải tính lại.</p>
-<pre><code>let cache = [];
+<pre><code>const cache = [];
 
-let fibo = (n) =&gt; {
+const fibo = (n) =&gt; {
   if (n === 0) 
     cache[n] = 0;
   else if (n === 1) 
@@ -73,7 +73,7 @@ let fibo = (n) =&gt; {
 <p>Tuy nhiên, cứ phải tạo một biến toàn cục <code>cache</code> một cách thủ công như vậy không phải là một giải pháp hay, chưa kể đến việc cần cache nhiều thứ trong một ứng dụng, chúng ta cần một phương pháp tổng quát hơn, và hiệu quả hơn. Đó là memoize.</p>
 <p>Memoize khác với các kĩ thuật cache thông thường ở chỗ: <strong>Nó được dùng để cache giá trị trả về của một hàm, và cache được tạo ra dựa trên tham số của hàm đó.</strong></p>
 <p>Sau đây là một cách implement đơn giản cho hàm <code>memoize</code>:</p>
-<pre><code>let memoize = (func) =&gt; {
+<pre><code>const memoize = (func) =&gt; {
   let cache = {};
   let that = this;
   return (...args) =&gt; {
@@ -90,7 +90,7 @@ let fibo = (n) =&gt; {
 };
 </code></pre><p>Hàm <code>memozie</code> nhận vào tham số là một hàm, tạo cache dựa trên các tham số truyền vào của hàm đó. Khi được gọi thì nó sẽ trả về giá trị được cache nếu có, nếu chưa có giá trị cache thì chạy chính hàm được truyền vào và lưu lại giá trị trả về.</p>
 <p>Cực kì đơn giản đúng không? Giờ chúng ta thử implement lại hàm <code>fibo</code> ở đầu bài dùng <code>memoize</code>:</p>
-<pre><code>let memfibo = memoize((n) =&gt; {
+<pre><code>const memfibo = memoize((n) =&gt; {
   if (n === 0) return 0;
   if (n === 1) return 1;
   return memfibo(n - 1) + memfibo(n - 2);

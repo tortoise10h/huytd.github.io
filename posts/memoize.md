@@ -19,7 +19,7 @@ F_{n}=F_{n-1}+F_{n-2}
 Hay diễn giải bằng code như sau:
 
 ```
-let fibo = (n) => {
+const fibo = (n) => {
   if (n === 0) return 0;
   if (n === 1) return 1;
   return fibo(n - 1) + fibo(n - 2);
@@ -45,9 +45,9 @@ Và như ta đã nhận thấy, thì phần lớn thời gian tiêu tốn vào v
 Vì đối với mỗi số `n` bất kì, ta luôn luôn chỉ có duy nhất một giá trị sau khi tính toán với hàm `fibo(n)`. Vậy nên ta có thể tạo ra một mảng tên là `cache` để lưu lại các giá trị `fibo(n)` đã tính toán, ở lần chạy tiếp theo, chỉ việc lấy nó ra và sử dụng, không cần phải tính lại.
 
 ```
-let cache = [];
+const cache = [];
 
-let fibo = (n) => {
+const fibo = (n) => {
   if (n === 0) 
     cache[n] = 0;
   else if (n === 1) 
@@ -81,7 +81,7 @@ Memoize khác với các kĩ thuật cache thông thường ở chỗ: **Nó đ�
 Sau đây là một cách implement đơn giản cho hàm `memoize`:
 
 ```
-let memoize = (func) => {
+const memoize = (func) => {
   let cache = {};
   let that = this;
   return (...args) => {
@@ -103,7 +103,7 @@ Hàm `memozie` nhận vào tham số là một hàm, tạo cache dựa trên cá
 Cực kì đơn giản đúng không? Giờ chúng ta thử implement lại hàm `fibo` ở đầu bài dùng `memoize`:
 
 ```
-let memfibo = memoize((n) => {
+const memfibo = memoize((n) => {
   if (n === 0) return 0;
   if (n === 1) return 1;
   return memfibo(n - 1) + memfibo(n - 2);
