@@ -1,12 +1,10 @@
-# Weekend Hack - 03/2017
-
-Tuần này lưòi đọc sách nên chuyển sang vọc vạch lung tung, nhưng cũng có khá nhiều thứ cần note lại.
-
-## Hacking Amazon Dash Button
+# Hacking Amazon Dash Button
 
 Amazon Dash Button là một thiết bị kết nối Wifi và chỉ có 1 nút bấm. Sau khi mua về và cài đặt xong, thì khi bấm cái nút này, nó sẽ tự động gửi request đến Amazon để order món đồ mà bạn đã chọn trưóc đó. 
 
 Bạn có thể dùng nó để order mì tôm, bánh kẹo, sữa, bột giặt, cà phê, hay bất cứ thứ gì tùy thích. Tuy nhiên bạn chỉ đưọc order những mặt hàng của một hãng cho một nút, tùy theo nhãn in trên nút đó.
+
+## Cấu hình bên trong
 
 Tuy bề ngoài nhìn khá là đơn giản, nhưng bên trong Dash button có rất nhiều thứ hay ho:
 
@@ -23,6 +21,9 @@ Chưa hết, sau khi mua 1 em Dash này về, thì bạn sẽ được giảm gi
 
 Giờ vô chủ đề chính: **Hack cái nút Dash button**.
 
+## Hacking
+Ở thời điểm hiện tại thì chưa thấy ai làm đưọc gì nhiều hơn trong việc hack em Dash button này ngoài việc bắt lại request của nó mỗi khi nhấn nút và thực hiện một thao tác khác bằng server của chính mình. Nên trong phạm vi bài viết này cũng chỉ đề cập đến vấn đề đó. Sau này nếu tìm hiểu được thêm kĩ thuật gì mới hơn thì mình sẽ viết thêm.
+
 ### Cài đặt Dash Button
 Sau khi order về, thì việc đầu tiên cần làm đó là cấu hình cho cái nút kết nối đưọc với Wifi.
 
@@ -31,7 +32,6 @@ Sau khi order về, thì việc đầu tiên cần làm đó là cấu hình cho
 Sau đó app Amazon sẽ nhảy ra màn hình chọn sản phẩm cần mua, tại bước này nhớ **đừng chọn cái gì cả**, chỉ lẳng lặng tắt app đi là xong.
 
 ### Tìm MAC address của Dash Button
-
 Để có thể sử dụng được Dash button thì chúng ta cần phải lấy địa chỉ MAC của nó. Cách lấy thì nhiều vô kể. Có ngưòi sử dụng các script chuyên dụng, có ngưòi tự viết script để bắt gói tin và tra địa chỉ. Mình chỉ trình bày cách đơn giản đó là dùng `tcpdump`.
 
 Đầu tiên chạy `tcpdump`:
