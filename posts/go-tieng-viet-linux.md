@@ -53,7 +53,7 @@ Hình sau mô tả toàn cảnh việc xử lý nhập liệu trong một hệ t
 
 ![](img/xinputmethod-arch.png)
 
-<div style="text-align: center;" class="copyright">Hình ảnh được tác giả vẽ lại từ tài liệu [Xlib Programming Manual - Chapter 11: Internationalized Text Input](http://menehune.opt.wfu.edu/Kokua/Irix_6.5.21_doc_cd/usr/share/Insight/library/SGI_bookshelves/SGI_Developer/books/XLib_PG/sgi_html/ch11.html)</div>
+<div style="text-align: center;" class="copyright">Hình vẽ lại từ tài liệu [Xlib Programming Manual - Chapter 11: Internationalized Text Input](http://menehune.opt.wfu.edu/Kokua/Irix_6.5.21_doc_cd/usr/share/Insight/library/SGI_bookshelves/SGI_Developer/books/XLib_PG/sgi_html/ch11.html)</div>
 
 - Khi user nhấn một phím trên bàn phím, keycode của phím này sẽ đưọc gửi về cho X Server.
 - X Server gửi một sự kiện  nhấn phím (KeyPress Event) tới cho các X client đang đăng ký chờ event (application sẽ làm nhiệm vụ báo cho client biết nó có nên đăng kí nhận event hay ko)
