@@ -230,6 +230,12 @@ Output sẽ là:
 
 Nhưng nếu dùng nó ở phạm vi toàn cục (không thuộc scope nào) thì trình biên dịch sẽ nhận biết đó là một biến/hàm public.
 
+```
+static void rust_lang() {
+  // ...
+}
+```
+
 ---
 
 #### Biên dịch bằng Make
