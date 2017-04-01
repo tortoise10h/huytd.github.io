@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
+        <link href="../css/inconsolata.css" rel="stylesheet" type="text/css">
         <link href="../css/theme.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="../css/highlight/tomorrow.css">
         <link rel="stylesheet" href="../css/fontello.css">
@@ -156,7 +157,10 @@ static_test();
 0 -- 2
 0 -- 3
 </code></pre><p>Nhưng nếu dùng nó ở phạm vi toàn cục (không thuộc scope nào) thì trình biên dịch sẽ nhận biết đó là một biến/hàm public.</p>
-<hr>
+<pre><code>static void rust_lang() {
+  // ...
+}
+</code></pre><hr>
 <h4 id="bi-n-d-ch-b-ng-make">Biên dịch bằng Make</h4>
 <h3 id="common-practice-khi-modularity">Common practice khi Modularity</h3>
 <h4 id="ki-m-tra-module-export-c-i-g-ra-ngo-i-">Kiểm tra module export cái gì ra ngoài?</h4>

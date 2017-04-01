@@ -1,5 +1,6 @@
 * {
-  font-family: Menlo, Monaco, Consolas, 'Andale Mono', Helvetica, monospace;
+  font-family: "Inconsolata", "Lucida Console", Monaco, monospace;
+  /*font-family: Menlo, Monaco, Consolas, 'Andale Mono', Helvetica, monospace;*/
 }
 
 .copyright {
@@ -22,7 +23,7 @@ and (max-device-width : 736px) {
 
 html, body {
     margin: 0; padding: 0;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 100;
     overflow-x: hidden;
 }
@@ -53,6 +54,7 @@ ul li {
   margin-bottom: 8px;
   margin-top: 8px;
   padding-left: 10px;
+  line-height: 24px;
 }
 
 h1 {
