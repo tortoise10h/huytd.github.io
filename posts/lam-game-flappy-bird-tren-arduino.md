@@ -374,3 +374,5 @@ Các bạn có thể tham khảo mã nguồn của game tại Github: https://gi
 <meta property="og:title" content="Làm game Flappy Bird trên Arduino" />
 <meta property="og:description" content="Một trong những vị cứu tinh của dân đam mê điện tử nhưng ngoại đạo như mình đó là Arduino, đây là một board mạch lập trình được (vì tích hợp cả mạch nạp, mạch nguồn, output, input,...), bạn chỉ cần tập trung vào sử dụng các chân input,..." />
 <meta property="og:image" content="https://raw.githubusercontent.com/huytd/huytd.github.io/master/posts/arduinoflappy.jpg" />
+
+--@TAGS: arduino, game, hacking, hardware

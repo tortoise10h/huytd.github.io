@@ -97,3 +97,5 @@ Sau khi đã đặt xong câu hỏi thì ngồi yên đó, tiếp tục tra cứ
 Ai cũng bận rộn cả, họ phải tranh thủ chút thời gian rảnh để tranh thủ lên mạng giúp bạn, thì bạn nên tôn trọng họ, không thúc ép, không hỏi dai hỏi lì, việc trình bày câu hỏi cho "đẹp" cũng là một cách để tôn trọng thời gian của người khác. Nếu được hỏi một cách nhã nhặn, lịch sự thì người ta cũng sẽ trả lời bạn một cách lịch sự lại thôi :D 
 
 Hy vọng bài viết này sẽ giúp các bạn mới học hiểu được tại sao mình hỏi mà không ai trả lời, và biết cách hỏi làm sao để người khác vui vẻ trả lời. Chúc các bạn may mắn :D 
+
+--@TAGS: random, opinion, review

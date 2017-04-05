@@ -22,7 +22,10 @@
             <div class="main">
                 <h1 id="random-notes">Random Notes</h1>
 <p>This is just a clipboard for myself.</p>
-<h2 id="save-vim-session">Save VIM session</h2>
+<h2 id="list-all-todo-in-project">List all TODO in project</h2>
+<p>Put this alias to <code>~/.bash_profile</code>:</p>
+<pre><code>alias todo=&quot;grep --exclude-dir={.tmp,tmp,node_modules,lib,libs} -rnw . -e TODO&quot;
+</code></pre><h2 id="save-vim-session">Save VIM session</h2>
 <p>Save current split layout to <code>$(CWD)/.work</code> file:</p>
 <pre><code>nnoremap &lt;Leader&gt;ss :mksession .work&lt;CR&gt;
 </code></pre><p>Load saved session with:</p>

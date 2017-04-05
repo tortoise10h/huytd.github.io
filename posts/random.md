@@ -196,3 +196,4 @@ echo | openssl s_client -showcerts -servername <domain> -connect <domain>:443 2>
 /filter add irc_join_names * irc_366,irc_332,irc_333,irc_329,irc_324 *
 ```
 
+--@TAGS: random

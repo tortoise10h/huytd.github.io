@@ -217,3 +217,5 @@ Dựa vào điều $(4)$ đã chứng minh ở trên, chúng ta có thể kết 
 [1] Nguyễn Hùng Sơn, _"Thuật toán phục hồi số hữu tỉ"_, [Epsilon số 1](https://www.dropbox.com/s/evlskte9fmn59np/Epsilon_No1.pdf?dl=0) (2015), pp. 21-30.
 
 [2] Miguel A. Lerma, _"John's PIN"_, [Northwestern University Math Problem Solving Group](http://www.math.northwestern.edu/~mlerma/problem_solving/) (2003)
+
+--@TAGS: math, algorithm

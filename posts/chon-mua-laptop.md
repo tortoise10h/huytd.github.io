@@ -35,3 +35,5 @@ Chốt cái hình minh họa:
 ![](img/x220arch.png)
 
 Hình ảnh chỉ mang tính chất thời vụ, vì có thể trong tương lai (tính bằng đơn vị ngày hoặc giờ) mình sẽ lại đổi màu nó sang cái gì đó mới hơn, chính tác giả cũng không biết trước được 😂 
+
+--@TAGS: random, opinion, linux

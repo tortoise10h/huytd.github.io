@@ -18,3 +18,5 @@ Rất mong các bạn quan tâm và ủng hộ.
 <meta property="og:title" content="Nhục Driven Development" />
 <meta property="og:description" content="Mình là một người thích ăn gạch... :v" />
 <meta property="og:image" content="https://gescis.com/wp-content/uploads/2014/02/Blog-Writing-Ideas.jpg" />
+
+--@TAGS: random, opinion

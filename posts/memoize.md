@@ -179,3 +179,5 @@ Có một trưòng hợp mà dù có sử dụng memoize thì cũng vô dụng, 
 Và thêm nữa, vì memoize cũng là caching, tức là dữ liệu tính toán xong được lưu lại và nằm đó luôn, không mất đi đâu cả, cho nên bạn phải nghĩ tới vấn đề khi app chạy trong một khoản thời gian dài, thì dung lưọng bộ nhớ cũng vì thế mà tăng lên. Cho nên cần phải giải phóng bộ nhớ cache của hàm memoize sau một khoản thời gian nhất định, nếu không sẽ dẫn tới tràn bộ nhớ hoặc memleak.
 
 Vì sử dụng memoize tức là bạn đang đánh đổi memory để lấy tốc độ, chứ không có cái gì là free cả, nên nếu biết chừng mực và dùng đúng lúc đúng chỗ thì sẽ đem lại hiệu quả cao, còn ngược lại, lạm dụng quá mức thì hậu quả sẽ khó lường. Cho nên gì gì thì cũng phải hiểu để xài nhau cho tốt hơn, nhé :D 
+
+--@TAGS: javascript, memoize, performance, algorithm

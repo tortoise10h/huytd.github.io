@@ -38,3 +38,5 @@ git d <blah-blah>
 ```
 
 Happy Vimming ^^
+
+--@TAGS: vim

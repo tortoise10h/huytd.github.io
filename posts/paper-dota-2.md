@@ -25,3 +25,5 @@ Link bài báo: [https://www.diva-portal.org/smash/get/diva2:829556/FULLTEXT01.p
 
 Phân tích replay để dự đoán kết quả trận đấu, có giới thiệu qua nhiều thuật toán nhưng cuối cùng kết luận Random Forest là cho kết quả chính xác nhất, bài này nói khá kĩ ở khúc phân tích đặc thù dữ liệu của một file replay DotA 2
 
+--@TAGS: research, hacking
+                        console.log(irisData);

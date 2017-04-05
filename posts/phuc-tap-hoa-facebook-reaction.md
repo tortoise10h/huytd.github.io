@@ -683,3 +683,5 @@ Hoặc chạy thử trực tiếp tại [Codepen](http://codepen.io/huytd/pen/gM
 Hy vọng qua bài viết này, các bạn đã có thêm cái nhìn sâu sắc hơn về CSS và các kĩ thuật animation trong đó. Không phải cứ hễ những công việc gì liên quan đến CSS thì đều là khô khan nhàm chán cả :D
 
 Hẹn gặp lại các bạn trong các bài viết sau.
+
+--@TAGS: javascript, css, hacking

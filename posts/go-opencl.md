@@ -213,3 +213,5 @@ err = cl.EnqueueReadBuffer(cq, output, cl.TRUE, 0, 4*1024, unsafe.Pointer(&resul
 Ở chương trình trên thì có sự xuất hiện của kí tự `\x00` ở phần `kernel source`, đây là kí tự [NULL](https://en.m.wikipedia.org/wiki/Null_character) dùng để báo hiệu kết thúc string. 
 
 Và chúng ta cũng thấy, ở đây ta có thể tận dụng luôn các chức năng mà Go cung cấp một cách rất hiệu quả như là `defer` hoặc `channel`,...
+
+--@TAGS: gpu, golang, algorithm, math

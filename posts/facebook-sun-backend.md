@@ -31,3 +31,5 @@ Nhưng nếu đặt mình vào vị trí của một người đứng trên đ�
 Có lẽ nhiều người cho đó là điều cần thiết, vì phải master được một cái gì đó, "nhất nghệ tinh nhất thân vinh". Nhưng cá nhân mình không nghĩ đó là hay ho. Vì công nghệ là thứ thay đổi từng ngày một, nếu một người làm công nghệ mà có đầu óc bảo thủ, không biết cân bằng giữa việc "nghệ tinh" và việc live on the edge thì kết cục cũng sẽ giống như Sun mà thôi :))
 
 Và thêm nữa, là Java, C++ hay JavaScript, Ruby on Rails, mỗi thứ này không phải là một cái nghề, mà "lập trình" mới là một cái nghề, việc master mỗi một món Java hay Ruby chỉ đơn giản là master **một** kĩ thuật trong nghề lập trình mà thôi. Nên đừng lấy đó làm lý do để tự vỗ về sự lười biếng của bản thân.
+
+--@TAGS: opinion, random

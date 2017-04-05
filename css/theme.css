@@ -356,3 +356,14 @@ h4:before {
 ::-moz-selection {
   background: #FFF5B8;
   display: block; }
+
+.other-tags {
+  padding: 10px;
+}
+
+.topic-tag {
+  display: inline-block;
+  padding: 5px 8px;
+  margin: 5px;
+  background: #EEE;
+}

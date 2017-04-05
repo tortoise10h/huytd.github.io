@@ -166,3 +166,4 @@ Và các nhà khoa học vẫn đang miệt mài nghiên cứu để đưa con s
 
 Theo một bình luận của giáo sư Ngô Quang Hưng trên Procul, thì các thuật toán của Strassen và Coppersmith-Winograd chỉ mang giá trị lý thuyết là chính, trong thực tế ít ai dùng cho các ma trận lớn vì hidden-constant quá lớn và implement phức tạp, dễ bị lỗi <sup>[[8]](http://www.procul.org/blog/2005/11/16/nhan-ma-tr%E1%BA%ADn-dft-va-ly-thuy%E1%BA%BFt-bi%E1%BB%83u-di%E1%BB%85n-nhom-1/#comment-11070)</sup>.
 
+--@TAGS: algorithm, math, performance

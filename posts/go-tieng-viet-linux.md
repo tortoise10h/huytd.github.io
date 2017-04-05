@@ -143,3 +143,5 @@ Hy vọng bài viết này giúp các bạn có thêm cái nhìn sâu hơn về 
 Bài viết chỉ dựa trên quan điểm chủ quan của tác giả khi tìm hiểu về các bộ gõ không dùng preedit, nên còn nhiều thiếu sót và có nhiều nội dung liên quan đến phưong pháp chuẩn (preedit) và các kĩ thuật khác như surrounding text,... đã bị bỏ qua. 
 
 Hy vọng các bạn quan tâm có thể nhiệt tình góp ý, bổ sung và giúp mình hoàn thiện bài viết. Xin cảm ơn :D
+
+--@TAGS: linux, opinion, algorithm

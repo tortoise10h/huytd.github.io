@@ -202,3 +202,5 @@ for i in xrange(2, 10):
 Xin chân thành cảm ơn ae nhóm **#hardcore** của cộng đồng Ruby Việt Nam đã tích cực thảo luận để tổng hợp thành bài viết này.
 
 Hy vọng bài viết phần nào giúp cho các bạn nhận ra sự quan trọng của việc ứng dụng toán học, đặc biệt là việc sử dụng ma trận vào giải quyết các bài toán phức tạp. Viết xong bài tổng hợp này mình vẫn còn ngồi vắt tay lên trán mà suy nghĩ, giá mà hồi đó mình chăm học toán hơn thì tốt biết mấy :joy:
+
+--@TAGS: algorithm, math

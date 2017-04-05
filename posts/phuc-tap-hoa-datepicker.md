@@ -237,3 +237,5 @@ Hy vọng qua bài viết này, mỗi khi nghĩ tới Datepicker hoặc việc x
 Đến đây bạn hoàn toàn có thể tự viết cho riêng mình một component Datepicker mà không bị phụ thuộc vào bất cứ một món ăn sẵn nào nữa.
 
 Hẹn gặp lại các bạn trong các bài viết tiếp theo của sê-ri **Phức tạp hoá vấn đề** ^^
+
+--@TAGS: algorithm, math

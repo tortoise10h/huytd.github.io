@@ -11,4 +11,4 @@ Tương tự như nội dung bài viết vừa rồi của  mình, nhưng sâu h
 Bài báo nói về phương pháp bóc tách các nội dung như khung truyện, khung thoại, lời thoại (tiếng Nhật) ra từ bản scan và tổng hợp lại sử dụng ComicXML để lưu thông tin, nội dung của từng khung hình. Kết quả nghiên cứu này cho độ chính xác 81.6% khi nhận diện khung hình đối với các bản scan thô (non-flat, scan không phẳng), chính xác 100% khi nhận diện các khung thoại và 93.75% khi nhận diện các kí tự tiếng Nhật.
 
 
-
+--@TAGS: research, opencv, hacking

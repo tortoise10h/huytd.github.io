@@ -125,3 +125,5 @@ Cá nhân mình không phải lúc nào cũng thành công với những project
 ---
 
 Tóm lại, growth hacking là cả một quá trình, nó không phải là chuyện dành cho các marketer hay những người làm SEO chuyên nghiệp, mà đó là một kĩ năng cực kì cần thiết của một developer. Bạn nên tìm hiểu nó nếu muốn tạo ra các sản phẩm tốt và được nhiều người đón nhận. 
+
+--@TAGS: opinion, growthhacking, review

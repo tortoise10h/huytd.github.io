@@ -49,3 +49,5 @@ Link sách trên Amazon: [Discrete Mathematics and Its Applications](https://www
 ---
 
 Như đã nói thì các cuốn cách mình giới thiệu trên đây là những cuốn mình đang đọc và chưa hề đi sâu vào toán, vì thực sự thì khả năng về toán của mình cũng không đủ sâu để đọc những quyển quá sâu ở thời điểm hiện tại. Hy vọng trong thời gian tới sẽ đủ trình có thể giới thiệu cho các bạn nhiều tựa sách hay hơn. :D 
+
+--@TAGS: random, math, opinion, reading, review

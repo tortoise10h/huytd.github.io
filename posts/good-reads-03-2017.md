@@ -103,3 +103,5 @@ Bản dịch _"Koudan: Miyamoto Musashi"_ là phiên bản "viết" được nh�
 Quyển sách kể về cuộc đời của Miyamoto Musashi, một nhân vật lịch sử có thật và cực kì nổi tiếng, được đông đảo người Việt nam biết đến qua các ấn phẩm văn hóa Nhật như tiểu thuyết, truyện tranh, phim ảnh,... 
 
 Mặc dù người dịch đã khuyến cáo là thể loại Koudan rất khó để dịch ra thứ ngôn ngữ khác, vì nó sử dụng các âm điệu, vần, từ ngữ cổ của Nhật Bản, dịch ra sẽ mất hầu hết những cái tinh hoa đặc sắc của Koudan, tuy nhiên mình thấy đây là một bản dịch không tồi, thật tình là rất cảm phục người dịch giả, bỏ công sức ra dịch miễn phí nhưng từng câu từng chữ đều được viết ra một cách rất cẩn thận và có đầu tư, không như vô số các dịch giả khác, dịch xong nhiều khi phá hỏng luôn cả bộ truyện :D 
+
+--@TAGS: random, algorithm, review, math, rust

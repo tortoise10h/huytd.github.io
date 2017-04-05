@@ -110,3 +110,5 @@ Chúc các bạn một năm mới thành công rực rỡ :four_leaf_clover: đ�
 ---
 
 **P/S:** Được a @karmiphuc share cái link này khá hay, **Bill Gates chia sẽ về kinh nghiệm đọc sách của ông** (https://www.facebook.com/quartznews/videos/1131694693530898/)
+
+--@TAGS: opinion, reading

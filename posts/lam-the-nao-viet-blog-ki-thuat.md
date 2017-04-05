@@ -116,3 +116,5 @@ Hãy đọc lại bài viết của mình nhiều lần trước khi nhấn nút
 ![alt text](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/publish.jpg_f67tekvshq)
 
 Happy blogging ^^
+
+--@TAGS: opinion, writing, random

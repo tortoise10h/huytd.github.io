@@ -442,3 +442,5 @@ Biến `i` trong chương trình trên là id của tiến trình kernel đượ
 ## Implement thuật toán nhân ma trận trên GPU
 
 (Coming soon...)
+
+--@TAGS: algorithm, math, gpu

@@ -63,3 +63,5 @@ Và câu kết bài thì thực sự là giá trị đây:
 Để viết được như vầy thì không có gì là khó, nếu bạn viết ra một câu, trừ khi câu đó cũng là giọng điệu của bạn khi nói chuyện với bạn bè, còn không thì đừng viết nó ra. Là vậy đó, hãy tưởng tượng người sẽ đọc bài viết này đang ngồi trước mặt bạn, và viết như thể đang nói chuyện với họ, với tư cách là một người bạn.
 
 Cuối cùng thì, bắt tay vào viết thôi, chúc các bạn tự tin và sẽ có nhiều bài viết hữu ích!
+
+--@TAGS: random, opinion, review, writing

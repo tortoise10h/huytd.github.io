@@ -407,4 +407,4 @@ Có một số lệnh của Super CHIP-8 nhưng để bài viết đơn giản, 
 
 Chi tiết về cách implement các bạn có thể tham khảo mã nguồn tại: https://github.com/huytd/js-chip8-emulator
 
---@TAGS: emulator, javascript, bitwise, assembly
+--@TAGS: emulator, javascript, bitwise, assembly, hacking, hardware, game

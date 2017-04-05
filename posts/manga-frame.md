@@ -268,3 +268,5 @@ Dữ liệu cho các ví dụ minh hoạt thuật toán ở trong bài viết đ
 
 ![](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)
 <center>Bài viết được phát hành với giấy phép [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/)<br/>Có thể trích dẫn nguyên văn hoặc share lại với điều kiện không được sửa đổi bất kì nội dung nào, và không được sử dụng với mục đích thương mại.</center>
+
+--@TAGS: algorithm, opencv, hacking, research

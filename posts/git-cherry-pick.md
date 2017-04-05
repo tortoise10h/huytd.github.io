@@ -21,3 +21,5 @@ git cherry-pick A
 Ngoài ra, bạn còn có thể chỉ định danh sách các commit cần "bốc" từ A để "bỏ" vào B nếu cần thiết. 
 
 Xem thêm thông tin về `cherry-pick` tại [đây](https://git-scm.com/docs/git-cherry-pick)
+
+--@TAGS: git

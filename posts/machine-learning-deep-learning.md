@@ -38,3 +38,5 @@ Tất nhiên các khóa trên đều thuộc phạm trù Machine Learning Lý Th
 Và học thêm [Sci-Kit](http://scikit-learn.org/stable/) hoặc TensorFlow qua [loạt bài ví dụ này](https://github.com/aymericdamien/TensorFlow-Examples) để tự implement thử vài thứ cho dễ hiểu thêm. Hoặc máu thì có thể tự implement thủ công hoàn toàn, trong trường hợp này mình khuyên nên dùng Swift hoặc Ruby vì cả 2 ngôn ngữ này đều có sẵn một vài cấu trúc dữ liệu cũng như hàm tính toán có thể vận dụng ngay, tránh tốn thời gian implement những cái vặt vãnh, để focus vào cái thuật toán toàn cục.
 
 Hai bước thực hành và lý thuyết bạn có thể tiến hành song song, nhưng tuyệt đối ko đc bỏ phần lý thuyết nếu bạn muốn học ML một cách nghiêm túc :D
+
+--@TAGS: opinion, random, review

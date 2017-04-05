@@ -133,3 +133,5 @@ Các bài hay có liên quan đến toán, giải thuật nhưng rất nhẹ, d�
 - Một bài khác cũng là Naive Bayes giúp phân loại nội dung trên Twitter (http://cloudacademy.com/blog/naive-bayes-classifier/)
 - Ứng dụng của toán học trong Machine Learning (https://www.toptal.com/machine-learning/machine-learning-theory-an-introductory-primer)
 - Xây dựng recommend engine bằng NodeJS (https://www.toptal.com/algorithms/predicting-likes-inside-a-simple-recommendation-engine)
+
+--@TAGS: opinion, random, math, algorithm
