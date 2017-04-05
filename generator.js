@@ -62,6 +62,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  	markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
 			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
 			  	markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
+          markdownPost = markdownPost.replace(/--@TAGS.*\n/g, '');
 
 			  	postContent = marked(markdownPost);
 			  	htmlContent = templateHtml.replace('{%content%}', postContent);
@@ -123,6 +124,7 @@ function generateForSubFolder(currentSubFolder) {
             markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
             markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
             markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
+            markdownPost = markdownPost.replace(/--@TAGS.*\n/g, '');
 
             postContent = marked(markdownPost);
             htmlContent = templateHtml.replace('{%content%}', postContent);

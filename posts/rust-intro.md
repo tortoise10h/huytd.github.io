@@ -245,3 +245,5 @@ Ngoài ra chúng ta cũng có cộng đồng **Rust Việt Nam**:
 - [Slack Chat](http://chat.ruby.org.vn/): Join vào channel [#rustlang](https://vietnamrb.slack.com/messages/rustlang/)
 
 Hẹn gặp lại các bạn ở Rustlandia!!!
+
+--@TAGS: rust

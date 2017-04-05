@@ -2,6 +2,14 @@
 
 This is just a clipboard for myself.
 
+## List all TODO in project
+
+Put this alias to `~/.bash_profile`:
+
+```
+alias todo="grep --exclude-dir={.tmp,tmp,node_modules,lib,libs} -rnw . -e TODO"
+```
+
 ## Save VIM session
 
 Save current split layout to `$(CWD)/.work` file:

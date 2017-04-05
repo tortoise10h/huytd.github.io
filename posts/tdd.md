@@ -446,3 +446,5 @@ Các bạn có thể tham khảo source đầy đủ của module FizzBuzz trong
 Vậy thì, nên lựa chọn giữa tốc độ (bay vào code ào ào) hay chất lượng (uống miếng nước ăn miếng bánh, viết miếng test case trước rồi mới code)? Bỏ thời gian ra ngồi debug và cãi nhau với tester hay nhận bug về chạy test để biết được vấn đề nằm ở đâu rồi fix một cách nhanh chóng? Trở thành một lập trình viên chuyên nghiệp hay một công nhân fix bug, fix vài năm rồi lên làm leader :trollface:? Hy vọng đến đây các bạn đã có câu trả lời cho chính bản thân mình.
 
 Happy bug fixing ^^
+
+--@TAGS: tdd, ruby, fizzbuzz

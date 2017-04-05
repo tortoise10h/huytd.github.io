@@ -186,3 +186,5 @@ Có thể bạn sẽ thấy các cách mà Rust đưa ra để chúng ta có th�
 [billion-dollar-mistake]: https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare
 [maybe-monad]: https://kipalog.com/posts/Co-Khong---Functional-idioms-de-dung-nullable-values-voi-functions-nhu-normal-values--Phan-1
 [taste-of-rust]: https://lwn.net/Articles/547145/
+
+--@TAGS: rust

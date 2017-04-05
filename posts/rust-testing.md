@@ -162,3 +162,5 @@ Có thể thấy trong output chia làm 3 phần, phần đầu tiên là kết 
 Một phút dành cho quảng cáo: Cộng đồng Rustlang Việt Nam đã được thành lập, các bạn có thể tham gia tại các địa chỉ sau:
 
 ![](img/rustlang-vietnam-social.png)
+
+--@TAGS: tdd, rust

@@ -554,3 +554,5 @@ Và đừng quên đọc thêm các link tham khảo mình tổng hợp lại �
 [macro]: https://doc.rust-lang.org/book/macros.html
 [methods]: https://doc.rust-lang.org/book/method-syntax.html
 [matching]: https://doc.rust-lang.org/book/match.html
+
+--@TAGS: rust, algorithm

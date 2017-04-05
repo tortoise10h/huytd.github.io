@@ -72,18 +72,4 @@ Sau khi gõ xong nội dung request, nhấm `Ctrl + J` để bắt đầu gửi 
 
 Vim sẽ tạo ra một split mới để hiện kết quả request. Rất là tiện lợi.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+--@TAGS: vim, plugin, http

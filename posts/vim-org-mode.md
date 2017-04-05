@@ -138,3 +138,5 @@ Khi ở màn hình danh sách To Do, bạn có thể dùng phím `<Tab>` để n
 Trên đây là một vài thao tác cơ bản để bạn có thể bắt đầu sử dụng `vim-orgmode` một cách hiệu quả. Trong quá trình sử dụng, bạn có thể tìm hiểu thêm thông qua hướng dẫn sử dụng của `vim-orgmode` [trên Github](https://github.com/jceb/vim-orgmode/blob/master/doc/orgguide.txt) để làm việc hiệu quả hơn nhé.
 
 Happy vimming ^^
+
+--@TAGS: vim, orgmode, emacs
