@@ -37,7 +37,7 @@
 <p>Chưa hết, sau khi mua 1 em Dash này về, thì bạn sẽ được giảm giá ngay 4.99$ cho order đầu tiên. Vì bạn Evan nhà mình chuẩn bị mọc răng, rất thích nhai bất cứ thứ gì bạn ấy vớ được nên hôm qua mình order một cục chew toy giá <code>5$</code> và đưọc giảm giá ngay lập tức, dù là cái Dash button mua chỉ có <code>0.99$</code> :))</p>
 <p>Giờ vô chủ đề chính: <strong>Hack cái nút Dash button</strong>.</p>
 <h2 id="hacking">Hacking</h2>
-<p>Ở thời điểm hiện tại thì chưa thấy ai làm đưọc gì nhiều hơn trong việc hack em Dash button này ngoài việc bắt lại request của nó mỗi khi nhấn nút và thực hiện một thao tác khác bằng server của chính mình. Nên trong phạm vi bài viết này cũng chỉ đề cập đến vấn đề đó. Sau này nếu tìm hiểu được thêm kĩ thuật gì mới hơn thì mình sẽ viết thêm.</p>
+<p>Giờ vô hack thiệt nè :D</p>
 <h3 id="c-i-t-dash-button">Cài đặt Dash Button</h3>
 <p>Sau khi order về, thì việc đầu tiên cần làm đó là cấu hình cho cái nút kết nối đưọc với Wifi.</p>
 <p>Để cấu hình thì chỉ cần mở app Amazon trên điện thoại ra, vào <strong>Menu -&gt; Your Account -&gt; Add new Dash Button</strong>, sau đó làm theo hướng dẫn trên app, nhấn cái nút của Dash trong vòng 6 giây cho tới khi cái đèn trên đó chuyển qua màu xanh thì nhả ra. Điền pass Wifi vào.</p>
@@ -52,7 +52,31 @@
 <pre><code>22:26:52.777174 IP 0.0.0.0.bootpc &gt; 255.255.255.255.bootps: BOOTP/DHCP, 
 Request from XX:XX:XX:XX:XX:XX (oui Unknown), length 261
 </code></pre><p>Trong đó <code>XX:XX:XX:XX:XX:XX</code> sẽ là địa chỉ MAC của Dash button mà chúng ta cần tìm.</p>
+<h3 id="hack-nh-th-n-o-y-">Hack như thế nào đây?</h3>
+<p>Cơ chế hoạt động của Dash Button là sau khi bạn nhấn nút, nó sẽ gửi một request tới server của Amazon và thực hiện lệnh order. Việc chúng ta cần làm là lập một server để listen và chặn hết các gói tin do Dash gửi đi. Đồng thời vì đã bắt được event nhấn nút, coi như chúng ta có thể dùng Dash để điều khiển thứ gì đó theo ý mình tùy thích.</p>
+<p>Để listen các request từ Dash, chúng ta có thể dùng thư viện <a href="https://github.com/hortinstein/node-dash-button"><code>node-dash-button</code></a>. Cách làm rất đơn giản:</p>
+<p>Đầu tiên, chúng ta tạo một thư mục mới cho dự án hacking của mình và khởi tạo một node project mới với <code>yarn</code> hoặc <code>npm</code>:</p>
+<pre><code>$ mkdir dashfun
+$ yarn init
+</code></pre><p>Tiếp theo, chúng ta cài đặt gói <code>node-dash-button</code>:</p>
+<pre><code>$ yarn add node-dash-button
+</code></pre><p>Sau đó tạo file <code>main.js</code> và bắt đầu viết code:</p>
+<pre><code>$ touch main.js
+</code></pre><p>Nội dung file <code>main.js</code> đơn giản như thế này thôi:</p>
+<pre><code>const DashButton = require(&#39;node-dash-button&#39;);
+const dash = DashButton(&quot;XX:XX:XX:XX:XX:XX&quot;, null, null, &#39;all&#39;);
 
+dash.on(&quot;detected&quot;, function (){
+    console.log(&quot;omg found&quot;);
+});
+</code></pre><p>Nhớ thay <code>XX:XX:XX:XX:XX:XX</code> bằng địa chỉ MAC của dash button bạn có.</p>
+<p>Bất cứ khi nào bạn nhấn nút, thư viện <code>node-dash-button</code> sẽ bắt các gói tin và thực thi hàm callback của sự kiện <code>detected</code>.</p>
+<p>Đến đây việc hack coi như hoàn thành, bạn có thể thực hiện thao tác gì đó bạn muốn (pha cà phê, bật tắt đèn, request gửi tin nhắn, shutdown server, chạy lệnh <code>rm -rf /</code>,...) tùy thích bên trong hàm callback này.</p>
+<p>Video demo:</p>
+<iframe width="700" height="400" src="https://www.youtube.com/embed/unKgZ29CrDM" frameborder="0" allowfullscreen></iframe>
+
+<p>Ở thời điểm hiện tại thì chưa thấy ai làm đưọc gì nhiều hơn trong việc hack em Dash button này ngoài việc bắt lại request của nó mỗi khi nhấn nút và thực hiện một thao tác khác bằng server của chính mình. Nên trong phạm vi bài viết này cũng chỉ đề cập đến vấn đề đó. Sau này nếu tìm hiểu được thêm kĩ thuật gì mới hơn thì mình sẽ viết thêm.</p>
+<div class='other-tags'><b>Tags:</b> <a class='topic-tag' href='https://huytd.github.io/tags/hardware.html'>hardware</a><a class='topic-tag' href='https://huytd.github.io/tags/hacking.html'>hacking</a><a class='topic-tag' href='https://huytd.github.io/tags/javascript.html'>javascript</a></div>
                 <div class="copyright">
                 Bạn được tùy ý bấm like, trích dẫn hoặc copy, post lại, nhưng vui lòng ghi rõ nguồn và tác giả và không làm thay đổi nội dung bài viết. Nếu không làm vậy, mình hy vọng từ nay về sau bạn sẽ luôn cảm thấy cắn rứt lương tâm, ăn không ngon, ngủ không yên. 😆
                 </div>

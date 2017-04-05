@@ -22,7 +22,7 @@ Chưa hết, sau khi mua 1 em Dash này về, thì bạn sẽ được giảm gi
 Giờ vô chủ đề chính: **Hack cái nút Dash button**.
 
 ## Hacking
-Ở thời điểm hiện tại thì chưa thấy ai làm đưọc gì nhiều hơn trong việc hack em Dash button này ngoài việc bắt lại request của nó mỗi khi nhấn nút và thực hiện một thao tác khác bằng server của chính mình. Nên trong phạm vi bài viết này cũng chỉ đề cập đến vấn đề đó. Sau này nếu tìm hiểu được thêm kĩ thuật gì mới hơn thì mình sẽ viết thêm.
+Giờ vô hack thiệt nè :D
 
 ### Cài đặt Dash Button
 Sau khi order về, thì việc đầu tiên cần làm đó là cấu hình cho cái nút kết nối đưọc với Wifi.
@@ -54,3 +54,53 @@ Request from XX:XX:XX:XX:XX:XX (oui Unknown), length 261
 ```
 
 Trong đó `XX:XX:XX:XX:XX:XX` sẽ là địa chỉ MAC của Dash button mà chúng ta cần tìm.
+
+### Hack như thế nào đây?
+
+Cơ chế hoạt động của Dash Button là sau khi bạn nhấn nút, nó sẽ gửi một request tới server của Amazon và thực hiện lệnh order. Việc chúng ta cần làm là lập một server để listen và chặn hết các gói tin do Dash gửi đi. Đồng thời vì đã bắt được event nhấn nút, coi như chúng ta có thể dùng Dash để điều khiển thứ gì đó theo ý mình tùy thích.
+
+Để listen các request từ Dash, chúng ta có thể dùng thư viện [`node-dash-button`](https://github.com/hortinstein/node-dash-button). Cách làm rất đơn giản:
+
+Đầu tiên, chúng ta tạo một thư mục mới cho dự án hacking của mình và khởi tạo một node project mới với `yarn` hoặc `npm`:
+
+```
+$ mkdir dashfun
+$ yarn init
+```
+
+Tiếp theo, chúng ta cài đặt gói `node-dash-button`:
+
+```
+$ yarn add node-dash-button
+```
+
+Sau đó tạo file `main.js` và bắt đầu viết code:
+
+```
+$ touch main.js
+```
+
+Nội dung file `main.js` đơn giản như thế này thôi:
+
+```
+const DashButton = require('node-dash-button');
+const dash = DashButton("XX:XX:XX:XX:XX:XX", null, null, 'all');
+
+dash.on("detected", function (){
+	console.log("omg found");
+});
+```
+
+Nhớ thay `XX:XX:XX:XX:XX:XX` bằng địa chỉ MAC của dash button bạn có.
+
+Bất cứ khi nào bạn nhấn nút, thư viện `node-dash-button` sẽ bắt các gói tin và thực thi hàm callback của sự kiện `detected`.
+
+Đến đây việc hack coi như hoàn thành, bạn có thể thực hiện thao tác gì đó bạn muốn (pha cà phê, bật tắt đèn, request gửi tin nhắn, shutdown server, chạy lệnh `rm -rf /`,...) tùy thích bên trong hàm callback này.
+
+Video demo:
+
+<iframe width="700" height="400" src="https://www.youtube.com/embed/unKgZ29CrDM" frameborder="0" allowfullscreen></iframe>
+
+Ở thời điểm hiện tại thì chưa thấy ai làm đưọc gì nhiều hơn trong việc hack em Dash button này ngoài việc bắt lại request của nó mỗi khi nhấn nút và thực hiện một thao tác khác bằng server của chính mình. Nên trong phạm vi bài viết này cũng chỉ đề cập đến vấn đề đó. Sau này nếu tìm hiểu được thêm kĩ thuật gì mới hơn thì mình sẽ viết thêm.
+
+--@TAGS: hardware, hacking, javascript
