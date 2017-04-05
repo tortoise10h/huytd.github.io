@@ -5,6 +5,7 @@ Amazon Dash Button là một thiết bị kết nối Wifi và chỉ có 1 nút 
 Bạn có thể dùng nó để order mì tôm, bánh kẹo, sữa, bột giặt, cà phê, hay bất cứ thứ gì tùy thích. Tuy nhiên bạn chỉ đưọc order những mặt hàng của một hãng cho một nút, tùy theo nhãn in trên nút đó.
 
 ![](img/dashbutton.jpg)
+<div class="copyright">Hình ảnh bợ từ blog [Matthew Petroff: Amazon Dash Button Teardown](https://mpetroff.net/2015/05/amazon-dash-button-teardown/)</div>
 
 ## Cấu hình bên trong
 
