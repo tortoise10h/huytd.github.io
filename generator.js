@@ -62,7 +62,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  	markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
 			  	markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
 			  	markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
-          markdownPost = markdownPost.replace(/--@TAGS.*\n/g, '');
+          markdownPost = markdownPost.replace(/--@TAGS.*\n/g, generateTags(markdownPost));
 
 			  	postContent = marked(markdownPost);
 			  	htmlContent = templateHtml.replace('{%content%}', postContent);
@@ -89,6 +89,22 @@ for (var i = 0; i < subfolders.length; i++) {
   var currentSubFolder = subfolders[i];
   // Generate sub folders
   generateForSubFolder(currentSubFolder);
+}
+
+function generateTags(post) {
+  let html = "";
+  let matches = post.match(/--@TAGS:(.*)\n/i);
+  if (matches) {
+    let tags = matches[1].split(",");
+    html = tags.reduce((str, tag) => {
+      let t = tag.trim();
+      if (t) {
+        str += "<a class='topic-tag' href='https://huytd.github.io/tags/" + t + ".html'>" + t + "</a>";
+      }
+      return str;
+    }, "<div class='other-tags'><b>Tags:</b> ") + "</div>";
+  }
+  return html;
 }
 
 function generateForSubFolder(currentSubFolder) {
@@ -124,7 +140,7 @@ function generateForSubFolder(currentSubFolder) {
             markdownPost = markdownPost.replace(/<\/cover>/g, '"></div><div class="cover-holder"></div>');
             markdownPost = markdownPost.replace(/<math>/g, '<pre class="math">$$');
             markdownPost = markdownPost.replace(/<\/math>/g, '$$</pre>');
-            markdownPost = markdownPost.replace(/--@TAGS.*\n/g, '');
+            markdownPost = markdownPost.replace(/--@TAGS.*\n/g, generateTags(markdownPost));
 
             postContent = marked(markdownPost);
             htmlContent = templateHtml.replace('{%content%}', postContent);

@@ -148,7 +148,7 @@ cl.Finish(cq)
 err = cl.EnqueueReadBuffer(cq, output, cl.TRUE, 0, 4*1024, unsafe.Pointer(&amp;results[0]), 0, nil, nil)
 </code></pre><p>Ở chương trình trên thì có sự xuất hiện của kí tự <code>\x00</code> ở phần <code>kernel source</code>, đây là kí tự <a href="https://en.m.wikipedia.org/wiki/Null_character">NULL</a> dùng để báo hiệu kết thúc string. </p>
 <p>Và chúng ta cũng thấy, ở đây ta có thể tận dụng luôn các chức năng mà Go cung cấp một cách rất hiệu quả như là <code>defer</code> hoặc <code>channel</code>,...</p>
-
+<div class='other-tags'><b>Tags:</b> <a class='topic-tag' href='https://huytd.github.io/tags/gpu.html'>gpu</a><a class='topic-tag' href='https://huytd.github.io/tags/golang.html'>golang</a><a class='topic-tag' href='https://huytd.github.io/tags/algorithm.html'>algorithm</a><a class='topic-tag' href='https://huytd.github.io/tags/math.html'>math</a></div>
                 <div class="copyright">
                 Bạn được tùy ý bấm like, trích dẫn hoặc copy, post lại, nhưng vui lòng ghi rõ nguồn và tác giả và không làm thay đổi nội dung bài viết. Nếu không làm vậy, mình hy vọng từ nay về sau bạn sẽ luôn cảm thấy cắn rứt lương tâm, ăn không ngon, ngủ không yên. 😆
                 </div>
