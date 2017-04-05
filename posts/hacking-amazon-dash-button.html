@@ -23,6 +23,7 @@
                 <h1 id="hacking-amazon-dash-button">Hacking Amazon Dash Button</h1>
 <p>Amazon Dash Button là một thiết bị kết nối Wifi và chỉ có 1 nút bấm. Sau khi mua về và cài đặt xong, thì khi bấm cái nút này, nó sẽ tự động gửi request đến Amazon để order món đồ mà bạn đã chọn trưóc đó. </p>
 <p>Bạn có thể dùng nó để order mì tôm, bánh kẹo, sữa, bột giặt, cà phê, hay bất cứ thứ gì tùy thích. Tuy nhiên bạn chỉ đưọc order những mặt hàng của một hãng cho một nút, tùy theo nhãn in trên nút đó.</p>
+<p><img src="img/dashbutton.jpg" alt=""></p>
 <h2 id="c-u-h-nh-b-n-trong">Cấu hình bên trong</h2>
 <p>Tuy bề ngoài nhìn khá là đơn giản, nhưng bên trong Dash button có rất nhiều thứ hay ho:</p>
 <ul>
@@ -37,8 +38,17 @@
 <p>Chưa hết, sau khi mua 1 em Dash này về, thì bạn sẽ được giảm giá ngay 4.99$ cho order đầu tiên. Vì bạn Evan nhà mình chuẩn bị mọc răng, rất thích nhai bất cứ thứ gì bạn ấy vớ được nên hôm qua mình order một cục chew toy giá <code>5$</code> và đưọc giảm giá ngay lập tức, dù là cái Dash button mua chỉ có <code>0.99$</code> :))</p>
 <p>Giờ vô chủ đề chính: <strong>Hack cái nút Dash button</strong>.</p>
 <h2 id="hacking">Hacking</h2>
-<p>Giờ vô hack thiệt nè :D</p>
-<h3 id="c-i-t-dash-button">Cài đặt Dash Button</h3>
+<p>Mô hình hoạt động của Dash button có dạng như sau: </p>
+<pre><code> .--------.
+| DASH ( ) | -------&gt; INTERNET -------&gt; AMAZON SERVER
+ `--------&#39;
+</code></pre><p>Sau khi bạn nhấn nút, nó sẽ gửi một request tới server của Amazon và thực hiện lệnh order. Việc chúng ta cần làm là lập một server để listen và chặn hết các gói tin do Dash gửi đi. Đồng thời vì đã bắt được event nhấn nút, coi như chúng ta có thể dùng Dash để điều khiển thứ gì đó theo ý mình tùy thích.</p>
+<pre><code> .--------.
+| DASH ( ) | -------&gt; NODE SERVER ----X     INTERNET
+ `--------&#39;                |
+                           |
+                            `-------&gt; Làm trò mèo
+</code></pre><h3 id="c-i-t-dash-button">Cài đặt Dash Button</h3>
 <p>Sau khi order về, thì việc đầu tiên cần làm đó là cấu hình cho cái nút kết nối đưọc với Wifi.</p>
 <p>Để cấu hình thì chỉ cần mở app Amazon trên điện thoại ra, vào <strong>Menu -&gt; Your Account -&gt; Add new Dash Button</strong>, sau đó làm theo hướng dẫn trên app, nhấn cái nút của Dash trong vòng 6 giây cho tới khi cái đèn trên đó chuyển qua màu xanh thì nhả ra. Điền pass Wifi vào.</p>
 <p>Sau đó app Amazon sẽ nhảy ra màn hình chọn sản phẩm cần mua, tại bước này nhớ <strong>đừng chọn cái gì cả</strong>, chỉ lẳng lặng tắt app đi là xong.</p>
@@ -52,8 +62,7 @@
 <pre><code>22:26:52.777174 IP 0.0.0.0.bootpc &gt; 255.255.255.255.bootps: BOOTP/DHCP, 
 Request from XX:XX:XX:XX:XX:XX (oui Unknown), length 261
 </code></pre><p>Trong đó <code>XX:XX:XX:XX:XX:XX</code> sẽ là địa chỉ MAC của Dash button mà chúng ta cần tìm.</p>
-<h3 id="hack-nh-th-n-o-y-">Hack như thế nào đây?</h3>
-<p>Cơ chế hoạt động của Dash Button là sau khi bạn nhấn nút, nó sẽ gửi một request tới server của Amazon và thực hiện lệnh order. Việc chúng ta cần làm là lập một server để listen và chặn hết các gói tin do Dash gửi đi. Đồng thời vì đã bắt được event nhấn nút, coi như chúng ta có thể dùng Dash để điều khiển thứ gì đó theo ý mình tùy thích.</p>
+<h3 id="t-o-server-trung-gian-b-t-request">Tạo server trung gian để bắt request</h3>
 <p>Để listen các request từ Dash, chúng ta có thể dùng thư viện <a href="https://github.com/hortinstein/node-dash-button"><code>node-dash-button</code></a>. Cách làm rất đơn giản:</p>
 <p>Đầu tiên, chúng ta tạo một thư mục mới cho dự án hacking của mình và khởi tạo một node project mới với <code>yarn</code> hoặc <code>npm</code>:</p>
 <pre><code>$ mkdir dashfun

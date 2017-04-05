@@ -4,6 +4,8 @@ Amazon Dash Button là một thiết bị kết nối Wifi và chỉ có 1 nút 
 
 Bạn có thể dùng nó để order mì tôm, bánh kẹo, sữa, bột giặt, cà phê, hay bất cứ thứ gì tùy thích. Tuy nhiên bạn chỉ đưọc order những mặt hàng của một hãng cho một nút, tùy theo nhãn in trên nút đó.
 
+![](img/dashbutton.jpg)
+
 ## Cấu hình bên trong
 
 Tuy bề ngoài nhìn khá là đơn giản, nhưng bên trong Dash button có rất nhiều thứ hay ho:
@@ -22,7 +24,23 @@ Chưa hết, sau khi mua 1 em Dash này về, thì bạn sẽ được giảm gi
 Giờ vô chủ đề chính: **Hack cái nút Dash button**.
 
 ## Hacking
-Giờ vô hack thiệt nè :D
+Mô hình hoạt động của Dash button có dạng như sau: 
+
+```
+ .--------.
+| DASH ( ) | -------> INTERNET -------> AMAZON SERVER
+ `--------'
+```
+
+Sau khi bạn nhấn nút, nó sẽ gửi một request tới server của Amazon và thực hiện lệnh order. Việc chúng ta cần làm là lập một server để listen và chặn hết các gói tin do Dash gửi đi. Đồng thời vì đã bắt được event nhấn nút, coi như chúng ta có thể dùng Dash để điều khiển thứ gì đó theo ý mình tùy thích.
+
+```
+ .--------.
+| DASH ( ) | -------> NODE SERVER ----X     INTERNET
+ `--------'                |
+                           |
+                            `-------> Làm trò mèo 
+```
 
 ### Cài đặt Dash Button
 Sau khi order về, thì việc đầu tiên cần làm đó là cấu hình cho cái nút kết nối đưọc với Wifi.
@@ -55,9 +73,7 @@ Request from XX:XX:XX:XX:XX:XX (oui Unknown), length 261
 
 Trong đó `XX:XX:XX:XX:XX:XX` sẽ là địa chỉ MAC của Dash button mà chúng ta cần tìm.
 
-### Hack như thế nào đây?
-
-Cơ chế hoạt động của Dash Button là sau khi bạn nhấn nút, nó sẽ gửi một request tới server của Amazon và thực hiện lệnh order. Việc chúng ta cần làm là lập một server để listen và chặn hết các gói tin do Dash gửi đi. Đồng thời vì đã bắt được event nhấn nút, coi như chúng ta có thể dùng Dash để điều khiển thứ gì đó theo ý mình tùy thích.
+### Tạo server trung gian để bắt request
 
 Để listen các request từ Dash, chúng ta có thể dùng thư viện [`node-dash-button`](https://github.com/hortinstein/node-dash-button). Cách làm rất đơn giản:
 
