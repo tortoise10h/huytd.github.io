@@ -54,7 +54,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
     html = html.replace(/"css/g, '"../css');
     html = html.replace(/"js/g, '"../js');
 
-    let links = "<h1>Tag: " + key + "</h1>" + urls + "<br/>" + otherTags;
+    let links = "<h1>" + key + "</h1>" + urls + "<br/>" + otherTags;
     html = html.replace("{%content%}", links);
 
     fs.writeFileSync("./tags/" + key + ".html", html);
