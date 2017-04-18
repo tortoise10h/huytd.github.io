@@ -10,6 +10,16 @@ Put this alias to `~/.bash_profile`:
 alias todo="grep --exclude-dir={.tmp,tmp,node_modules,lib,libs} -rnw . -e TODO"
 ```
 
+## VIM search inside a scope
+
+Add this config to `~/.vimrrc`:
+
+```
+vnoremap <M-/> <Esc>/\%V
+```
+
+Now, select a scope with `vi{` or something similar and press `Mod-/` or `Alt-/` to start searching.
+
 ## Save VIM session
 
 Save current split layout to `$(CWD)/.work` file:

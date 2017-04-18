@@ -25,7 +25,11 @@
 <h2 id="list-all-todo-in-project">List all TODO in project</h2>
 <p>Put this alias to <code>~/.bash_profile</code>:</p>
 <pre><code>alias todo=&quot;grep --exclude-dir={.tmp,tmp,node_modules,lib,libs} -rnw . -e TODO&quot;
-</code></pre><h2 id="save-vim-session">Save VIM session</h2>
+</code></pre><h2 id="vim-search-inside-a-scope">VIM search inside a scope</h2>
+<p>Add this config to <code>~/.vimrrc</code>:</p>
+<pre><code>vnoremap &lt;M-/&gt; &lt;Esc&gt;/\%V
+</code></pre><p>Now, select a scope with <code>vi{</code> or something similar and press <code>Mod-/</code> or <code>Alt-/</code> to start searching.</p>
+<h2 id="save-vim-session">Save VIM session</h2>
 <p>Save current split layout to <code>$(CWD)/.work</code> file:</p>
 <pre><code>nnoremap &lt;Leader&gt;ss :mksession .work&lt;CR&gt;
 </code></pre><p>Load saved session with:</p>
@@ -199,5 +203,10 @@ alias stash=&quot;git stash&quot;
           }
         });
         </script>
+        <!-- begin olark code -->
+        <script type="text/javascript" async> ;(function(o,l,a,r,k,y){if(o.olark)return; r="script";y=l.createElement(r);r=l.getElementsByTagName(r)[0]; y.async=1;y.src="//"+a;r.parentNode.insertBefore(y,r); y=o.olark=function(){k.s.push(arguments);k.t.push(+new Date)}; y.extend=function(i,j){y("extend",i,j)}; y.identify=function(i){y("identify",k.i=i)}; y.configure=function(i,j){y("configure",i,j);k.c[i]=j}; k=y._={s:[],t:[+new Date],c:{},l:a}; })(window,document,"static.olark.com/jsclient/loader.js");
+        /* custom configuration goes here (www.olark.com/documentation) */
+        olark.identify('6087-660-10-6785');</script>
+        <!-- end olark code -->
     </body>
 </html>
