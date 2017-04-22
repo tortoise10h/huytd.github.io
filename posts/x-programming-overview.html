@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title> Kipito Editor | Huy's Blog</title>
+        <title> Lập trình trên X Window System | Huy's Blog</title>
         <meta charset="utf-8">
         <meta http-equiv="content-type" content="text/html;"><meta name=viewport content="initial-scale=1.0 maximum-scale=1.0">
         
@@ -20,25 +20,65 @@
         </div>
         <div class="container">
             <div class="main">
-                <h1 id="kipito-editor">Kipito Editor</h1>
-<p>Kipito là một markdown editor mã nguồn mở được xây dựng trên nền tảng React/Redux và Electron. </p>
-<p><img src="img/kipito.png" alt=""></p>
-<p>Kipito còn được tích hợp khả năng hỗ trợ việc post bài lên <a href="http://kipalog.com">Kipalog</a> - Là một cộng đồng chia sẽ các bài viết về lập trình rất bổ ích. Sắp tới có thể sẽ bổ sung thêm tính năng hỗ trợ <a href="http://medium.com">Medium</a> và <a href="http://github.com/huytd/azeroth-js">GitHub Pages</a></p>
-<p>Hiện nay Kipito đang trong giai đoạn thử nghiệm nên không tránh khỏi việc xuất hiện bug, tuy tỉ lệ xảy ra bug là rất thấp =)) Rất mong nhận được sự góp ý từ các bạn để Kipito ngày một hoàn thiện hơn.</p>
-<h2 id="download">Download</h2>
+                <h1 id="l-p-tr-nh-tr-n-x-window-system">Lập trình trên X Window System</h1>
+<p>X là một môi trường quản lý giao diện cửa sổ dựa trên mô hình mạng (client-server), các ứng dụng có thể thực thi độc lập trong một hệ thống mạng từ nhiều thiết bị khác nhau, và kết quả (hình ảnh về cửa sổ, giao diện của ứng dụng đó) sẽ được hiển thị trên workstation ở local.</p>
+<p>X11 là tên gọi khác của X phiên bản 11, được release lần đầu vào tháng 9 năm 1987.</p>
+<p>Xlib là tên của bộ thư viện chuẩn được dùng để viết chương trình trên môi trường X.</p>
+<h2 id="x-window-system-concepts">X Window System Concepts</h2>
 <ul>
-<li><a href="https://www.dropbox.com/s/ajox687bn3v19dy/kipito-macOS.zip?dl=0">macOS 64-bit</a></li>
-<li><a href="https://www.dropbox.com/s/szugc2p3dvytyzm/kipito-win32.zip?dl=0">Windows 32-bit</a></li>
-<li><a href="https://www.dropbox.com/s/282u0kdnroiowk5/kipito-win64.zip?dl=0">Windows 64-bit</a></li>
+<li><strong>Display:</strong> is a workstation consisting of a keyboard, pointing device (mouse, touchpad,...) and <em>one or more</em> screens.</li>
+<li><strong>Client:</strong> or <em>applications</em> is the user programs.</li>
+<li><strong>Server:</strong> Is a program that control each <em>display</em>, it allows access to the <em>display</em> by multiple <em>clients</em>, pass <em>user input</em> to <em>clients</em>, render graphics content (such as UI) of a <em>client</em>,...</li>
+<li><strong>Window:</strong> a region that a <em>client</em> is being draw.</li>
+<li><strong>Window Manager:</strong> a program written with Xlib, it is given a special authority to control the layout, the appearance or the UI style of <em>windows</em> on the screen. (i3, dwm,...)</li>
+<li><strong>Event:</strong> is a user input (mouse click, mouse move, key press,...) or interaction with other programs (window move, window resize, window close,...).</li>
+<li><strong>Extensions:</strong> X is <em>extensible</em>. It allows both client-side and server-side codes to be executed at the same level as Xlib routines to define new behaviors of X.</li>
 </ul>
-<h2 id="m-ngu-n">Mã nguồn</h2>
-<p>Các bạn có thể tham khảo và contribute vào mã nguồn của dự án tại GitHub: </p>
-<p><a href="https://github.com/huytd/notepad">https://github.com/huytd/notepad</a></p>
-
+<h2 id="x-window-system-architecture">X Window System Architecture</h2>
+<pre><code>.-------------.  .------------------.  .-------------.
+|   Client    |  |      Client      |  |   Client    |
+| Application |  | (Window Manager) |  | Application |
+|-------------|  |------------------|  |-------------|
+|    Xlib     |  |       Xlib       |  |   Toolkit   |
+`-------------&#39;  `------------------&#39;  |-------------|
+      |                    |           |     Xlib    |
+      |                    |           `-------------&#39;
+      `---------------.    |                  |
+                      |    |    .-------------&#39;
+  X Window System     |    |    |
+  protocol requests   |    |    |  Events and replies are
+  sent from clients   |    |    |  passed back to Clients
+                      |    |    |
+  ======================================================= NETWORK
+                      |    |    |
+                  .----------------.
+                  |    X Server    |
+                  |----------------| ====&gt; DISPLAY DEVICE
+                  | Device Drivers |
+                  `----------------&#39;
+</code></pre><p>Clients communicate with the X server by calling to the low-level C library named Xlib. This library provides functions for <em>connecting to a particular display server</em>, <em>creating windows</em>, <em>drawing graphics</em>, <em>responding to events</em>,... </p>
+<p>Xlib calls are translated to network requests following the X Window System Protocol and sending to X server.</p>
+<p><em>Toolkits</em> is a set of higher level subroutine libraries, implement a set of UI features such as menus or command buttons (aka <em>toolkit widgets</em>), and allow applications to manipulate these features using OOP techniques. </p>
+<h2 id="xlib">Xlib</h2>
+<p>As mentioned in previous section, Xlib is a low-level C library provides us many functions to work with the X Server. The functions can be grouped as: </p>
+<pre><code>- Color                                 - Cursors
+- Data Management                       - Display Connection
+- Display and Server Specifications     - Drawing
+- Errors                                - Events
+- Extensions                            - Fonts
+- Geometery                             - Graphic Context
+- Host Access                           - Images
+- Interclient Communication             - Internationalization
+- Keyboard                              - Pointer
+- Regions                               - Resource Management
+- Screen Saver                          - Text
+- User Preferences                      - Window Attributes
+- Window Life                           - Window Management
+</code></pre>
                 <div class="copyright">
                 Bạn được tùy ý bấm like, trích dẫn hoặc copy, post lại, nhưng vui lòng ghi rõ nguồn và tác giả và không làm thay đổi nội dung bài viết. Nếu không làm vậy, mình hy vọng từ nay về sau bạn sẽ luôn cảm thấy cắn rứt lương tâm, ăn không ngon, ngủ không yên. 😆
                 </div>
-                <div class="fb-like" data-href="http://huytd.github.io/posts/kipito.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                <div class="fb-like" data-href="http://huytd.github.io/posts/x-programming-overview.html" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
                 <div id="disqus_thread"></div>
                 <script>
                 /**
