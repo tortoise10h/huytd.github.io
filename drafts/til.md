@@ -1,5 +1,14 @@
 # TIL
 
+## Diff in markdown
+
+```
+############################################ PLUGINS
+# which plugins are enabled (they must be installed via setup.py first)
+-plugins = about, liveupdate
++plugins = about, liveupdate, place
+```
+
 ## Use surf with tabbed
 
 `surf` is a lightweight and embedable web browser based on WebKit, it can be embed into any X application.
@@ -74,4 +83,8 @@ What is the performance different between `$or` and `$in`? And why it's recommen
 It's important to note that: [MongoDB will performs a collection scan for each clause in the `$or` expression](https://docs.mongodb.com/manual/reference/operator/query/or/#behaviors).
 
 That's mean, the number of collection scan for `$or` expression is equals to the number of clauses you have, but the number of collection scan for `$in` expression is regardless to the number of values you want to check.
+
+# Kiểm tra console.log trước khi commit
+
+grep -n console $(git ls-files -m)
 
