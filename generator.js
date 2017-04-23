@@ -69,6 +69,7 @@ fs.readdir(__dirname + '/posts/', function(err, files) {
 			  	htmlContent = htmlContent.replace('{%title%}', title);
 			  	htmlContent = htmlContent.replace('{%meta%}', metaData);
 			  	htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
+			  	htmlContent = htmlContent.replace('{%postslug%}', f.replace('.md', ''));
 
 			  	fs.writeFile(htmlOutput, htmlContent, function (err) {
 				     if (err)
@@ -147,6 +148,7 @@ function generateForSubFolder(currentSubFolder) {
             htmlContent = htmlContent.replace('{%title%}', title);
             htmlContent = htmlContent.replace('{%meta%}', metaData);
             htmlContent = htmlContent.replace('{%posturl%}', 'http://huytd.github.io/posts/' + f.replace('.md', '.html'));
+            htmlContent = htmlContent.replace('{%postslug%}', f.replace('.md', ''));
 
             htmlContent = htmlContent.replace(/\.\.\//g, '../../');
             htmlContent = htmlContent.replace(/\.\.\/\.\.\/img/g, '../img');

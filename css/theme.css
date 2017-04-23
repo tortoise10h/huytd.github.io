@@ -367,3 +367,113 @@ h4:before {
   margin: 5px;
   background: #EEE;
 }
+
+.container .comments {
+  margin-top: 30px;
+}
+
+.container .comments .loading {
+  padding: 30px;
+  background: url(../img/loading.gif) no-repeat center center;
+  display: block;
+}
+
+.container .comments .login {
+  display: none;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  background: #FAFAFA;
+}
+
+.container .comments .login button {
+  background: #3498db;
+  border: none;
+  border-radius: 3px;
+  padding: 3px 5px;
+  color: #FFF;
+  font-size: 1.0em;
+  cursor: pointer;
+}
+
+.container .comments .comment-input {
+  margin-top: 10px;
+  display: none;
+  flex-direction: row;
+}
+
+.container .comments .comment-input .avatar {
+  flex-basis: 32px;
+  width: 32px; height: 32px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.container .comments .comment-input .input {
+  flex: 1;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.container .comments .comment-input .input textarea {
+  padding: 5px;
+  outline: none;
+  font-size: 1.0em;
+  border: 1px solid #CCC;
+  resize: none;
+  border-radius: 3px;
+  min-height: 50px;
+  max-height: 120px;
+}
+
+.container .comments .comment-input .input span {
+  flex-basis: 14px;
+  font-size: 0.8em;
+  margin-top: 5px;
+  text-align: right;
+  color: #555;
+}
+
+.container .comments .comment-input .input span kbd {
+  background: #FAFAFA;
+  padding: 3px;
+}
+
+.container .comments .comment-list {
+  margin: 0; padding: 0;
+  list-style: none;
+}
+
+.container .comments .comment-list li {
+  display: flex;
+  flex-direction: row;
+}
+
+.container .comments .comment-list li:before {
+  display: none;
+  content: "";
+}
+
+.container .comments .comment-list li .avatar {
+  flex-basis: 32px;
+  width: 32px; height: 32px;
+  border-radius: 3px;
+  overflow: hidden;
+  padding: 8px;
+}
+
+.container .comments .comment-list li .comment {
+  flex: 1;
+  margin-left: 5px;
+}
+
+.container .comments .comment-list li .comment .metadata {
+  font-size: 0.9em;
+  color: #888;
+}
+
+.container .comments .comment-list li .comment .metadata b {
+  color: #000;
+}
