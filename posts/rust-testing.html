@@ -207,7 +207,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
           };
 
           const encodeHTML = function(s) {
-            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+            return s.replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/>/g, '&gt;');
           };
 
           const saveNewComment = function(comment) {
@@ -233,8 +233,13 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
             }
           };
 
+          const filterURLinComment = function(comment) {
+            return comment.replace(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9]\.[^\s]{2,})/g, "<a target='_blank' rel='noopener noreferrer' href='$1'>$1</a>");
+          };
+
           const addNewComment = function(user, avatar, time, comment) {
             let commentFiltered = encodeHTML(comment);
+            commentFiltered = filterURLinComment(commentFiltered);
             let d = new Date(time);
             let commentTime = d.toLocaleTimeString() + ' ' + d.toLocaleDateString();
             let html = '<div class="avatar">' +
