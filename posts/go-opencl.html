@@ -242,7 +242,7 @@ err = cl.EnqueueReadBuffer(cq, output, cl.TRUE, 0, 4*1024, unsafe.Pointer(&amp;r
             let commentData = {
               user: currentUser.displayName,
               avatar: currentUser.photoURL,
-              time: (new Date()).toISOString(),
+              time: (new Date()).getTime(),
               message: encodeHTML(comment)
             };
             database.ref(postCommentURL).push(commentData);

@@ -141,7 +141,7 @@ You get the picture. Now get an x220 and stop asking ;)
             let commentData = {
               user: currentUser.displayName,
               avatar: currentUser.photoURL,
-              time: (new Date()).toISOString(),
+              time: (new Date()).getTime(),
               message: encodeHTML(comment)
             };
             database.ref(postCommentURL).push(commentData);

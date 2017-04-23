@@ -401,7 +401,7 @@ Finished in 0.001397s, 2863.2785 runs/s, 2863.2785 assertions/s.
             let commentData = {
               user: currentUser.displayName,
               avatar: currentUser.photoURL,
-              time: (new Date()).toISOString(),
+              time: (new Date()).getTime(),
               message: encodeHTML(comment)
             };
             database.ref(postCommentURL).push(commentData);

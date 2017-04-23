@@ -363,7 +363,7 @@ Gán <code>Vx</code> = <code>Vx / 2</code></p>
             let commentData = {
               user: currentUser.displayName,
               avatar: currentUser.photoURL,
-              time: (new Date()).toISOString(),
+              time: (new Date()).getTime(),
               message: encodeHTML(comment)
             };
             database.ref(postCommentURL).push(commentData);

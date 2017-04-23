@@ -217,7 +217,7 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured
             let commentData = {
               user: currentUser.displayName,
               avatar: currentUser.photoURL,
-              time: (new Date()).toISOString(),
+              time: (new Date()).getTime(),
               message: encodeHTML(comment)
             };
             database.ref(postCommentURL).push(commentData);

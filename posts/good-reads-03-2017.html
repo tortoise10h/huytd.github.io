@@ -182,7 +182,7 @@ Pro: {2}        e_S: {1}        ode: {1, 1}     tin: {2}
             let commentData = {
               user: currentUser.displayName,
               avatar: currentUser.photoURL,
-              time: (new Date()).toISOString(),
+              time: (new Date()).getTime(),
               message: encodeHTML(comment)
             };
             database.ref(postCommentURL).push(commentData);
