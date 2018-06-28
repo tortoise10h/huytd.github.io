@@ -273,8 +273,8 @@ resources, so I decided to write a new post just to talk about this
 topic, focusing on sending strings to other languages using FFI.
 </p>
 
-<div id="outline-container-org859df72" class="outline-2">
-<h2 id="sending-out-a-string"><a id="org859df72"></a><span class="section-number-2">1</span> Sending out a String</h2>
+<div id="outline-container-orga739e2f" class="outline-2">
+<h2 id="sending-out-a-string"><a id="orga739e2f"></a><span class="section-number-2">1</span> Sending out a String</h2>
 <div class="outline-text-2" id="text-sending-out-a-string">
 <p>
 First, we need to understand the Rust's <code>String</code>. Let's build a simple
@@ -292,28 +292,26 @@ pub extern fn string_from_rust() -&gt; String {
 And the Node.js code to read it:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">ffi</span> = require<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'ffi'</span><span style="color: #5EC4FF;">)</span>;
+<pre class="example">
+const ffi = require('ffi');
 
-<span style="color: #56697A;">// </span><span style="color: #56697A;">The path should be 'rstring/target/debug/librstring.so' on Linux environment</span>
-<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">lib</span> = ffi.Library<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'rstring/target/debug/librstring.dylib'</span>, <span style="color: #E27E8D;">{</span>
-  string_from_rust: <span style="color: #8BD49C;">[</span><span style="color: #7FA0B7;">'string'</span>, <span style="color: #D98E48;">[]</span><span style="color: #8BD49C;">]</span>
-<span style="color: #E27E8D;">}</span><span style="color: #5EC4FF;">)</span>;
+// The path should be 'rstring/target/debug/librstring.so' on Linux environment
+let lib = ffi.Library('rstring/target/debug/librstring.dylib', {
+  string_from_rust: ['string', []]
+});
 
-<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">result</span> = lib.string_from_rust<span style="color: #5EC4FF;">()</span>;
-console.log<span style="color: #5EC4FF;">(</span>result<span style="color: #5EC4FF;">)</span>;
+let result = lib.string_from_rust();
+console.log(result);
 </pre>
-</div>
 
 <p>
 Run this code and what you will see is:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
-<span style="color: #5EC4FF;">[</span><span style="color: #E27E8D; font-weight: bold;">1</span><span style="color: #5EC4FF;">]</span>    <span style="color: #E27E8D; font-weight: bold;">63179</span> segmentation fault  node ffi.js
+<pre class="example">
+$ node ffi.js
+[1]    63179 segmentation fault  node ffi.js
 </pre>
-</div>
 
 <p>
 Crashed! But why?
@@ -327,8 +325,8 @@ Rust.
 </p>
 </div>
 
-<div id="outline-container-org337079d" class="outline-3">
-<h3 id="string-must-be-returned-as-a-pointer"><a id="org337079d"></a><span class="section-number-3">1.1</span> String must be returned as a pointer</h3>
+<div id="outline-container-org460f74a" class="outline-3">
+<h3 id="string-must-be-returned-as-a-pointer"><a id="org460f74a"></a><span class="section-number-3">1.1</span> String must be returned as a pointer</h3>
 <div class="outline-text-3" id="text-string-must-be-returned-as-a-pointer">
 <p>
 With particular data types that only available in Rust such as <code>String</code>
@@ -355,11 +353,10 @@ pub extern fn string_from_rust() -&gt; *const u8 {
 Run the Node.js code again, and this is what you got:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
+<pre class="example">
+$ node ffi.js
 Hello WorldHello World
 </pre>
-</div>
 
 <p>
 Ehh, guys, we got good news and bad news here&#x2026;
@@ -372,8 +369,8 @@ look right.
 </div>
 </div>
 
-<div id="outline-container-orge8165e9" class="outline-3">
-<h3 id="the-nul-terminated-strings"><a id="orge8165e9"></a><span class="section-number-3">1.2</span> The NUL-terminated strings</h3>
+<div id="outline-container-org98d9b02" class="outline-3">
+<h3 id="the-nul-terminated-strings"><a id="org98d9b02"></a><span class="section-number-3">1.2</span> The NUL-terminated strings</h3>
 <div class="outline-text-3" id="text-the-nul-terminated-strings">
 <p>
 In Rust, a <code>String</code> is not NUL-terminated (not ending with <code>\0</code>), but
@@ -403,11 +400,10 @@ pub extern fn string_from_rust() -&gt; *const u8 {
 Run it again, looks good now:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
+<pre class="example">
+$ node ffi.js
 Hello World
 </pre>
-</div>
 
 <p>
 OK. But wait, do I have to put the <code>\0</code> character all the time when I
@@ -440,10 +436,9 @@ First, we create a <code>CString</code> from a string slice, then we return a
 pointer to its value, just like we do previously.
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
+<pre class="example">
+$ node ffi.js
 </pre>
-</div>
 
 <p>
 Oops! Nothing displayed. Why?
@@ -451,8 +446,8 @@ Oops! Nothing displayed. Why?
 </div>
 </div>
 
-<div id="outline-container-orgd3b77e3" class="outline-3">
-<h3 id="stdmemforget-it-to-keep-it"><a id="orgd3b77e3"></a><span class="section-number-3">1.3</span> std::mem::forget it to keep it</h3>
+<div id="outline-container-org28428f9" class="outline-3">
+<h3 id="stdmemforget-it-to-keep-it"><a id="org28428f9"></a><span class="section-number-3">1.3</span> std::mem::forget it to keep it</h3>
 <div class="outline-text-3" id="text-stdmemforget-it-to-keep-it">
 <p>
 Rust is smart, in this case, too smart. It automatically frees up the
@@ -510,17 +505,16 @@ Rust.
 The string now leaked out. And Node.js now able to read its value:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
+<pre class="example">
+$ node ffi.js
 Hello World
 </pre>
 </div>
 </div>
 </div>
-</div>
 
-<div id="outline-container-org2c7156a" class="outline-2">
-<h2 id="sending-out-a-vector-of-string"><a id="org2c7156a"></a><span class="section-number-2">2</span> Sending out a Vector of String</h2>
+<div id="outline-container-org23127f8" class="outline-2">
+<h2 id="sending-out-a-vector-of-string"><a id="org23127f8"></a><span class="section-number-2">2</span> Sending out a Vector of String</h2>
 <div class="outline-text-2" id="text-sending-out-a-vector-of-string">
 <p>
 Sometimes, sending out just a <code>String</code> is not enough, you need to send a
@@ -555,20 +549,19 @@ On Node.js side, we need to use <code>ref-array</code> package from <code>npm</c
 implement the <code>Array</code> from the returned <code>Buffer</code>.
 </p>
 
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">ffi</span> = require<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'ffi'</span><span style="color: #5EC4FF;">)</span>;
-<span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">array</span> = require<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'ref-array'</span><span style="color: #5EC4FF;">)</span>;
-<span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">StringArray</span> = array<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'string'</span><span style="color: #5EC4FF;">)</span>;
+<pre class="example">
+const ffi = require('ffi');
+const array = require('ref-array');
+const StringArray = array('string');
 
-<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">lib</span> = ffi.Library<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'rstring/target/debug/librstring.so'</span>, <span style="color: #E27E8D;">{</span>
-  string_array: <span style="color: #8BD49C;">[</span>StringArray, <span style="color: #D98E48;">[]</span><span style="color: #8BD49C;">]</span>
-<span style="color: #E27E8D;">}</span><span style="color: #5EC4FF;">)</span>;
+let lib = ffi.Library('rstring/target/debug/librstring.so', {
+  string_array: [StringArray, []]
+});
 
-<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">b</span> = lib.string_array<span style="color: #5EC4FF;">()</span>;
-b.length = <span style="color: #E27E8D; font-weight: bold;">2</span>;
-console.log<span style="color: #5EC4FF;">(</span>b<span style="color: #5EC4FF;">)</span>;
+let b = lib.string_array();
+b.length = 2;
+console.log(b);
 </pre>
-</div>
 
 <p>
 We defined a new data type in Node.js, called <code>StringArray</code>, with the
@@ -576,10 +569,9 @@ help of <code>ref-array</code> to convert the <code>Buffer</code> data into an a
 <code>string</code>.
 </p>
 
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">StringArray</span> = array<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'string'</span><span style="color: #5EC4FF;">)</span>;
+<pre class="example">
+const StringArray = array('string');
 </pre>
-</div>
 
 <p>
 And because it's an <code>Array</code>, we need to have the fixed size. So we need
@@ -590,21 +582,19 @@ to specify the <code>length</code> of an array to make it readable.
 Like this:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
-<span style="color: #5EC4FF;">[</span> <span style="color: #7FA0B7;">'&#65533;&#65533;\u0002\u0002'</span>, <span style="color: #7FA0B7;">'8+&#65533;&#65533;&#65533;~'</span>, buffer: &lt;Buffer &gt; <span style="color: #5EC4FF;">]</span>
+<pre class="example">
+$ node ffi.js
+[ '��\u0002\u0002', '8+���~', buffer: &lt;Buffer &gt; ]
 </pre>
-</div>
 
 <p>
 Otherwise, you will just get the <code>Buffer</code> without knowing its content.
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
-<span style="color: #5EC4FF;">[</span> buffer: &lt;Buffer&gt; <span style="color: #5EC4FF;">]</span>
+<pre class="example">
+$ node ffi.js
+[ buffer: &lt;Buffer&gt; ]
 </pre>
-</div>
 
 <p>
 Oh wait! What? Why the weird strings?
@@ -633,11 +623,10 @@ pub extern fn string_array() -&gt; *const *const u8 {
 Now it's fine:
 </p>
 
-<div class="org-src-container">
-<pre class="src src-sh">$ node ffi.js
-<span style="color: #5EC4FF;">[</span> <span style="color: #7FA0B7;">'Hello'</span>, <span style="color: #7FA0B7;">'World'</span>, buffer: &lt;Buffer&gt; <span style="color: #5EC4FF;">]</span>
+<pre class="example">
+$ node ffi.js
+[ 'Hello', 'World', buffer: &lt;Buffer&gt; ]
 </pre>
-</div>
 
 <hr />
 

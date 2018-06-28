@@ -36,7 +36,7 @@ function that returns a =String=:
 
 And the Node.js code to read it:
 
-#+BEGIN_SRC js
+#+BEGIN_SRC
     const ffi = require('ffi');
 
     // The path should be 'rstring/target/debug/librstring.so' on Linux environment
@@ -50,7 +50,7 @@ And the Node.js code to read it:
 
 Run this code and what you will see is:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     [1]    63179 segmentation fault  node ffi.js
 #+END_SRC
@@ -84,7 +84,7 @@ Let's slightly modify our Rust code:
 
 Run the Node.js code again, and this is what you got:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     Hello WorldHello World
 #+END_SRC
@@ -119,7 +119,7 @@ Solution? Just insert the =\0= at the end of our =String=.
 
 Run it again, looks good now:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     Hello World
 #+END_SRC
@@ -147,7 +147,7 @@ Let's see how will we use =CString= to send a string to Node.js:
 First, we create a =CString= from a string slice, then we return a
 pointer to its value, just like we do previously.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
 #+END_SRC
 
@@ -198,7 +198,7 @@ Rust.
 
 The string now leaked out. And Node.js now able to read its value:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     Hello World
 #+END_SRC
@@ -233,7 +233,7 @@ that only available in Rust. That mean, we need to return it as a
 On Node.js side, we need to use =ref-array= package from =npm= to
 implement the =Array= from the returned =Buffer=.
 
-#+BEGIN_SRC js
+#+BEGIN_SRC
     const ffi = require('ffi');
     const array = require('ref-array');
     const StringArray = array('string');
@@ -251,7 +251,7 @@ We defined a new data type in Node.js, called =StringArray=, with the
 help of =ref-array= to convert the =Buffer= data into an array of
 =string=.
 
-#+BEGIN_SRC js
+#+BEGIN_SRC
     const StringArray = array('string');
 #+END_SRC
 
@@ -260,14 +260,14 @@ to specify the =length= of an array to make it readable.
 
 Like this:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     [ '��\u0002\u0002', '8+���~', buffer: <Buffer > ]
 #+END_SRC
 
 Otherwise, you will just get the =Buffer= without knowing its content.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     [ buffer: <Buffer> ]
 #+END_SRC
@@ -293,7 +293,7 @@ So we need to =forget= it.
 
 Now it's fine:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
     $ node ffi.js
     [ 'Hello', 'World', buffer: <Buffer> ]
 #+END_SRC
