@@ -3,3 +3,4 @@
 #+OPTIONS: toc:nil
 
 * [[./writing-6502-disassembler.html][Writing 6502 disassembler]]
+* [[./recursive-rust.html][Recursive Structure in Rust]]

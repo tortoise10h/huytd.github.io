@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-28 Thu 14:00 -->
+<!-- 2018-06-28 Thu 13:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>/dev/random</title>
+<title>Recursive type problem in Rust</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -229,19 +229,174 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
-<h1 class="title">/dev/random</h1>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Recursive type problem in Rust</h1>
+<p>
+After spending much time reading about Rust, I decided to <a href="https://github.com/huytd/thingsinrust/blob/master/binary_tree/binary_tree.rs">give it a try</a>.
+</p>
 
-<div id="outline-container-org38937bc" class="outline-2">
-<h2 id="org38937bc"><span class="section-number-2">1</span> <a href="./writing-6502-disassembler.html">Writing 6502 disassembler</a></h2>
+
+<div class="figure">
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*UNsRZHTPh1rO1eF_VH71gw.png" alt="1*UNsRZHTPh1rO1eF_VH71gw.png" width="500px" />
+</p>
 </div>
-<div id="outline-container-org0752692" class="outline-2">
-<h2 id="org0752692"><span class="section-number-2">2</span> <a href="./recursive-rust.html">Recursive Structure in Rust</a></h2>
+
+<p>
+It was a very simple implementation of <b><b>Binary Tree Traversal</b></b> algorithm.
+Surprisingly, by doing it, I learned a lot of Rust’s basic concepts!
+</p>
+
+<div id="outline-container-orgad1da47" class="outline-2">
+<h2 id="orgad1da47"><span class="section-number-2">1</span> Rust tell us what’s wrong in our code</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+One of the first things that the smartass Rust compiler threw to my face was the lovely error message:
+</p>
+
+<pre class="example">
+$ rustc binary_tree.rs -o binary_tree
+error[E0072]: recursive type `Node` has infinite size
+  --&gt; binary_tree.rs:1:1
+  |
+  |
+  = help: insert indirection (e.g., a `Box`, `Rc`, or `&amp;`) at some point to make `Node` representable
+error: aborting due to previous error
+
+So yes, this is the code:
+
+struct Node {
+    value: i32,
+    left: Option&lt;Node&gt;,
+    right: Option&lt;Node&gt;
+}
+</pre>
+
+<p>
+This code is a very obvious way to implement a binary tree node in other
+programming languages like C/C++ or Java. However, Rust compiler just doesn’t agree with us. Also, this is the interesting part.
+</p>
+
+<p>
+Take a closer look. The error message said that our <b><b>Node</b></b> struct is a
+<b><b>recursive type</b></b> and it has infinite size. What does it mean?
+</p>
+
+<p>
+In Rust, all values are allocated in stack by default. So the compiler needs to
+know the size of each. The size of a struct is the sum of all its fields size.
+</p>
+
+<p>
+For example, with this struct:
+</p>
+
+<pre class="example">
+struct Point {
+    x: i32,
+    y: u8
+}
+</pre>
+
+<p>
+So the size of Point struct is:
+</p>
+
+<pre class="example">
+size_of::&lt;Point&gt;() == size_of::&lt;i32&gt;() + size_of::&lt;u8&gt;()
+</pre>
+
+<p>
+Back to our implementation, how do we calculate our Node’s size?
+</p>
+
+<pre class="example">
+size_of::&lt;i32&gt;() + 2 * size_of::&lt;Option&gt;() + 2 * size_of::&lt;Node&gt;()
+</pre>
+
+<p>
+Let’s expand this equation:
+</p>
+
+
+<div class="figure">
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*rV3hH3Yq-KkS7d5sVYYCog.png" alt="1*rV3hH3Yq-KkS7d5sVYYCog.png" width="600px" />
+</p>
+</div>
+
+<p>
+Hey hey! Hey! Stop it! You can do this for all day long. There’s no way to stop the expanding process.
+</p>
+
+<p>
+So, the size of <b><b>Node</b></b> would be infinite and become impossible for Rust
+compiler to calculate.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org81e45c1" class="outline-2">
+<h2 id="org81e45c1"><span class="section-number-2">2</span> And Rust also tell us how to fix it</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Let’s take a look at the error message again. You can see the kindness of Rust when it tries to teach us how to repair the broken:
+</p>
+
+<pre class="example">
+$ rustc binary_tree.rs -o binary_tree
+
+error[E0072]: recursive type `Node` has infinite size
+  --&gt; binary_tree.rs:1:1
+  |
+1 | struct Node {
+  | ^ recursive type has infinite size
+  |
+
+error: aborting due to previous error
+</pre>
+
+<p>
+If we follow the hint and add <b><b>Box&lt;T&gt;</b></b> to our implementation, the problem will be solved:
+</p>
+
+<pre class="example">
+struct Node {
+    value: i32,
+    left: Option&lt;Box&lt;Node&gt;&gt;,
+    right: Option&lt;Box&lt;Node&gt;&gt;
+}
+</pre>
+
+<p>
+However, what is <code>Box&lt;T&gt;</code>? How does it solve our recursive reference problem?
+</p>
+
+<p>
+<code>Box&lt;T&gt;</code> is a <b><b>pointer</b></b> that pointed to a heap allocated memory space.
+</p>
+
+<p>
+So when we declare a reference to <code>Node</code> using <code>Box&lt;Node&gt;</code>, <b>the size of this reference is the size of a pointer</b>, not the size of the <code>Node</code> type, and it is defined, so Rust compiler now aware how much memory needed to allocate for a <code>Node</code>. And the recursive type problem now solved!
+</p>
+
+<hr />
+
+<p>
+I hope you enjoy the post and now understand the problem of recursive type, how to fix it.
+</p>
+
+<p>
+Please feel free to leave a comment if you want to discuss or subscribe to my blog to keep updated about my next posts in Rust (and other technical stuff, of course).
+</p>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-06-28 Thu 14:00</p>
+<p class="date">Created: 2018-06-28 Thu 13:59</p>
 <p class="validation"></p>
 </div>
 </body>
