@@ -1,0 +1,323 @@
+#+TITLE: Rust FFI: Sending strings to the outside world
+#+OPTIONS: timestamp:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_LINK_HOME: /
+
+*Foreign Function Interface* (FFI) is the most important feature of Rust
+to let it live peacefully with the other part of the world such as
+C/C++, Ruby, Python, Node.js, C#,...
+
+The [[https://doc.rust-lang.org/book/ffi.html][official FFI document]]
+is much more improved from before but it still not satisfied the people
+who want to dig deeper into FFI.
+
+Another better source to learn about FFI is
+[[http://jakegoulding.com/rust-ffi-omnibus/basics/][The Rust FFI Omnibus]], which is a collection of examples show you how to use it with
+many languages.
+
+I'm quite confused while reading about how to work with String in these
+resources, so I decided to write a new post just to talk about this
+topic, focusing on sending strings to other languages using FFI.
+
+** Sending out a String
+   :PROPERTIES:
+   :CUSTOM_ID: sending-out-a-string
+   :END:
+
+First, we need to understand the Rust's =String=. Let's build a simple
+function that returns a =String=:
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_from_rust() -> String {
+      "Hello World".to_string()
+    }
+#+END_EXAMPLE
+
+And the Node.js code to read it:
+
+#+BEGIN_SRC js
+    const ffi = require('ffi');
+
+    // The path should be 'rstring/target/debug/librstring.so' on Linux environment
+    let lib = ffi.Library('rstring/target/debug/librstring.dylib', {
+      string_from_rust: ['string', []]
+    });
+
+    let result = lib.string_from_rust();
+    console.log(result);
+#+END_SRC
+
+Run this code and what you will see is:
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    [1]    63179 segmentation fault  node ffi.js
+#+END_SRC
+
+Crashed! But why?
+
+The reason is simple. =String= is a type that only being implemented in
+Rust, the other languages (Node.js in this case) does not have anything
+like =std::string::String=. So it couldn't read that returned value from
+Rust.
+
+*** String must be returned as a pointer
+    :PROPERTIES:
+    :CUSTOM_ID: string-must-be-returned-as-a-pointer
+    :END:
+
+With particular data types that only available in Rust such as =String=
+or =Vector=, we should send it out as a =Pointer= to a memory block that
+holds its value.
+
+Let's slightly modify our Rust code:
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_from_rust() -> *const u8 {
+      "Hello World".as_ptr()
+    }
+#+END_EXAMPLE
+
+=*const u8= is the type of a =Pointer=.
+
+Run the Node.js code again, and this is what you got:
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    Hello WorldHello World
+#+END_SRC
+
+Ehh, guys, we got good news and bad news here...
+
+The good news is we can see the =String= now. The bad news is it doesn't
+look right.
+
+*** The NUL-terminated strings
+    :PROPERTIES:
+    :CUSTOM_ID: the-nul-terminated-strings
+    :END:
+
+In Rust, a =String= is not NUL-terminated (not ending with =\0=), but
+strings in the others languages do. In this case, Node.js doesn't know
+where is the end of the text we want to get.
+
+/Oh, and speaking of NUL-terminated string, there is a guy who
+[[http://sasheldon.com/blog/2017/05/07/how-i-broke-cargo-for-windows/][broke
+the whole Rust ecosystem on Windows]] last April with his NUL-terminated
+string generating crate./
+
+Solution? Just insert the =\0= at the end of our =String=.
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_from_rust() -> *const u8 {
+      "Hello World\0".as_ptr()
+    }
+#+END_EXAMPLE
+
+Run it again, looks good now:
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    Hello World
+#+END_SRC
+
+OK. But wait, do I have to put the =\0= character all the time when I
+want to work with String? Well, not actually, Rust also provided a
+C-compatible string type called =std::ffi::CString=.
+
+You can easily create a =CString= from a string slice:
+
+#+BEGIN_EXAMPLE
+    CString::new("Hello World").unwrap()
+#+END_EXAMPLE
+
+Let's see how will we use =CString= to send a string to Node.js:
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_from_rust() -> *const c_char {
+        let s = CString::new("Hello World").unwrap();
+        s.as_ptr()
+    }
+#+END_EXAMPLE
+
+First, we create a =CString= from a string slice, then we return a
+pointer to its value, just like we do previously.
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+#+END_SRC
+
+Oops! Nothing displayed. Why?
+
+*** std::mem::forget it to keep it
+    :PROPERTIES:
+    :CUSTOM_ID: stdmemforget-it-to-keep-it
+    :END:
+
+Rust is smart, in this case, too smart. It automatically frees up the
+memory blocks of any variable that being out of its scope.
+
+Take a closer look at our =string_from_rust()= function. We created a
+=CString=, then return a *pointer* to the memory blocks that holding its
+value, then what? We going out of the scope of =string_from_rust()=
+function, that mean, =s= is now out of scope. So, Rust do its job,
+killing the =s=!
+
+#+BEGIN_EXAMPLE
+    pub extern fn string_from_rust() -> *const c_char { 
+        let s = CString::new("Hello World").unwrap(); <---.  
+        s.as_ptr()                                        | The scope of s
+    } <---------------------------------------------------'
+#+END_EXAMPLE
+
+In the Node.js application, we received the pointer of =s=, which
+pointed to a freed memory blocks. That's why we see nothing.
+
+So how do we tell Rust not to free up the memory of our string?
+
+We use =std::mem::forget=! The usage is simple:
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_from_rust() -> *const c_char {
+        let s = CString::new("Hello World").unwrap();
+        let p = s.as_ptr();
+        std::mem::forget(s);
+        p
+    }
+#+END_EXAMPLE
+
+First, we store the =Pointer= of =s= string in a variable (=p=).
+
+Then we use =std::mem::forget= to release it from the responsibility of
+Rust.
+
+The string now leaked out. And Node.js now able to read its value:
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    Hello World
+#+END_SRC
+
+** Sending out a Vector of String
+   :PROPERTIES:
+   :CUSTOM_ID: sending-out-a-vector-of-string
+   :END:
+
+Sometimes, sending out just a =String= is not enough, you need to send a
+bunch of =String=s.
+
+What we learned from the previous section is we need to send a =String=
+as a NUL-terminated string, such as =String= + =\0= or =CString=.
+
+=Vector= are resizeable array, and it's also one of the particular types
+that only available in Rust. That mean, we need to return it as a
+=Pointer=. So what we will have here is a =Pointer= to a =Pointer= of
+=String=. This is quite similar to C's array.
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_array() -> *const *const u8 {
+        let v = vec![
+            "Hello\0".as_ptr(),
+            "World\0".as_ptr()
+        ];
+        v.as_ptr()
+    }
+#+END_EXAMPLE
+
+On Node.js side, we need to use =ref-array= package from =npm= to
+implement the =Array= from the returned =Buffer=.
+
+#+BEGIN_SRC js
+    const ffi = require('ffi');
+    const array = require('ref-array');
+    const StringArray = array('string');
+
+    let lib = ffi.Library('rstring/target/debug/librstring.so', {
+      string_array: [StringArray, []]
+    });
+
+    let b = lib.string_array();
+    b.length = 2;
+    console.log(b);
+#+END_SRC
+
+We defined a new data type in Node.js, called =StringArray=, with the
+help of =ref-array= to convert the =Buffer= data into an array of
+=string=.
+
+#+BEGIN_SRC js
+    const StringArray = array('string');
+#+END_SRC
+
+And because it's an =Array=, we need to have the fixed size. So we need
+to specify the =length= of an array to make it readable.
+
+Like this:
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    [ '��\u0002\u0002', '8+���~', buffer: <Buffer > ]
+#+END_SRC
+
+Otherwise, you will just get the =Buffer= without knowing its content.
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    [ buffer: <Buffer> ]
+#+END_SRC
+
+Oh wait! What? Why the weird strings?
+
+Remember the =std::mem::forget=? We got the same issue here. Rust also
+deallocated the vector =v= when it exit the =string_array()= function.
+So we need to =forget= it.
+
+#+BEGIN_EXAMPLE
+    #[no_mangle]
+    pub extern fn string_array() -> *const *const u8 {
+        let v = vec![
+            "Hello\0".as_ptr(),
+            "World\0".as_ptr()
+        ];
+        let p = v.as_ptr();
+        std::mem::forget(v);
+        p
+    }
+#+END_EXAMPLE
+
+Now it's fine:
+
+#+BEGIN_SRC sh
+    $ node ffi.js
+    [ 'Hello', 'World', buffer: <Buffer> ]
+#+END_SRC
+
+--------------
+
+Playing with =std::mem::forget= and leaking out memory is undesirable
+and we should not overuse it.
+
+Many people suggest that in production, we should not do all these
+things by hand, it's a better idea to utilizing existing projects such
+as [[https://github.com/neon-bindings/neon][Neon]] from Dave Herman, the
+head of Mozilla Research. I totally agree with that. He loses a lot of
+his hairs for this, so we don't need to lose ours, jk.
+
+--------------
+
+I hope that reading this post would be as helpful for you as writing it
+was for me. Any feedback would be greatly appreciated.
+
+Please feel free to leave a comment on my [[https://news.ycombinator.com/item?id=14336140][HackerNews]] and [[https://www.reddit.com/r/rust/comments/6b4ngv/rust_ffi_sending_strings_to_the_outside_world/][Reddit]] post.
+
+--------------
+
+Hey, thanks to HN and Reddit peoples, there are a lot of feedbacks. I
+have updated some parts in this post, and I will keep updating. Thank
+you so much!

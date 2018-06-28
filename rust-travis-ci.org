@@ -1,0 +1,100 @@
+#+TITLE: Setup Travis CI for Rust Diesel project
+#+OPTIONS: timestamp:nil toc:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_LINK_HOME: /
+
+Rust is [[https://docs.travis-ci.com/user/languages/rust/][supported on Travis CI]], there are three main channels of Rust you can use:
+/stable/, /beta/ and /nightly/. You can just follow their instruction to
+get your Rust project build smoothly.
+
+But when it come to [[https://diesel.rs][diesel.rs]], it will be a bit tricky.
+
+The reason is, in order to build a diesel-based project, you will need
+to have: - A database on your build machine - A =.env= file with a
+configuration to connect to that database - *diesel-cli* installed to
+run migration
+
+So, it will require some more configuration.
+
+Let's create a =.travis.yml= file in your project's root folder.
+
+** Step 1: Rust version
+   :PROPERTIES:
+   :CUSTOM_ID: step-1-rust-version
+   :END:
+
+You can select any version of Rust in your Travis CI, put this to your
+config file:
+
+#+BEGIN_EXAMPLE
+    language: rust
+    rust:
+      - nightly
+      // or
+      - 1.22.0
+      // or
+      - stable
+#+END_EXAMPLE
+
+** Step 2: PostgreSQL (or what ever database you use)
+   :PROPERTIES:
+   :CUSTOM_ID: step-2-postgresql-or-what-ever-database-you-use
+   :END:
+
+Next, we need to add PostgreSQL as an extra service:
+
+#+BEGIN_EXAMPLE
+    services:
+      - postgresql
+#+END_EXAMPLE
+
+If you're using a different database, just change it. For the complete
+list of supported database, please take a look at
+[[https://docs.travis-ci.com/user/database-setup/][this document]].
+
+** Step 3: Init your database and migration
+   :PROPERTIES:
+   :CUSTOM_ID: step-3-init-your-database-and-migration
+   :END:
+
+Now we need to do a lot of things, create a databse, install
+*diesel-cli*, create a database and run migration, let create a
+=before_script= section:
+
+#+BEGIN_EXAMPLE
+    before_script:
+      - psql -c 'create database build_db;' -U postgres
+      - echo "DATABASE_URL=postgres://postgres@localhost/build_db" > .env
+      - cargo install diesel_cli --no-default-features --features=postgres
+      - diesel migration run
+#+END_EXAMPLE
+
+** Step 4: Build and Test
+   :PROPERTIES:
+   :CUSTOM_ID: step-4-build-and-test
+   :END:
+
+Finally, build and test your project with =cargo=:
+
+#+BEGIN_EXAMPLE
+    script:
+      - cargo build --verbose --all
+      - cargo test --verbose --all
+#+END_EXAMPLE
+
+That's all you need!
+
+If you are too lazy to follow the four steps,
+[[https://gist.github.com/huytd/8438a0d3fe1510a483a0499e63a07925][this is a gist]] for you.
+
+*P/S:* It's worth to mention that due to a lot of =cargo= run, the build
+time is so freaking slow, with the above gist, my project took
+approximately 8 to 9 mins per build.
+
+You might want to add some caching for =cargo= in your =.travis.yml=:
+
+#+BEGIN_EXAMPLE
+    cache: cargo
+#+END_EXAMPLE
+
+See more about [[https://docs.travis-ci.com/user/caching/][dependencies caching here]].

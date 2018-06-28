@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rust FFI: Sending strings to the outside world</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Huy Tran" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/hack.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Rust FFI: Sending strings to the outside world</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sending-out-a-string">1. Sending out a String</a>
+<ul>
+<li><a href="#string-must-be-returned-as-a-pointer">1.1. String must be returned as a pointer</a></li>
+<li><a href="#the-nul-terminated-strings">1.2. The NUL-terminated strings</a></li>
+<li><a href="#stdmemforget-it-to-keep-it">1.3. std::mem::forget it to keep it</a></li>
+</ul>
+</li>
+<li><a href="#sending-out-a-vector-of-string">2. Sending out a Vector of String</a></li>
+</ul>
+</div>
+</div>
+<p>
+<b>Foreign Function Interface</b> (FFI) is the most important feature of Rust
+to let it live peacefully with the other part of the world such as
+C/C++, Ruby, Python, Node.js, C#,&#x2026;
+</p>
+
+<p>
+The <a href="https://doc.rust-lang.org/book/ffi.html">official FFI document</a>
+is much more improved from before but it still not satisfied the people
+who want to dig deeper into FFI.
+</p>
+
+<p>
+Another better source to learn about FFI is
+<a href="http://jakegoulding.com/rust-ffi-omnibus/basics/">The Rust FFI Omnibus</a>, which is a collection of examples show you how to use it with
+many languages.
+</p>
+
+<p>
+I'm quite confused while reading about how to work with String in these
+resources, so I decided to write a new post just to talk about this
+topic, focusing on sending strings to other languages using FFI.
+</p>
+
+<div id="outline-container-org859df72" class="outline-2">
+<h2 id="sending-out-a-string"><a id="org859df72"></a><span class="section-number-2">1</span> Sending out a String</h2>
+<div class="outline-text-2" id="text-sending-out-a-string">
+<p>
+First, we need to understand the Rust's <code>String</code>. Let's build a simple
+function that returns a <code>String</code>:
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_from_rust() -&gt; String {
+  "Hello World".to_string()
+}
+</pre>
+
+<p>
+And the Node.js code to read it:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">ffi</span> = require<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'ffi'</span><span style="color: #5EC4FF;">)</span>;
+
+<span style="color: #56697A;">// </span><span style="color: #56697A;">The path should be 'rstring/target/debug/librstring.so' on Linux environment</span>
+<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">lib</span> = ffi.Library<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'rstring/target/debug/librstring.dylib'</span>, <span style="color: #E27E8D;">{</span>
+  string_from_rust: <span style="color: #8BD49C;">[</span><span style="color: #7FA0B7;">'string'</span>, <span style="color: #D98E48;">[]</span><span style="color: #8BD49C;">]</span>
+<span style="color: #E27E8D;">}</span><span style="color: #5EC4FF;">)</span>;
+
+<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">result</span> = lib.string_from_rust<span style="color: #5EC4FF;">()</span>;
+console.log<span style="color: #5EC4FF;">(</span>result<span style="color: #5EC4FF;">)</span>;
+</pre>
+</div>
+
+<p>
+Run this code and what you will see is:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+<span style="color: #5EC4FF;">[</span><span style="color: #E27E8D; font-weight: bold;">1</span><span style="color: #5EC4FF;">]</span>    <span style="color: #E27E8D; font-weight: bold;">63179</span> segmentation fault  node ffi.js
+</pre>
+</div>
+
+<p>
+Crashed! But why?
+</p>
+
+<p>
+The reason is simple. <code>String</code> is a type that only being implemented in
+Rust, the other languages (Node.js in this case) does not have anything
+like <code>std::string::String</code>. So it couldn't read that returned value from
+Rust.
+</p>
+</div>
+
+<div id="outline-container-org337079d" class="outline-3">
+<h3 id="string-must-be-returned-as-a-pointer"><a id="org337079d"></a><span class="section-number-3">1.1</span> String must be returned as a pointer</h3>
+<div class="outline-text-3" id="text-string-must-be-returned-as-a-pointer">
+<p>
+With particular data types that only available in Rust such as <code>String</code>
+or <code>Vector</code>, we should send it out as a <code>Pointer</code> to a memory block that
+holds its value.
+</p>
+
+<p>
+Let's slightly modify our Rust code:
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_from_rust() -&gt; *const u8 {
+  "Hello World".as_ptr()
+}
+</pre>
+
+<p>
+<code>*const u8</code> is the type of a <code>Pointer</code>.
+</p>
+
+<p>
+Run the Node.js code again, and this is what you got:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+Hello WorldHello World
+</pre>
+</div>
+
+<p>
+Ehh, guys, we got good news and bad news here&#x2026;
+</p>
+
+<p>
+The good news is we can see the <code>String</code> now. The bad news is it doesn't
+look right.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge8165e9" class="outline-3">
+<h3 id="the-nul-terminated-strings"><a id="orge8165e9"></a><span class="section-number-3">1.2</span> The NUL-terminated strings</h3>
+<div class="outline-text-3" id="text-the-nul-terminated-strings">
+<p>
+In Rust, a <code>String</code> is not NUL-terminated (not ending with <code>\0</code>), but
+strings in the others languages do. In this case, Node.js doesn't know
+where is the end of the text we want to get.
+</p>
+
+<p>
+/Oh, and speaking of NUL-terminated string, there is a guy who
+<a href="http://sasheldon.com/blog/2017/05/07/how-i-broke-cargo-for-windows/">broke
+the whole Rust ecosystem on Windows</a> last April with his NUL-terminated
+string generating crate./
+</p>
+
+<p>
+Solution? Just insert the <code>\0</code> at the end of our <code>String</code>.
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_from_rust() -&gt; *const u8 {
+  "Hello World\0".as_ptr()
+}
+</pre>
+
+<p>
+Run it again, looks good now:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+Hello World
+</pre>
+</div>
+
+<p>
+OK. But wait, do I have to put the <code>\0</code> character all the time when I
+want to work with String? Well, not actually, Rust also provided a
+C-compatible string type called <code>std::ffi::CString</code>.
+</p>
+
+<p>
+You can easily create a <code>CString</code> from a string slice:
+</p>
+
+<pre class="example">
+CString::new("Hello World").unwrap()
+</pre>
+
+<p>
+Let's see how will we use <code>CString</code> to send a string to Node.js:
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_from_rust() -&gt; *const c_char {
+    let s = CString::new("Hello World").unwrap();
+    s.as_ptr()
+}
+</pre>
+
+<p>
+First, we create a <code>CString</code> from a string slice, then we return a
+pointer to its value, just like we do previously.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+</pre>
+</div>
+
+<p>
+Oops! Nothing displayed. Why?
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd3b77e3" class="outline-3">
+<h3 id="stdmemforget-it-to-keep-it"><a id="orgd3b77e3"></a><span class="section-number-3">1.3</span> std::mem::forget it to keep it</h3>
+<div class="outline-text-3" id="text-stdmemforget-it-to-keep-it">
+<p>
+Rust is smart, in this case, too smart. It automatically frees up the
+memory blocks of any variable that being out of its scope.
+</p>
+
+<p>
+Take a closer look at our <code>string_from_rust()</code> function. We created a
+<code>CString</code>, then return a <b>pointer</b> to the memory blocks that holding its
+value, then what? We going out of the scope of <code>string_from_rust()</code>
+function, that mean, <code>s</code> is now out of scope. So, Rust do its job,
+killing the <code>s</code>!
+</p>
+
+<pre class="example">
+pub extern fn string_from_rust() -&gt; *const c_char { 
+    let s = CString::new("Hello World").unwrap(); &lt;---.  
+    s.as_ptr()                                        | The scope of s
+} &lt;---------------------------------------------------'
+</pre>
+
+<p>
+In the Node.js application, we received the pointer of <code>s</code>, which
+pointed to a freed memory blocks. That's why we see nothing.
+</p>
+
+<p>
+So how do we tell Rust not to free up the memory of our string?
+</p>
+
+<p>
+We use <code>std::mem::forget</code>! The usage is simple:
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_from_rust() -&gt; *const c_char {
+    let s = CString::new("Hello World").unwrap();
+    let p = s.as_ptr();
+    std::mem::forget(s);
+    p
+}
+</pre>
+
+<p>
+First, we store the <code>Pointer</code> of <code>s</code> string in a variable (<code>p</code>).
+</p>
+
+<p>
+Then we use <code>std::mem::forget</code> to release it from the responsibility of
+Rust.
+</p>
+
+<p>
+The string now leaked out. And Node.js now able to read its value:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+Hello World
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2c7156a" class="outline-2">
+<h2 id="sending-out-a-vector-of-string"><a id="org2c7156a"></a><span class="section-number-2">2</span> Sending out a Vector of String</h2>
+<div class="outline-text-2" id="text-sending-out-a-vector-of-string">
+<p>
+Sometimes, sending out just a <code>String</code> is not enough, you need to send a
+bunch of =String=s.
+</p>
+
+<p>
+What we learned from the previous section is we need to send a <code>String</code>
+as a NUL-terminated string, such as <code>String</code> + <code>\0</code> or <code>CString</code>.
+</p>
+
+<p>
+<code>Vector</code> are resizeable array, and it's also one of the particular types
+that only available in Rust. That mean, we need to return it as a
+<code>Pointer</code>. So what we will have here is a <code>Pointer</code> to a <code>Pointer</code> of
+<code>String</code>. This is quite similar to C's array.
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_array() -&gt; *const *const u8 {
+    let v = vec![
+        "Hello\0".as_ptr(),
+        "World\0".as_ptr()
+    ];
+    v.as_ptr()
+}
+</pre>
+
+<p>
+On Node.js side, we need to use <code>ref-array</code> package from <code>npm</code> to
+implement the <code>Array</code> from the returned <code>Buffer</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">ffi</span> = require<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'ffi'</span><span style="color: #5EC4FF;">)</span>;
+<span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">array</span> = require<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'ref-array'</span><span style="color: #5EC4FF;">)</span>;
+<span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">StringArray</span> = array<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'string'</span><span style="color: #5EC4FF;">)</span>;
+
+<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">lib</span> = ffi.Library<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'rstring/target/debug/librstring.so'</span>, <span style="color: #E27E8D;">{</span>
+  string_array: <span style="color: #8BD49C;">[</span>StringArray, <span style="color: #D98E48;">[]</span><span style="color: #8BD49C;">]</span>
+<span style="color: #E27E8D;">}</span><span style="color: #5EC4FF;">)</span>;
+
+<span style="color: #5EC4FF;">let</span> <span style="color: #9CAABB;">b</span> = lib.string_array<span style="color: #5EC4FF;">()</span>;
+b.length = <span style="color: #E27E8D; font-weight: bold;">2</span>;
+console.log<span style="color: #5EC4FF;">(</span>b<span style="color: #5EC4FF;">)</span>;
+</pre>
+</div>
+
+<p>
+We defined a new data type in Node.js, called <code>StringArray</code>, with the
+help of <code>ref-array</code> to convert the <code>Buffer</code> data into an array of
+<code>string</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #5EC4FF;">const</span> <span style="color: #9CAABB;">StringArray</span> = array<span style="color: #5EC4FF;">(</span><span style="color: #7FA0B7;">'string'</span><span style="color: #5EC4FF;">)</span>;
+</pre>
+</div>
+
+<p>
+And because it's an <code>Array</code>, we need to have the fixed size. So we need
+to specify the <code>length</code> of an array to make it readable.
+</p>
+
+<p>
+Like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+<span style="color: #5EC4FF;">[</span> <span style="color: #7FA0B7;">'&#65533;&#65533;\u0002\u0002'</span>, <span style="color: #7FA0B7;">'8+&#65533;&#65533;&#65533;~'</span>, buffer: &lt;Buffer &gt; <span style="color: #5EC4FF;">]</span>
+</pre>
+</div>
+
+<p>
+Otherwise, you will just get the <code>Buffer</code> without knowing its content.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+<span style="color: #5EC4FF;">[</span> buffer: &lt;Buffer&gt; <span style="color: #5EC4FF;">]</span>
+</pre>
+</div>
+
+<p>
+Oh wait! What? Why the weird strings?
+</p>
+
+<p>
+Remember the <code>std::mem::forget</code>? We got the same issue here. Rust also
+deallocated the vector <code>v</code> when it exit the <code>string_array()</code> function.
+So we need to <code>forget</code> it.
+</p>
+
+<pre class="example">
+#[no_mangle]
+pub extern fn string_array() -&gt; *const *const u8 {
+    let v = vec![
+        "Hello\0".as_ptr(),
+        "World\0".as_ptr()
+    ];
+    let p = v.as_ptr();
+    std::mem::forget(v);
+    p
+}
+</pre>
+
+<p>
+Now it's fine:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">$ node ffi.js
+<span style="color: #5EC4FF;">[</span> <span style="color: #7FA0B7;">'Hello'</span>, <span style="color: #7FA0B7;">'World'</span>, buffer: &lt;Buffer&gt; <span style="color: #5EC4FF;">]</span>
+</pre>
+</div>
+
+<hr />
+
+<p>
+Playing with <code>std::mem::forget</code> and leaking out memory is undesirable
+and we should not overuse it.
+</p>
+
+<p>
+Many people suggest that in production, we should not do all these
+things by hand, it's a better idea to utilizing existing projects such
+as <a href="https://github.com/neon-bindings/neon">Neon</a> from Dave Herman, the
+head of Mozilla Research. I totally agree with that. He loses a lot of
+his hairs for this, so we don't need to lose ours, jk.
+</p>
+
+<hr />
+
+<p>
+I hope that reading this post would be as helpful for you as writing it
+was for me. Any feedback would be greatly appreciated.
+</p>
+
+<p>
+Please feel free to leave a comment on my <a href="https://news.ycombinator.com/item?id=14336140">HackerNews</a> and <a href="https://www.reddit.com/r/rust/comments/6b4ngv/rust_ffi_sending_strings_to_the_outside_world/">Reddit</a> post.
+</p>
+
+<hr />
+
+<p>
+Hey, thanks to HN and Reddit peoples, there are a lot of feedbacks. I
+have updated some parts in this post, and I will keep updating. Thank
+you so much!
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Huy Tran</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>
