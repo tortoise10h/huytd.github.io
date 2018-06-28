@@ -1,0 +1,4 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+
+* Random notes
+- [[./writing-6502-disassembler.html][Writing 6502 disassembler]]
