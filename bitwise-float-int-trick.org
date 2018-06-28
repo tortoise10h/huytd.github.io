@@ -1,0 +1,64 @@
+#+TITLE: Bitwise trick to convert Float to Int
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_LINK_HOME: /
+
+I recently found myself using this trick a lot when playing with LeetCode problems: Use double NOT =~~= operator to quick convert a =float= into an =int=, instead of using =Math.floor= or something similar.
+
+#+BEGIN_SRC 
+        ~~(5.423451) == 5 // true
+Math.floor(5.423451) == 5 // true
+#+END_SRC
+
+Bitwise operators tend to be fast, so you can use this trick to optimize your code sometimes.
+
+But why does this work?
+
+JavaScript numbers have 64-bit precision, which is also called /double/ precision, the internal representation is based on the IEEE 754 standard [fn:1]:
+
+[[file:./img/javascript-float.png]]
+
+In most JavaScript engines, if a number $x$ is small enough integer (e.g: $-2^{31} \le x \le 2^{31}$), it will be represented as a 32-bit integer [fn:2]. And will be convert back to 64-bit when it large enough.
+
+According to ECMAScript Specs [fn:3], when you perform any bitwise operator, the values will be converted to 32-bit integer [fn:4] [fn:5].
+
+For converting numbers, we can perform some "useless" bitwise operators, such as:
+
+#+BEGIN_SRC 
+~~(5.423451) == 5 // Double not
+5.423451 | 0 == 5 // Or
+5.423451 << 0 == 5 // Right shift
+5.423451 >> 0 == 5 // Left shift
+#+END_SRC
+
+Let's apply this trick to solve this simple LeetCode problem ([[https://leetcode.com/problems/power-of-four/description/][#342]]): Check if a number is power of 4.
+
+If there is a number $x$ such that $x^4 = n$, with $n \in Z$ is an integer, so $x$ must be an integer ($x \in Z$) as well. In other way, the logarithm base 4 of $n$ should be an integer $log_4n \in Z$).
+
+So we can solve the problem by checking if logarithm base 4 of $n$ is an integer or not. But it's a bit tricky, because JavaScript's =Math.log= function is only for base 10.
+
+It's time for a little high school math, we know that the logarithm $log_bx$ can be computed from the logarithms of $x$ and $b$ with respect to arbitary base $k$, using the following formula [fn:6]:
+
+$$
+log_ab = \displaystyle{\frac{log_{10}b}{log_{10}a}}
+$$
+
+To check if a number is integer or not, we can check if that number is still the same after we convert it into an integer, so our final implementation should be:
+
+#+BEGIN_SRC 
+var isPowerOfFour = function(num) {
+    let lg4 = Math.log(num) / Math.log(4);
+    return lg4 === (~~lg4);
+};
+#+END_SRC
+
+[fn:1] [[http://speakingjs.com/es5/ch11.html#number_representation][The Internal Representation of Numbers]], Speaking JavaScript, Chapter 11
+
+[fn:2] [[http://speakingjs.com/es5/ch11.html#integers][Integers in JavaScript]], Speaking JavaScript, Chaper 11
+
+[fn:3] [[https://www.ecma-international.org/ecma-262/8.0/index.html#sec-bitwise-not-operator][Bitwise NOT Operator]], ECMAScript 2017 Language Specification
+
+[fn:4] [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Signed_32-bit_integers][JavaScript: Bitwise Operators]], MDN Web Docs
+
+[fn:5] [[http://speakingjs.com/es5/ch11.html#integers_via_bitwise_operators][32-bit Integers via Bitwise Operators]], Speaking JavaScript, Chapter 11
+
+[fn:6] [[https://en.wikipedia.org/wiki/Logarithm#Change_of_base][Logarithm's change of base formula]], Wikipedia

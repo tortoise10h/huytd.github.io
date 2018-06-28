@@ -2,6 +2,7 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
 #+OPTIONS: toc:nil
 
+* [[./bitwise-float-int-trick.html][Bitwise trick to convert Float to Int]]
 * [[./rust-for-the-web.html][Rust for the Web]]
 * [[./string-ffi-rust.html][Rust FFI: Sending strings to the outside world]]
 * [[./writing-6502-disassembler.html][Writing 6502 disassembler]]

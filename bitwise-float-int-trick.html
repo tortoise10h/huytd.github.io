@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-28 Thu 16:15 -->
+<!-- 2018-06-28 Thu 16:14 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>/usr/huy/notes</title>
+<title>Bitwise trick to convert Float to Int</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -227,33 +227,148 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
-<h1 class="title">/usr/huy/notes</h1>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Bitwise trick to convert Float to Int</h1>
+<p>
+I recently found myself using this trick a lot when playing with LeetCode problems: Use double NOT <code>~~</code> operator to quick convert a <code>float</code> into an <code>int</code>, instead of using <code>Math.floor</code> or something similar.
+</p>
 
-<div id="outline-container-org48bc569" class="outline-2">
-<h2 id="org48bc569"><span class="section-number-2">1</span> <a href="./bitwise-float-int-trick.html">Bitwise trick to convert Float to Int</a></h2>
+<pre class="example">
+        ~~(5.423451) == 5 // true
+Math.floor(5.423451) == 5 // true
+</pre>
+
+<p>
+Bitwise operators tend to be fast, so you can use this trick to optimize your code sometimes.
+</p>
+
+<p>
+But why does this work?
+</p>
+
+<p>
+JavaScript numbers have 64-bit precision, which is also called <i>double</i> precision, the internal representation is based on the IEEE 754 standard <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/javascript-float.png" alt="javascript-float.png" />
+</p>
 </div>
-<div id="outline-container-org87ba8f9" class="outline-2">
-<h2 id="org87ba8f9"><span class="section-number-2">2</span> <a href="./rust-for-the-web.html">Rust for the Web</a></h2>
+
+<p>
+In most JavaScript engines, if a number \(x\) is small enough integer (e.g: \(-2^{31} \le x \le 2^{31}\)), it will be represented as a 32-bit integer <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>. And will be convert back to 64-bit when it large enough.
+</p>
+
+<p>
+According to ECMAScript Specs <sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>, when you perform any bitwise operator, the values will be converted to 32-bit integer <sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> <sup>, </sup><sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>.
+</p>
+
+<p>
+For converting numbers, we can perform some "useless" bitwise operators, such as:
+</p>
+
+<pre class="example">
+~~(5.423451) == 5 // Double not
+5.423451 | 0 == 5 // Or
+5.423451 &lt;&lt; 0 == 5 // Right shift
+5.423451 &gt;&gt; 0 == 5 // Left shift
+</pre>
+
+<p>
+Let's apply this trick to solve this simple LeetCode problem (<a href="https://leetcode.com/problems/power-of-four/description/">#342</a>): Check if a number is power of 4.
+</p>
+
+<p>
+If there is a number \(x\) such that \(x^4 = n\), with \(n \in Z\) is an integer, so \(x\) must be an integer (\(x \in Z\)) as well. In other way, the logarithm base 4 of \(n\) should be an integer \(log_4n \in Z\)).
+</p>
+
+<p>
+So we can solve the problem by checking if logarithm base 4 of \(n\) is an integer or not. But it's a bit tricky, because JavaScript's <code>Math.log</code> function is only for base 10.
+</p>
+
+<p>
+It's time for a little high school math, we know that the logarithm \(log_bx\) can be computed from the logarithms of \(x\) and \(b\) with respect to arbitary base \(k\), using the following formula <sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>:
+</p>
+
+<p>
+\[
+log_ab = \displaystyle{\frac{log_{10}b}{log_{10}a}}
+\]
+</p>
+
+<p>
+To check if a number is integer or not, we can check if that number is still the same after we convert it into an integer, so our final implementation should be:
+</p>
+
+<pre class="example">
+var isPowerOfFour = function(num) {
+    let lg4 = Math.log(num) / Math.log(4);
+    return lg4 === (~~lg4);
+};
+</pre>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="http://speakingjs.com/es5/ch11.html#number_representation">The Internal Representation of Numbers</a>, Speaking JavaScript, Chapter 11
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="http://speakingjs.com/es5/ch11.html#integers">Integers in JavaScript</a>, Speaking JavaScript, Chaper 11
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.ecma-international.org/ecma-262/8.0/index.html#sec-bitwise-not-operator">Bitwise NOT Operator</a>, ECMAScript 2017 Language Specification
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators#Signed_32-bit_integers">JavaScript: Bitwise Operators</a>, MDN Web Docs
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+<a href="http://speakingjs.com/es5/ch11.html#integers_via_bitwise_operators">32-bit Integers via Bitwise Operators</a>, Speaking JavaScript, Chapter 11
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.6" class="footnum" href="#fnr.6">6</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://en.wikipedia.org/wiki/Logarithm#Change_of_base">Logarithm's change of base formula</a>, Wikipedia
+</p></div></div>
+
+
 </div>
-<div id="outline-container-org473859d" class="outline-2">
-<h2 id="org473859d"><span class="section-number-2">3</span> <a href="./string-ffi-rust.html">Rust FFI: Sending strings to the outside world</a></h2>
-</div>
-<div id="outline-container-org7ff79cd" class="outline-2">
-<h2 id="org7ff79cd"><span class="section-number-2">4</span> <a href="./writing-6502-disassembler.html">Writing 6502 disassembler</a></h2>
-</div>
-<div id="outline-container-org193b494" class="outline-2">
-<h2 id="org193b494"><span class="section-number-2">5</span> <a href="./rust-travis-ci.html">Setup Travis CI for Rust Diesel project</a></h2>
-</div>
-<div id="outline-container-org719d799" class="outline-2">
-<h2 id="org719d799"><span class="section-number-2">6</span> <a href="./recursive-rust.html">Recursive type problem in Rust</a></h2>
-</div>
-</div>
+</div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-06-28 Thu 16:15</p>
+<p class="date">Created: 2018-06-28 Thu 16:14</p>
 <p class="validation"></p>
 </div>
 </body>
