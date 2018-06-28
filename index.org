@@ -1,4 +1,4 @@
-#+TITLE: /dev/random
+#+TITLE: /usr/huy/notes
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
 #+OPTIONS: toc:nil
 
