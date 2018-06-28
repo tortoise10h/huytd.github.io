@@ -1,3 +1,0 @@
-# Text Object in Vim
-
-
