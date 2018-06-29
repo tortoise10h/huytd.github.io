@@ -1,5 +1,6 @@
 #+TITLE: Bitwise trick to convert Float to Int
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 #+HTML_LINK_HOME: /
 
 I recently found myself using this trick a lot when playing with LeetCode problems: Use double NOT =~~= operator to quick convert a =float= into an =int=, instead of using =Math.floor= or something similar.

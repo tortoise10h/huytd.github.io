@@ -1,5 +1,6 @@
 #+TITLE: Re-Implementing Facebook Reaction Animation
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 #+HTML_LINK_HOME: /
 
 *Disclaimer:* I'm not a Facebook engineer, and I don't know how did they

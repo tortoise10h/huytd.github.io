@@ -180,6 +180,7 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/hack.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -259,8 +260,8 @@ So, it will require some more configuration.
 Let's create a <code>.travis.yml</code> file in your project's root folder.
 </p>
 
-<div id="outline-container-org2d95245" class="outline-2">
-<h2 id="step-1-rust-version"><a id="org2d95245"></a><span class="section-number-2">1</span> Step 1: Rust version</h2>
+<div id="outline-container-org33ac695" class="outline-2">
+<h2 id="step-1-rust-version"><a id="org33ac695"></a><span class="section-number-2">1</span> Step 1: Rust version</h2>
 <div class="outline-text-2" id="text-step-1-rust-version">
 <p>
 You can select any version of Rust in your Travis CI, put this to your
@@ -279,8 +280,8 @@ rust:
 </div>
 </div>
 
-<div id="outline-container-orgb53b76b" class="outline-2">
-<h2 id="step-2-postgresql-or-what-ever-database-you-use"><a id="orgb53b76b"></a><span class="section-number-2">2</span> Step 2: PostgreSQL (or what ever database you use)</h2>
+<div id="outline-container-org5bd9f10" class="outline-2">
+<h2 id="step-2-postgresql-or-what-ever-database-you-use"><a id="org5bd9f10"></a><span class="section-number-2">2</span> Step 2: PostgreSQL (or what ever database you use)</h2>
 <div class="outline-text-2" id="text-step-2-postgresql-or-what-ever-database-you-use">
 <p>
 Next, we need to add PostgreSQL as an extra service:
@@ -299,8 +300,8 @@ list of supported database, please take a look at
 </div>
 </div>
 
-<div id="outline-container-org136587d" class="outline-2">
-<h2 id="step-3-init-your-database-and-migration"><a id="org136587d"></a><span class="section-number-2">3</span> Step 3: Init your database and migration</h2>
+<div id="outline-container-orga3598b7" class="outline-2">
+<h2 id="step-3-init-your-database-and-migration"><a id="orga3598b7"></a><span class="section-number-2">3</span> Step 3: Init your database and migration</h2>
 <div class="outline-text-2" id="text-step-3-init-your-database-and-migration">
 <p>
 Now we need to do a lot of things, create a databse, install
@@ -318,8 +319,8 @@ before_script:
 </div>
 </div>
 
-<div id="outline-container-orgd8166d8" class="outline-2">
-<h2 id="step-4-build-and-test"><a id="orgd8166d8"></a><span class="section-number-2">4</span> Step 4: Build and Test</h2>
+<div id="outline-container-orgcb07881" class="outline-2">
+<h2 id="step-4-build-and-test"><a id="orgcb07881"></a><span class="section-number-2">4</span> Step 4: Build and Test</h2>
 <div class="outline-text-2" id="text-step-4-build-and-test">
 <p>
 Finally, build and test your project with <code>cargo</code>:

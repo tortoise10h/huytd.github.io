@@ -2,6 +2,7 @@
 #+DATE: 25-05-2017 11:30:20
 #+OPTIONS: timestamp:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 #+HTML_LINK_HOME: /
 
 /"Can we create web apps in Rust?"/ - Many people asked. So am I.

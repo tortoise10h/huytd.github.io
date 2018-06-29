@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-28 Thu 13:29 -->
+<!-- 2018-06-28 Thu 17:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Writing 6502 Disassembler in Rust</title>
@@ -181,6 +181,7 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/hack.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -239,12 +240,12 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6eae617">1. Little-endian memory layout</a></li>
-<li><a href="#org9e66d56">2. MOS 6502 Opcode Structure</a></li>
-<li><a href="#org07865f2">3. Reading binary file in Rust</a></li>
-<li><a href="#org3a3dbeb">4. Parsing Opcode from byte vector</a></li>
-<li><a href="#org8afd464">5. Use match to write code faster</a></li>
-<li><a href="#org58a8f04">6. What's next?</a></li>
+<li><a href="#org013487c">1. Little-endian memory layout</a></li>
+<li><a href="#org766c603">2. MOS 6502 Opcode Structure</a></li>
+<li><a href="#org3644716">3. Reading binary file in Rust</a></li>
+<li><a href="#org792cb95">4. Parsing Opcode from byte vector</a></li>
+<li><a href="#orge543760">5. Use match to write code faster</a></li>
+<li><a href="#orgec4cac2">6. What's next?</a></li>
 </ul>
 </div>
 </div>
@@ -256,8 +257,8 @@ In this post, I am talking about writing a disassembler for <b><b>MOS 6502</b></
 It is recommended to read about implementing CHIP-8 interpreter first. If you are not familiar with it, so I can wait, just go and read, then come back.
 </p>
 
-<div id="outline-container-org6eae617" class="outline-2">
-<h2 id="org6eae617"><span class="section-number-2">1</span> Little-endian memory layout</h2>
+<div id="outline-container-org013487c" class="outline-2">
+<h2 id="org013487c"><span class="section-number-2">1</span> Little-endian memory layout</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 One of the most important things you need to know before building anything with MOS 6502 is: It is a <b><b>little-endian 8-bit microprocessor</b></b>. So what do it mean?
@@ -329,8 +330,8 @@ The high and low bytes of the memory address has been swapped because the 6502 u
 </div>
 </div>
 
-<div id="outline-container-org9e66d56" class="outline-2">
-<h2 id="org9e66d56"><span class="section-number-2">2</span> MOS 6502 Opcode Structure</h2>
+<div id="outline-container-org766c603" class="outline-2">
+<h2 id="org766c603"><span class="section-number-2">2</span> MOS 6502 Opcode Structure</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Every instruction starts with an Opcode, which is a 3 characters Assembly code, following with an Operand (the data).
@@ -376,8 +377,8 @@ let high = (opcode &amp; 0x00F0) &gt;&gt; 4;     // you get "A"
 </div>
 </div>
 
-<div id="outline-container-org07865f2" class="outline-2">
-<h2 id="org07865f2"><span class="section-number-2">3</span> Reading binary file in Rust</h2>
+<div id="outline-container-org3644716" class="outline-2">
+<h2 id="org3644716"><span class="section-number-2">3</span> Reading binary file in Rust</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 So let's start building a 6502 disassembler in Rust, the first step is reading the ROM file.
@@ -409,8 +410,8 @@ We open the file with <code>std::fs::File::open()</code> function then read the 
 </div>
 </div>
 
-<div id="outline-container-org3a3dbeb" class="outline-2">
-<h2 id="org3a3dbeb"><span class="section-number-2">4</span> Parsing Opcode from byte vector</h2>
+<div id="outline-container-org792cb95" class="outline-2">
+<h2 id="org792cb95"><span class="section-number-2">4</span> Parsing Opcode from byte vector</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Now we have the byte vector <code>program</code>. We need to define a <b><b>program counter</b></b> which tells us where we are in the code. 
@@ -450,8 +451,8 @@ The <code>LDA #</code> instruction takes up to <b><b>two bytes</b></b>, so at th
 </div>
 </div>
 
-<div id="outline-container-org8afd464" class="outline-2">
-<h2 id="org8afd464"><span class="section-number-2">5</span> Use match to write code faster</h2>
+<div id="outline-container-orge543760" class="outline-2">
+<h2 id="orge543760"><span class="section-number-2">5</span> Use match to write code faster</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Repeatedly writing <code>if</code> statements is not fun, let's make it better by using <code>match</code> on a tuple of <code>(high, low)</code>:
@@ -475,8 +476,8 @@ match (high, low) {
 </div>
 </div>
 
-<div id="outline-container-org58a8f04" class="outline-2">
-<h2 id="org58a8f04"><span class="section-number-2">6</span> What's next?</h2>
+<div id="outline-container-orgec4cac2" class="outline-2">
+<h2 id="orgec4cac2"><span class="section-number-2">6</span> What's next?</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 From now, you already know the format of 6502 programs, and how to read them, you can follow the instruction set to finish your disassembler. 
@@ -501,7 +502,7 @@ Thanks to the comments of <a href="https://www.reddit.com/r/rust/comments/5uuwet
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-06-28 Thu 13:29</p>
+<p class="date">Created: 2018-06-28 Thu 17:52</p>
 <p class="validation"></p>
 </div>
 </body>

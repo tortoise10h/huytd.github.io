@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-28 Thu 17:35 -->
+<!-- 2018-06-28 Thu 17:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Re-Implementing Facebook Reaction Animation</title>
@@ -181,6 +181,7 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/hack.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -280,8 +281,8 @@ In this blog post, we will learn how to implement it. In HTML/CSS and a
 bit of JavaScript.
 </p>
 
-<div id="outline-container-org37223eb" class="outline-2">
-<h2 id="breaking-down-the-animation"><a id="org37223eb"></a><span class="section-number-2">1</span> Breaking down the animation</h2>
+<div id="outline-container-orge96e197" class="outline-2">
+<h2 id="breaking-down-the-animation"><a id="orge96e197"></a><span class="section-number-2">1</span> Breaking down the animation</h2>
 <div class="outline-text-2" id="text-breaking-down-the-animation">
 <p>
 OK. Let's break it down step by step, so we will see and understand the
@@ -348,8 +349,8 @@ Not so complex, huh?
 </div>
 </div>
 
-<div id="outline-container-org3a69b74" class="outline-2">
-<h2 id="raw-implementation"><a id="org3a69b74"></a><span class="section-number-2">2</span> Raw implementation</h2>
+<div id="outline-container-org47d88a7" class="outline-2">
+<h2 id="raw-implementation"><a id="org47d88a7"></a><span class="section-number-2">2</span> Raw implementation</h2>
 <div class="outline-text-2" id="text-raw-implementation">
 <p>
 Now, we start the implementation. In the beginning, we just implement
@@ -369,8 +370,8 @@ the end of this post to vanilla JS or whatever you want)
 </p>
 </div>
 
-<div id="outline-container-org73b6bcf" class="outline-3">
-<h3 id="prototyping-the-news-feed-post"><a id="org73b6bcf"></a><span class="section-number-3">2.1</span> Prototyping the news feed post</h3>
+<div id="outline-container-orga72d28a" class="outline-3">
+<h3 id="prototyping-the-news-feed-post"><a id="orga72d28a"></a><span class="section-number-3">2.1</span> Prototyping the news feed post</h3>
 <div class="outline-text-3" id="text-prototyping-the-news-feed-post">
 <p>
 So we want to create a news feed item, and add a Like button to it.
@@ -437,8 +438,8 @@ button, see? It's green! It's cool now, isn't it?
 </div>
 </div>
 
-<div id="outline-container-orgebe8a9a" class="outline-3">
-<h3 id="display-the-reaction-box"><a id="orgebe8a9a"></a><span class="section-number-3">2.2</span> Display the reaction box</h3>
+<div id="outline-container-org930d89a" class="outline-3">
+<h3 id="display-the-reaction-box"><a id="org930d89a"></a><span class="section-number-3">2.2</span> Display the reaction box</h3>
 <div class="outline-text-3" id="text-display-the-reaction-box">
 <p>
 The next step is adding the reaction box. This will be a <b>312x55</b> pixels
@@ -510,8 +511,8 @@ This is the result:
 </div>
 </div>
 
-<div id="outline-container-orgbe8c63e" class="outline-3">
-<h3 id="adding-the-emoticons"><a id="orgbe8c63e"></a><span class="section-number-3">2.3</span> Adding the emoticons</h3>
+<div id="outline-container-org7866115" class="outline-3">
+<h3 id="adding-the-emoticons"><a id="org7866115"></a><span class="section-number-3">2.3</span> Adding the emoticons</h3>
 <div class="outline-text-3" id="text-adding-the-emoticons">
 <p>
 Now we have the reaction box displayed, let's add some emoticons so it
@@ -649,8 +650,8 @@ And this is the result:
 </div>
 </div>
 
-<div id="outline-container-org6d8f3f5" class="outline-3">
-<h3 id="did-you-see-a-bug"><a id="org6d8f3f5"></a><span class="section-number-3">2.4</span> Did you see a bug?</h3>
+<div id="outline-container-org7677ad5" class="outline-3">
+<h3 id="did-you-see-a-bug"><a id="org7677ad5"></a><span class="section-number-3">2.4</span> Did you see a bug?</h3>
 <div class="outline-text-3" id="text-did-you-see-a-bug">
 <p>
 You may notice that the reaction box is too close to the Like button, it
@@ -726,8 +727,8 @@ Now you can refresh the page. It should be fine now :)
 </div>
 </div>
 
-<div id="outline-container-org64d6c0b" class="outline-3">
-<h3 id="display-emoticons-label-only-on-mouse-hover"><a id="org64d6c0b"></a><span class="section-number-3">2.5</span> Display emoticon's label only on mouse hover</h3>
+<div id="outline-container-org29cdb0b" class="outline-3">
+<h3 id="display-emoticons-label-only-on-mouse-hover"><a id="org29cdb0b"></a><span class="section-number-3">2.5</span> Display emoticon's label only on mouse hover</h3>
 <div class="outline-text-3" id="text-display-emoticons-label-only-on-mouse-hover">
 <p>
 The next thing to do is to hide all emoticon's labels and display them
@@ -778,8 +779,8 @@ Animation &#x2014; Part 1</a>.
 </div>
 </div>
 
-<div id="outline-container-orgf52f016" class="outline-2">
-<h2 id="adding-animation"><a id="orgf52f016"></a><span class="section-number-2">3</span> Adding Animation</h2>
+<div id="outline-container-orga8b6334" class="outline-2">
+<h2 id="adding-animation"><a id="orga8b6334"></a><span class="section-number-2">3</span> Adding Animation</h2>
 <div class="outline-text-2" id="text-adding-animation">
 <p>
 Now, let's the pain begin. In this part, we will implement some
@@ -787,8 +788,8 @@ animations to give the better feeling for users.
 </p>
 </div>
 
-<div id="outline-container-org1d60d73" class="outline-3">
-<h3 id="emoticon-zooming-animation"><a id="org1d60d73"></a><span class="section-number-3">3.1</span> Emoticon zooming animation</h3>
+<div id="outline-container-orga321b9e" class="outline-3">
+<h3 id="emoticon-zooming-animation"><a id="orga321b9e"></a><span class="section-number-3">3.1</span> Emoticon zooming animation</h3>
 <div class="outline-text-3" id="text-emoticon-zooming-animation">
 <p>
 Let's start with the simplest one. We will slowly zooming the emoticon
@@ -831,8 +832,8 @@ CSS transitions &#x2014; MDN</a>.
 </div>
 </div>
 
-<div id="outline-container-org7a6668b" class="outline-3">
-<h3 id="emoticons-show-up-animation"><a id="org7a6668b"></a><span class="section-number-3">3.2</span> Emoticon's show up animation</h3>
+<div id="outline-container-org026fff9" class="outline-3">
+<h3 id="emoticons-show-up-animation"><a id="org026fff9"></a><span class="section-number-3">3.2</span> Emoticon's show up animation</h3>
 <div class="outline-text-3" id="text-emoticons-show-up-animation">
 <p>
 Let's take a look at the show-up animation again:
@@ -1014,7 +1015,7 @@ See you in the next posts. Happy CSSing ^^
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-06-28 Thu 17:35</p>
+<p class="date">Created: 2018-06-28 Thu 17:52</p>
 <p class="validation"></p>
 </div>
 </body>
