@@ -4,6 +4,7 @@ body {
     margin: 0 auto;
     width: 600px;
     padding-bottom: 30px;
+    max-width: 96vw;
 }
 
 h1 > span,h2 > span,h3 > span,h4 > span,h5 > span,h6 > span {
@@ -40,4 +41,14 @@ h1 > span,h2 > span,h3 > span,h4 > span,h5 > span,h6 > span {
 
 #org-div-home-and-up a[accesskey="H"]:before {
     content: "<";
+}
+
+img {
+    max-width: 90vw;
+}
+
+img.full-width {
+    text-align: center;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
 }
