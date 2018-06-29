@@ -7,7 +7,7 @@ Spacemacs is the first Emacs version I used, so I'm kind of attached to the =evi
 
 But I always have a feeling that something is not right, Spacemacs hides a lot of things under the hood, and it loads a lot of stuff that I do not need during the startup. This would be a huge waste, and I need to have a fresh setup that I can control every single thing in my editor.
 
-So I created my own Emacs configuration, it's suprisingly easier than as I thought.
+So I created my own Emacs configuration, it's surprisingly easier than as I thought.
 
 #+ATTR_HTML: :class full-width round :width 750px
 [[./img/custom-emacs.png]]
