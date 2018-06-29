@@ -5,7 +5,7 @@
 * [[./bitwise-float-int-trick.html][Bitwise trick to convert Float to Int]]
 * [[./rust-for-the-web.html][Rust for the Web]]
 * [[./string-ffi-rust.html][Rust FFI: Sending strings to the outside world]]
-* [[./reimplementing-facebook-reaction.html][Re-Implementing Facebook Reaction Animation]]
+* [[./reimplementing-facebook-animation.html][Re-Implementing Facebook Reaction Animation]]
 * [[./writing-6502-disassembler.html][Writing 6502 disassembler]]
 * [[./rust-travis-ci.html][Setup Travis CI for Rust Diesel project]]
 * [[./recursive-rust.html][Recursive type problem in Rust]]
