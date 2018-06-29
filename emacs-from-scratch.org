@@ -1,0 +1,199 @@
+#+TITLE: Emacs from scratch
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+#+HTML_LINK_HOME: /
+
+Spacemacs is the first Emacs version I used, so I'm kind of attached to the =evil-mode= and =SPC= mnemonic key binding.
+
+But I always have a feeling that something is not right, Spacemacs hides a lot of things under the hood, and it loads a lot of stuff that I do not need during the startup. This would be a huge waste, and I need to have a fresh setup that I can control every single thing in my editor.
+
+So I created my own Emacs configuration, it's suprisingly easier than as I thought.
+
+#+ATTR_HTML: :class full-width round :width 750px
+[[./img/custom-emacs.png]]
+
+In this post, I'll go through the steps I built a minimal Spacemacs-like version, with some basic key binding:
+
+#+BEGIN_SRC
+  General:
+    SPC /     : ripgrep
+    SPC TAB   : previous buffer
+    SPC SPC   : Open M-x
+  
+  Files:
+    SPC p f   : find files
+  
+  Buffers:
+    SPC b b   : buffers list
+    
+  Window:
+    SPC w l   : move right
+    SPC w h   : move left 
+    SPC w j   : move down
+    SPC w k   : move up
+    SPC w /   : split right
+    SPC w -   : split bottom
+    SPC w x   : close window
+  
+  Other:
+    SPC a t   : open terminal in current buffer
+#+END_SRC
+
+* Configuration file
+  
+First, we need to create a =init.el= file:
+
+#+BEGIN_SRC 
+$ mkdir -p ~/.emacs.d
+$ touch ~/.emacs.d/init.el
+#+END_SRC
+
+Now, Emacs will start with the ugly tools bar and status bar, just like any editor that I would uninstall right away. Let's change this.
+
+* Minimal UI
+
+Now, we need to disable all the ugly stuff and make Emacs just as clean and clear as Vim or Sublime, Atom,... or whatever modern editor today has.
+
+Put these to the beginning of your =init.el=:
+
+#+BEGIN_SRC 
+;; Minimal UI
+(scroll-bar-mode nil)
+(tool-bar-mode   nil)
+(tooltip-mode    nil)
+(menu-bar-mode   nil)
+#+END_SRC
+
+Next, we'll add a package manager to start installing themes/packages.
+
+* Package Manager
+  
+By default, Emacs is configured to use =ELPA= package archive, we'll need to add more repository such as =GNU ELPA=, =MELPA=,...
+
+Put this to the beginning of your =init.el=:
+
+#+BEGIN_SRC 
+;; Package configs
+(require 'package)
+(setq package-enable-at-startup nil)
+(setq package-archives '(("org"   . "http://orgmode.org/elpa/")
+                         ("gnu"   . "http://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
+(package-initialize)
+#+END_SRC
+  
+Next, we'll use [[https://github.com/jwiegley/use-package][use-package]] to configure our packages better, in case you don't know, this package provides a macro to allow you to easily install packages and isolate package configuration in a way that is both performance-oriented and tidy.
+
+#+BEGIN_SRC 
+;; Bootstrap `use-package`
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+#+END_SRC
+
+* Vim key binding with Evil Mode
+  
+Now that you have package manager setted up, let's install our first package: =evil-mode=, this package allows you to use Vim-like key binding in Emacs.
+
+#+BEGIN_SRC 
+;; Vim mode
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1))
+#+END_SRC
+
+That's it! Now restart your Emacs, you'll see the mode line displaying the current Vim mode, and you'll be able to navigate with =hjkl=.
+
+* Installing Theme
+
+One of the best theme for Emacs I could found is =doom-themes= package, that has a lot of cool themes. The following code will install this package and load its flagship theme =doom-one=:
+
+#+BEGIN_SRC 
+;; Theme
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-themes 'doom-one))
+#+END_SRC
+
+* Installing Helm
+
+[[https://github.com/emacs-helm/helm][Helm]] is a framework for incremental completions and narrowing selections in Emacs. Many people prefer =ivy= because it's much lighter, for me, it's doesn't matter. I find =helm= is easier to use and config.
+
+The following snippet will install =helm= and configure /fuzzy matching/:
+
+#+BEGIN_SRC 
+;; Helm
+(use-package helm
+  :ensure t
+  :init
+  (setq helm-mode-fuzzy-match t)
+  (setq helm-completion-in-region-fuzzy-match t)
+  (setq helm-candidate-number-list 50))
+#+END_SRC
+
+* Installing Which Key
+
+In Spacemacs, when you press =SPC= or any other key sequence, a small buffer will be popped up to show the list of features you can do next, installing =which-key= will give you this.
+
+#+BEGIN_SRC 
+;; Which Key
+(use-package which-key
+  :ensure t
+  :init
+  (setq which-key-separator " ")
+  (setq which-key-prefix-prefix "+")
+  :config
+  (which-key-mode))
+#+END_SRC
+
+* Custom Key Binding
+
+Finally, you can start config your custom key binding with =general= package, this is my config, the prefix is =SPC= just like in Spacemacs:
+
+#+BEGIN_SRC 
+;; Custom keybinding
+(use-package general
+  :ensure t
+  :config (general-define-key
+  :states '(normal visual insert emacs)
+  :prefix "SPC"
+  :non-normal-prefix "M-SPC"
+  ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
+  "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+  "SPC" '(helm-M-x :which-key "M-x")
+  "pf"  '(helm-find-file :which-key "find files")
+  ;; Buffers
+  "bb"  '(helm-buffers-list :which-key "buffers list")
+  ;; Window
+  "wl"  '(windmove-right :which-key "move right")
+  "wh"  '(windmove-left :which-key "move left")
+  "wk"  '(windmove-up :which-key "move up")
+  "wj"  '(windmove-down :which-key "move bottom")
+  "w/"  '(split-window-right :which-key "split right")
+  "w-"  '(split-window-below :which-key "split bottom")
+  "wx"  '(delete-window :which-key "delete window")
+  ;; Others
+  "at"  '(ansi-term :which-key "open terminal")
+))
+#+END_SRC
+
+* Matching Titlebar color on MacOS
+  
+If you're using Emacs on macOS, you can add this to have your titlebar color changed and matching your color theme:
+
+#+BEGIN_SRC 
+;; Fancy titlebar for MacOS
+(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+(add-to-list 'default-frame-alist '(ns-appearance . dark))
+(setq ns-use-proxy-icon  nil)
+(setq frame-title-format nil)
+#+END_SRC
+
+-----
+
+From here, you can continue customize Emacs as you need, for example, add [[https://github.com/bbatsov/projectile][projectile]] package for project management, add more language supports, customize your mode line,...
+
+I hope you'll find this post helpful and will be able to build your own Emacs configuration. Also, you can check my [[https://gist.github.com/huytd/6b785bdaeb595401d69adc7797e5c22c][customized configuration here]].

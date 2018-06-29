@@ -52,3 +52,7 @@ img.full-width {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
 }
+
+img.round {
+    border-radius: 5px;
+}

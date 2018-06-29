@@ -2,6 +2,8 @@
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
 #+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 #+OPTIONS: toc:nil
+
+* [[./emacs-from-scratch.html][Emacs from scratch]]
 * [[./bitwise-float-int-trick.html][Bitwise trick to convert Float to Int]]
 * [[./rust-for-the-web.html][Rust for the Web]]
 * [[./string-ffi-rust.html][Rust FFI: Sending strings to the outside world]]
