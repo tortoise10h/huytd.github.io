@@ -104,6 +104,15 @@ Now that you have package manager setted up, let's install our first package: =e
   (evil-mode 1))
 #+END_SRC
 
+I personally prefer using =jk= for escape key, so I'll install =evil-escape= and have this setting:
+
+#+BEGIN_SRC 
+(use-package evil-escape
+  :ensure t
+  :init
+  (setq-default evil-escape-key-sequence "jk"))
+#+END_SRC
+
 That's it! Now restart your Emacs, you'll see the mode line displaying the current Vim mode, and you'll be able to navigate with =hjkl=.
 
 * Installing Theme
