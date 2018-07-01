@@ -110,7 +110,9 @@ I personally prefer using =jk= for escape key, so I'll install =evil-escape= and
 (use-package evil-escape
   :ensure t
   :init
-  (setq-default evil-escape-key-sequence "jk"))
+  (setq-default evil-escape-key-sequence "jk")
+  :config
+  (evil-escape-mode 1))
 #+END_SRC
 
 That's it! Now restart your Emacs, you'll see the mode line displaying the current Vim mode, and you'll be able to navigate with =hjkl=.
@@ -140,7 +142,9 @@ The following snippet will install =helm= and configure /fuzzy matching/:
   :init
   (setq helm-mode-fuzzy-match t)
   (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 50))
+  (setq helm-candidate-number-list 50)
+  :config
+  (helm-mode 1))
 #+END_SRC
 
 * Installing Which Key
@@ -155,7 +159,7 @@ In Spacemacs, when you press =SPC= or any other key sequence, a small buffer wil
   (setq which-key-separator " ")
   (setq which-key-prefix-prefix "+")
   :config
-  (which-key-mode))
+  (which-key-mode 1))
 #+END_SRC
 
 * Custom Key Binding
@@ -201,8 +205,39 @@ If you're using Emacs on macOS, you can add this to have your titlebar color cha
 (setq frame-title-format nil)
 #+END_SRC
 
+* Project Management
+  
+One of the most important thing to install at first is =projectile=, for manage projects in Emacs. In my configuration, I also unset the =projectile-require-project-root= option to have =projectile= recognize any folder as a project, not just ones with project files.
+
+#+BEGIN_SRC 
+;; Projectile
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-require-project-root nil)
+  :config
+  (projectile-mode 1))
+#+END_SRC
+
+* Optional: NeoTree and Icons
+  
+One thing that nice to have is =neotree=, which will display the folder tree. In this configuration, I also installed =all-the-icons= so =neotree= can be displayed with some nice graphical icons:
+
+#+BEGIN_SRC 
+;; All The Icons
+(use-package all-the-icons :ensure t)
+
+;; NeoTree
+(use-package neotree
+  :ensure t
+  :init
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+#+END_SRC
+
+Just don't forget to run =M-x all-the-icons-install-fonts= after start your Emacs for the first time.
+
 -----
 
-From here, you can continue customizing Emacs as you need, for example, add [[https://github.com/bbatsov/projectile][projectile]] package for project management, add more language supports, customize your mode line,...
+From here, you can continue customizing Emacs as you need, for example, add more language supports, customize your mode line,...
 
 I hope you'll find this post helpful and will be able to build your own Emacs configuration. Also, you can check my [[https://gist.github.com/huytd/6b785bdaeb595401d69adc7797e5c22c][customized configuration here]].
