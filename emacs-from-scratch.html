@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-06-29 Fri 14:49 -->
+<!-- 2018-06-30 Sat 20:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs from scratch</title>
@@ -240,15 +240,15 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5be8c19">1. Configuration file</a></li>
-<li><a href="#org97b3746">2. Minimal UI</a></li>
-<li><a href="#org444251a">3. Package Manager</a></li>
-<li><a href="#org02c8d59">4. Vim key binding with Evil Mode</a></li>
-<li><a href="#org468802a">5. Installing Theme</a></li>
-<li><a href="#org5ac1209">6. Installing Helm</a></li>
-<li><a href="#orga5757fb">7. Installing Which Key</a></li>
-<li><a href="#orgc57603a">8. Custom Key Binding</a></li>
-<li><a href="#orgd7676c5">9. Matching Titlebar color on MacOS</a></li>
+<li><a href="#org98fadfa">1. Configuration file</a></li>
+<li><a href="#org29da13b">2. Minimal UI</a></li>
+<li><a href="#org85f8c6e">3. Package Manager</a></li>
+<li><a href="#orgb96a237">4. Vim key binding with Evil Mode</a></li>
+<li><a href="#orgc6188d1">5. Installing Theme</a></li>
+<li><a href="#org95e3654">6. Installing Helm</a></li>
+<li><a href="#org82dce33">7. Installing Which Key</a></li>
+<li><a href="#org31f1a83">8. Custom Key Binding</a></li>
+<li><a href="#org82f1eeb">9. Matching Titlebar color on MacOS</a></li>
 </ul>
 </div>
 </div>
@@ -299,8 +299,8 @@ Other:
   SPC a t   : open terminal in current buffer
 </pre>
 
-<div id="outline-container-org5be8c19" class="outline-2">
-<h2 id="org5be8c19"><span class="section-number-2">1</span> Configuration file</h2>
+<div id="outline-container-org98fadfa" class="outline-2">
+<h2 id="org98fadfa"><span class="section-number-2">1</span> Configuration file</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 First, we need to create a <code>init.el</code> file:
@@ -317,8 +317,8 @@ Now, Emacs will start with the ugly tools bar and status bar, just like any edit
 </div>
 </div>
 
-<div id="outline-container-org97b3746" class="outline-2">
-<h2 id="org97b3746"><span class="section-number-2">2</span> Minimal UI</h2>
+<div id="outline-container-org29da13b" class="outline-2">
+<h2 id="org29da13b"><span class="section-number-2">2</span> Minimal UI</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Now, we need to disable all the ugly stuff and make Emacs just as clean and clear as Vim or Sublime, Atom,&#x2026; or whatever modern editor today has.
@@ -330,10 +330,10 @@ Put these to the beginning of your <code>init.el</code>:
 
 <pre class="example">
 ;; Minimal UI
-(scroll-bar-mode nil)
-(tool-bar-mode   nil)
-(tooltip-mode    nil)
-(menu-bar-mode   nil)
+(scroll-bar-mode -1)
+(tool-bar-mode   -1)
+(tooltip-mode    -1)
+(menu-bar-mode   -1)
 </pre>
 
 <p>
@@ -342,8 +342,8 @@ Next, we'll add a package manager to start installing themes/packages.
 </div>
 </div>
 
-<div id="outline-container-org444251a" class="outline-2">
-<h2 id="org444251a"><span class="section-number-2">3</span> Package Manager</h2>
+<div id="outline-container-org85f8c6e" class="outline-2">
+<h2 id="org85f8c6e"><span class="section-number-2">3</span> Package Manager</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 By default, Emacs is configured to use <code>ELPA</code> package archive, we'll need to add more repository such as <code>GNU ELPA</code>, <code>MELPA</code>,&#x2026;
@@ -358,8 +358,8 @@ Put this to the beginning of your <code>init.el</code>:
 (require 'package)
 (setq package-enable-at-startup nil)
 (setq package-archives '(("org"   . "http://orgmode.org/elpa/")
-                         ("gnu"   . "http://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+			 ("gnu"   . "http://elpa.gnu.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 </pre>
 
@@ -377,8 +377,8 @@ Next, we'll use <a href="https://github.com/jwiegley/use-package">use-package</a
 </div>
 </div>
 
-<div id="outline-container-org02c8d59" class="outline-2">
-<h2 id="org02c8d59"><span class="section-number-2">4</span> Vim key binding with Evil Mode</h2>
+<div id="outline-container-orgb96a237" class="outline-2">
+<h2 id="orgb96a237"><span class="section-number-2">4</span> Vim key binding with Evil Mode</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Now that you have package manager setted up, let's install our first package: <code>evil-mode</code>, this package allows you to use Vim-like key binding in Emacs.
@@ -398,8 +398,8 @@ That's it! Now restart your Emacs, you'll see the mode line displaying the curre
 </div>
 </div>
 
-<div id="outline-container-org468802a" class="outline-2">
-<h2 id="org468802a"><span class="section-number-2">5</span> Installing Theme</h2>
+<div id="outline-container-orgc6188d1" class="outline-2">
+<h2 id="orgc6188d1"><span class="section-number-2">5</span> Installing Theme</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 One of the best theme for Emacs I could found is <code>doom-themes</code> package, that has a lot of cool themes. The following code will install this package and load its flagship theme <code>doom-one</code>:
@@ -410,13 +410,13 @@ One of the best theme for Emacs I could found is <code>doom-themes</code> packag
 (use-package doom-themes
   :ensure t
   :config
-  (load-themes 'doom-one))
+  (load-theme 'doom-one t))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org5ac1209" class="outline-2">
-<h2 id="org5ac1209"><span class="section-number-2">6</span> Installing Helm</h2>
+<div id="outline-container-org95e3654" class="outline-2">
+<h2 id="org95e3654"><span class="section-number-2">6</span> Installing Helm</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 <a href="https://github.com/emacs-helm/helm">Helm</a> is a framework for incremental completions and narrowing selections in Emacs. Many people prefer <code>ivy</code> because it's much lighter, for me, it's doesn't matter. I find <code>helm</code> is easier to use and config.
@@ -438,8 +438,8 @@ The following snippet will install <code>helm</code> and configure <i>fuzzy matc
 </div>
 </div>
 
-<div id="outline-container-orga5757fb" class="outline-2">
-<h2 id="orga5757fb"><span class="section-number-2">7</span> Installing Which Key</h2>
+<div id="outline-container-org82dce33" class="outline-2">
+<h2 id="org82dce33"><span class="section-number-2">7</span> Installing Which Key</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 In Spacemacs, when you press <code>SPC</code> or any other key sequence, a small buffer will be popped up to show the list of features you can do next, installing <code>which-key</code> will give you this.
@@ -458,8 +458,8 @@ In Spacemacs, when you press <code>SPC</code> or any other key sequence, a small
 </div>
 </div>
 
-<div id="outline-container-orgc57603a" class="outline-2">
-<h2 id="orgc57603a"><span class="section-number-2">8</span> Custom Key Binding</h2>
+<div id="outline-container-org31f1a83" class="outline-2">
+<h2 id="org31f1a83"><span class="section-number-2">8</span> Custom Key Binding</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Finally, you can start config your custom key binding with <code>general</code> package, this is my config, the prefix is <code>SPC</code> just like in Spacemacs:
@@ -494,8 +494,8 @@ Finally, you can start config your custom key binding with <code>general</code> 
 </div>
 </div>
 
-<div id="outline-container-orgd7676c5" class="outline-2">
-<h2 id="orgd7676c5"><span class="section-number-2">9</span> Matching Titlebar color on MacOS</h2>
+<div id="outline-container-org82f1eeb" class="outline-2">
+<h2 id="org82f1eeb"><span class="section-number-2">9</span> Matching Titlebar color on MacOS</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 If you're using Emacs on macOS, you can add this to have your titlebar color changed and matching your color theme:
@@ -512,7 +512,7 @@ If you're using Emacs on macOS, you can add this to have your titlebar color cha
 <hr />
 
 <p>
-From here, you can continue customize Emacs as you need, for example, add <a href="https://github.com/bbatsov/projectile">projectile</a> package for project management, add more language supports, customize your mode line,&#x2026;
+From here, you can continue customizing Emacs as you need, for example, add <a href="https://github.com/bbatsov/projectile">projectile</a> package for project management, add more language supports, customize your mode line,&#x2026;
 </p>
 
 <p>
@@ -523,7 +523,7 @@ I hope you'll find this post helpful and will be able to build your own Emacs co
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-06-29 Fri 14:49</p>
+<p class="date">Created: 2018-06-30 Sat 20:40</p>
 <p class="validation"></p>
 </div>
 </body>

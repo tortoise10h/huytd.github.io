@@ -58,10 +58,10 @@ Put these to the beginning of your =init.el=:
 
 #+BEGIN_SRC 
 ;; Minimal UI
-(scroll-bar-mode nil)
-(tool-bar-mode   nil)
-(tooltip-mode    nil)
-(menu-bar-mode   nil)
+(scroll-bar-mode -1)
+(tool-bar-mode   -1)
+(tooltip-mode    -1)
+(menu-bar-mode   -1)
 #+END_SRC
 
 Next, we'll add a package manager to start installing themes/packages.
@@ -115,7 +115,7 @@ One of the best theme for Emacs I could found is =doom-themes= package, that has
 (use-package doom-themes
   :ensure t
   :config
-  (load-themes 'doom-one))
+  (load-theme 'doom-one t))
 #+END_SRC
 
 * Installing Helm
@@ -194,6 +194,6 @@ If you're using Emacs on macOS, you can add this to have your titlebar color cha
 
 -----
 
-From here, you can continue customize Emacs as you need, for example, add [[https://github.com/bbatsov/projectile][projectile]] package for project management, add more language supports, customize your mode line,...
+From here, you can continue customizing Emacs as you need, for example, add [[https://github.com/bbatsov/projectile][projectile]] package for project management, add more language supports, customize your mode line,...
 
 I hope you'll find this post helpful and will be able to build your own Emacs configuration. Also, you can check my [[https://gist.github.com/huytd/6b785bdaeb595401d69adc7797e5c22c][customized configuration here]].
