@@ -64,6 +64,18 @@ Put these to the beginning of your =init.el=:
 (menu-bar-mode   -1)
 #+END_SRC
 
+* Font and Frame Size
+
+By default, Emacs will starts with a default monospace font and squared size window. We can change this by adding these settings:
+
+#+BEGIN_SRC 
+(add-to-list 'default-frame-alist '(font . "mononoki-12"))
+(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(width . 80))
+#+END_SRC
+
+In the above config, we set the default font face to =mononoki= and font size is =12=. We also set the frame dimension into =80x24=, just like any default terminal emulator size.
+
 Next, we'll add a package manager to start installing themes/packages.
 
 * Package Manager
@@ -140,9 +152,20 @@ The following snippet will install =helm= and configure /fuzzy matching/:
 (use-package helm
   :ensure t
   :init
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 50)
+  (setq helm-M-x-fuzzy-match t
+	helm-mode-fuzzy-match t
+	helm-buffers-fuzzy-matching t
+	helm-recentf-fuzzy-match t
+	helm-locate-fuzzy-match t
+	helm-semantic-fuzzy-match t
+	helm-imenu-fuzzy-match t
+	helm-completion-in-region-fuzzy-match t
+	helm-candidate-number-list 150
+	helm-split-window-in-side-p t
+	helm-move-to-line-cycle-in-source t
+	helm-echo-input-in-header-line t
+	helm-autoresize-max-height 0
+	helm-autoresize-min-height 20)
   :config
   (helm-mode 1))
 #+END_SRC
@@ -177,7 +200,7 @@ Finally, you can start config your custom key binding with =general= package, th
   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
   "SPC" '(helm-M-x :which-key "M-x")
-  "pf"  '(helm-find-file :which-key "find files")
+  "pf"  '(helm-find-files :which-key "find files")
   ;; Buffers
   "bb"  '(helm-buffers-list :which-key "buffers list")
   ;; Window
@@ -235,6 +258,26 @@ One thing that nice to have is =neotree=, which will display the folder tree. In
 #+END_SRC
 
 Just don't forget to run =M-x all-the-icons-install-fonts= after start your Emacs for the first time.
+
+* Optional: Matching Parentheses
+  
+This is a very helpful built-in feature of Emacs, by enable this, it will highlight any matching parentheses that the cursor is on.
+
+#+BEGIN_SRC 
+;; Show matching parens
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+#+END_SRC
+
+* Optional: Disable backup files
+  
+I find it really annoying when Emacs automatically create a backup file for every buffer you opened, so I [[http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html][disabled it]], you might not want to do this:
+
+#+BEGIN_SRC 
+;; Disable backup files
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
+#+END_SRC
 
 -----
 

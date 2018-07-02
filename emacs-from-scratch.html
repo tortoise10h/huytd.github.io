@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-07-01 Sun 00:34 -->
+<!-- 2018-07-02 Mon 10:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs from scratch</title>
@@ -240,17 +240,20 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org708684d">1. Configuration file</a></li>
-<li><a href="#orge70905e">2. Minimal UI</a></li>
-<li><a href="#orgeb935c7">3. Package Manager</a></li>
-<li><a href="#org2047a72">4. Vim key binding with Evil Mode</a></li>
-<li><a href="#orgcd0548a">5. Installing Theme</a></li>
-<li><a href="#orgad42751">6. Installing Helm</a></li>
-<li><a href="#org06abc42">7. Installing Which Key</a></li>
-<li><a href="#orgf1efc74">8. Custom Key Binding</a></li>
-<li><a href="#orgf9ce466">9. Matching Titlebar color on MacOS</a></li>
-<li><a href="#org0bdf219">10. Project Management</a></li>
-<li><a href="#org7cf894c">11. Optional: NeoTree and Icons</a></li>
+<li><a href="#org303bb2e">1. Configuration file</a></li>
+<li><a href="#org057eae4">2. Minimal UI</a></li>
+<li><a href="#org3f8f7ec">3. Font and Frame Size</a></li>
+<li><a href="#org0b7fedd">4. Package Manager</a></li>
+<li><a href="#org71380b2">5. Vim key binding with Evil Mode</a></li>
+<li><a href="#orga999f59">6. Installing Theme</a></li>
+<li><a href="#org6cccd86">7. Installing Helm</a></li>
+<li><a href="#org0d12aae">8. Installing Which Key</a></li>
+<li><a href="#org1006b5c">9. Custom Key Binding</a></li>
+<li><a href="#orge3a802f">10. Matching Titlebar color on MacOS</a></li>
+<li><a href="#org7bc990b">11. Project Management</a></li>
+<li><a href="#org9e6ea1e">12. Optional: NeoTree and Icons</a></li>
+<li><a href="#org9686527">13. Optional: Matching Parentheses</a></li>
+<li><a href="#orgabd1d31">14. Optional: Disable backup files</a></li>
 </ul>
 </div>
 </div>
@@ -301,8 +304,8 @@ Other:
   SPC a t   : open terminal in current buffer
 </pre>
 
-<div id="outline-container-org708684d" class="outline-2">
-<h2 id="org708684d"><span class="section-number-2">1</span> Configuration file</h2>
+<div id="outline-container-org303bb2e" class="outline-2">
+<h2 id="org303bb2e"><span class="section-number-2">1</span> Configuration file</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 First, we need to create a <code>init.el</code> file:
@@ -319,8 +322,8 @@ Now, Emacs will start with the ugly tools bar and status bar, just like any edit
 </div>
 </div>
 
-<div id="outline-container-orge70905e" class="outline-2">
-<h2 id="orge70905e"><span class="section-number-2">2</span> Minimal UI</h2>
+<div id="outline-container-org057eae4" class="outline-2">
+<h2 id="org057eae4"><span class="section-number-2">2</span> Minimal UI</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Now, we need to disable all the ugly stuff and make Emacs just as clean and clear as Vim or Sublime, Atom,&#x2026; or whatever modern editor today has.
@@ -337,6 +340,25 @@ Put these to the beginning of your <code>init.el</code>:
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 </pre>
+</div>
+</div>
+
+<div id="outline-container-org3f8f7ec" class="outline-2">
+<h2 id="org3f8f7ec"><span class="section-number-2">3</span> Font and Frame Size</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+By default, Emacs will starts with a default monospace font and squared size window. We can change this by adding these settings:
+</p>
+
+<pre class="example">
+(add-to-list 'default-frame-alist '(font . "mononoki-12"))
+(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(width . 80))
+</pre>
+
+<p>
+In the above config, we set the default font face to <code>mononoki</code> and font size is <code>12</code>. We also set the frame dimension into <code>80x24</code>, just like any default terminal emulator size.
+</p>
 
 <p>
 Next, we'll add a package manager to start installing themes/packages.
@@ -344,9 +366,9 @@ Next, we'll add a package manager to start installing themes/packages.
 </div>
 </div>
 
-<div id="outline-container-orgeb935c7" class="outline-2">
-<h2 id="orgeb935c7"><span class="section-number-2">3</span> Package Manager</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org0b7fedd" class="outline-2">
+<h2 id="org0b7fedd"><span class="section-number-2">4</span> Package Manager</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 By default, Emacs is configured to use <code>ELPA</code> package archive, we'll need to add more repository such as <code>GNU ELPA</code>, <code>MELPA</code>,&#x2026;
 </p>
@@ -379,9 +401,9 @@ Next, we'll use <a href="https://github.com/jwiegley/use-package">use-package</a
 </div>
 </div>
 
-<div id="outline-container-org2047a72" class="outline-2">
-<h2 id="org2047a72"><span class="section-number-2">4</span> Vim key binding with Evil Mode</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org71380b2" class="outline-2">
+<h2 id="org71380b2"><span class="section-number-2">5</span> Vim key binding with Evil Mode</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Now that you have package manager setted up, let's install our first package: <code>evil-mode</code>, this package allows you to use Vim-like key binding in Emacs.
 </p>
@@ -413,9 +435,9 @@ That's it! Now restart your Emacs, you'll see the mode line displaying the curre
 </div>
 </div>
 
-<div id="outline-container-orgcd0548a" class="outline-2">
-<h2 id="orgcd0548a"><span class="section-number-2">5</span> Installing Theme</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga999f59" class="outline-2">
+<h2 id="orga999f59"><span class="section-number-2">6</span> Installing Theme</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 One of the best theme for Emacs I could found is <code>doom-themes</code> package, that has a lot of cool themes. The following code will install this package and load its flagship theme <code>doom-one</code>:
 </p>
@@ -430,9 +452,9 @@ One of the best theme for Emacs I could found is <code>doom-themes</code> packag
 </div>
 </div>
 
-<div id="outline-container-orgad42751" class="outline-2">
-<h2 id="orgad42751"><span class="section-number-2">6</span> Installing Helm</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org6cccd86" class="outline-2">
+<h2 id="org6cccd86"><span class="section-number-2">7</span> Installing Helm</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 <a href="https://github.com/emacs-helm/helm">Helm</a> is a framework for incremental completions and narrowing selections in Emacs. Many people prefer <code>ivy</code> because it's much lighter, for me, it's doesn't matter. I find <code>helm</code> is easier to use and config.
 </p>
@@ -446,18 +468,29 @@ The following snippet will install <code>helm</code> and configure <i>fuzzy matc
 (use-package helm
   :ensure t
   :init
-  (setq helm-mode-fuzzy-match t)
-  (setq helm-completion-in-region-fuzzy-match t)
-  (setq helm-candidate-number-list 50)
+  (setq helm-M-x-fuzzy-match t
+	helm-mode-fuzzy-match t
+	helm-buffers-fuzzy-matching t
+	helm-recentf-fuzzy-match t
+	helm-locate-fuzzy-match t
+	helm-semantic-fuzzy-match t
+	helm-imenu-fuzzy-match t
+	helm-completion-in-region-fuzzy-match t
+	helm-candidate-number-list 150
+	helm-split-window-in-side-p t
+	helm-move-to-line-cycle-in-source t
+	helm-echo-input-in-header-line t
+	helm-autoresize-max-height 0
+	helm-autoresize-min-height 20)
   :config
   (helm-mode 1))
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org06abc42" class="outline-2">
-<h2 id="org06abc42"><span class="section-number-2">7</span> Installing Which Key</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org0d12aae" class="outline-2">
+<h2 id="org0d12aae"><span class="section-number-2">8</span> Installing Which Key</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 In Spacemacs, when you press <code>SPC</code> or any other key sequence, a small buffer will be popped up to show the list of features you can do next, installing <code>which-key</code> will give you this.
 </p>
@@ -475,9 +508,9 @@ In Spacemacs, when you press <code>SPC</code> or any other key sequence, a small
 </div>
 </div>
 
-<div id="outline-container-orgf1efc74" class="outline-2">
-<h2 id="orgf1efc74"><span class="section-number-2">8</span> Custom Key Binding</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org1006b5c" class="outline-2">
+<h2 id="org1006b5c"><span class="section-number-2">9</span> Custom Key Binding</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 Finally, you can start config your custom key binding with <code>general</code> package, this is my config, the prefix is <code>SPC</code> just like in Spacemacs:
 </p>
@@ -493,7 +526,7 @@ Finally, you can start config your custom key binding with <code>general</code> 
   ;; "/"   '(counsel-rg :which-key "ripgrep") ; You'll need counsel package for this
   "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
   "SPC" '(helm-M-x :which-key "M-x")
-  "pf"  '(helm-find-file :which-key "find files")
+  "pf"  '(helm-find-files :which-key "find files")
   ;; Buffers
   "bb"  '(helm-buffers-list :which-key "buffers list")
   ;; Window
@@ -511,9 +544,9 @@ Finally, you can start config your custom key binding with <code>general</code> 
 </div>
 </div>
 
-<div id="outline-container-orgf9ce466" class="outline-2">
-<h2 id="orgf9ce466"><span class="section-number-2">9</span> Matching Titlebar color on MacOS</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orge3a802f" class="outline-2">
+<h2 id="orge3a802f"><span class="section-number-2">10</span> Matching Titlebar color on MacOS</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 If you're using Emacs on macOS, you can add this to have your titlebar color changed and matching your color theme:
 </p>
@@ -528,9 +561,9 @@ If you're using Emacs on macOS, you can add this to have your titlebar color cha
 </div>
 </div>
 
-<div id="outline-container-org0bdf219" class="outline-2">
-<h2 id="org0bdf219"><span class="section-number-2">10</span> Project Management</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-org7bc990b" class="outline-2">
+<h2 id="org7bc990b"><span class="section-number-2">11</span> Project Management</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 One of the most important thing to install at first is <code>projectile</code>, for manage projects in Emacs. In my configuration, I also unset the <code>projectile-require-project-root</code> option to have <code>projectile</code> recognize any folder as a project, not just ones with project files.
 </p>
@@ -547,9 +580,9 @@ One of the most important thing to install at first is <code>projectile</code>, 
 </div>
 </div>
 
-<div id="outline-container-org7cf894c" class="outline-2">
-<h2 id="org7cf894c"><span class="section-number-2">11</span> Optional: NeoTree and Icons</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org9e6ea1e" class="outline-2">
+<h2 id="org9e6ea1e"><span class="section-number-2">12</span> Optional: NeoTree and Icons</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 One thing that nice to have is <code>neotree</code>, which will display the folder tree. In this configuration, I also installed <code>all-the-icons</code> so <code>neotree</code> can be displayed with some nice graphical icons:
 </p>
@@ -568,6 +601,36 @@ One thing that nice to have is <code>neotree</code>, which will display the fold
 <p>
 Just don't forget to run <code>M-x all-the-icons-install-fonts</code> after start your Emacs for the first time.
 </p>
+</div>
+</div>
+
+<div id="outline-container-org9686527" class="outline-2">
+<h2 id="org9686527"><span class="section-number-2">13</span> Optional: Matching Parentheses</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+This is a very helpful built-in feature of Emacs, by enable this, it will highlight any matching parentheses that the cursor is on.
+</p>
+
+<pre class="example">
+;; Show matching parens
+(setq show-paren-delay 0)
+(show-paren-mode 1)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgabd1d31" class="outline-2">
+<h2 id="orgabd1d31"><span class="section-number-2">14</span> Optional: Disable backup files</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+I find it really annoying when Emacs automatically create a backup file for every buffer you opened, so I <a href="http://ergoemacs.org/emacs/emacs_set_backup_into_a_directory.html">disabled it</a>, you might not want to do this:
+</p>
+
+<pre class="example">
+;; Disable backup files
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
+</pre>
 
 <hr />
 
@@ -583,7 +646,7 @@ I hope you'll find this post helpful and will be able to build your own Emacs co
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-07-01 Sun 00:34</p>
+<p class="date">Created: 2018-07-02 Mon 10:55</p>
 <p class="validation"></p>
 </div>
 </body>
