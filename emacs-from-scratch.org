@@ -279,6 +279,19 @@ I find it really annoying when Emacs automatically create a backup file for ever
 (setq auto-save-default nil) ; stop creating #autosave# files
 #+END_SRC
 
+* Optional: Problem with environment variables
+  
+If you got problem with environment variables or commands, for example, Emacs could not recognize `brew` or something, you might need to load your =.bashrc= or =.bash_profile= manually:
+
+#+BEGIN_SRC 
+(let ((path (shell-command-to-string ". ~/.bashrc; echo -n $PATH")))
+  (setenv "PATH" path)
+  (setq exec-path 
+        (append
+         (split-string-and-unquote path ":")
+         exec-path)))
+#+END_SRC
+
 -----
 
 From here, you can continue customizing Emacs as you need, for example, add more language supports, customize your mode line,...
