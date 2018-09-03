@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-09-03 Mon 12:27 -->
+<!-- 2018-08-28 Tue 23:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The best To-Do List System</title>
+<title>Set Theory</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -180,8 +180,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="css/hack.css" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+<style>body{max-width: 500px;margin:0 auto;}</style>
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -230,115 +229,69 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href=""> UP </a>
- |
- <a accesskey="H" href="/"> HOME </a>
-</div><div id="content">
-<h1 class="title">The best To-Do List System</h1>
-<p>
-Let me tell you about the <del>best</del> To-Do List System I'm using, the only one you need that could replace every single app on your mobile or your desktop. You are not gonna need <code>bullet journals</code>, <code>google keep</code>, <code>org-mode</code> or <code>evernote</code> for to-do list anymore.
-</p>
-
-<p>
-A timeless method for to-do list:
-</p>
-
-
-<div class="figure">
-<p><img src="./img/todo-list-method.jpg" alt="todo-list-method.jpg" class="full-width round" width="750px" />
-</p>
-</div>
-
-<p>
-What the fuck? You may asked.
-</p>
-
-<p>
-I found it's better to use a real to-do list, which you can just put it right under your nose, rather than an electronic one that hidden somewhere in your browser, or buried somewhere as an <code>org-mode</code> file, and required some efforts to open it up.
-</p>
-
-<p>
-The paper list doesn't go anywhere, you can quickly glance at it, take the pen and write it down immediately when something is coming up, you can't forget it, and it will make you feel more responsibility with the tasks you wrote down.
-</p>
-
-<p>
-This is what you need:
-</p>
-<ul class="org-ul">
-<li><b>A piece of paper</b></li>
-<li><b>A pen</b> (pencil is okey, I prefer a 6B, but <a href="https://en.wikipedia.org/wiki/Pencil#Grading_and_classification">choose your, wisely</a>)</li>
+<div id="content">
+<h1 class="title">Set Theory</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbcbbc69">1. Problem</a></li>
+<li><a href="#org350ce2a">2. Chứng minh</a></li>
 </ul>
-
-<p>
-For an <b>on-going task</b>, draw a circle following by a description:
-</p>
-
-
-<div class="figure">
-<p><img src="./img/on-going-task.jpg" alt="on-going-task.jpg" class="full-width round" width="750px" />
-</p>
+</div>
 </div>
 
+<div id="outline-container-orgbcbbc69" class="outline-2">
+<h2 id="orgbcbbc69"><span class="section-number-2">1</span> Problem</h2>
+<div class="outline-text-2" id="text-1">
 <p>
-The description should be clear, with the definition of done, do not put something generic or unclear without the goal, you won't make it without a goal.
+Chứng minh mối quan hệ giữa lượng từ phổ biến và lượng từ tồn tại:
 </p>
 
-<p>
-If you need a deadline, put it on the right side:
-</p>
+<pre class="example">
+¬[∀x ∈ X, P(x)] ≡ ∃x ∈ X, ¬P(x)
 
-
-<div class="figure">
-<p><img src="./img/on-going-with-deadline.jpg" alt="on-going-with-deadline.jpg" class="full-width round" width="750px" />
-</p>
+¬[∃x ∈ X, P(x)] ≡ ∀x ∈ X, ¬P(x)
+</pre>
+</div>
 </div>
 
+<div id="outline-container-org350ce2a" class="outline-2">
+<h2 id="org350ce2a"><span class="section-number-2">2</span> Chứng minh</h2>
+<div class="outline-text-2" id="text-2">
 <p>
-You can even update the deadline:
+Giả thiết:
 </p>
 
+<pre class="example">
+¬[∀x ∈ X, P(x)] ≡ ∃x ∈ X, ¬P(x)
+</pre>
 
-<div class="figure">
-<p><img src="./img/deadline-changed.jpg" alt="deadline-changed.jpg" class="full-width round" width="750px" />
+<p>
+Với mọi giá trị x ∈ X thỏa điều kiện P(x), hiển nhiên tồn tại một giá trị a bất kì cũng thỏa điều kiện P(a):
 </p>
+
+<pre class="example">
+∀x ∈ X, P(x) → P(a)  (1)
+
+P(a) → ∃x, P(x)      (2)
+</pre>
+
+<p>
+Từ (1) và (2):
+</p>
+
+<pre class="example">
+¬[∀x ∈ X, P(x)] → ¬P(a)
+
+¬P(a) → ∃x, ¬P(x)
+</pre>
 </div>
-
-<p>
-When you done with it, just fill the circle, and scratch the whole line out:
-</p>
-
-
-<div class="figure">
-<p><img src="./img/finished-task.jpg" alt="finished-task.jpg" class="full-width round" width="750px" />
-</p>
 </div>
-
-<p>
-That's it. The to-do list need to be in short term only, for me, it's just in a day. Any longer schedule should be on a calendar. At the end of the day, I just tear off the page, and throw it away. Carry over the to-do list will ruin your productivity, so don't do that.
-</p>
-
-<p>
-If you need to store the lists to keep track of your productivity, you can use Scannable app to scan and store it into your Evernote. It would be useful because Evernote can search for your handwritten text directly.
-</p>
-
-
-<div class="figure">
-<p><img src="./img/evernote-search-handwritten.png" alt="evernote-search-handwritten.png" class="full-width round" width="750px" />
-</p>
-</div>
-
-<p>
-Some might prefer <code>bullet journals</code>, it's a good method as well, as long as you try to focus on the note-taking, don't be that guy who trying to keep his notes tidy and clean and beautiful just to upload them to Instagram, some even draw some fancy stuff, that's unneccessary and waste of time.
-</p>
-
-<p>
-I doubt any of those guys who posted fancy to-do lists ever use a to-do list.
-</p>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2018-09-03 Mon 12:27</p>
+<p class="date">Created: 2018-08-28 Tue 23:52</p>
 <p class="validation"></p>
 </div>
 </body>

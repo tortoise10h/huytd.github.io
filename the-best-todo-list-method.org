@@ -44,6 +44,11 @@ When you done with it, just fill the circle, and scratch the whole line out:
 
 That's it. The to-do list need to be in short term only, for me, it's just in a day. Any longer schedule should be on a calendar. At the end of the day, I just tear off the page, and throw it away. Carry over the to-do list will ruin your productivity, so don't do that.
 
-Some might say: Why don't you just use =bullet journal=? It's a good method, but it's unnecessary complex, not the right one for me. I don't need a month-long schedule on some piece of paper. I don't need too many statuses for my tasks as well. For notes, I use =org-mode=, it's the thing that we should store electronically.
+If you need to store the lists to keep track of your productivity, you can use Scannable app to scan and store it into your Evernote. It would be useful because Evernote can search for your handwritten text directly.
 
-If you still want to use =bullet journal=, take my advice: Stay away from these fancy to-do lists on Pinterest. I doubt any of those guys who posted fancy to-do lists ever use a to-do list.
+#+ATTR_HTML: :class full-width round :width 750px
+[[file:./img/evernote-search-handwritten.png]]
+
+Some might prefer =bullet journals=, it's a good method as well, as long as you try to focus on the note-taking, don't be that guy who trying to keep his notes tidy and clean and beautiful just to upload them to Instagram, some even draw some fancy stuff, that's unneccessary and waste of time.
+
+I doubt any of those guys who posted fancy to-do lists ever use a to-do list.
