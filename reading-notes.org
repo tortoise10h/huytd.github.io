@@ -1,0 +1,15 @@
+#+TITLE: Reading Notes
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+#+HTML_LINK_HOME: /
+
+I find it really helpful to write down what I'm reading in my own words, and by hand, instead of typing on a computer.
+
+It's force myself to processing the information better, so I can retain more of what I've read.
+
+-----
+#+INCLUDE: reading-notes-good-and-bad-procrastination.org
+-----
+#+INCLUDE: reading-notes-haskell-laziness.org
+-----
+#+INCLUDE: reading-notes-how-lazy-evaluation-works.org

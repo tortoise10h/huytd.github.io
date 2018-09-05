@@ -1,0 +1,8 @@
+* Reading Notes: How Lazy Evaluation works in Haskell
+Article: https://hackhands.com/lazy-evaluation-works-haskell/
+
+#+ATTR_HTML: :class full-width round :width 900px
+[[./img/notes-how-lazy-eval-001.jpg]]
+
+#+ATTR_HTML: :class full-width round :width 900px
+[[./img/notes-how-lazy-eval-002.jpg]]

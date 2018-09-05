@@ -1,0 +1,7 @@
+* Reading Notes: Good and Bad Procrastination
+Article: http://paulgraham.com/procrastination.html
+
+Please excuse any typos :D
+
+#+ATTR_HTML: :class full-width round :width 900px
+[[./img/notes-good-bad-procrastination.jpg]]
