@@ -3,10 +3,13 @@
 #+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 #+HTML_LINK_HOME: /
 
-I find it really helpful to write down what I'm reading in my own words, and by hand, instead of typing on a computer.
+I find it very helpful to write down what I'm reading in my own words, with a pen, on a paper, instead of typing on a computer. It's forcing myself to process the information better, instead of letting words slipping away, so I can retain more of what I've read.
 
-It's force myself to processing the information better, so I can retain more of what I've read.
+I'm trying to keep everything simple and did not use any note-taking system, but since it's pretty helpful, I used some techniques from [[http://rohdesign.com/sketchnotes/][Sketchnotes]]. I only own a few physical books and always read things on my Kindle, there's no way for me to do [[https://en.wikipedia.org/wiki/Marginalia][marginalia]]. Instead, I write quotes from books or articles to my notebook and make some comment directly with comic-style bubbles.
 
+I store all the copies of my notes online with OneNote, with the help of Office Lens app, this combo provides a great OCR, I can say, it's the best OCR solution ever (I knew it because it can recognize my ugly handwriting), so I can search the content of my notes anytime. The framed =READ= symbol at the beginning of each note also serves that purpose.
+
+The following are random notes I wrote during the time I spent on the Internet. I thought it's just me that will read these notes; I let so many typos happen; but then I think it would be nice to share these note online. So, please excuse my ugly handwriting, bad words, and any typos.
 -----
 #+INCLUDE: reading-notes-good-and-bad-procrastination.org
 -----
