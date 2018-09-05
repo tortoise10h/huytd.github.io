@@ -1,4 +1,4 @@
-* Reading Notes: Haskell/Laziness
+* Haskell/Laziness
 Article: https://en.wikibooks.org/wiki/Haskell/Laziness
 
 #+ATTR_HTML: :class full-width round :width 900px
