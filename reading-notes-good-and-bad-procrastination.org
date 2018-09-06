@@ -5,3 +5,17 @@ Please excuse any typos :D
 
 #+ATTR_HTML: :class full-width round :width 900px
 [[./img/notes-good-bad-procrastination.jpg]]
+
+*TL;DR:*
+- Procrastination is impossible to cure. *How to not procrastination* is not a right question to ask, but *how to procrastination well*.
+- There are 3 types of procrastination: It's when you working on
+  - (1) nothing
+  - (2) something less important
+  - (3) something more important
+- We also called (3) a *good procrastination*, that's the real work -- things that worth spending time on it. For example, a big research project, finish your side project (eh...)
+- (3) are hard things, and sometimes terrifying, or things you don't enjoy doing it, that we always trying to avoid
+- One of the way to avoid real works is falling into errands -- (1) and (2). It's time wasting. For example, instead of doing homework, you check your Facebook, feeding your cat, go to bath...
+- *Solution:* trick yourself to enjoy doing real works, by:
+  - Working on smaller tasks that can be add up into a larger goal
+  - Doing the even harder stuff
+  - Share the work to other people
