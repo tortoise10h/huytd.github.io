@@ -1,4 +1,7 @@
 * How Lazy Evaluation works in Haskell
+:PROPERTIES:
+:CUSTOM_ID: how-lazy-evaluation-works-in-haskell
+:END:
 Article: https://hackhands.com/lazy-evaluation-works-haskell/
 
 #+ATTR_HTML: :class full-width round :width 900px

@@ -1,4 +1,8 @@
 * Good and Bad Procrastination
+:PROPERTIES:
+:CUSTOM_ID: good-and-bad-procrastination
+:END:
+
 Article: http://paulgraham.com/procrastination.html
 
 Please excuse any typos :D

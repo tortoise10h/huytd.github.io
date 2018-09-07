@@ -16,3 +16,5 @@ The following are random notes I wrote during the time I spent on the Internet. 
 #+INCLUDE: reading-notes-haskell-laziness.org
 -----
 #+INCLUDE: reading-notes-how-lazy-evaluation-works.org
+-----
+#+INCLUDE: reading-notes-suffering-oriented-programming.org
