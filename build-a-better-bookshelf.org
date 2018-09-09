@@ -1,0 +1,34 @@
+#+TITLE: Build a better Bookshelf
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+#+HTML_LINK_HOME: /
+
+I happen to use OneNote a lot recently, mainly for storing my handwritten notes thanks to the pretty accurate OCR feature.
+
+Then I realize, there's also a great usage of OCR in OneNote other than just saving notes, it's: **building an electronic index for all of your physical book**.
+
+How?
+
+- Step 1: Install any document scanning app on your phone
+- Step 2: Scan all the index pages and table of contents in all of your books
+- Step 3: Send it to whatever software you're using that has OCR feature
+- Step 4: Now you can search your books digitally
+
+For me, I use Office Lens on my phone and OneNote for OCR. But it's okay to use Scannable/Evernote, and their OCR is well enough to recognize printed texts.
+
+OK, but why?
+
+Every time I tried to look up something, I have to search the index page and table of contents manually. Page by page, for every book on your bookshelf, such a PITA. Are you not believe me? Let's say you have five algorithms books, and you want to find out which book as a definition about =k-d tree=. Can you feel the pain?
+
+Here's how I look it up:
+
+#+ATTR_HTML: :class full-width round :width 900px
+[[./img/better-bookshelf.png]]
+
+Just half a second and I know I should open =The Algorithm Design Manual= book, and go to page 581 to read about =k-d tree=.
+
+And the search result is limited to just my books, not the whole internet, that's the point of scanning instead of Googling.
+
+I feel more confident to buy more books and throw them at my bookshelf now :P
+
+/This post originallly [[./img/handwritten-build-a-better-bookshelf.jpg][sketched by hand]]./

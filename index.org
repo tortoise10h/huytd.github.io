@@ -3,6 +3,7 @@
 #+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
 #+OPTIONS: toc:nil
 
+* [[./build-a-better-bookshelf.html][Build a better Bookshelf]]
 * [[./reading-notes.html][Handwritten Reading Notes]]
 * [[./the-best-todo-list-method.html][The best To-Do List System]]
 * [[./emacs-from-scratch.html][Emacs from scratch]]
