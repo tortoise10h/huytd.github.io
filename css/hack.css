@@ -96,8 +96,7 @@ h1.title:after {
     bottom: 10px;
     z-index: -1;
     display: block;
-    content: ".";
-    text-indent: -9999999px;
+    content: "";
     transform: skew(-20deg) rotate(-0.3deg);
 }
 
