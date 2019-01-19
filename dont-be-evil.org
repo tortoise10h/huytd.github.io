@@ -1,0 +1,157 @@
+#+TITLE: Don't be evil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/hack.css" />
+#+HTML_HEAD: <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+#+HTML_LINK_HOME: /
+
+This note is not about [[https://en.m.wikipedia.org/wiki/Don%27t_be_evil][Google's motto]]. This is a note about *moving away from evil-mode*.
+
+* OK, but why?
+
+Because =evil-mode= messed up the keybinding of so many packages I'm using (magit, neotree, org-mode agenda,...). I know there's a package to make these packages working nicely with =evil=, but eventually, these packages are not designed to work with =evil= in the first place.
+
+Another reason, is that sticking with =evil-mode= make me feel I'm not really into Emacs, it's holding me back from exploring the real Emacs. So, if it's not =org-mode= that hold me back, I can just go back and use Vim instead.
+
+* I'm convinced, now show me how?
+  
+** First step: Comment out every =evil= related packages.
+
+And restart Emacs as well.
+
+#+BEGIN_SRC lisp
+;;;; Vim mode
+;;(use-package evil
+;;  :ensure t
+;;  :config
+;;  (evil-mode 1)
+;;  (evil-set-initial-state 'term-mode 'emacs))
+
+;;(use-package evil-escape
+;;  :ensure t
+;;  :init
+;;  (setq-default evil-escape-key-sequence "jk")
+;;  :config
+;;  (evil-escape-mode 1))
+
+;;;; Matchit
+;;(use-package evil-matchit
+;;  :ensure t
+;;  :init
+;;  (global-evil-matchit-mode 1))
+
+;;;; Evil surround
+;;(use-package evil-surround
+;;  :ensure t
+;;  :config
+;;  (global-evil-surround-mode 1))
+#+END_SRC
+
+Next, we'll learn some basic, mostly what written here is my concerns as a Vim/Evil user moving to Emacs, trying to find the equivalent key.
+
+** Second step: Learn the basic movement.
+
+So, in =evil-mode=, we move around with =hjkl=, but before that, we need to press =esc= or in my case =jk= to switch from =insert= mode to =normal= mode.
+
+Without =evil-mode=, we don't have modal editing, no more mode switching, we're in =insert= mode all the time, so you can just type whenever you want, but if you want to move around:
+
+| *Emacs Key* | *Description*                         | *Evil Equivalent* |
+| C-n, C-p  | Move to the next/previous line      | j/k             |
+| C-f, C-b  | Move forward/backward in a line     | h/l             |
+| C-e, C-a  | Move to the end/begin of the line   | $/0             |
+| M-f, M-b  | Jump to next/previous word          | w/b             |
+| M->, M-<  | Move to the end/begin of the buffer | G/gg            |
+
+It should not take you more than 15 minutes to getting used to the new keybindings.
+
+** Third step: Learn the basic functions.
+
+Next, we'll see what's the Emacs equivalent of Vim keybinding for basic functionalities like searching, selecting, copy, paste.
+
+| *Emacs Key*     | *Description*                                     | *Evil Equivalent*  |
+| C-x u or C-/  | Undo                                            | u                |
+| C-SPC         | Start selecting                                 | v                |
+| C-x SPC       | Rectangle selecting                             | C-v              |
+| C-w           | Cut after select                                | x                |
+| M-w           | Copy after select                               | y                |
+| C-y           | Paste                                           | p                |
+| C-s           | Search in a buffer                              | /                |
+| C-s C-s       | Search next                                     | n                |
+| C-SPC C-x r t | Select and replace                              | cw or dw         |
+| C-k           | Delete to the end of line                       | Shift D          |
+| M-d           | Delete a word                                   | dw               |
+| C-j           | Move the content behind pointer to new line     | Dunno, never use |
+| C-e C-j       | Jump to the end and add a new line              | o                |
+| C-a C-k       | Jump to the beginning and delete the whole line | dd               |
+| C-S-backspace | Delete the whole line                           | dd               |
+| C-x C-s       | Save the current buffer                         | :w               |
+| C-x C-f       | Open a new file                                 | :e               |
+| C-g           | Escape, canceling the current action            | Esc              |
+
+At this point, we should take a break from the exploring and start using Emacs with these keybinding for a day or so, to get yourself being used with the changes.
+
+For functions that you don't know, just start typing =M-x=, type some words and press =tab= to see the suggestion list, use it from here instead of your =evil= keybindings. There's no need to hurry.
+
+** Fourth step: Custom some keybinding
+
+Now, it's time to take the control of Emacs and make it your. Before making the move to vanilla Emacs, I'm using =general= mode to make some custom keybinding. Now we can't use it, but we can just map the key directly using =global-set-key=.
+
+This is some of my keybindings, first, we make some movement enhancement. I find it very useful to use =super-k/j= to jump by paragraph, it's faster than crawling line by line with =C-n/p=, next, instead of =C-a= for moving to beginning of the line, I change it to =C-0=.
+
+#+BEGIN_SRC lisp
+;; Custom keybinding
+;; Movement and editing
+(global-set-key (kbd "s-j") 'forward-paragraph)
+(global-set-key (kbd "s-k") 'backward-paragraph)
+(global-set-key (kbd "C-0") 'beginning-of-line)
+(global-set-key (kbd "C-o") (lambda () (interactive) (end-of-line) (newline-and-indent)))
+#+END_SRC
+
+On MacOS, depends on your keyboard, you can remap the =Cmd= key to =Ctrl= or =Meta=:
+
+#+BEGIN_SRC lisp
+(setq mac-command-modifier 'control)
+;; or
+(setq mac-command-modifier 'meta)
+#+END_SRC
+
+Also, instead of typing =M-x= all the time, I bind =C-=== to =helm-M-x=, this will let me have a suggestion list of =M-x= command, and the hand movement is way better than =M-x=.
+
+#+BEGIN_SRC lisp
+(global-set-key (kbd "C-=") 'helm-M-x)
+#+END_SRC
+
+Next is some window management keys:
+
+#+BEGIN_SRC lisp
+;; Window management                               
+(global-set-key (kbd "C-c /") 'split-window-right)
+(global-set-key (kbd "C-c \\") 'split-window-below)
+(global-set-key (kbd "C-c l") 'windmove-right)     
+(global-set-key (kbd "C-c h") 'windmove-left)      
+(global-set-key (kbd "C-c k") 'windmove-up)        
+(global-set-key (kbd "C-c j") 'windmove-down)      
+(global-set-key (kbd "C-c =") 'balance-windows)    
+#+END_SRC
+
+For closing window, there's a =C-x 0= key and it's good enough, so we don't have to change.
+
+Now, some other stuff that also helpful:
+
+#+BEGIN_SRC lisp
+;; Searching
+(global-set-key (kbd "C-x /") 'helm-projectile-ag)
+(global-set-key (kbd "C-x .") 'helm-resume)
+;; Functions
+(global-set-key (kbd "C-.") 'repeat)
+(global-set-key (kbd "C-c f e d") (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
+(global-set-key (kbd "C-c f e R") (lambda () (interactive) (load-file "~/.emacs.d/init.el")))
+#+END_SRC
+
+From here, we can continue exploring the Emacs keybinding, when in doubt, open this document: https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top
+
+* Conclusion
+
+After a day, I've been familiar enough with basic vanilla Emacs. I still miss a lot from Vim/Evil, but I feel much more confident. In fact, I do learn some more interesting Emacs feature, like =C-x r t= (=rectangle-string=), which I never tried in =evil-mode=.
+
+The most concerned thing that stop me from switching to vanilla Emacs before is the ergonomic of using =hjkl=, it seems to be way more convenience than =C-n/p/b/f=. But tried it for a while, I think it's not that bad. Since it has another benefit, is you don't have to go back and forth from =insert= and =normal= mode. You'll feel more freedom.
+
+*Edit:* Oh, and one more thing, I just discovered that macOS has some built-in keybinding for Emacs as well, that mean, we can actually use =C-n=, =C-p=,... in the textboxes across the OS, including browsers address bar, terminal emulators,... needless to say how comfortable it is if you're already familiar with Emacs keybinding.

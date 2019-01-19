@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-19 Sat 00:45 -->
+<!-- 2019-01-19 Sat 00:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>/usr/huy/notes</title>
+<title>Integrate WebAssembly in any JavaScript project</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -230,55 +230,66 @@ for the JavaScript code in this tag.
 </script>
 </head>
 <body>
-<div id="content">
-<h1 class="title">/usr/huy/notes</h1>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Integrate WebAssembly in any JavaScript project</h1>
+<p>
+Read: <a href="https://developers.google.com/web/updates/2019/01/emscripten-npm#integration_with_npm">https://developers.google.com/web/updates/2019/01/emscripten-npm#integration_with_npm</a>
+</p>
 
-<div id="outline-container-orga2df98f" class="outline-2">
-<h2 id="orga2df98f"><span class="section-number-2">1</span> <a href="./wasm-thread.html">Threads and WebAssembly</a></h2>
-</div>
-<div id="outline-container-org4a95d19" class="outline-2">
-<h2 id="org4a95d19"><span class="section-number-2">2</span> <a href="./wasm-with-npm.html">Integrate WebAssembly with any JavaScript project</a></h2>
-</div>
-<div id="outline-container-org2926c94" class="outline-2">
-<h2 id="org2926c94"><span class="section-number-2">3</span> <a href="./dont-be-evil.html">Don't be evil</a></h2>
-</div>
-<div id="outline-container-org0b98062" class="outline-2">
-<h2 id="org0b98062"><span class="section-number-2">4</span> <a href="./build-a-better-bookshelf.html">Build a better Bookshelf</a></h2>
-</div>
-<div id="outline-container-org0eb1c33" class="outline-2">
-<h2 id="org0eb1c33"><span class="section-number-2">5</span> <a href="./reading-notes.html">Handwritten Reading Notes</a></h2>
-</div>
-<div id="outline-container-org10d8361" class="outline-2">
-<h2 id="org10d8361"><span class="section-number-2">6</span> <a href="./the-best-todo-list-method.html">The best To-Do List System</a></h2>
-</div>
-<div id="outline-container-orgc88b4a6" class="outline-2">
-<h2 id="orgc88b4a6"><span class="section-number-2">7</span> <a href="./emacs-from-scratch.html">Emacs from scratch</a></h2>
-</div>
-<div id="outline-container-org1d4f0d0" class="outline-2">
-<h2 id="org1d4f0d0"><span class="section-number-2">8</span> <a href="./bitwise-float-int-trick.html">Bitwise trick to convert Float to Int</a></h2>
-</div>
-<div id="outline-container-org031012a" class="outline-2">
-<h2 id="org031012a"><span class="section-number-2">9</span> <a href="./rust-for-the-web.html">Rust for the Web</a></h2>
-</div>
-<div id="outline-container-org856660b" class="outline-2">
-<h2 id="org856660b"><span class="section-number-2">10</span> <a href="./string-ffi-rust.html">Rust FFI: Sending strings to the outside world</a></h2>
-</div>
-<div id="outline-container-orgafef149" class="outline-2">
-<h2 id="orgafef149"><span class="section-number-2">11</span> <a href="./reimplementing-facebook-animation.html">Re-Implementing Facebook Reaction Animation</a></h2>
-</div>
-<div id="outline-container-orgfb1883b" class="outline-2">
-<h2 id="orgfb1883b"><span class="section-number-2">12</span> <a href="./writing-6502-disassembler.html">Writing 6502 disassembler</a></h2>
-</div>
-<div id="outline-container-org9f959b2" class="outline-2">
-<h2 id="org9f959b2"><span class="section-number-2">13</span> <a href="./rust-travis-ci.html">Setup Travis CI for Rust Diesel project</a></h2>
-</div>
-<div id="outline-container-org86f24ec" class="outline-2">
-<h2 id="org86f24ec"><span class="section-number-2">14</span> <a href="./recursive-rust.html">Recursive type problem in Rust</a></h2>
-</div>
+<p>
+By using Docker and NPM, we can integrate WebAssembly into any JS project.
+</p>
+
+<p>
+<b>First</b>, create a new entry in NPM scripts to run <code>build.sh</code>, a script to build your WASM module, like this:
+</p>
+
+<pre class="example">
+"build:emscripten": "docker run --rm -v $(pwd):/src trzeci/emscripten ./build.sh",
+</pre>
+
+<p>
+To avoid messing up with environment, we can use <code>docker</code> to hold the WASM build environment. The <code>-v $(pwd)</code> parameter is bind the current folder into <code>docker</code> container so we can actually build.
+</p>
+
+<p>
+<b>Second</b>, write the build script, it will be something like:
+</p>
+
+<pre class="example">
+emcc &lt;src&gt; -o /dist
+</pre>
+
+<p>
+All of the JavaScript and Wasm files will be put into <code>dist</code> folder, and this is where you use it.
+</p>
+
+<p>
+<b>Finally</b>, you can use it by importing, just like any other JS modules.
+</p>
+
+<pre class="example">
+&lt;!doctype html&gt;
+&lt;title&gt;Emscripten + npm example&lt;/title&gt;
+Open the console to see the output from the wasm module.
+&lt;script type="module"&gt;
+import wasmModule from "./my-module.js";
+
+const instance = wasmModule({
+  onRuntimeInitialized() {
+     // Do something with instance
+  }
+});
+&lt;/script&gt;
+</pre>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-19 Sat 00:45</p>
+<p class="date">Created: 2019-01-19 Sat 00:46</p>
 <p class="validation"></p>
 </div>
 </body>
