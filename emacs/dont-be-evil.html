@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-01-21 Mon 16:20 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Don't be evil</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Huy Tran" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/_css/style.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Don't be evil</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org17b60b7">1. OK, but why?</a></li>
+<li><a href="#org1fd6348">2. I'm convinced, now show me how?</a>
+<ul>
+<li><a href="#org63c0b3f">2.1. First step: Comment out every <code>evil</code> related packages.</a></li>
+<li><a href="#org533b371">2.2. Second step: Learn the basic movement.</a></li>
+<li><a href="#org650a42d">2.3. Third step: Learn the basic functions.</a></li>
+<li><a href="#org7ec4108">2.4. Fourth step: Custom some keybinding</a></li>
+</ul>
+</li>
+<li><a href="#org222cff1">3. Conclusion</a></li>
+</ul>
+</div>
+</div>
+<p>
+This note is not about <a href="https://en.m.wikipedia.org/wiki/Don't_be_evil">Google's motto</a>. This is a note about <b>moving away from evil-mode</b>.
+</p>
+
+<div id="outline-container-org17b60b7" class="outline-2">
+<h2 id="org17b60b7"><span class="section-number-2">1</span> OK, but why?</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Because <code>evil-mode</code> messed up the keybinding of so many packages I'm using (magit, neotree, org-mode agenda,&#x2026;). I know there's a package to make these packages working nicely with <code>evil</code>, but eventually, these packages are not designed to work with <code>evil</code> in the first place.
+</p>
+
+<p>
+Another reason, is that sticking with <code>evil-mode</code> make me feel I'm not really into Emacs, it's holding me back from exploring the real Emacs. So, if it's not <code>org-mode</code> that hold me back, I can just go back and use Vim instead.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1fd6348" class="outline-2">
+<h2 id="org1fd6348"><span class="section-number-2">2</span> I'm convinced, now show me how?</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org63c0b3f" class="outline-3">
+<h3 id="org63c0b3f"><span class="section-number-3">2.1</span> First step: Comment out every <code>evil</code> related packages.</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+And restart Emacs as well.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #9ca0a4;">;;;; </span><span style="color: #9ca0a4;">Vim mode</span>
+<span style="color: #9ca0a4;">;;</span><span style="color: #9ca0a4;">(use-package evil</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:ensure t</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:config</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">(evil-mode 1)</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">(evil-set-initial-state 'term-mode 'emacs))</span>
+
+<span style="color: #9ca0a4;">;;</span><span style="color: #9ca0a4;">(use-package evil-escape</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:ensure t</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:init</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">(setq-default evil-escape-key-sequence "jk")</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:config</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">(evil-escape-mode 1))</span>
+
+<span style="color: #9ca0a4;">;;;; </span><span style="color: #9ca0a4;">Matchit</span>
+<span style="color: #9ca0a4;">;;</span><span style="color: #9ca0a4;">(use-package evil-matchit</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:ensure t</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:init</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">(global-evil-matchit-mode 1))</span>
+
+<span style="color: #9ca0a4;">;;;; </span><span style="color: #9ca0a4;">Evil surround</span>
+<span style="color: #9ca0a4;">;;</span><span style="color: #9ca0a4;">(use-package evil-surround</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:ensure t</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">:config</span>
+<span style="color: #9ca0a4;">;;  </span><span style="color: #9ca0a4;">(global-evil-surround-mode 1))</span>
+</pre>
+</div>
+
+<p>
+Next, we'll learn some basic, mostly what written here is my concerns as a Vim/Evil user moving to Emacs, trying to find the equivalent key.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org533b371" class="outline-3">
+<h3 id="org533b371"><span class="section-number-3">2.2</span> Second step: Learn the basic movement.</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+So, in <code>evil-mode</code>, we move around with <code>hjkl</code>, but before that, we need to press <code>esc</code> or in my case <code>jk</code> to switch from <code>insert</code> mode to <code>normal</code> mode.
+</p>
+
+<p>
+Without <code>evil-mode</code>, we don't have modal editing, no more mode switching, we're in <code>insert</code> mode all the time, so you can just type whenever you want, but if you want to move around:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><b>Emacs Key</b></td>
+<td class="org-left"><b>Description</b></td>
+<td class="org-left"><b>Evil Equivalent</b></td>
+</tr>
+
+<tr>
+<td class="org-left">C-n, C-p</td>
+<td class="org-left">Move to the next/previous line</td>
+<td class="org-left">j/k</td>
+</tr>
+
+<tr>
+<td class="org-left">C-f, C-b</td>
+<td class="org-left">Move forward/backward in a line</td>
+<td class="org-left">h/l</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e, C-a</td>
+<td class="org-left">Move to the end/begin of the line</td>
+<td class="org-left">$/0</td>
+</tr>
+
+<tr>
+<td class="org-left">M-f, M-b</td>
+<td class="org-left">Jump to next/previous word</td>
+<td class="org-left">w/b</td>
+</tr>
+
+<tr>
+<td class="org-left">M-&gt;, M-&lt;</td>
+<td class="org-left">Move to the end/begin of the buffer</td>
+<td class="org-left">G/gg</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+It should not take you more than 15 minutes to getting used to the new keybindings.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org650a42d" class="outline-3">
+<h3 id="org650a42d"><span class="section-number-3">2.3</span> Third step: Learn the basic functions.</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Next, we'll see what's the Emacs equivalent of Vim keybinding for basic functionalities like searching, selecting, copy, paste.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left"><b>Emacs Key</b></td>
+<td class="org-left"><b>Description</b></td>
+<td class="org-left"><b>Evil Equivalent</b></td>
+</tr>
+
+<tr>
+<td class="org-left">C-x u or C-/</td>
+<td class="org-left">Undo</td>
+<td class="org-left">u</td>
+</tr>
+
+<tr>
+<td class="org-left">C-SPC</td>
+<td class="org-left">Start selecting</td>
+<td class="org-left">v</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x SPC</td>
+<td class="org-left">Rectangle selecting</td>
+<td class="org-left">C-v</td>
+</tr>
+
+<tr>
+<td class="org-left">C-w</td>
+<td class="org-left">Cut after select</td>
+<td class="org-left">x</td>
+</tr>
+
+<tr>
+<td class="org-left">M-w</td>
+<td class="org-left">Copy after select</td>
+<td class="org-left">y</td>
+</tr>
+
+<tr>
+<td class="org-left">C-y</td>
+<td class="org-left">Paste</td>
+<td class="org-left">p</td>
+</tr>
+
+<tr>
+<td class="org-left">C-s</td>
+<td class="org-left">Search in a buffer</td>
+<td class="org-left">/</td>
+</tr>
+
+<tr>
+<td class="org-left">C-s C-s</td>
+<td class="org-left">Search next</td>
+<td class="org-left">n</td>
+</tr>
+
+<tr>
+<td class="org-left">C-SPC C-x r t</td>
+<td class="org-left">Select and replace</td>
+<td class="org-left">cw or dw</td>
+</tr>
+
+<tr>
+<td class="org-left">C-k</td>
+<td class="org-left">Delete to the end of line</td>
+<td class="org-left">Shift D</td>
+</tr>
+
+<tr>
+<td class="org-left">M-d</td>
+<td class="org-left">Delete a word</td>
+<td class="org-left">dw</td>
+</tr>
+
+<tr>
+<td class="org-left">C-j</td>
+<td class="org-left">Move the content behind pointer to new line</td>
+<td class="org-left">Dunno, never use</td>
+</tr>
+
+<tr>
+<td class="org-left">C-e C-j</td>
+<td class="org-left">Jump to the end and add a new line</td>
+<td class="org-left">o</td>
+</tr>
+
+<tr>
+<td class="org-left">C-a C-k</td>
+<td class="org-left">Jump to the beginning and delete the whole line</td>
+<td class="org-left">dd</td>
+</tr>
+
+<tr>
+<td class="org-left">C-S-backspace</td>
+<td class="org-left">Delete the whole line</td>
+<td class="org-left">dd</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-s</td>
+<td class="org-left">Save the current buffer</td>
+<td class="org-left">:w</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x C-f</td>
+<td class="org-left">Open a new file</td>
+<td class="org-left">:e</td>
+</tr>
+
+<tr>
+<td class="org-left">C-g</td>
+<td class="org-left">Escape, canceling the current action</td>
+<td class="org-left">Esc</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+At this point, we should take a break from the exploring and start using Emacs with these keybinding for a day or so, to get yourself being used with the changes.
+</p>
+
+<p>
+For functions that you don't know, just start typing <code>M-x</code>, type some words and press <code>tab</code> to see the suggestion list, use it from here instead of your <code>evil</code> keybindings. There's no need to hurry.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7ec4108" class="outline-3">
+<h3 id="org7ec4108"><span class="section-number-3">2.4</span> Fourth step: Custom some keybinding</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Now, it's time to take the control of Emacs and make it your. Before making the move to vanilla Emacs, I'm using <code>general</code> mode to make some custom keybinding. Now we can't use it, but we can just map the key directly using <code>global-set-key</code>.
+</p>
+
+<p>
+This is some of my keybindings, first, we make some movement enhancement. I find it very useful to use <code>super-k/j</code> to jump by paragraph, it's faster than crawling line by line with <code>C-n/p</code>, next, instead of <code>C-a</code> for moving to beginning of the line, I change it to <code>C-0</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Custom keybinding</span>
+<span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Movement and editing</span>
+(global-set-key (kbd <span style="color: #50a14f;">"s-j"</span>) 'forward-paragraph)
+(global-set-key (kbd <span style="color: #50a14f;">"s-k"</span>) 'backward-paragraph)
+(global-set-key (kbd <span style="color: #50a14f;">"C-0"</span>) 'beginning-of-line)
+(global-set-key (kbd <span style="color: #50a14f;">"C-o"</span>) (<span style="color: #e45649;">lambda</span> () (interactive) (end-of-line) (newline-and-indent)))
+</pre>
+</div>
+
+<p>
+On MacOS, depends on your keyboard, you can remap the <code>Cmd</code> key to <code>Ctrl</code> or <code>Meta</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(setq mac-command-modifier 'control)
+<span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">or</span>
+(setq mac-command-modifier 'meta)
+</pre>
+</div>
+
+<p>
+Also, instead of typing <code>M-x</code> all the time, I bind <code>C-==</code> to <code>helm-M-x</code>, this will let me have a suggestion list of <code>M-x</code> command, and the hand movement is way better than <code>M-x</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp">(global-set-key (kbd <span style="color: #50a14f;">"C-="</span>) 'helm-M-x)
+</pre>
+</div>
+
+<p>
+Next is some window management keys:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Window management                               </span>
+(global-set-key (kbd <span style="color: #50a14f;">"C-c /"</span>) 'split-window-right)
+(global-set-key (kbd <span style="color: #50a14f;">"C-c \\"</span>) 'split-window-below)
+(global-set-key (kbd <span style="color: #50a14f;">"C-c l"</span>) 'windmove-right)     
+(global-set-key (kbd <span style="color: #50a14f;">"C-c h"</span>) 'windmove-left)      
+(global-set-key (kbd <span style="color: #50a14f;">"C-c k"</span>) 'windmove-up)        
+(global-set-key (kbd <span style="color: #50a14f;">"C-c j"</span>) 'windmove-down)      
+(global-set-key (kbd <span style="color: #50a14f;">"C-c ="</span>) 'balance-windows)    
+</pre>
+</div>
+
+<p>
+For closing window, there's a <code>C-x 0</code> key and it's good enough, so we don't have to change.
+</p>
+
+<p>
+Now, some other stuff that also helpful:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Searching</span>
+(global-set-key (kbd <span style="color: #50a14f;">"C-x /"</span>) 'helm-projectile-ag)
+(global-set-key (kbd <span style="color: #50a14f;">"C-x ."</span>) 'helm-resume)
+<span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Functions</span>
+(global-set-key (kbd <span style="color: #50a14f;">"C-."</span>) 'repeat)
+(global-set-key (kbd <span style="color: #50a14f;">"C-c f e d"</span>) (<span style="color: #e45649;">lambda</span> () (interactive) (find-file <span style="color: #50a14f;">"~/.emacs.d/init.el"</span>)))
+(global-set-key (kbd <span style="color: #50a14f;">"C-c f e R"</span>) (<span style="color: #e45649;">lambda</span> () (interactive) (load-file <span style="color: #50a14f;">"~/.emacs.d/init.el"</span>)))
+</pre>
+</div>
+
+<p>
+From here, we can continue exploring the Emacs keybinding, when in doubt, open this document: <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top">https://www.gnu.org/software/emacs/manual/html_node/emacs/index.html#Top</a>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org222cff1" class="outline-2">
+<h2 id="org222cff1"><span class="section-number-2">3</span> Conclusion</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+After a day, I've been familiar enough with basic vanilla Emacs. I still miss a lot from Vim/Evil, but I feel much more confident. In fact, I do learn some more interesting Emacs feature, like <code>C-x r t</code> (<code>rectangle-string</code>), which I never tried in <code>evil-mode</code>.
+</p>
+
+<p>
+The most concerned thing that stop me from switching to vanilla Emacs before is the ergonomic of using <code>hjkl</code>, it seems to be way more convenience than <code>C-n/p/b/f</code>. But tried it for a while, I think it's not that bad. Since it has another benefit, is you don't have to go back and forth from <code>insert</code> and <code>normal</code> mode. You'll feel more freedom.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2019-01-08 Tue 00:00</p>
+<p class="author">Author: Huy Tran</p>
+<p class="date">Created: 2019-01-21 Mon 16:20</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>

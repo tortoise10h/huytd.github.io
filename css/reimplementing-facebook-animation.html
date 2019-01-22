@@ -1,0 +1,1023 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2019-01-21 Mon 16:20 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Re-Implementing Facebook Reaction Animation</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Huy Tran" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/hack.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+<link rel="stylesheet" href="/_css/style.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Re-Implementing Facebook Reaction Animation</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#breaking-down-the-animation">1. Breaking down the animation</a></li>
+<li><a href="#raw-implementation">2. Raw implementation</a>
+<ul>
+<li><a href="#prototyping-the-news-feed-post">2.1. Prototyping the news feed post</a></li>
+<li><a href="#display-the-reaction-box">2.2. Display the reaction box</a></li>
+<li><a href="#adding-the-emoticons">2.3. Adding the emoticons</a></li>
+<li><a href="#did-you-see-a-bug">2.4. Did you see a bug?</a></li>
+<li><a href="#display-emoticons-label-only-on-mouse-hover">2.5. Display emoticon's label only on mouse hover</a></li>
+</ul>
+</li>
+<li><a href="#adding-animation">3. Adding Animation</a>
+<ul>
+<li><a href="#emoticon-zooming-animation">3.1. Emoticon zooming animation</a></li>
+<li><a href="#emoticons-show-up-animation">3.2. Emoticon's show up animation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<b>Disclaimer:</b> I'm not a Facebook engineer, and I don't know how did they
+make it. This is just my own implementation. It may not have the best
+performance and I'm just tested on Chrome 😅
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-prod.png" alt="fb-reaction-prod.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span><i>Facebook's Reaction Popup &#x2014; or whatever it called</i></p>
+</div>
+
+<p>
+If you are a Facebooker, chance you will use this popup every day.
+</p>
+
+<p>
+In this blog post, we will learn how to implement it. In HTML/CSS and a
+bit of JavaScript.
+</p>
+
+<div id="outline-container-org2c5bb34" class="outline-2">
+<h2 id="breaking-down-the-animation"><a id="org2c5bb34"></a><span class="section-number-2">1</span> Breaking down the animation</h2>
+<div class="outline-text-2" id="text-breaking-down-the-animation">
+<p>
+OK. Let's break it down step by step, so we will see and understand the
+animation in detailed.
+</p>
+
+<p>
+There are 2 phases of the animation: <b>Show up phase</b> and <b>Mouse hover
+phase</b>.
+</p>
+
+<p>
+For the sake of simplicity, this is the simplified version of a feed, on
+your News Feed. The green rectangle is where the Like button stays, you
+hover your mouse over it and a yellow popup (in reality, it‘s white)
+show up.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-plan.png" alt="fb-reaction-plan.png" class="full-width" />
+</p>
+</div>
+
+<p>
+Then, the emoticons ascend, one by one. The red arrows here tells us the
+animation direction of the emoticons.
+</p>
+
+<p>
+If we look carefully into each emoticon, you will see it has the easing
+effect in its animation, like this:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-animation-plan.png" alt="fb-reaction-animation-plan.png" width="500px" />
+</p>
+</div>
+
+<p>
+When all emoticons finish its animation, phase 1 (Show up) finished.
+</p>
+
+<p>
+Phase 2 (Mouse Hover) begins when the user hovers his mouse on an
+emoticon.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-hover-plan.png" alt="fb-reaction-hover-plan.png" class="full-width" />
+</p>
+</div>
+
+<p>
+The selected emoticon will scale up a bit, and a black label appears on
+the top to tell us what is the name of this emoticon.
+</p>
+
+<p>
+Not so complex, huh?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org00d76d0" class="outline-2">
+<h2 id="raw-implementation"><a id="org00d76d0"></a><span class="section-number-2">2</span> Raw implementation</h2>
+<div class="outline-text-2" id="text-raw-implementation">
+<p>
+Now, we start the implementation. In the beginning, we just implement
+the raw HTML structure, add some basic actions with CSS, no animation
+here in this part.
+</p>
+
+<p>
+It's recommended to use Codepen.io for prototyping, so we have the live
+preview, SCSS compiling on the go,&#x2026;
+</p>
+
+<p>
+But you can write code on your local machine, it's up to you. All we
+need is: HTML, SCSS, and jQuery (or you can convert the jQuery code at
+the end of this post to vanilla JS or whatever you want)
+</p>
+</div>
+
+<div id="outline-container-org9e13bf9" class="outline-3">
+<h3 id="prototyping-the-news-feed-post"><a id="org9e13bf9"></a><span class="section-number-3">2.1</span> Prototyping the news feed post</h3>
+<div class="outline-text-3" id="text-prototyping-the-news-feed-post">
+<p>
+So we want to create a news feed item, and add a Like button to it.
+</p>
+
+<p>
+HTML Code:
+</p>
+
+<pre class="example">
+&lt;div class="feed"&gt; 
+  &lt;a class="like-btn"&gt;&lt;/a&gt; 
+&lt;/div&gt;
+</pre>
+
+<p>
+CSS (SCSS):
+</p>
+
+<pre class="example">
+html,
+body {
+    padding: 20px;
+    font-family: sans-serif;
+}
+.feed {
+    width: 500px;
+    height: 473px;
+    background-image: url(&lt;path-to-placeholder-image&gt;);
+    position: relative;
+    .like-btn {
+        width: 44px;
+        height: 25px;
+        background: #D0D0D0;
+        position: absolute;
+        bottom: 13px;
+        left: 13px;
+        cursor: pointer;
+        &amp;:hover {
+            background: #718C00;
+        }
+    }
+}
+</pre>
+
+<p>
+You can copy the URL of the image below and replace to
+<code>&lt;path-to-placeholder-image&gt;</code>, or use the uploaded image
+<a href="http://i.imgur.com/HckmGbj.png">on Imgur</a>.
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-placeholder.png" alt="fb-reaction-placeholder.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span><i>Copy this image URL as a placeholder image</i></p>
+</div>
+
+
+<p>
+Now you have your news feed prototype, try to hover over the Like
+button, see? It's green! It's cool now, isn't it?
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7d57837" class="outline-3">
+<h3 id="display-the-reaction-box"><a id="org7d57837"></a><span class="section-number-3">2.2</span> Display the reaction box</h3>
+<div class="outline-text-3" id="text-display-the-reaction-box">
+<p>
+The next step is adding the reaction box. This will be a <b>312x55</b> pixels
+rectangle with rounded corners.
+</p>
+
+<p>
+Reaction box will only show up when the user hovers on the Like button.
+</p>
+
+<p>
+OK, let's create a div, the class name is <code>reaction-box</code>, put it inside
+the Like button.
+</p>
+
+<p>
+HTML Code:
+</p>
+
+<pre class="example">
+&lt;div class="feed"&gt; 
+  &lt;a class="like-btn"&gt; 
+    &lt;div class="reaction-box"&gt;&lt;/div&gt; 
+  &lt;/a&gt; 
+&lt;/div&gt;
+</pre>
+
+<p>
+Our reaction box will be hidden, so we set its display attribute to
+none. And in Like button's <code>:hover</code> event, we set it back to <code>block</code>.
+</p>
+
+<p>
+CSS (SCSS):
+</p>
+
+<pre class="example">
+.like-btn { 
+  ... 
+
+  .reaction-box { 
+    position: absolute; 
+    width: 312px; height: 55px; 
+    background: #F0C674; 
+    border-radius: 28px; 
+    left: -25px; bottom: 25px; 
+    display: none; 
+  } 
+
+  &amp;:hover { 
+    ... 
+
+    .reaction-box { 
+      display: block; 
+    } 
+  } 
+}
+</pre>
+
+<p>
+This is the result:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-1.gif" alt="fb-reaction-demo-1.gif" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org701d3be" class="outline-3">
+<h3 id="adding-the-emoticons"><a id="org701d3be"></a><span class="section-number-3">2.3</span> Adding the emoticons</h3>
+<div class="outline-text-3" id="text-adding-the-emoticons">
+<p>
+Now we have the reaction box displayed, let's add some emoticons so it
+will look like the real Facebook 🤗
+</p>
+
+<p>
+Because we're just prototyping, so, just use the small circles to
+represent our emoticons.
+</p>
+
+<p>
+This is the HTML structure for an emoticon:
+</p>
+
+<pre class="example">
+&lt;div class="reaction-icon"&gt; 
+  &lt;label&gt;Like&lt;/label&gt; 
+&lt;/div&gt;
+</pre>
+
+<p>
+We also need a label inside, so we can show the user what's the name of
+this emoticon.
+</p>
+
+<p>
+Let's add 6 reaction icons to represent the real Facebook's reactions:
+<i>Like, Love, Haha, Wow, Sad</i> and <i>Angry</i>. Put them inside reaction box.
+</p>
+
+<p>
+Then we use CSS transform to scale up these emoticons on mouse hover
+event.
+</p>
+
+<p>
+HTML Code:
+</p>
+
+<pre class="example">
+...
+&lt;div class="reaction-box"&gt;
+    &lt;div class="reaction-icon"&gt;
+        &lt;label&gt;Like&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="reaction-icon"&gt;
+        &lt;label&gt;Love&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="reaction-icon"&gt;
+        &lt;label&gt;Haha&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="reaction-icon"&gt;
+        &lt;label&gt;Wow&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="reaction-icon"&gt;
+        &lt;label&gt;Sad&lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class="reaction-icon"&gt;
+        &lt;label&gt;Angry&lt;/label&gt;
+    &lt;/div&gt;
+&lt;/div&gt; 
+...
+</pre>
+
+<p>
+Insert this CSS inside reaction box:
+</p>
+
+<p>
+CSS (SCSS):
+</p>
+
+<pre class="example">
+.reaction-box {
+  ...
+  // insert here
+  .reaction-icon {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background: #8959A8;
+    border-radius: 20px;
+    margin: 8px -1px 0 8px;
+    text-align: center;
+
+    label {
+      padding: 3px 5px 3px 5px;
+      position: relative;
+      top: -24px;
+      border-radius: 10px;
+      font-size: 11px;
+      color: #FFF;
+      background: #333;
+    }
+  }
+}
+</pre>
+
+<p>
+And insert this inside <code>:hover</code> event of the Like button.
+</p>
+
+<pre class="example">
+&amp;:hover {
+  ... 
+
+  .reaction-box {
+    ... 
+
+    .reaction-icon:hover {   // changed here!
+      transform: scale(1.4);
+      transform-origin: bottom;
+    }
+  }
+}
+</pre>
+
+<p>
+We scale up the emoticon 1.4 times when the user hovers his mouse to
+Like button. We also set the <code>transform-origin</code> attribute to bottom, so
+the origin of the scale-up effect will be on the bottom edge of the
+emoticon.
+</p>
+
+<p>
+And this is the result:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-2.gif" alt="fb-reaction-demo-2.gif" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org215bd0e" class="outline-3">
+<h3 id="did-you-see-a-bug"><a id="org215bd0e"></a><span class="section-number-3">2.4</span> Did you see a bug?</h3>
+<div class="outline-text-3" id="text-did-you-see-a-bug">
+<p>
+You may notice that the reaction box is too close to the Like button, it
+should not. How about moving it up a bit?
+</p>
+
+<p>
+Okay, since reaction box has an absolute position, let's change its
+bottom attribute from <code>25px</code> to <code>35px</code> (10px upper)
+</p>
+
+<pre class="example">
+.reaction-box { 
+  ... 
+  left: -25px; bottom: 35px; 
+  ...
+</pre>
+
+<p>
+Looks better now, right? But wait! WT*?? It's broken! I can't hover my
+mouse to the reaction box anymore!! What did you do??? Why you break my
+code???
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-3.gif" alt="fb-reaction-demo-3.gif" />
+</p>
+</div>
+
+<p>
+OK. Calm down. Let's take a step back, and look at the code.
+</p>
+
+<p>
+The reason is that the distance between reaction box and Like button now
+increased to <code>10px</code>, so, when you tried to move the cursor to reaction
+box, it will go out of Like button's hover region, so it triggers the
+mouse out event. If you look at the CSS rules, you can see we display
+the reaction box based on Like button's hover event. On mouse out,
+reaction box will be back to its original state (<code>display: none</code>)
+</p>
+
+<p>
+The solution is: Increase the hover region of Like button, so it can
+fill the distance to reaction box.
+</p>
+
+<p>
+There are many ways to do it, we will take the simplest way: Add the
+<code>::before</code> pseudo-element to Like button, it will be a box with the size
+of <code>44x10</code>, and it's transparent, so user can't see it but it will fill
+the distance to reaction box.
+</p>
+
+<pre class="example">
+.like-btn { 
+  ... 
+
+  &amp;::before { 
+    content: "."; 
+    opacity: 0; 
+    display: block; 
+    width: 44px; height: 10px; 
+    position: absolute; 
+    top: -10px; left: 0; 
+  }
+</pre>
+
+<p>
+Now you can refresh the page. It should be fine now :)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1fc05ac" class="outline-3">
+<h3 id="display-emoticons-label-only-on-mouse-hover"><a id="org1fc05ac"></a><span class="section-number-3">2.5</span> Display emoticon's label only on mouse hover</h3>
+<div class="outline-text-3" id="text-display-emoticons-label-only-on-mouse-hover">
+<p>
+The next thing to do is to hide all emoticon's labels and display them
+when user hover on each emoticon.
+</p>
+
+<pre class="example">
+label { 
+   ... 
+   visibility: hidden; 
+}
+</pre>
+
+<p>
+Then display them in <code>:hover</code> event of reaction icon (emoticon).
+</p>
+
+<pre class="example">
+.reaction-icon:hover { 
+   ... 
+   label { 
+      visibility: visible; 
+   } 
+}
+</pre>
+
+<p>
+This is the result:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-4.gif" alt="fb-reaction-demo-4.gif" />
+</p>
+</div>
+
+<p>
+Alright, let's take a break here. It's a long post and you need some
+rest, so do I =]]
+</p>
+
+<p>
+You can revise the full code for this raw implementation phase here:
+<a href="http://codepen.io/huytd/pen/ZOEoMe">Codepen &#x2014; Facebook Reaction
+Animation &#x2014; Part 1</a>.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf79771a" class="outline-2">
+<h2 id="adding-animation"><a id="orgf79771a"></a><span class="section-number-2">3</span> Adding Animation</h2>
+<div class="outline-text-2" id="text-adding-animation">
+<p>
+Now, let's the pain begin. In this part, we will implement some
+animations to give the better feeling for users.
+</p>
+</div>
+
+<div id="outline-container-orgccafc0e" class="outline-3">
+<h3 id="emoticon-zooming-animation"><a id="orgccafc0e"></a><span class="section-number-3">3.1</span> Emoticon zooming animation</h3>
+<div class="outline-text-3" id="text-emoticon-zooming-animation">
+<p>
+Let's start with the simplest one. We will slowly zooming the emoticon
+by adding transition: all 0.3s; attribute to emoticons:
+</p>
+
+<p>
+CSS (SCSS):
+</p>
+
+<pre class="example">
+reaction-icon { 
+   ... 
+   // Animation 
+   transition: all 0.3s;
+</pre>
+
+<p>
+By adding transition with <code>all</code> and <code>0.3s</code> parameters, we tell the
+browser that all of the emoticon's attributes can be animated (slowly
+changing) in the duration of <code>0.3</code> seconds.
+</p>
+
+<p>
+So this is our first animation:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-5.gif" alt="fb-reaction-demo-5.gif" />
+</p>
+</div>
+
+<p>
+If you have no idea about <code>transition</code>, you may want to read this
+article
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions/Using_CSS_transitions">Using
+CSS transitions &#x2014; MDN</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3c9d8b0" class="outline-3">
+<h3 id="emoticons-show-up-animation"><a id="org3c9d8b0"></a><span class="section-number-3">3.2</span> Emoticon's show up animation</h3>
+<div class="outline-text-3" id="text-emoticons-show-up-animation">
+<p>
+Let's take a look at the show-up animation again:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-animation-plan.png" alt="fb-reaction-animation-plan.png" width="500px" />
+</p>
+</div>
+
+<p>
+This animation can be represented in a graph:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-animation-graph.png" alt="fb-reaction-animation-graph.png" class="full-width" />
+</p>
+</div>
+
+<p>
+As you see, the y-axis represents emoticon's y position over time.
+</p>
+
+<p>
+The function that represents the graph above is also the way we can
+control how the attributes change over time, they called: easing
+functions (or timing functions).
+</p>
+
+<p>
+In CSS transition, we can set the timing functions for an element by
+using transition-timing-function attribute.
+</p>
+
+<p>
+You should read more about timing function here
+<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/timing-function">Timing Function - MDN</a>.
+</p>
+
+<p>
+The timing function we gonna use here is <code>easeOutBack</code>, it's a bezier
+that can be defined in CSS by using <code>cubic-bezier()</code> function.
+</p>
+
+<p>
+We will use the predefined <code>cubic-bezier()</code> function for <code>easeOutBack</code>
+from here <a href="http://easings.net/#easeOutBack">Easing Function - easeOutBack</a>.
+</p>
+
+<pre class="example">
+cubic-bezier(0.175, 0.885, 0.32, 1.275)
+</pre>
+
+<p>
+Add this function to <code>reaction-icon</code>'s <code>transition</code> attribute:
+</p>
+
+<pre class="example">
+.reaction-icon { 
+   ... 
+   // Animation 
+   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+</pre>
+
+<p>
+The emoticons will appear with the starting opacity is 0, scaling is 0
+and the position is 100px away from the desired position &#x2014; we call
+this is the first state.
+</p>
+
+<pre class="example">
+.reaction-icon { 
+   ... 
+   // Animation 
+   opacity: 0; 
+   transform: translate(0, 100px) scale(0);
+</pre>
+
+<p>
+Now we add a new class to define the final state of its animation, let's
+call it <code>.show</code>, and put it in the <code>:hover</code> event of Like button:
+</p>
+
+<pre class="example">
+&amp;:hover { 
+   ... 
+   .reaction-box { 
+      ... 
+      .reaction-icon { 
+         &amp;.show { 
+            opacity: 1; 
+            transform: translate(0, 0) scale(1); 
+         }
+</pre>
+
+<p>
+So, what will happen here? When the user hovers on the Like button, we
+search for the emoticons and assign the class <code>.show</code> to activate the
+animation. We can do it with JavaScript (jQuery - lol, it's okay, you
+can use anything else):
+</p>
+
+<pre class="example">
+$(function() {
+    $(".like-btn").hover(function() {
+        $(".reaction-icon").each(function(index, element) {
+            setTimeout(function() {
+                $(element).addClass("show");
+            }, index * 100);
+        });
+    }, function() {
+        $(".reaction-icon").removeClass("show")
+    });
+})
+</pre>
+
+<p>
+You may notice the <code>setTimeout()</code>, we use it to delay the <code>addClass</code>
+action on each emoticon, based on its index. From the first emoticon
+(index = 0) to the last one (index = 5), we have the particular delay
+time is 0, 100ms, 200ms, 300ms, 400ms and 500ms. So we have the chasing
+effect of emoticons show up.
+</p>
+
+<p>
+Now refresh and see:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-final.gif" alt="fb-reaction-demo-final.gif" />
+</p>
+</div>
+
+<p>
+We're done!
+</p>
+
+<p>
+If you get lost somewhere in the middle of this post, don't panic, let's
+head to this page to see the source code:
+<a href="http://codepen.io/huytd/pen/beGKWB">Codepen &#x2014; Facebook Reaction Animation &#x2014; Part 2</a>.
+</p>
+
+<p>
+What's left to be done is reskin the elements to get more realistic
+result like this:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/fb-reaction-demo-final-2.gif" alt="fb-reaction-demo-final-2.gif" />
+</p>
+</div>
+
+<p>
+See higher resolution video here
+<a href="https://gfycat.com/ZigzagForthrightCob">https://gfycat.com/ZigzagForthrightCob</a>.
+</p>
+
+<p>
+If you want more improvement, you may want to consider
+<a href="http://bjk5.com/post/44698559168/breaking-down-amazons-mega-dropdown">Amazon's Magic Triangle</a> (and <a href="https://css-tricks.com/dropdown-menus-with-more-forgiving-mouse-movement-paths/">its implementation here</a>) to get more stable when moving your cursor.
+</p>
+
+<p>
+Hope you like this post. If you spot any error or have any question,
+feel free to leave a comment so we can discuss.
+</p>
+
+<p>
+See you in the next posts. Happy CSSing ^^
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Huy Tran</p>
+<p class="date">Created: 2019-01-21 Mon 16:20</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>

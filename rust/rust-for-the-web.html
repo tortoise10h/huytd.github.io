@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rust for the Web</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Huy Tran" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="css/hack.css" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121604637-1"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-121604637-1'); </script>
+<link rel="stylesheet" href="/_css/style.css">
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
+ |
+ <a accesskey="H" href="/"> HOME </a>
+</div><div id="content">
+<h1 class="title">Rust for the Web</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#client-side-javascript-in-rust">1. Client-side JavaScript in Rust</a></li>
+<li><a href="#restful-api-in-rust">2. RESTful API in Rust</a></li>
+<li><a href="#isomorphic-web-app-in-rust">3. Isomorphic web app in Rust</a></li>
+</ul>
+</div>
+</div>
+<p>
+<i>"Can we create web apps in Rust?"</i> - Many people asked. So am I.
+</p>
+
+<p>
+My primary goal when I started learning Rust is to make a move from my
+ducky JavaScript tech stack (Node.js Express), that means, to make web
+apps in Rust.
+</p>
+
+<p>
+And after a year, I learned something. So I write this post to tell you
+my journal into Rust Web Programming.
+</p>
+
+<p>
+There are many approach to creating web apps in Rust, for example,
+compile Rust code to client-side JavaScript, writing a RESTful API, or
+building an isomorphic web app just like it's 2012. I'll go one by one.
+</p>
+
+<div id="outline-container-org70bc49d" class="outline-2">
+<h2 id="client-side-javascript-in-rust"><a id="org70bc49d"></a><span class="section-number-2">1</span> Client-side JavaScript in Rust</h2>
+<div class="outline-text-2" id="text-client-side-javascript-in-rust">
+<p>
+The first thing that came to my mind is to have component-based
+architecture just like React. This mean, you need to find a way to run
+Rust code on the web browser.
+</p>
+
+<p>
+Thanks to ASM.js and WebAssembly, this is possible, with
+<a href="https://users.rust-lang.org/t/compiling-to-the-web-with-rust-and-emscripten/7627">a quick setup</a>, you can compile your Rust code to ASM.js/WebAssembly in
+few minutes.
+</p>
+
+<p>
+Now, for the component-based architecture, I just created some macros to
+wrap over the <a href="https://crates.io/crates/stdweb">stdweb</a> crate and
+rendering HTML elements via browser's DOM API.
+</p>
+
+<p>
+<a href="https://github.com/huytd/rust-webapp-template/blob/master/src/main.rs#L13-L58">https://github.com/huytd/rust-webapp-template/blob/master/src/main.rs#L13-L58</a>
+</p>
+
+<p>
+Don't be scared if you think I just posted an alien language. The
+<code>component!</code> macro is used to define a custom element. The
+<code>mount_component!</code> macro is used to append an element to the document,
+and <code>html!</code> macro is to create an element from HTML string.
+</p>
+
+<p>
+Here is how I use it:
+</p>
+
+<pre class="example">
+component!(AppComponent =&gt; {
+    init: {
+        let e: Element = html!("
+        &lt;div&gt;
+            &lt;p&gt;
+                &lt;span&gt;Hello&lt;/span&gt;
+                &lt;span&gt;World&lt;/span&gt;
+            &lt;/p&gt;
+            &lt;GreenButton /&gt;
+        &lt;/div&gt;
+        ");
+
+        let mut button = GreenButton::new();
+        mount_component!(e, "GreenButton", button);
+
+        e
+    },
+    render: |this: &amp;Element| {
+    }
+});
+
+component!(GreenButton =&gt; {
+    init: {
+        let button = document().create_element("button");
+        button.add_event_listener(move |_: ClickEvent| {
+            js! {
+                alert("Yo! This is the Green Button!");
+            }
+        });
+        button
+    },
+    render: |this: &amp;Element| {
+        this.set_text_content("This is a button");
+    }
+});
+
+fn main() {
+    stdweb::initialize();
+
+    let mut app = AppComponent::new();
+    mount_component!(document(), "#root", app);
+
+    stdweb::event_loop();
+}
+</pre>
+
+<p>
+Who need React anymore when you can even write an <code>onClick</code> event in
+your Rust code :D (just kidding).
+</p>
+
+<p>
+You might want to <a href="https://github.com/huytd/rust-webapp-template">take a look at the full project</a> to see in details how to use <code>stdweb</code> with
+these macros.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9375a52" class="outline-2">
+<h2 id="restful-api-in-rust"><a id="org9375a52"></a><span class="section-number-2">2</span> RESTful API in Rust</h2>
+<div class="outline-text-2" id="text-restful-api-in-rust">
+<p>
+If you don't want to give up your JavaScript frontend, this is the
+better approach: Just write an API server in Rust to make it work with
+your exist frontend.
+</p>
+
+<p>
+There are a handful number of frameworks available for you to choose.
+Let's take a look at <a href="http://www.arewewebyet.org/">AreWeWebYet</a>.
+</p>
+
+<p>
+For people who prefer to have slimmer framework,
+<a href="https://crates.io/crates/tiny_http">tiny-http</a> is the best choice.
+</p>
+
+<p>
+For simplicty, you can use
+<a href="https://github.com/nickel-org/nickel.rs">nickel.rs</a>, it's one of the
+most lightweight framework in Rust that inspired by Node's Express.
+</p>
+
+<p>
+For HTTP/2 support, <a href="https://github.com/mlalic/solicit">solicit</a> is
+the only choice you have right now.
+</p>
+
+<p>
+Personally, I prefer to use <a href="https://rocket.rs">Rocket</a> as it is a
+very good framework that has many features, but still keep your code
+simple, with very elegant syntax. It also added built-in TLS support
+recently. The only minus point for this framework is it required to use
+nightly Rust version.
+</p>
+
+<p>
+This is the simple route handler for a <code>GET</code> method in <code>Rocket</code>.
+</p>
+
+<pre class="example">
+#[get("/posts", format = "application/json")]
+fn get_posts(page: i64) -&gt; Json&lt;Value&gt; {
+    Json(json!({
+        "result": []
+    }))
+}
+</pre>
+
+<p>
+I usually let <code>Rocket</code> serve the static files for me, just like what I
+did in Express:
+</p>
+
+<pre class="example">
+#[get("/")]
+fn index() -&gt; io::Result&lt;NamedFile&gt; {
+    NamedFile::open("www/index.html")
+}
+
+#[get("/&lt;file..&gt;", rank = 5)]
+fn files(file: PathBuf) -&gt; Option&lt;NamedFile&gt; {
+    NamedFile::open(Path::new("www/").join(file)).ok()
+}
+</pre>
+
+<p>
+So I can put all my frontend code inside <code>www</code> folder, and access it
+along my RESTful API. For example, a typical project struct will be:
+</p>
+
+<pre class="example">
+├── Cargo.toml
+├── README.md
+├── src
+│   ├── main.rs
+│   └── ...Rust code here...
+└── www
+    ├── index.html
+    ├── main.js
+    ├── package.json
+    ├── webpack.config.js
+    └── ...JavaScript code here...
+</pre>
+
+<p>
+To work with database, it's a good idea to use
+<a href="https://diesel.rs">Diesel</a>.
+</p>
+
+<p>
+If you want to see a <code>Rocket</code> + <code>Diesel</code> + <code>React</code> project in action, I
+will shamelessly plug one of <a href="https://news.kipalog.com">my side project
+here</a> and <a href="https://github.com/huytd/codedaily-v3">its source code</a> on
+Github.
+</p>
+
+
+<div class="figure">
+<p><img src="img/rust-kipalog.png" alt="rust-kipalog.png" width="500px" />
+</p>
+</div>
+
+<p>
+Please feel free take a look or use it if it good enough for you.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd901bc0" class="outline-2">
+<h2 id="isomorphic-web-app-in-rust"><a id="orgd901bc0"></a><span class="section-number-2">3</span> Isomorphic web app in Rust</h2>
+<div class="outline-text-2" id="text-isomorphic-web-app-in-rust">
+<p>
+The last one, my favorite one, like it's 2012, when I started my
+programming career with my first PHP job.
+</p>
+
+<p>
+No more single page applications, no more client-side rendered UI. No
+more broken web pages when people
+<a href="https://www.quora.com/Why-do-some-people-disable-JavaScript-in-their-browser">disabled
+JavaScript on their browsers</a>.
+</p>
+
+<p>
+<code>Rocket</code> and many other frameworks has the ability to render the HTML
+templates after binding some data into it.
+</p>
+
+<pre class="example">
+#[get("/")]
+fn index() -&gt; Template {
+    let news = fetch_from(RSS_URL).ok().expect("Could not read RSS");
+    Template::render("index", &amp;news)
+}
+</pre>
+
+<p>
+I recently built a <a href="https://codedaily.xyz">Hacker News reader</a> using
+<code>Rocket</code> + <code>Handlebars</code> templates, you can take a look at
+<a href="https://github.com/huytd/hackernews-rss-reader">its source code here</a>
+(hey, I know, it's a shameless PR again).
+</p>
+
+
+<div class="figure">
+<p><img src="img/rust-hackernews.png" alt="rust-hackernews.png" width="500px" />
+</p>
+</div>
+
+<hr />
+
+<p>
+I hope the three approaches I listed here will be helpful if you're the
+one who asking: <i>"Can Rust make webs?"</i>. Each one has pros and cons, and
+depends on your project, you can pick one of them or mixing them all
+together.
+</p>
+
+<p>
+Please feel free to leave a comment on <a href="https://news.ycombinator.com/item?id=15014557">Hacker News</a> or <a href="https://www.reddit.com/r/rust/comments/6tqzka/rust_for_the_web/">Reddit</a> to share your thoughts.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 25-05-2017 11:30:20</p>
+<p class="author">Author: Huy Tran</p>
+<p class="validation"></p>
+</div>
+</body>
+</html>
