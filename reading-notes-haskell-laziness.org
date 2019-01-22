@@ -1,8 +1,0 @@
-* Haskell/Laziness
-:PROPERTIES:
-:CUSTOM_ID: haskell-laziness
-:END:
-Article: https://en.wikibooks.org/wiki/Haskell/Laziness
-
-#+ATTR_HTML: :class full-width round :width 900px
-[[./img/notes-haskell-laziness.jpg]]

@@ -1,9 +1,0 @@
-* Suffering-oriented Programming
-:PROPERTIES:
-:CUSTOM_ID: suffering-oriented-programming
-:END:
-
-Article: http://nathanmarz.com/blog/suffering-oriented-programming.html
-
-#+ATTR_HTML: :class full-width round :width 900px
-[[./img/notes-suffering-oriented-programming.jpg]]
