@@ -6,7 +6,7 @@
 <!-- 2019-01-22 Tue 11:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Use Emacs as a reminder</title>
+<title>Publishing files or folder starts with dash on Github Page</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -234,79 +234,21 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content">
-<h1 class="title">Use Emacs as a reminder</h1>
+<h1 class="title">Publishing files or folder starts with dash on Github Page</h1>
 <p>
-Emacs has a built-in <code>diary-mode</code> which is really awesome. I mostly use it as a reminder.
+Github Page build your page with Jekyll, and by default, it will skip files or folders that starts with dashes <code>_</code>, dots <code>.</code> or hashses <code>#</code>, or end with tides <code>~</code>.
 </p>
 
 <p>
-To start using it, you need to create a <code>~/diary</code> or <code>~/.emacs.d/diary</code> file, open it. Jot down everything you need, like this:
-</p>
-
-
-<div class="figure">
-<p><img src="./img/diary-appointment.png" alt="diary-appointment.png" />
-</p>
-</div>
-
-<p>
-By default, a notification text will be displayed on your <code>mode-line</code> just about 10 minutes before the event.
+For more information about exclusion rule, check here: <a href="https://help.github.com/articles/files-that-start-with-an-underscore-are-missing/">https://help.github.com/articles/files-that-start-with-an-underscore-are-missing/</a>
 </p>
 
 <p>
-If you want to setup a desktop notification, use the following snippet:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Appointment Setup</span>
-(<span style="color: #e45649;">require</span> '<span style="color: #b751b6;">appt</span>)
-(setq appt-time-msg-list nil
-      appt-display-interval '3
-      appt-message-warning-time '12
-      appt-display-mode-line t
-      appt-display-format 'window)
-(appt-activate 1)
-
-(<span style="color: #e45649;">defvar</span> <span style="color: #6a1868;">terminal-notifier-path</span>
-  <span style="color: #50a14f;">"/usr/local/bin/terminal-notifier"</span>)
-
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">user-appt-send-notification</span> (title msg)
-  (shell-command (concat terminal-notifier-path
-                         <span style="color: #50a14f;">" -message "</span> msg
-                         <span style="color: #50a14f;">" -title "</span> title
-                         <span style="color: #50a14f;">" -appIcon /Applications/Calendar.app/Contents/Resources/App-empty.icns"</span>)))
-
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">user-appt-display</span> (min-to-app new-time msg)
-  (user-appt-send-notification
-   (format <span style="color: #50a14f;">"'&#128293; Appointment in %s minutes'"</span> min-to-app)
-   (format <span style="color: #50a14f;">"'%s'"</span> msg)))
-
-(setq appt-disp-window-function (function user-appt-display))
-</pre>
-</div>
-
-<p>
-The <code>appt-message-warning-time</code> is the amount of time before the event we'll first display a notification. Then, we'll repeat the notification every <code>appt-display-interval</code> minutes from the <code>appt-message-warning-time</code>.
-</p>
-
-<p>
-To display the notification, we'll use <code>terminal-notifier</code>, if you don't have it yet, install with:
-</p>
-
-<pre class="example">
-brew install terminal-notifier
-</pre>
-
-<p>
-The <code>user-appt-send-notification</code> function construct and call the <code>terminal-notifier</code> command, in here, we supply the <code>appIcon</code> parameter, points to an icon from macOS's Calendar application.
-</p>
-
-<p>
-Somebody also use <code>org-agenda-to-appt</code> function to create appointment entry from <code>org-agenda</code>, this might be helpful, but I don't find it fitting my workflow, so I'll just leave it.
+To make your files visible regardless to these rules, create a <code>.nojekyll</code> file in the root of your repository.
 </p>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019-01-21 Mon 00:00</p>
+<p class="date">Date: 2019-01-22 Tue 00:00</p>
 <p class="author">Author: Huy Tran</p>
 <p class="date">Created: 2019-01-22 Tue 11:40</p>
 <p class="validation"></p>
