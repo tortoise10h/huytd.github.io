@@ -114,3 +114,12 @@ strong, b {
 h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
+
+#postamble {
+    color: #CCC;
+    float: right;
+    text-align: right;
+    font-size: 0.8em;
+    line-height: 0.95em;
+    padding-right: 10px;
+}
