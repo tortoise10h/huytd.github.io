@@ -71,31 +71,6 @@ p {
     margin: 0 0 1.15rem;
 }
 
-h1.title {
-    margin-bottom: 0.8em;
-    position: relative;
-    text-align: center;
-    display: inline-block;
-    margin: 30px auto 20px auto;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    font-variant-caps: small-caps;
-}
-
-h1.title:after {
-    width: 100%;
-    height: 26%;
-    background: rgba(255, 150, 0, 0.2);
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    z-index: -1;
-    display: block;
-    content: "";
-    transform: skew(-20deg) rotate(-0.3deg);
-}
-
 pre {
     border: none;
     box-shadow: none;
