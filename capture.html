@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-03-21 Thu 11:48 -->
+<!-- 2019-03-22 Fri 10:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Captured</title>
@@ -330,12 +330,53 @@ Captured On: <span class="timestamp-wrapper"><span class="timestamp">[2019-03-21
 </p>
 </div>
 </li>
+<li><a id="org54ab176"></a>Series of introduction to Functional Programming<br />
+<div class="outline-text-3" id="text-1-11">
+<p>
+Source: <span class="timestamp-wrapper"><span class="timestamp">[2019-03-22 Fri]</span></span>, <a href="https://codurance.com/2018/08/09/the-functional-style-part-1/">The Functional Style - Part 1 | Codurance | Craft at Heart | London | Barcelona</a>
+</p>
+<blockquote>
+<p>
+So over the course of this nine part series I want to cover the topics that I think are important in functional programming. I will try to explain first-class and higher-order functions, map and reduce, currying, function composition and monads, lazy evaluation and persistent data structures. All will be illustrated with code examples wherever possible. Most (but not all) of the code will be in Java, Groovy and Clojure because that is what I know best.
+</p>
+
+<p>
+Topics you will not find in this series include monoids, functors, applicatives, and category theory. 
+</p>
+</blockquote>
+</div>
+</li>
+<li><a id="org976af86"></a>Figma rewrite parts of its TypeScript multiplayer server with Rust<br />
+<div class="outline-text-3" id="text-1-12">
+<p>
+Source: <span class="timestamp-wrapper"><span class="timestamp">[2019-03-22 Fri]</span></span>, <a href="https://www.figma.com/blog/rust-in-production-at-figma/">How Mozilla’s Rust dramatically improved our server-side performance</a>
+</p>
+
+<p>
+Their problem:
+</p>
+<blockquote>
+<p>
+The main problem with the old server was the unpredictable latency spikes during syncing. The server was written in TypeScript and, being single-threaded, couldn’t process operations in parallel. That meant a single slow operation would lock up the entire worker until it was complete. A common operation is to encode the document and Figma documents can get very large, so operations would take an arbitrarily-long amount of time. Users connected to that worker would be unable to sync their changes in the meantime.
+</p>
+</blockquote>
+
+<p>
+And the solution:
+</p>
+<blockquote>
+<p>
+we did by moving the performance-sensitive parts of the multiplayer server into a separate child process. That child process is written in Rust and communicates with its host process using stdin and stdout.
+</p>
+</blockquote>
+</div>
+</li>
 </ol>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-03-21 Thu 11:48</p>
+<p class="date">Created: 2019-03-22 Fri 10:21</p>
 <p class="validation"></p>
 </div>
 </body>
