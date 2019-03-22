@@ -13,3 +13,6 @@ a { color: #555; }
         max-width: 450px;
     }
 }
+:target{
+    background: #FFF9C4;
+}
