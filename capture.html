@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-03-22 Fri 11:16 -->
+<!-- 2019-03-22 Fri 14:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Captured</title>
@@ -249,6 +249,7 @@ for the JavaScript code in this tag.
 <li><a href="#org566de1f">1.10. [PDF] A program to solve Sudoku</a></li>
 <li><a href="#org54ab176">1.11. Series of introduction to Functional Programming</a></li>
 <li><a href="#org976af86">1.12. Figma rewrite parts of its TypeScript multiplayer server with Rust</a></li>
+<li><a href="#org870fa69">1.13. Recover the dropped git stash</a></li>
 </ul>
 </li>
 </ul>
@@ -406,11 +407,40 @@ we did by moving the performance-sensitive parts of the multiplayer server into 
 </blockquote>
 </div>
 </div>
+<div id="outline-container-org870fa69" class="outline-3">
+<h3 id="org870fa69"><span class="section-number-3">1.13</span> Recover the dropped git stash</h3>
+<div class="outline-text-3" id="text-1-13">
+<p>
+Source: <span class="timestamp-wrapper"><span class="timestamp">[2019-03-22 Fri]</span></span>, <a href="http://inlehmansterms.net/2015/09/19/recover-a-dropped-git-stash/">Recover a dropped Git stash - In Lehman's Terms</a>
+</p>
+<blockquote>
+<p>
+Dangling commit: commits that not linked to any commit / branch,.. for most of the times, dropped stashes can be found as a dangling commit.
+</p>
+
+<p>
+We pipe the output of git fsck thru awk to only log the hashes of the dangling commits.
+</p>
+
+<p>
+git fsck &#x2013;no-reflogs | awk '<i>dangling commit</i> {print $3}'
+</p>
+
+<p>
+This still might produce a number of hashes. To better determine which hash corresponds to the commit you dropped from the stash, you can pass the hashes to git log or git show to get more information.
+</p>
+
+<p>
+When you found the hash, checkout to revert it back.
+</p>
+</blockquote>
+</div>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-03-22 Fri 11:16</p>
+<p class="date">Created: 2019-03-22 Fri 14:45</p>
 <p class="validation"></p>
 </div>
 </body>
