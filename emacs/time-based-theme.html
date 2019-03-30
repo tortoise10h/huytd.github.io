@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-03-29 Fri 23:47 -->
+<!-- 2019-03-29 Fri 23:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Load light or dark theme based on time of the day</title>
@@ -240,7 +240,7 @@ I have to work in a dark room sometimes during the night, so I have the screen b
 </p>
 
 <p>
-So I wrote a script to automatically select the right color scheme when I open Emacs. If it's between <code>20:00</code> in the evening and <code>6:00</code> in the morning, it is the light theme, otherwise, use the dark one. I also have some customization for the dark theme, so it's something like this:
+So I wrote a script to automatically select the right color scheme when I open Emacs. If it's between <code>20:00</code> in the evening and <code>6:00</code> in the morning, it is the light theme, otherwise, use the dark one:
 </p>
 
 <pre class="example">
@@ -252,28 +252,9 @@ So I wrote a script to automatically select the right color scheme when I open E
 (defun set-dark-theme ()
   "Set the dark theme with some customization if needed."
   (interactive)
-  (load-theme 'doom-tomorrow-night t)
-  (custom-set-faces
-   '(default ((t (:inherit nil :stipple nil :background "#1d1f21" :foreground "#dfe1e0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin :width normal))))
-   '(company-template-field ((t (:background "#f7cc62" :foreground "black"))))
-   '(company-tooltip ((t (:background "#f7cc62" :foreground "black"))))
-   '(company-tooltip-selection ((t (:background "#f58c31"))))
-   '(helm-candidate-number ((t (:background "#f7cc62" :foreground "black"))))
-   '(helm-ff-pipe ((t (:background "black" :foreground "#f7cc62"))))
-   '(helm-ff-prefix ((t (:background "#f7cc62" :foreground "black"))))
-   '(helm-header-line-left-margin ((t (:background "#f7cc62" :foreground "black"))))
-   '(helm-match ((t (:foreground "gold1" :inverse-video nil))))
-   '(helm-rg-preview-line-highlight ((t (:background "#46b866" :foreground "black"))))
-   '(helm-selection ((t (:foreground "#f7cc62" :inverse-video t))))
-   '(helm-source-header ((t (:foreground "white" :weight bold :height 1.0))))
-   '(mode-line-inactive ((t (:background "#2d2f31" :foreground "#5a5b5a" :box nil))))
-   '(neo-dir-link-face ((t (:foreground "gray85"))))
-   '(vertical-border ((t (:background "#161616" :foreground "#323333"))))
-   '(window-divider ((t (:foreground "#323333"))))
-   '(window-divider-first-pixel ((t (:foreground "#323333"))))))
+  (load-theme 'doom-tomorrow-night t))
 
-(let ((current-hour (string-to-number (format-time-string "%H"))))
-  (if (or (&lt; current-hour 6) (&gt; current-hour 20)) (set-light-theme) (set-dark-theme)))
+(if (or (&lt; current-hour 6) (&gt; current-hour 20)) (set-light-theme) (set-dark-theme)))
 </pre>
 
 <p>
@@ -292,7 +273,7 @@ If you want your Emacs automatically switch between the color schemes when the t
 <div id="postamble" class="status">
 <p class="date">Date: 2019-03-29 Fri 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-03-29 Fri 23:47</p>
+<p class="date">Created: 2019-03-29 Fri 23:54</p>
 <p class="validation"></p>
 </div>
 </body>
