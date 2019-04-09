@@ -942,9 +942,8 @@ body {
 
 #content {
     margin: 0 auto;
-    width: 600px;
     padding-bottom: 30px;
-    max-width: 96vw;
+    max-width: 38rem;
 }
 
 h2>span,
