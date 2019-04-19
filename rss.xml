@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+	   xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	   xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	   xmlns:dc="http://purl.org/dc/elements/1.1/"
+	   xmlns:atom="http://www.w3.org/2005/Atom"
+	   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	   xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	   xmlns:georss="http://www.georss.org/georss"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:media="http://search.yahoo.com/mrss/"><channel>
+  <title>jft :: CoffeeAddict</title>
+  <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
+  <link>/</link>
+  <description><![CDATA[]]></description>
+  <language>en</language>
+  <pubDate>Fri, 19 Apr 2019 10:00:20 -0700</pubDate>
+  <lastBuildDate>Fri, 19 Apr 2019 10:00:20 -0700</lastBuildDate>
+  <generator>Emacs 26.1 Org-mode 9.1.9</generator>
+  <webMaster>huy@USLOPMNLM223026.local (Huy Tran)</webMaster>
+  <image>
+    <url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
+    <title>jft :: CoffeeAddict</title>
+    <link>/</link>
+  </image>
+
+  <p>
+    css
+  </p>
+  <item>
+    <title>Button cannot be a flex container</title>
+    <link>/css/button-is-not-flex.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/button-is-not-flex.html</guid>
+    <pubDate>Tue, 19 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    The problem
+    </p>
+
+    <p>
+    Let's say, we have a button like this, we use flexbox to make the content centered:
+    </p>
+
+    <pre class="example">
+    ┌────────────────┐
+    │     Hello      │
+    └────────────────┘
+    </pre>
+
+    <pre class="example">
+    &lt;button class="btn"&gt;Hello&lt;/button&gt;
+
+    .btn {
+    @include display-flex;
+    @include align-items(flex-start);
+    @include justify-content(center);
+    }
+    </pre>
+
+    <p>
+    But the damn thing doesn't look like that on older browsers like Safari 10. It looks like this:
+    </p>
+
+    <pre class="example">
+    ┌────────────────┐
+    │ Hello          │
+    └────────────────┘
+    </pre>
+
+    <p>
+    We know there is something wrong with flexbox, but what is it?
+    </p>
+
+    <p>
+    The reason
+    </p>
+
+    <p>
+    Knowing the issue may come from flexbox, we can check the Flexbugs repository, there actually a known issue: <a href="https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers">Button cannot be a flex container</a>. And that's why the CSS rules for centering content didn't work.
+    </p>
+
+    <p>
+    The solution
+    </p>
+
+    <p>
+    To fix this, there are a lot of way. I want to minimize the changes, so, replacing button tag with something else, for example, a tag, would be a good fix.
+    </p>
+
+    <pre class="example">
+    &lt;a class="btn"&gt;Hello&lt;/a&gt;
+
+    .btn { /* no css change */
+    @include display-flex;
+    @include align-items(flex-start);
+    @include justify-content(center);
+    }
+    </pre>
+    ]]></description>
+  </item>
+  <item>
+    <title>Font spacing problem in Firefox and Chrome</title>
+    <link>/css/font-size-spacing-problem.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/font-size-spacing-problem.html</guid>
+    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    The problem
+    </p>
+
+    <p>
+    A popup dialog is having a scrollbar on Firefox, but doesn't on Chrome.
+    </p>
+
+    <p>
+    This is how it looks like on Google Chrome:
+    </p>
+    <pre class="example">
+    | this is a long text |
+    </pre>
+
+    <p>
+    And this is how it looks like on Firefox:
+    </p>
+    <pre class="example">
+    |  this  is  a  long 	▐ |
+    ^^^--- scroll bar
+    </pre>
+
+    <p>
+    Diagnosis
+    </p>
+
+    <p>
+    The problem is reproducible at a 100% rate, even worse on Firefox Windows.
+    </p>
+
+    <p>
+    As observed, the font size and container size are the same for both browsers, but there's an issue with the text content.
+    </p>
+
+    <p>
+    The word <code>"text"</code> is being pushed to the next line on Firefox, on Chrome, it's not.
+    </p>
+
+    <p>
+    Since the font size are the same, the problem might come from the spacing of the words/characters.
+    </p>
+
+    <p>
+    TODO Action plan
+    </p>
+
+    <p>
+    First, we need to examine the spacing, by inspecting the page, try changing the two spacing controller properties: <code>letter-spacing</code> and <code>word-spacing</code>.
+    </p>
+
+    <p>
+    Turned out, both of them can solve the problem. So the reason of the different is, we didn't set the initial value for these spacings, and the browser have to determine it themselves.
+    </p>
+
+    <p>
+    What next is to determine which one to use.
+    </p>
+    ]]></description>
+  </item>
+  <item>
+    <title>IE11, flexbox, min-height and align-items</title>
+    <link>/css/ie11-flexbox-min-height-bug.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/ie11-flexbox-min-height-bug.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    The problem
+    I jumped into an issue with IE11 today, a <code>question mark icon</code> does not display right. On Chrome, it's fine, but on IE, it's being pushed down a bit. Like this:
+    </p>
+
+
+    <div class="figure">
+    <p><img src="./img/css-flexbox-align-bug.png" alt="css-flexbox-align-bug.png" />
+    </p>
+    </div>
+
+    <p>
+    Analysis
+    At first, it seems like an issue is coming from the icon. But after inspecting, it doesn't have any specific style that would affects the positioning. Trying to fix the problem by applying <code>margin-top</code> to the icon helps, but it introduce a new issue on Chrome.
+    </p>
+
+    <p>
+    So, there's nothing can be done with the question mark icon. It's time to move on to the near by elements, in this case, the <code>black box</code>.
+    </p>
+
+    <p>
+    The style of black box is something like this:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-css"><span style="color: #FFAE57;">display</span>: flex;
+    <span style="color: #FFAE57;">min-height</span>: 28px;
+    <span style="color: #FFAE57;">align-items</span>: center;
+    </pre>
+    </div>
+
+    <p>
+    It's still doesn't look like anything would causes the problem here. But let's try "debugging" the problem with the infamous-method-which-will-works-most-of-the-time: <code>removing each attribute and see how it changes</code>.
+    </p>
+
+    <p>
+    Surprisingly, after removing <code>min-height</code>, the question mark jumped back to its position.
+    </p>
+
+    <p>
+    What the f*ck?
+    </p>
+
+    <p>
+    Diagnosis and solution
+    If removing <code>min-height</code> works, so there must be some <code>min-height</code> bug related to <code>flexbox</code>. The best I can do at this point is, ask my friend, Google: <code>"Hey Google, what the fuck is going on with IE11 and flexbox when it has min-height?"</code>.
+    </p>
+
+    <p>
+    Apparently, it's not that long sentence I'm using, but this: <code>"IE11 flexbox min-height"</code>.
+    </p>
+
+    <p>
+    It doesn't took me long to find out, there's actually <a href="http://web.archive.org/web/20140725045629/https://connect.microsoft.com/IE/feedback/details/802625/min-height-and-flexbox-flex-direction-column-dont-work-together-in-ie-10-11-preview">a bug in IE</a>, so, if <code>min-height</code> is present, the element's content cannot be vertically center align, and that's what <code>align-items: center</code> do!
+    </p>
+
+    <p>
+    Someone already found a <a href="https://github.com/philipwalton/flexbugs/issues/231">workaround</a> for this, by replacing <code>min-height</code> with <code>height</code>. In case <code>min-height</code> is required, you can set it for the container, and set the poor element's <code>height</code> to something smaller.
+    </p>
+
+    <p>
+    Planning and implementing the solution
+    So, before doing anything, I checked the design with product team, turned out, the box I'm working on never has its height changed, so I'm can replace the <code>min-height</code> above with the <code>height</code>. Whoever implemented this was too carefully to make it <code>min-height</code> instead of <code>height</code>, he probably think it must be good for responsive.
+    </p>
+
+    <p>
+    To make sure this is a root cause of the problem, I'm gonna need to make sure it won't introduce any other issues, it's better to test it on as many browsers as possible after the fix.
+    </p>
+
+    <p>
+    So this is the final result:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-css"><span style="color: #FFAE57;">display</span>: flex;
+    <span style="color: #FFAE57;">height</span>: 28px;
+    <span style="color: #FFAE57;">align-items</span>: center;
+    </pre>
+    </div>
+    ]]></description>
+  </item>
+  <item>
+    <title>Layout viewport and visual viewport</title>
+    <link>/css/viewports.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/viewports.html</guid>
+    <pubDate>Wed, 13 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    Read: <a href="https://developers.google.com/web/updates/2017/09/visual-viewport-api">https://developers.google.com/web/updates/2017/09/visual-viewport-api</a>
+    </p>
+
+    <p>
+    Layout viewport is the viewport as we known already. Visual viewport is the viewport when we zoom-pinch, for example on mobile devices.
+    </p>
+
+    <p>
+    Position fixed elements only stick to layout viewport but not visual view port.
+    </p>
+
+    <p>
+    We can access visual viewport thru <code>window.visualViewport</code>.
+    </p>
+    ]]></description>
+  </item>
+  <item>
+    <title>No initial for IE, then what should I use?</title>
+    <link>/css/initial-value-for-IE.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/initial-value-for-IE.html</guid>
+    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    You might not know that IE browsers does not supports <code>initial</code> value in CSS, that doesn't sound like a big deal until you got a problem.
+    </p>
+
+    <p>
+    In my case, we have an element that always display its text (coming from unknown source) as lowercase, except the text containing company name, for example: <code>"people are trying to get rid of the big five such as Google, Facebook and Amazon"</code>.
+    </p>
+
+    <p>
+    The solution we picked up was, wrapping the dynamic content in a filtering function, which will return all of the company names as a <code>span</code>, for example, the above text will be output as this HTML:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-html">&lt;<span style="color: #FFD580;">div</span> <span style="color: #D9D7CE;">class</span>=<span style="color: #BAE67E;">"lowercase-text"</span>&gt;people are trying to get rid of the big five such as &lt;<span style="color: #FFD580;">span</span> <span style="color: #D9D7CE;">class</span>=<span style="color: #BAE67E;">"no-mess"</span>&gt;Google&lt;/<span style="color: #FFD580;">span</span>&gt;, &lt;<span style="color: #FFD580;">span</span> <span style="color: #D9D7CE;">class</span>=<span style="color: #BAE67E;">"no-mess"</span>&gt;Facebook&lt;/<span style="color: #FFD580;">span</span>&gt; and &lt;<span style="color: #FFD580;">span</span> <span style="color: #D9D7CE;">class</span>=<span style="color: #BAE67E;">"no-mess"</span>&gt;Amazon&lt;/<span style="color: #FFD580;">span</span>&gt;&lt;/<span style="color: #FFD580;">div</span>&gt;
+    </pre>
+    </div>
+
+    <p>
+    And we would define the CSS rules as the following snippet, reset the <code>text-transform</code> value for <code>no-mess</code> class:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-css"><span style="color: #FFD580;">.lowercase-text </span>{
+    <span style="color: #FFAE57;">text-transform</span>: lowercase;
+    <span style="color: #FFD580;">.no-mess </span>{
+    <span style="color: #FFAE57;">text-transform</span>: initial;
+    }
+    }
+    </pre>
+    </div>
+
+    <p>
+    This works well on any browsers except IE, because the damn browser doesn't supports <code>initial</code> value.
+    </p>
+
+    <p>
+    So how do we fix it?
+    </p>
+
+    <p>
+    Just change <code>initial</code> to <code>none</code>, since they has the same effect:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-css"><span style="color: #FFD580;">.no-mess </span>{
+    <span style="color: #FFAE57;">text-transform</span>: none;
+    }
+    </pre>
+    </div>
+    ]]></description>
+  </item>
+  <item>
+    <title>Padding and margin are related to element's width</title>
+    <link>/css/padding-and-width.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/padding-and-width.html</guid>
+    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    CSS padding property can have a fixed value, or a percentage.
+    </p>
+
+    <p>
+    When a percentage is applied, the size of the padding is now related to the <code>width</code> of the containing block.
+    </p>
+
+    <p>
+    So, even when you have a <code>div</code> that <code>50px</code> height, <code>100px</code> wide, and you set its <code>padding-top</code> to <code>50%</code>, it will be <code>50px</code> regardless to the height, even if you set the height to 0.
+    </p>
+
+    <p>
+    The same with <code>margin</code>.
+    </p>
+
+    <p>
+    By using this attribute of <code>padding</code>, we can create a aspect ratio friendly elements where the height is calculated automatically based on the <code>width</code>, even in a fluid environment. For example, we create an element that in the ratio of <code>16:9</code> by:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-css"><span style="color: #FFD580;">parent </span>{
+    <span style="color: #FFAE57;">with</span>: something;
+    }
+
+    <span style="color: #FFD580;">div </span>{
+    <span style="color: #FFAE57;">height</span>: 0;
+    <span style="color: #FFAE57;">padding-top</span>: 56.25%; <span style="color: #5C6773; font-style: italic;">/* </span><span style="color: #5C6773; font-style: italic;">9 / 16 = 0.5625 </span><span style="color: #5C6773; font-style: italic;">*/</span>
+    }
+    </pre>
+    </div>
+    ]]></description>
+  </item>
+  <item>
+    <title>Performance tip: Setting image size in HTML instead of CSS</title>
+    <link>/css/image-size.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/image-size.html</guid>
+    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    Source: <a href="https://developers.google.com/web/tools/lighthouse/audits/aspect-ratio">https://developers.google.com/web/tools/lighthouse/audits/aspect-ratio</a>
+    </p>
+
+    <blockquote>
+    <p>
+    When possible, it's a good practice to specify image width and height in HTML, so that the browser can allocate space for the image, which prevents it from jumping around as the page loads. It's more optimal to specify width and height in HTML rather than CSS, because the browser allocates space before parsing the CSS. In practice this approach can be difficult if you're working with responsive images, because there's no way to specify width and height until you know the viewport dimensions.
+    </p>
+    </blockquote>
+    ]]></description>
+  </item>
+  <item>
+    <title>Position Sticky and its events</title>
+    <link>/css/sticky-events.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/sticky-events.html</guid>
+    <pubDate>Tue, 12 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    Position sticky is around for a while, there is still one thing it does not do well, is providing a way to detect whenever an element is sticked or not.
+    </p>
+
+    <p>
+    The naive approach would be watching for scroll event, but this is a stupid solution, because it's an expensive operator that will cause jankiness.
+    </p>
+
+    <p>
+    A smoother way is using observers, it called <code>IntersectionObserver</code>, the usage is pretty simple:
+    </p>
+
+    <div class="org-src-container">
+    <pre class="src src-js"><span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">observer</span> = <span style="color: #FFAE57;">new</span> <span style="color: #5CCFE6;">IntersectionObserver</span>((entries, observer) =&gt; {
+    <span style="color: #FFAE57;">for</span> (entry of entries) {
+    <span style="color: #FFAE57;">if</span> (entry.isIntersecting) {
+    <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">the element is sticked, do something</span>
+    }
+    }
+    });
+    observer.observe(document.querySelector(<span style="color: #BAE67E;">'your-target'</span>));
+    </pre>
+    </div>
+
+    <p>
+    Read more at <a href="https://developers.google.com/web/updates/2017/09/sticky-headers">https://developers.google.com/web/updates/2017/09/sticky-headers</a>
+    </p>
+    ]]></description>
+  </item>
+  <item>
+    <title>Re-Implementing Facebook Reaction Animation</title>
+    <link>/css/reimplementing-facebook-animation.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/reimplementing-facebook-animation.html</guid>
+    <pubDate>Mon, 21 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[<p>
+    <b>Disclaimer:</b> I'm not a Facebook engineer, and I don't know how did they
+    make it. This is just my own implementation. It may not have the best
+    performance and I'm just tested on Chrome 😅
+    </p>
+
+
+    <div class="figure">
+    <p><img src="./img/fb-reaction-prod.png" alt="fb-reaction-prod.png" />
+    </p>
+    <p><span class="figure-number">Figure 2: </span><i>Facebook's Reaction Popup --- or whatever it called</i></p>
+    </div>
+
+    <p>
+    If you are a Facebooker, chance you will use this popup every day.
+    </p>
+
+    <p>
+    In this blog post, we will learn how to implement it. In HTML/CSS and a
+    bit of JavaScript.
+    </p>
+
+    <p>
+    Breaking down the animation
+    </p>
+    <p>
+    :CUSTOM<sub>ID</sub>: breaking-down-the-animation
+    </p>
+
+    <p>
+    OK. Let's break it down step by step, so we will see and understand the
+    animation in detailed.
+    </p>
+
+    <p>
+    There are 2 phases of the animation: <b>Show up phase</b> and <b>Mouse hover
+    phase</b>.
+    </p>
+
+    <p>
+    For the sake of simplicity, this is the simplified version of a feed, on
+    your News Feed. The green rectangle is where the Like button stays, you
+    hover your mouse over it and a yellow popup (in reality, it‘s white)
+    show up.
+    </p>
+
+
+    <div class="figure">
+    <p><img src="./img/fb-reaction-plan.png" alt="fb-reaction-plan.png" />
+    </p>
+    </div>
+
+    <p>
+    Then, the emoticons ascend, one by one. The red arrows here tells us the
+    animation direction of the emoticons.
+    </p>
+
+    <p>
+    If we look carefully into each emoticon, you will see it has the easing
+    effect in its animation, like this:
+    </p>
+
+
+    <div class="figure">
+    <p><img src="./img/fb-reaction-animation-plan.png" alt="fb-reaction-animation-plan.png" />
+    </p>
+    </div>
+
+    <p>
+    When all emoticons finish its animation, phase 1 (Show up) finished.
+    </p>
+
+    <p>
+    Phase 2 (Mouse Hover) begins when the user hovers his mouse on an
+    emoticon.
+    </p>
+
+
+    <div class="figure">
+    <p><img src="./img/fb-reaction-hover-plan.png" alt="fb-reaction-hover-plan.png" />
+    </p>
+    </div>
+
+    <p>
+    The selected emoticon will scale up a bit, and a black label appears on
+    the top to tell us what is the name of this emoticon.
+    </p>
+
+    <p>
+    Not so complex, huh?
+    </p>
+
+    <p>
+    Raw implementation
+    </p>
+    <p>
+    :CUSTOM<sub>ID</sub>: raw-implementation
+    </p>
+
+    <p>
+    Now, we start the implementation. In the beginning, we just implement
+    the raw HTML structure, add some basic actions with CSS, no animation
+    here in this part.
+    </p>
+
+    <p>
+    It's recommended to use Codepen.io for prototyping, so we have the live
+    preview, SCSS compiling on the go,...
+    </p>
+
+    <p>
+    But you can write code on your local machine, it's up to you. All we
+    need is: HTML, SCSS, and jQuery (or you can convert the jQuery code at
+    the end of this post to vanilla JS or whatever you want)
+    </p>
+
+    <div id="outline-container-orgf8f5ebf" class="outline-3">
+    <h3 id="prototyping-the-news-feed-post"><a id="orgf8f5ebf"></a><a id="ID-5FA79DDF-F67C-4D8B-AA1E-9BE9E239DB13"></a><span class="section-number-3">9.1</span> Prototyping the news feed post</h3>
+    <div class="outline-text-3" id="text-prototyping-the-news-feed-post">
+    <p>
+    So we want to create a news feed item, and add a Like button to it.
+    </p>
+
+    <p>
+    HTML Code:
+    </p>
+
+    <pre class="example">
+    &lt;div class="feed"&gt; 
+    &lt;a class="like-btn"&gt;&lt;/a&gt; 
+    &lt;/div&gt;
+    </pre>
+
+    <p>
+    CSS (SCSS):
+    </p>
+
+    <pre class="example">
+    html,
+    body {
+    padding: 20px;
+    font-family: sans-serif;
+    }
+    .feed {
+    width: 500px;
+    height: 473px;
+    background-image: url(&lt;path-to-placeholder-image&gt;);
+    position: relative;
+    .like-btn {
+    width: 44px;
+    height: 25px;
+    background: #D0D0D0;
+    position: absolute;
+    bottom: 13px;
+    left: 13px;
+    cursor: pointer;
+    &amp;:hover {
+    background: #718C00;
+    }
+    }
+    }
+    </pre>
+
+    <p>
+    You can copy the URL of the image below and replace to
+    <code>&lt;path-to-placeholder-image&gt;</code>, or use the uploaded image
+    <a href="http://i.imgur.com/HckmGbj.png">on Imgur</a>.
+    </p>
+
+
+    <div class="figure">
+    <p><img src="./img/fb-reaction-placeholder.png" alt="fb-reaction-placeholder.png" />
+    </p>
+    <p><span class="figure-number">Figure 6: </span><i>Copy this image URL as a placeholder image</i></p>
+    </div>
+    </div>
+    </div>
+    ]]></description>
+</item>
+</channel>
+</rss>
