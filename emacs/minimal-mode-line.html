@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-04-17 Wed 14:31 -->
+<!-- 2019-04-18 Thu 23:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A minimal but useful mode-line</title>
@@ -239,11 +239,9 @@ for the JavaScript code in this tag.
 I've been using <code>doom-modeline</code> for a while, it was great but I still want it more simpler. So I rolled my own <code>mode-line</code>.
 </p>
 
-
-<div class="figure">
-<p><img src="https://i.imgur.com/8UvE9IRl.png" alt="8UvE9IRl.png" />
+<p>
+<a href="https://i.imgur.com/VQZDsBE.png?1">https://i.imgur.com/VQZDsBE.png?1</a>
 </p>
-</div>
 
 <p>
 It only has a few things: editing status, an icon of the current mode, a file path, current line, and the current git branch.
@@ -253,37 +251,46 @@ It only has a few things: editing status, an icon of the current mode, a file pa
 Here's the script:
 </p>
 
-<pre class="example">
-;; Modeline
+<div class="org-src-container">
+<pre class="src src-lisp"><span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Auto updating version control information</span>
 (setq auto-revert-check-vc-info t)
 (setq-default mode-line-format (list
-  '((:eval
-     (cond
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Check the buffer status and display its status</span>
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">&#9919; for locked buffer. &#9967; for modified buffer. &#9926; is the normal one.</span>
+  '((<span style="color: #D4BFFF;">:eval</span>
+     (<span style="color: #FFAE57;">cond</span>
       (buffer-read-only
-       (propertize " ⚿ " 'face '(:foreground "red" :weight 'bold)))
+       (propertize <span style="color: #BAE67E;">" &#9919; "</span> 'face '(<span style="color: #D4BFFF;">:foreground</span> <span style="color: #BAE67E;">"red"</span> <span style="color: #D4BFFF;">:weight</span> 'bold)))
       ((buffer-modified-p)
-       (propertize " ⛯ " 'face '(:foreground "orange")))
+       (propertize <span style="color: #BAE67E;">" &#9967; "</span> 'face '(<span style="color: #D4BFFF;">:foreground</span> <span style="color: #BAE67E;">"orange"</span>)))
       ((not (buffer-modified-p))
-       (propertize " ⛆ " 'face '(:foreground "gray85"))))))
-  '(:eval (propertize (all-the-icons-icon-for-mode major-mode :height (/ all-the-icons-scale-factor 1.4) :v-adjust -0.03)))
-  " %f "
+       (propertize <span style="color: #BAE67E;">" &#9926; "</span> 'face '(<span style="color: #D4BFFF;">:foreground</span> <span style="color: #BAE67E;">"gray85"</span>))))))
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Use all-the-icons to display the icon of current major mode</span>
+  '(<span style="color: #D4BFFF;">:eval</span> (propertize (all-the-icons-icon-for-mode major-mode
+          <span style="color: #D4BFFF;">:height</span> (/ all-the-icons-scale-factor 1.4)
+          <span style="color: #D4BFFF;">:v-adjust</span> -0.03)))
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Show the file name with full path</span>
+  <span style="color: #BAE67E;">" %f "</span>
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Show the current position of the cursor in buffer</span>
   'mode-line-position
-  "["
-  'mode-name
-  "] "
-  '(:eval
-    (if vc-mode
-        (let* ((noback (replace-regexp-in-string (format "^ %s" (vc-backend buffer-file-name)) " " vc-mode))
-               (face (cond ((string-match "^ -" noback) 'mode-line-vc)
-                           ((string-match "^ [:@]" noback) 'mode-line-vc-edit)
-                           ((string-match "^ [!\\?]" noback) 'mode-line-vc-modified))))
-          (format "[git:%s]" (substring noback 2)))))))
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Show the current major mode name</span>
+  <span style="color: #BAE67E;">"["</span> 'mode-name <span style="color: #BAE67E;">"] "</span>
+  <span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Check if the buffer is in any version control system, if yes, show the branch</span>
+  '(<span style="color: #D4BFFF;">:eval</span>
+    (<span style="color: #FFAE57;">if</span> vc-mode
+        (<span style="color: #FFAE57;">let*</span> ((noback (replace-regexp-in-string
+                           (format <span style="color: #BAE67E;">"^ %s"</span> (vc-backend buffer-file-name)) <span style="color: #BAE67E;">" "</span> vc-mode))
+               (face (<span style="color: #FFAE57;">cond</span> ((string-match <span style="color: #BAE67E;">"^ -"</span> noback) 'mode-line-vc)
+                           ((string-match <span style="color: #BAE67E;">"^ [:@]"</span> noback) 'mode-line-vc-edit)
+                           ((string-match <span style="color: #BAE67E;">"^ [!\\?]"</span> noback) 'mode-line-vc-modified))))
+          (format <span style="color: #BAE67E;">"[git:%s]"</span> (substring noback 2)))))))
 </pre>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019-04-17 Wed 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-04-17 Wed 14:31</p>
+<p class="date">Created: 2019-04-18 Thu 23:52</p>
 <p class="validation"></p>
 </div>
 </body>
