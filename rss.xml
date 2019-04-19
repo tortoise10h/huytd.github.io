@@ -14,8 +14,8 @@
   <link>/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Fri, 19 Apr 2019 10:00:20 -0700</pubDate>
-  <lastBuildDate>Fri, 19 Apr 2019 10:00:20 -0700</lastBuildDate>
+  <pubDate>Fri, 19 Apr 2019 10:27:10 -0700</pubDate>
+  <lastBuildDate>Fri, 19 Apr 2019 10:27:10 -0700</lastBuildDate>
   <generator>Emacs 26.1 Org-mode 9.1.9</generator>
   <webMaster>huy@USLOPMNLM223026.local (Huy Tran)</webMaster>
   <image>
@@ -25,7 +25,7 @@
   </image>
 
   <p>
-    css
+    css/
   </p>
   <item>
     <title>Button cannot be a flex container</title>
@@ -554,7 +554,7 @@
     </p>
 
     <div id="outline-container-orgf8f5ebf" class="outline-3">
-    <h3 id="prototyping-the-news-feed-post"><a id="orgf8f5ebf"></a><a id="ID-5FA79DDF-F67C-4D8B-AA1E-9BE9E239DB13"></a><span class="section-number-3">9.1</span> Prototyping the news feed post</h3>
+    <h3 id="prototyping-the-news-feed-post"><a id="orgf8f5ebf"></a><a id="ID-28F38370-E083-489E-AF19-477663465949"></a><span class="section-number-3">9.1</span> Prototyping the news feed post</h3>
     <div class="outline-text-3" id="text-prototyping-the-news-feed-post">
     <p>
     So we want to create a news feed item, and add a Like button to it.
