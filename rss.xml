@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+	   xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	   xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	   xmlns:dc="http://purl.org/dc/elements/1.1/"
+	   xmlns:atom="http://www.w3.org/2005/Atom"
+	   xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	   xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	   xmlns:georss="http://www.georss.org/georss"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:media="http://search.yahoo.com/mrss/"><channel>
+  <title></title>
+  <atom:link href="/rss.xml" rel="self" type="application/rss+xml" />
+  <link>/</link>
+  <description><![CDATA[]]></description>
+  <language>en</language>
+  <pubDate>Fri, 19 Apr 2019 17:38:07 -0700</pubDate>
+  <lastBuildDate>Fri, 19 Apr 2019 17:38:07 -0700</lastBuildDate>
+  <generator>Emacs 26.1 Org-mode 9.1.9</generator>
+  <webMaster>huy@USLOPMNLM223026.local (Huy Tran)</webMaster>
+  <image>
+    <url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
+    <title></title>
+    <link>/</link>
+  </image>
+
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#orgce4d52c</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#orgce4d52c</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/css/">https://blog.jft.rocks/css/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>Button cannot be a flex container</title>
+    <link>/https://blog.jft.rocks/css/button-is-not-flex.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/button-is-not-flex.html</guid>
+    <pubDate>Tue, 19 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Font spacing problem in Firefox and Chrome</title>
+    <link>/https://blog.jft.rocks/css/font-size-spacing-problem.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/font-size-spacing-problem.html</guid>
+    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>IE11, flexbox, min-height and align-items</title>
+    <link>/https://blog.jft.rocks/css/ie11-flexbox-min-height-bug.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/ie11-flexbox-min-height-bug.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Layout viewport and visual viewport</title>
+    <link>/https://blog.jft.rocks/css/viewports.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/viewports.html</guid>
+    <pubDate>Wed, 13 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>No initial for IE, then what should I use?</title>
+    <link>/https://blog.jft.rocks/css/initial-value-for-IE.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/initial-value-for-IE.html</guid>
+    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Padding and margin are related to element's width</title>
+    <link>/https://blog.jft.rocks/css/padding-and-width.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/padding-and-width.html</guid>
+    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Performance tip: Setting image size in HTML instead of CSS</title>
+    <link>/https://blog.jft.rocks/css/image-size.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/image-size.html</guid>
+    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Position Sticky and its events</title>
+    <link>/https://blog.jft.rocks/css/sticky-events.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/sticky-events.html</guid>
+    <pubDate>Tue, 12 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Re-Implementing Facebook Reaction Animation</title>
+    <link>/https://blog.jft.rocks/css/reimplementing-facebook-animation.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/reimplementing-facebook-animation.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Sentence case in CSS</title>
+    <link>/https://blog.jft.rocks/css/sentence-case.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/css/sentence-case.html</guid>
+    <pubDate>Wed, 27 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#orgf123d77</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#orgf123d77</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/emacs/">https://blog.jft.rocks/emacs/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>A minimal but useful mode-line</title>
+    <link>/https://blog.jft.rocks/emacs/minimal-mode-line.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/minimal-mode-line.html</guid>
+    <pubDate>Wed, 17 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Create and open an empty buffer in org-mode</title>
+    <link>/https://blog.jft.rocks/emacs/elisp-create-and-open-empty-buffer.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/elisp-create-and-open-empty-buffer.html</guid>
+    <pubDate>Sun, 06 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Define minor mode in Emacs</title>
+    <link>/https://blog.jft.rocks/emacs/define-minor-mode.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/define-minor-mode.html</guid>
+    <pubDate>Wed, 20 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Deft create new file with custom name</title>
+    <link>/https://blog.jft.rocks/emacs/deft-create-file-with-custom-name.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/deft-create-file-with-custom-name.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Delete inside pair of bracket or quotes</title>
+    <link>/https://blog.jft.rocks/emacs/delete-in-pair.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/delete-in-pair.html</guid>
+    <pubDate>Sun, 13 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Disable =linum-mode= for =ansi-term=</title>
+    <link>/https://blog.jft.rocks/emacs/disable-linum-for-term.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/disable-linum-for-term.html</guid>
+    <pubDate>Wed, 23 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Don't be evil</title>
+    <link>/https://blog.jft.rocks/emacs/dont-be-evil.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/dont-be-evil.html</guid>
+    <pubDate>Tue, 08 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Dvorak and Emacs</title>
+    <link>/https://blog.jft.rocks/emacs/dvorak.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/dvorak.html</guid>
+    <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Editing with CUA</title>
+    <link>/https://blog.jft.rocks/emacs/cua-mode.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/cua-mode.html</guid>
+    <pubDate>Tue, 19 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Elisp progn keyword</title>
+    <link>/https://blog.jft.rocks/emacs/progn.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/progn.html</guid>
+    <pubDate>Wed, 30 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Emacs close popup buffer</title>
+    <link>/https://blog.jft.rocks/emacs/close-popup-buffer.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/close-popup-buffer.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Emacs from scratch</title>
+    <link>/https://blog.jft.rocks/emacs/emacs-from-scratch.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/emacs-from-scratch.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Helm Ag with text at point</title>
+    <link>/https://blog.jft.rocks/emacs/helm-ag-at-point.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/helm-ag-at-point.html</guid>
+    <pubDate>Wed, 27 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Joining lines in Emacs</title>
+    <link>/https://blog.jft.rocks/emacs/join-lines.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/join-lines.html</guid>
+    <pubDate>Wed, 20 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Jump between Helm sections</title>
+    <link>/https://blog.jft.rocks/emacs/jump-between-helm-sections.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/jump-between-helm-sections.html</guid>
+    <pubDate>Tue, 01 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Jump between matching parens</title>
+    <link>/https://blog.jft.rocks/emacs/jump-between-pairs.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/jump-between-pairs.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Load light or dark theme based on time of the day</title>
+    <link>/https://blog.jft.rocks/emacs/time-based-theme.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/time-based-theme.html</guid>
+    <pubDate>Fri, 29 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Print org-mode agenda to a file</title>
+    <link>/https://blog.jft.rocks/emacs/print-agenda-to-a-file.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/print-agenda-to-a-file.html</guid>
+    <pubDate>Fri, 04 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Publishing org-mode notes as a website</title>
+    <link>/https://blog.jft.rocks/emacs/orgmode-publishing.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/orgmode-publishing.html</guid>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Recurring tasks in org-mode</title>
+    <link>/https://blog.jft.rocks/emacs/recurring-tasks.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/recurring-tasks.html</guid>
+    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Save current Emacs session without any extra package</title>
+    <link>/https://blog.jft.rocks/emacs/save-emacs-session.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/save-emacs-session.html</guid>
+    <pubDate>Thu, 04 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Textlint for Emacs</title>
+    <link>/https://blog.jft.rocks/emacs/textlint.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/textlint.html</guid>
+    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use Deft for note searching</title>
+    <link>/https://blog.jft.rocks/emacs/deft.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/deft.html</guid>
+    <pubDate>Fri, 11 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use Emacs as a reminder</title>
+    <link>/https://blog.jft.rocks/emacs/diary.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/diary.html</guid>
+    <pubDate>Mon, 21 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use Spacebar as Ctrl</title>
+    <link>/https://blog.jft.rocks/emacs/spacebar-as-ctrl.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/spacebar-as-ctrl.html</guid>
+    <pubDate>Mon, 04 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use let for local variable</title>
+    <link>/https://blog.jft.rocks/emacs/elisp-use-let-for-local.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/elisp-use-let-for-local.html</guid>
+    <pubDate>Sun, 06 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Working with Agenda in Org-Mode</title>
+    <link>/https://blog.jft.rocks/emacs/working-with-agenda.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/emacs/working-with-agenda.html</guid>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#org35f4b97</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#org35f4b97</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/functionalprogramming/">https://blog.jft.rocks/functionalprogramming/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>Algebraic Data Type</title>
+    <link>/https://blog.jft.rocks/functionalprogramming/algebraic-data-type.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/functionalprogramming/algebraic-data-type.html</guid>
+    <pubDate>Thu, 07 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Create a Cmd Msg from Msg in Elm</title>
+    <link>/https://blog.jft.rocks/functionalprogramming/msg-to-cmd.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/functionalprogramming/msg-to-cmd.html</guid>
+    <pubDate>Thu, 14 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Debug printing in Haskell</title>
+    <link>/https://blog.jft.rocks/functionalprogramming/debug-print-haskell.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/functionalprogramming/debug-print-haskell.html</guid>
+    <pubDate>Tue, 16 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Thermite vs Halogen</title>
+    <link>/https://blog.jft.rocks/functionalprogramming/halogen-vs-thermite.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/functionalprogramming/halogen-vs-thermite.html</guid>
+    <pubDate>Wed, 06 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#orgb91da15</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#orgb91da15</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/growth/">https://blog.jft.rocks/growth/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>Division of Responsibilities</title>
+    <link>/https://blog.jft.rocks/growth/division-of-responsibilities.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/growth/division-of-responsibilities.html</guid>
+    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Fuzz Testing</title>
+    <link>/https://blog.jft.rocks/growth/fuzz-testing.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/growth/fuzz-testing.html</guid>
+    <pubDate>Wed, 27 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Reading Source Code: My thinking process</title>
+    <link>/https://blog.jft.rocks/growth/source-code-reading.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/growth/source-code-reading.html</guid>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#org21582fc</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#org21582fc</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/hardware/">https://blog.jft.rocks/hardware/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>Arduino's KEY_3 and space character</title>
+    <link>/https://blog.jft.rocks/hardware/arduino-key-3.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/arduino-key-3.html</guid>
+    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Binary Clock</title>
+    <link>/https://blog.jft.rocks/hardware/binary-clock.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/binary-clock.html</guid>
+    <pubDate>Wed, 13 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Implementing firmware level key lock</title>
+    <link>/https://blog.jft.rocks/hardware/key-lock.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/key-lock.html</guid>
+    <pubDate>Fri, 08 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Keycaps Design Specs</title>
+    <link>/https://blog.jft.rocks/hardware/keycap-specs.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/keycap-specs.html</guid>
+    <pubDate>Sat, 16 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Packing two bytes into an integer</title>
+    <link>/https://blog.jft.rocks/hardware/packing-two-bytes-into-an-int.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/packing-two-bytes-into-an-int.html</guid>
+    <pubDate>Tue, 29 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Setting device name in Teensyduino</title>
+    <link>/https://blog.jft.rocks/hardware/custom-device-name-teensyduino.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/custom-device-name-teensyduino.html</guid>
+    <pubDate>Thu, 07 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Split keyboard firmware design</title>
+    <link>/https://blog.jft.rocks/hardware/split-keyboard-firmware.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/hardware/split-keyboard-firmware.html</guid>
+    <pubDate>Mon, 11 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#org98a5fc8</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#org98a5fc8</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/javascript/">https://blog.jft.rocks/javascript/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>A note about writing Node.js application with Webpack</title>
+    <link>/https://blog.jft.rocks/javascript/webpack-and-node.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/webpack-and-node.html</guid>
+    <pubDate>Wed, 23 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Bitwise trick to convert Float to Int</title>
+    <link>/https://blog.jft.rocks/javascript/bitwise-float-int-trick.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/bitwise-float-int-trick.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Emacs and TypeScript</title>
+    <link>/https://blog.jft.rocks/javascript/emacs-and-typescript.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/emacs-and-typescript.html</guid>
+    <pubDate>Sun, 27 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Execute command in interactive mode with Node</title>
+    <link>/https://blog.jft.rocks/javascript/spawn-interactive.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/spawn-interactive.html</guid>
+    <pubDate>Sun, 24 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Explaining var and for loop problem</title>
+    <link>/https://blog.jft.rocks/javascript/scoping-var-loop.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/scoping-var-loop.html</guid>
+    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Integrate WebAssembly in any JavaScript project</title>
+    <link>/https://blog.jft.rocks/javascript/wasm-with-npm.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/wasm-with-npm.html</guid>
+    <pubDate>Wed, 16 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Iterator and its applications</title>
+    <link>/https://blog.jft.rocks/javascript/iterator-and-its-applications.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/iterator-and-its-applications.html</guid>
+    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Mathematics operation with null and undefined</title>
+    <link>/https://blog.jft.rocks/javascript/null-vs-undefined.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/null-vs-undefined.html</guid>
+    <pubDate>Thu, 10 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Merging Emoji in JavaScript</title>
+    <link>/https://blog.jft.rocks/javascript/combine-emoji.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/combine-emoji.html</guid>
+    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Mock testing any front-end projects with Jest</title>
+    <link>/https://blog.jft.rocks/javascript/testing-frontend-with-mock.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/testing-frontend-with-mock.html</guid>
+    <pubDate>Mon, 07 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Notes on deploying Next.js to Heroku</title>
+    <link>/https://blog.jft.rocks/javascript/notes-deploy-next-heroku-now.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/notes-deploy-next-heroku-now.html</guid>
+    <pubDate>Sun, 27 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Print a PDF content automatically</title>
+    <link>/https://blog.jft.rocks/javascript/print-pdf.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/print-pdf.html</guid>
+    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>React's componentDidMount with async</title>
+    <link>/https://blog.jft.rocks/javascript/react-componentDidMount-async.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/react-componentDidMount-async.html</guid>
+    <pubDate>Fri, 25 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>React, TypeScript and scrollInToView</title>
+    <link>/https://blog.jft.rocks/javascript/react-typescript-scrollintoview.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/react-typescript-scrollintoview.html</guid>
+    <pubDate>Thu, 31 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Replace with callback in JavaScript</title>
+    <link>/https://blog.jft.rocks/javascript/replace-with-callback.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/replace-with-callback.html</guid>
+    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Scoping in JavaScript</title>
+    <link>/https://blog.jft.rocks/javascript/scoping.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/scoping.html</guid>
+    <pubDate>Tue, 15 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Thread for WebAssembly</title>
+    <link>/https://blog.jft.rocks/javascript/wasm-pthread.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/wasm-pthread.html</guid>
+    <pubDate>Wed, 16 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>What part of DOM are slow?</title>
+    <link>/https://blog.jft.rocks/javascript/why-dom-slow.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/why-dom-slow.html</guid>
+    <pubDate>Tue, 15 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Why TypeScript?</title>
+    <link>/https://blog.jft.rocks/javascript/why-typescript.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/why-typescript.html</guid>
+    <pubDate>Mon, 28 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>import() function</title>
+    <link>/https://blog.jft.rocks/javascript/import-function.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/javascript/import-function.html</guid>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#org7be89ed</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#org7be89ed</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/linux/">https://blog.jft.rocks/linux/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>Change back to previous directory</title>
+    <link>/https://blog.jft.rocks/linux/jump-back.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/linux/jump-back.html</guid>
+    <pubDate>Fri, 22 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Execute command over SSH a quick way</title>
+    <link>/https://blog.jft.rocks/linux/command-over-ssh.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/linux/command-over-ssh.html</guid>
+    <pubDate>Fri, 01 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>How ibus communicate with its engines</title>
+    <link>/https://blog.jft.rocks/linux/how-ibus-communicate-with-its-engines.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/linux/how-ibus-communicate-with-its-engines.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>No dev package needed for OpenBSD</title>
+    <link>/https://blog.jft.rocks/linux/openbsd-no-dev.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/linux/openbsd-no-dev.html</guid>
+    <pubDate>Fri, 01 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Red Black Tree in Linux kernel</title>
+    <link>/https://blog.jft.rocks/linux/red-black-tree.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/linux/red-black-tree.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>SSL for Dokku app with Let's Encrypt</title>
+    <link>/https://blog.jft.rocks/linux/dokku-ssl.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/linux/dokku-ssl.html</guid>
+    <pubDate>Mon, 04 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#orge223865</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#orge223865</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/random/">https://blog.jft.rocks/random/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>A random mathematics note</title>
+    <link>/https://blog.jft.rocks/random/a-random-math-note.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/a-random-math-note.html</guid>
+    <pubDate>Fri, 25 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>A trick to store PDF file an the internet</title>
+    <link>/https://blog.jft.rocks/random/save-pdf.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/save-pdf.html</guid>
+    <pubDate>Mon, 04 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Add dictionary for Kindle</title>
+    <link>/https://blog.jft.rocks/random/kindle-custom-dict.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/kindle-custom-dict.html</guid>
+    <pubDate>Mon, 11 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Build a better Bookshelf</title>
+    <link>/https://blog.jft.rocks/random/build-a-better-bookshelf.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/build-a-better-bookshelf.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Color picker in hex on macOS</title>
+    <link>/https://blog.jft.rocks/random/color-picker-in-hex.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/color-picker-in-hex.html</guid>
+    <pubDate>Fri, 01 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Get the source code of an NPM package</title>
+    <link>/https://blog.jft.rocks/random/get-npm-package-source.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/get-npm-package-source.html</guid>
+    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Handwritten Reading Notes</title>
+    <link>/https://blog.jft.rocks/random/reading-notes.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/reading-notes.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>How country flags emojis created</title>
+    <link>/https://blog.jft.rocks/random/how-flag-emoji-created.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/how-flag-emoji-created.html</guid>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>How to write an article review</title>
+    <link>/https://blog.jft.rocks/random/how-to-write-summary.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/how-to-write-summary.html</guid>
+    <pubDate>Wed, 13 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Ink Trap</title>
+    <link>/https://blog.jft.rocks/random/ink-trap.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/ink-trap.html</guid>
+    <pubDate>Sat, 02 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Making things with Lego</title>
+    <link>/https://blog.jft.rocks/random/lego-designer.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/lego-designer.html</guid>
+    <pubDate>Tue, 26 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>My Dvorak WPM progress</title>
+    <link>/https://blog.jft.rocks/random/dvorak-progress.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/dvorak-progress.html</guid>
+    <pubDate>Mon, 08 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Publishing files or folder starts with dash on Github Page</title>
+    <link>/https://blog.jft.rocks/random/github-page-jekyll-skip-files.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/github-page-jekyll-skip-files.html</guid>
+    <pubDate>Tue, 22 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Search code change in Git</title>
+    <link>/https://blog.jft.rocks/random/git-log-code-change.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/git-log-code-change.html</guid>
+    <pubDate>Thu, 28 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Search git log in date range</title>
+    <link>/https://blog.jft.rocks/random/git-log-date-range.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/git-log-date-range.html</guid>
+    <pubDate>Thu, 21 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Some good strategy games for PS4</title>
+    <link>/https://blog.jft.rocks/random/some-good-ps4-games.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/some-good-ps4-games.html</guid>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Some notes on technical writing</title>
+    <link>/https://blog.jft.rocks/random/notes-on-technical-writing.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/notes-on-technical-writing.html</guid>
+    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Squircle</title>
+    <link>/https://blog.jft.rocks/random/squircle.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/squircle.html</guid>
+    <pubDate>Tue, 12 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>The best To-Do List System</title>
+    <link>/https://blog.jft.rocks/random/the-best-todo-list-method.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/the-best-todo-list-method.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use stylus pen with Macbook</title>
+    <link>/https://blog.jft.rocks/random/drawing-on-macbook-touchpad.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/drawing-on-macbook-touchpad.html</guid>
+    <pubDate>Fri, 11 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>What is a good code example?</title>
+    <link>/https://blog.jft.rocks/random/what-is-a-good-code-example.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/what-is-a-good-code-example.html</guid>
+    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>When to double a consonant before ed or ing</title>
+    <link>/https://blog.jft.rocks/random/when-to-double.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/random/when-to-double.html</guid>
+    <pubDate>Tue, 19 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>:PROPERTIES:</title>
+    <link>/rss.html#orgf302cc9</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rss.html#orgf302cc9</guid>
+    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
+
+    <description><![CDATA[<p>
+    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/rust/">https://blog.jft.rocks/rust/</a>
+    :PUBDATE: 
+    </p>
+    ]]></description>
+  </item>
+
+  <item>
+    <title>Making Rust GUI app with HTML/CSS/JavaScript</title>
+    <link>/https://blog.jft.rocks/rust/gui-app.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/gui-app.html</guid>
+    <pubDate>Sat, 19 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Recursive type problem in Rust</title>
+    <link>/https://blog.jft.rocks/rust/recursive-rust.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/recursive-rust.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Rust FFI: Sending strings to the outside world</title>
+    <link>/https://blog.jft.rocks/rust/string-ffi-rust.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/string-ffi-rust.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Rust for the Web</title>
+    <link>/https://blog.jft.rocks/rust/rust-for-the-web.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/rust-for-the-web.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Setup Travis CI for Rust Diesel project</title>
+    <link>/https://blog.jft.rocks/rust/rust-travis-ci.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/rust-travis-ci.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Writing 6502 Disassembler in Rust</title>
+    <link>/https://blog.jft.rocks/rust/writing-6502-disassembler.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/writing-6502-disassembler.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>wasm-bindgen for Rust + WebAssembly in 2019</title>
+    <link>/https://blog.jft.rocks/rust/wasm-bindgen.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/https://blog.jft.rocks/rust/wasm-bindgen.html</guid>
+    <pubDate>Tue, 22 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+</channel>
+</rss>
