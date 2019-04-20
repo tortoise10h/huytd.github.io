@@ -14,8 +14,8 @@
   <link>/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Fri, 19 Apr 2019 17:38:07 -0700</pubDate>
-  <lastBuildDate>Fri, 19 Apr 2019 17:38:07 -0700</lastBuildDate>
+  <pubDate>Fri, 19 Apr 2019 17:46:15 -0700</pubDate>
+  <lastBuildDate>Fri, 19 Apr 2019 17:46:15 -0700</lastBuildDate>
   <generator>Emacs 26.1 Org-mode 9.1.9</generator>
   <webMaster>huy@USLOPMNLM223026.local (Huy Tran)</webMaster>
   <image>
@@ -23,20 +23,6 @@
     <title></title>
     <link>/</link>
   </image>
-
-  <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#orgce4d52c</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#orgce4d52c</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/css/">https://blog.jft.rocks/css/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
 
   <item>
     <title>Button cannot be a flex container</title>
@@ -128,20 +114,6 @@
 
     <description><![CDATA[]]></description>
   </item>
-  <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#orgf123d77</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#orgf123d77</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/emacs/">https://blog.jft.rocks/emacs/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
   <item>
     <title>A minimal but useful mode-line</title>
     <link>/https://blog.jft.rocks/emacs/minimal-mode-line.html</link>
@@ -386,20 +358,6 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#org35f4b97</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#org35f4b97</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/functionalprogramming/">https://blog.jft.rocks/functionalprogramming/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
-  <item>
     <title>Algebraic Data Type</title>
     <link>/https://blog.jft.rocks/functionalprogramming/algebraic-data-type.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
@@ -436,20 +394,6 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#orgb91da15</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#orgb91da15</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/growth/">https://blog.jft.rocks/growth/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
-  <item>
     <title>Division of Responsibilities</title>
     <link>/https://blog.jft.rocks/growth/division-of-responsibilities.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
@@ -476,20 +420,6 @@
 
     <description><![CDATA[]]></description>
   </item>
-  <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#org21582fc</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#org21582fc</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/hardware/">https://blog.jft.rocks/hardware/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
   <item>
     <title>Arduino's KEY_3 and space character</title>
     <link>/https://blog.jft.rocks/hardware/arduino-key-3.html</link>
@@ -553,20 +483,6 @@
 
     <description><![CDATA[]]></description>
   </item>
-  <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#org98a5fc8</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#org98a5fc8</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/javascript/">https://blog.jft.rocks/javascript/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
   <item>
     <title>A note about writing Node.js application with Webpack</title>
     <link>/https://blog.jft.rocks/javascript/webpack-and-node.html</link>
@@ -748,20 +664,6 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#org7be89ed</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#org7be89ed</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/linux/">https://blog.jft.rocks/linux/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
-  <item>
     <title>Change back to previous directory</title>
     <link>/https://blog.jft.rocks/linux/jump-back.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
@@ -815,20 +717,6 @@
 
     <description><![CDATA[]]></description>
   </item>
-  <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#orge223865</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#orge223865</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/random/">https://blog.jft.rocks/random/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
   <item>
     <title>A random mathematics note</title>
     <link>/https://blog.jft.rocks/random/a-random-math-note.html</link>
@@ -1027,20 +915,6 @@
 
     <description><![CDATA[]]></description>
   </item>
-  <item>
-    <title>:PROPERTIES:</title>
-    <link>/rss.html#orgf302cc9</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rss.html#orgf302cc9</guid>
-    <pubDate>Fri, 19 Apr 2019 17:38:00 -0700</pubDate>
-
-    <description><![CDATA[<p>
-    :RSS<sub>PERMALINK</sub>: <a href="https://blog.jft.rocks/rust/">https://blog.jft.rocks/rust/</a>
-    :PUBDATE: 
-    </p>
-    ]]></description>
-  </item>
-
   <item>
     <title>Making Rust GUI app with HTML/CSS/JavaScript</title>
     <link>/https://blog.jft.rocks/rust/gui-app.html</link>
