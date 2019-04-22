@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-27 Sun 21:02 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>React's componentDidMount with async</title>
@@ -240,8 +240,8 @@ It's safe to add <code>async</code> to <code>componentDidMount</code> to be able
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">async</span> componentDidMount(): Promise&lt;<span style="color: #e45649;">void</span>&gt; {
-  <span style="color: #e45649;">await</span> doSomething();
+<pre class="src src-js"><span style="color: #FFAE57;">async</span> componentDidMount(): Promise&lt;<span style="color: #FFAE57;">void</span>&gt; {
+  <span style="color: #FFAE57;">await</span> doSomething();
 }
 </pre>
 </div>
@@ -251,7 +251,7 @@ The above is the same as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">componentDidMount(): <span style="color: #e45649;">void</span> {
+<pre class="src src-js">componentDidMount(): <span style="color: #FFAE57;">void</span> {
   doSomething()
     .then(() =&gt; { ... });
 }
@@ -261,7 +261,7 @@ The above is the same as:
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-25 Fri 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-27 Sun 21:02</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

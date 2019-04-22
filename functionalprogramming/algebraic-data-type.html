@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-03-21 Thu 10:58 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Algebraic Data Type</title>
@@ -260,14 +260,14 @@ Is an alternative type, where the type of a value will be one of many other type
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b294bb;">data</span> <span style="color: #f0c674;">TrafficLight</span> <span style="color: #cc6666;">=</span> <span style="color: #f0c674;">Red</span> <span style="color: #cc6666;">|</span> <span style="color: #f0c674;">Yellow</span> <span style="color: #cc6666;">|</span> <span style="color: #f0c674;">Green</span>
+<pre class="src src-haskell"><span style="color: #FFAE57;">data</span> <span style="color: #5CCFE6;">TrafficLight</span> <span style="color: #D9D7CE;">=</span> <span style="color: #5CCFE6;">Red</span> <span style="color: #D9D7CE;">|</span> <span style="color: #5CCFE6;">Yellow</span> <span style="color: #D9D7CE;">|</span> <span style="color: #5CCFE6;">Green</span>
 
-<span style="color: #81a2be;">shouldGo</span> <span style="color: #cc6666;">::</span> <span style="color: #f0c674;">TrafficLight</span> <span style="color: #cc6666;">-&gt;</span> <span style="color: #f0c674;">Bool</span>
-<span style="color: #81a2be;">shouldGo</span> <span style="color: #f0c674;">Red</span> <span style="color: #cc6666;">=</span> <span style="color: #f0c674;">False</span>
-<span style="color: #81a2be;">shouldGo</span> <span style="color: #f0c674;">Yellow</span> <span style="color: #cc6666;">=</span> <span style="color: #f0c674;">True</span>
-<span style="color: #81a2be;">shouldGo</span> <span style="color: #f0c674;">Green</span> <span style="color: #cc6666;">=</span> <span style="color: #f0c674;">True</span>
+<span style="color: #FFD580;">shouldGo</span> <span style="color: #D9D7CE;">::</span> <span style="color: #5CCFE6;">TrafficLight</span> <span style="color: #D9D7CE;">-&gt;</span> <span style="color: #5CCFE6;">Bool</span>
+<span style="color: #FFD580;">shouldGo</span> <span style="color: #5CCFE6;">Red</span> <span style="color: #D9D7CE;">=</span> <span style="color: #5CCFE6;">False</span>
+<span style="color: #FFD580;">shouldGo</span> <span style="color: #5CCFE6;">Yellow</span> <span style="color: #D9D7CE;">=</span> <span style="color: #5CCFE6;">True</span>
+<span style="color: #FFD580;">shouldGo</span> <span style="color: #5CCFE6;">Green</span> <span style="color: #D9D7CE;">=</span> <span style="color: #5CCFE6;">True</span>
 
-<span style="color: #81a2be;">main</span> <span style="color: #cc6666;">=</span> print <span style="color: #cc6666;">$</span> shouldGo <span style="color: #f0c674;">Red</span>
+<span style="color: #FFD580;">main</span> <span style="color: #D9D7CE;">=</span> print <span style="color: #D9D7CE;">$</span> shouldGo <span style="color: #5CCFE6;">Red</span>
 </pre>
 </div>
 </div>
@@ -281,14 +281,14 @@ Is a combination of many other types, usually have a tag assigned for pattern ma
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell"><span style="color: #b294bb;">data</span> <span style="color: #f0c674;">Rect</span> a <span style="color: #cc6666;">=</span> <span style="color: #f0c674;">Rect</span> a a <span style="color: #b294bb;">deriving</span> <span style="color: #f0c674;">Show</span>
+<pre class="src src-haskell"><span style="color: #FFAE57;">data</span> <span style="color: #5CCFE6;">Rect</span> a <span style="color: #D9D7CE;">=</span> <span style="color: #5CCFE6;">Rect</span> a a <span style="color: #FFAE57;">deriving</span> <span style="color: #5CCFE6;">Show</span>
 
-<span style="color: #81a2be;">square</span> <span style="color: #cc6666;">::</span> <span style="color: #f0c674;">Int</span> <span style="color: #cc6666;">-&gt;</span> <span style="color: #f0c674;">Rect</span> <span style="color: #f0c674;">Int</span>
-<span style="color: #81a2be;">square</span> w <span style="color: #cc6666;">=</span> <span style="color: #f0c674;">Rect</span> w w
+<span style="color: #FFD580;">square</span> <span style="color: #D9D7CE;">::</span> <span style="color: #5CCFE6;">Int</span> <span style="color: #D9D7CE;">-&gt;</span> <span style="color: #5CCFE6;">Rect</span> <span style="color: #5CCFE6;">Int</span>
+<span style="color: #FFD580;">square</span> w <span style="color: #D9D7CE;">=</span> <span style="color: #5CCFE6;">Rect</span> w w
 
-<span style="color: #81a2be;">shapeA</span> <span style="color: #cc6666;">=</span> square 5
+<span style="color: #FFD580;">shapeA</span> <span style="color: #D9D7CE;">=</span> square 5
 
-<span style="color: #81a2be;">main</span> <span style="color: #cc6666;">=</span> print <span style="color: #cc6666;">$</span> shapeA
+<span style="color: #FFD580;">main</span> <span style="color: #D9D7CE;">=</span> print <span style="color: #D9D7CE;">$</span> shapeA
 </pre>
 </div>
 </div>
@@ -297,7 +297,7 @@ Is a combination of many other types, usually have a tag assigned for pattern ma
 <div id="postamble" class="status">
 <p class="date">Date: 2019-03-07 Thu 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-03-21 Thu 10:58</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

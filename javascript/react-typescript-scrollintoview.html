@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-31 Thu 14:05 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>React, TypeScript and scrollInToView</title>
@@ -252,16 +252,16 @@ First, define a <code>ref</code> like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">class</span> ListArticles <span style="color: #e45649;">extends</span> React.Component {
-  <span style="color: #e45649;">private</span> scrollAnchorRef: RefObject&lt;HTMLDivElement&gt;;
+<pre class="src src-js"><span style="color: #FFAE57;">class</span> ListArticles <span style="color: #FFAE57;">extends</span> React.Component {
+  <span style="color: #FFAE57;">private</span> scrollAnchorRef: RefObject&lt;HTMLDivElement&gt;;
 
   constructor(props) {
-    <span style="color: #e45649;">super</span>(props);
-    <span style="color: #b751b6;">this</span>.scrollAnchorRef = React.createRef();
+    <span style="color: #FFAE57;">super</span>(props);
+    <span style="color: #FFAE57;">this</span>.scrollAnchorRef = React.createRef();
   }
 
   render() {
-    &lt;div ref={<span style="color: #b751b6;">this</span>.scrollAnchorRef}&gt;
+    &lt;div ref={<span style="color: #FFAE57;">this</span>.scrollAnchorRef}&gt;
       ...
     &lt;/div&gt;
   }
@@ -299,8 +299,8 @@ The solution is simple, add an existent check:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">anchor</span> = <span style="color: #b751b6;">this</span>.scrollAnchorRef;
-<span style="color: #e45649;">if</span> (anchor) anchor.scrollIntoView();
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">anchor</span> = <span style="color: #FFAE57;">this</span>.scrollAnchorRef;
+<span style="color: #FFAE57;">if</span> (anchor) anchor.scrollIntoView();
 </pre>
 </div>
 
@@ -311,7 +311,7 @@ This is how type saved your butt.
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-31 Thu 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-31 Thu 14:05</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

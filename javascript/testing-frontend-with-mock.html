@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-21 Mon 16:20 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mock testing any front-end projects with Jest</title>
@@ -255,16 +255,16 @@ Let's consider the exist module in a front-end project like this:
 <b>File: internal/shared/utils.js</b>
 </p>
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">moment</span> = require(<span style="color: #50a14f;">'moment'</span>);
-(<span style="color: #e45649;">function</span>() {
-  require(<span style="color: #50a14f;">"Internal/some-module"</span>);
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">moment</span> = require(<span style="color: #BAE67E;">'moment'</span>);
+(<span style="color: #FFAE57;">function</span>() {
+  require(<span style="color: #BAE67E;">"Internal/some-module"</span>);
 
-  Foo.utils.formatPrice = <span style="color: #e45649;">function</span>(<span style="color: #6a1868;">price</span>) {
-    <span style="color: #e45649;">var</span> <span style="color: #6a1868;">correctPrice</span> = (price+<span style="color: #50a14f;">''</span>).replace(<span style="color: #50a14f;">/(\d+.\d{0,2})\d*$/</span>, <span style="color: #50a14f;">"$1"</span>);
-    <span style="color: #e45649;">return</span> Math.round(parseFloat(correctPrice) * 100) / 100;
+  Foo.utils.formatPrice = <span style="color: #FFAE57;">function</span>(<span style="color: #D9D7CE;">price</span>) {
+    <span style="color: #FFAE57;">var</span> <span style="color: #D9D7CE;">correctPrice</span> = (price+<span style="color: #BAE67E;">''</span>).replace(<span style="color: #BAE67E;">/(\d+.\d{0,2})\d*$/</span>, <span style="color: #BAE67E;">"$1"</span>);
+    <span style="color: #FFAE57;">return</span> Math.round(parseFloat(correctPrice) * 100) / 100;
   };
 
-  Foo.utils.insertView = <span style="color: #e45649;">function</span>(<span style="color: #6a1868;">el</span>) {
+  Foo.utils.insertView = <span style="color: #FFAE57;">function</span>(<span style="color: #D9D7CE;">el</span>) {
     $(document).append(el);
   };
 });
@@ -284,16 +284,16 @@ We can start the test by mocking and importing some stuffs:
 </p>
 <div class="org-src-container">
 <pre class="src src-js">beforeEach(() =&gt; {
-  jest.mock(<span style="color: #50a14f;">'Internal/some-module'</span>, () =&gt; {
-    <span style="color: #e45649;">return</span> {};
-  }, { virtual: <span style="color: #b751b6;">true</span> });
+  jest.mock(<span style="color: #BAE67E;">'Internal/some-module'</span>, () =&gt; {
+    <span style="color: #FFAE57;">return</span> {};
+  }, { virtual: <span style="color: #FFAE57;">true</span> });
 
   window.Foo = jest.fn();
-  window.$ = require(<span style="color: #50a14f;">'jquery'</span>);
+  window.$ = require(<span style="color: #BAE67E;">'jquery'</span>);
 
   jest.resetModules();
 
-  require(<span style="color: #50a14f;">'./utils'</span>);
+  require(<span style="color: #BAE67E;">'./utils'</span>);
 });
 </pre>
 </div>
@@ -310,13 +310,13 @@ Now it's time to write our actual test code:
 <b>File: internal/shared/utils.test.js</b>
 </p>
 <div class="org-src-container">
-<pre class="src src-js">describe(<span style="color: #50a14f;">'formatPrice testing'</span>, () =&gt; {
-  it(<span style="color: #50a14f;">'should working with normal price string'</span>, () =&gt; {
-    expect(Foo.utils.formatPrice(<span style="color: #50a14f;">'99.9999'</span>)).toEqual(99.99);
+<pre class="src src-js">describe(<span style="color: #BAE67E;">'formatPrice testing'</span>, () =&gt; {
+  it(<span style="color: #BAE67E;">'should working with normal price string'</span>, () =&gt; {
+    expect(Foo.utils.formatPrice(<span style="color: #BAE67E;">'99.9999'</span>)).toEqual(99.99);
   });
 
-  it(<span style="color: #50a14f;">'should not parse invalid input'</span>, () =&gt; {
-    expect(Foo.utils.formatPrice(<span style="color: #50a14f;">'awe99.99aewf99'</span>)).toEqual(<span style="color: #b751b6;">NaN</span>);
+  it(<span style="color: #BAE67E;">'should not parse invalid input'</span>, () =&gt; {
+    expect(Foo.utils.formatPrice(<span style="color: #BAE67E;">'awe99.99aewf99'</span>)).toEqual(<span style="color: #FFAE57;">NaN</span>);
   });
 });
 </pre>
@@ -329,7 +329,7 @@ Now run the test with <code>jest</code> command, everything should work.
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-07 Mon 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-21 Mon 16:20</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

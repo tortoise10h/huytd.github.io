@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-22 Tue 11:40 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Use Emacs as a reminder</title>
@@ -258,8 +258,8 @@ If you want to setup a desktop notification, use the following snippet:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Appointment Setup</span>
-(<span style="color: #e45649;">require</span> '<span style="color: #b751b6;">appt</span>)
+<pre class="src src-lisp"><span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Appointment Setup</span>
+(<span style="color: #FFAE57;">require</span> '<span style="color: #FFAE57;">appt</span>)
 (setq appt-time-msg-list nil
       appt-display-interval '3
       appt-message-warning-time '12
@@ -267,19 +267,19 @@ If you want to setup a desktop notification, use the following snippet:
       appt-display-format 'window)
 (appt-activate 1)
 
-(<span style="color: #e45649;">defvar</span> <span style="color: #6a1868;">terminal-notifier-path</span>
-  <span style="color: #50a14f;">"/usr/local/bin/terminal-notifier"</span>)
+(<span style="color: #FFAE57;">defvar</span> <span style="color: #D9D7CE;">terminal-notifier-path</span>
+  <span style="color: #BAE67E;">"/usr/local/bin/terminal-notifier"</span>)
 
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">user-appt-send-notification</span> (title msg)
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">user-appt-send-notification</span> (title msg)
   (shell-command (concat terminal-notifier-path
-                         <span style="color: #50a14f;">" -message "</span> msg
-                         <span style="color: #50a14f;">" -title "</span> title
-                         <span style="color: #50a14f;">" -appIcon /Applications/Calendar.app/Contents/Resources/App-empty.icns"</span>)))
+                         <span style="color: #BAE67E;">" -message "</span> msg
+                         <span style="color: #BAE67E;">" -title "</span> title
+                         <span style="color: #BAE67E;">" -appIcon /Applications/Calendar.app/Contents/Resources/App-empty.icns"</span>)))
 
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">user-appt-display</span> (min-to-app new-time msg)
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">user-appt-display</span> (min-to-app new-time msg)
   (user-appt-send-notification
-   (format <span style="color: #50a14f;">"'&#128293; Appointment in %s minutes'"</span> min-to-app)
-   (format <span style="color: #50a14f;">"'%s'"</span> msg)))
+   (format <span style="color: #BAE67E;">"'&#128293; Appointment in %s minutes'"</span> min-to-app)
+   (format <span style="color: #BAE67E;">"'%s'"</span> msg)))
 
 (setq appt-disp-window-function (function user-appt-display))
 </pre>
@@ -308,7 +308,7 @@ Somebody also use <code>org-agenda-to-appt</code> function to create appointment
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-21 Mon 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-22 Tue 11:40</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

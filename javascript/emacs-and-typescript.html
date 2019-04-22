@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-28 Mon 23:33 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs and TypeScript</title>
@@ -248,24 +248,24 @@ This is my config, using <code>use-package</code> and combining with <code>js2-m
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">JavaScript and TypeScript</span>
+<pre class="src src-lisp"><span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">JavaScript and TypeScript</span>
 (use-package js2-mode
-  <span style="color: #a626a4;">:ensure</span> t
-  <span style="color: #a626a4;">:init</span>
-  (add-to-list 'auto-mode-alist '(<span style="color: #50a14f;">"\\.js\\'"</span> . js2-mode)))
+  <span style="color: #D4BFFF;">:ensure</span> t
+  <span style="color: #D4BFFF;">:init</span>
+  (add-to-list 'auto-mode-alist '(<span style="color: #BAE67E;">"\\.js\\'"</span> . js2-mode)))
 
 (use-package tide
-  <span style="color: #a626a4;">:ensure</span> t
-  <span style="color: #a626a4;">:after</span> (typescript-mode company flycheck)
-  <span style="color: #a626a4;">:hook</span> ((typescript-mode . tide-setup)
+  <span style="color: #D4BFFF;">:ensure</span> t
+  <span style="color: #D4BFFF;">:after</span> (typescript-mode company flycheck)
+  <span style="color: #D4BFFF;">:hook</span> ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-formater-before-save)))
 
 (use-package web-mode
-  <span style="color: #a626a4;">:ensure</span> t
-  <span style="color: #a626a4;">:init</span>
-  (add-to-list 'auto-mode-alist '(<span style="color: #50a14f;">"\\.html?\\'"</span> . web-mode))
-  (add-to-list 'auto-mode-alist '(<span style="color: #50a14f;">"\\.tsx\\'"</span> . typescript-mode))
+  <span style="color: #D4BFFF;">:ensure</span> t
+  <span style="color: #D4BFFF;">:init</span>
+  (add-to-list 'auto-mode-alist '(<span style="color: #BAE67E;">"\\.html?\\'"</span> . web-mode))
+  (add-to-list 'auto-mode-alist '(<span style="color: #BAE67E;">"\\.tsx\\'"</span> . typescript-mode))
   (setq web-mode-enable-current-element-highlight t))
 </pre>
 </div>
@@ -273,7 +273,7 @@ This is my config, using <code>use-package</code> and combining with <code>js2-m
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-27 Sun 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-28 Mon 23:33</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

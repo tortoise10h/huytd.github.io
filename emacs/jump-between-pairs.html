@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-21 Mon 16:20 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Jump between matching parens</title>
@@ -244,12 +244,12 @@ So here's a workaround:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(global-set-key <span style="color: #50a14f;">"%"</span> 'match-paren)
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">match-paren</span> (arg)
-  <span style="color: #84888b; font-style: italic;">"Go to the matching paren if on a paren; otherwise insert %."</span>
-  (interactive <span style="color: #50a14f;">"p"</span>)
-  (<span style="color: #e45649;">cond</span> ((looking-at <span style="color: #50a14f;">"\\s("</span>) (forward-list 1) (backward-char 1))
-        ((looking-at <span style="color: #50a14f;">"\\s)"</span>) (forward-char 1) (backward-list 1))
+<pre class="src src-lisp">(global-set-key <span style="color: #BAE67E;">"%"</span> 'match-paren)
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">match-paren</span> (arg)
+  <span style="color: #BAE67E;">"Go to the matching paren if on a paren; otherwise insert %."</span>
+  (interactive <span style="color: #BAE67E;">"p"</span>)
+  (<span style="color: #FFAE57;">cond</span> ((looking-at <span style="color: #BAE67E;">"\\s("</span>) (forward-list 1) (backward-char 1))
+        ((looking-at <span style="color: #BAE67E;">"\\s)"</span>) (forward-char 1) (backward-list 1))
         (t (self-insert-command (or arg 1)))))
 </pre>
 </div>
@@ -265,7 +265,7 @@ Source: <a href="https://www.gnu.org/software/emacs/manual/html_node/efaq/Matchi
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-18 Fri 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-21 Mon 16:20</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

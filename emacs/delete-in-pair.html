@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-22 Tue 17:45 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Delete inside pair of bracket or quotes</title>
@@ -240,8 +240,8 @@ By using <code>backward-sexp</code> to move backward by sexp, basically it will 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp">(global-set-key (kbd <span style="color: #50a14f;">"M-d"</span>) (<span style="color: #e45649;">lambda</span> ()
-                              <span style="color: #84888b; font-style: italic;">"delete word sexp"</span>
+<pre class="src src-lisp">(global-set-key (kbd <span style="color: #BAE67E;">"M-d"</span>) (<span style="color: #FFAE57;">lambda</span> ()
+                              <span style="color: #BAE67E;">"delete word sexp"</span>
                               (interactive)
                               (backward-sexp)
                               (kill-sexp)))
@@ -255,70 +255,70 @@ Another better way to delete in pair is using what described at <a href="http://
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lisp"><span style="color: #9ca0a4;">;; </span><span style="color: #9ca0a4;">Deleting</span>
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">xah-delete-backward-char-or-bracket-text</span> ()
-  <span style="color: #84888b; font-style: italic;">"Delete backward 1 character, but if it's a \"quote\" or bracket ()[]{}&#12304;&#12305;&#12300;&#12301; etc, delete bracket and the inner text, push the deleted text to `</span><span style="color: #b751b6; font-style: italic;">kill-ring</span><span style="color: #84888b; font-style: italic;">'.</span>
+<pre class="src src-lisp"><span style="color: #5C6773; font-style: italic;">;; </span><span style="color: #5C6773; font-style: italic;">Deleting</span>
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">xah-delete-backward-char-or-bracket-text</span> ()
+  <span style="color: #BAE67E;">"Delete backward 1 character, but if it's a \"quote\" or bracket ()[]{}&#12304;&#12305;&#12300;&#12301; etc, delete bracket and the inner text, push the deleted text to `</span><span style="color: #FFAE57;">kill-ring</span><span style="color: #BAE67E;">'.</span>
 
-<span style="color: #84888b; font-style: italic;">What char is considered bracket or quote is determined by current syntax table.</span>
+<span style="color: #BAE67E;">What char is considered bracket or quote is determined by current syntax table.</span>
 
-<span style="color: #84888b; font-style: italic;">If `</span><span style="color: #b751b6; font-style: italic;">universal-argument</span><span style="color: #84888b; font-style: italic;">' is called first, do not delete inner text.</span>
+<span style="color: #BAE67E;">If `</span><span style="color: #FFAE57;">universal-argument</span><span style="color: #BAE67E;">' is called first, do not delete inner text.</span>
 
-<span style="color: #84888b; font-style: italic;">URL `</span><span style="color: #b751b6; font-style: italic;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #84888b; font-style: italic;">'</span>
-<span style="color: #84888b; font-style: italic;">Version 2017-07-02"</span>
+<span style="color: #BAE67E;">URL `</span><span style="color: #FFAE57;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #BAE67E;">'</span>
+<span style="color: #BAE67E;">Version 2017-07-02"</span>
   (interactive)
-  (<span style="color: #e45649;">if</span> (and delete-selection-mode (region-active-p))
+  (<span style="color: #FFAE57;">if</span> (and delete-selection-mode (region-active-p))
       (delete-region (region-beginning) (region-end))
-    (<span style="color: #e45649;">cond</span>
-     ((looking-back <span style="color: #50a14f;">"\\s)"</span> 1)
-      (<span style="color: #e45649;">if</span> current-prefix-arg
+    (<span style="color: #FFAE57;">cond</span>
+     ((looking-back <span style="color: #BAE67E;">"\\s)"</span> 1)
+      (<span style="color: #FFAE57;">if</span> current-prefix-arg
           (xah-delete-backward-bracket-pair)
         (xah-delete-backward-bracket-text)))
-     ((looking-back <span style="color: #50a14f;">"\\s("</span> 1)
-      (<span style="color: #e45649;">progn</span>
+     ((looking-back <span style="color: #BAE67E;">"\\s("</span> 1)
+      (<span style="color: #FFAE57;">progn</span>
         (backward-char)
         (forward-sexp)
-        (<span style="color: #e45649;">if</span> current-prefix-arg
+        (<span style="color: #FFAE57;">if</span> current-prefix-arg
             (xah-delete-backward-bracket-pair)
           (xah-delete-backward-bracket-text))))
-     ((looking-back <span style="color: #50a14f;">"\\s\""</span> 1)
-      (<span style="color: #e45649;">if</span> (nth 3 (syntax-ppss))
-          (<span style="color: #e45649;">progn</span>
+     ((looking-back <span style="color: #BAE67E;">"\\s\""</span> 1)
+      (<span style="color: #FFAE57;">if</span> (nth 3 (syntax-ppss))
+          (<span style="color: #FFAE57;">progn</span>
             (backward-char )
             (xah-delete-forward-bracket-pairs (not current-prefix-arg)))
-        (<span style="color: #e45649;">if</span> current-prefix-arg
+        (<span style="color: #FFAE57;">if</span> current-prefix-arg
             (xah-delete-backward-bracket-pair)
           (xah-delete-backward-bracket-text))))
      (t
       (delete-char -1)))))
 
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">xah-delete-backward-bracket-text</span> ()
-  <span style="color: #84888b; font-style: italic;">"Delete the matching brackets/quotes to the left of cursor, including the inner text.</span>
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">xah-delete-backward-bracket-text</span> ()
+  <span style="color: #BAE67E;">"Delete the matching brackets/quotes to the left of cursor, including the inner text.</span>
 
-<span style="color: #84888b; font-style: italic;">This command assumes the left of point is a right bracket, and there's a matching one before it.</span>
+<span style="color: #BAE67E;">This command assumes the left of point is a right bracket, and there's a matching one before it.</span>
 
-<span style="color: #84888b; font-style: italic;">What char is considered bracket or quote is determined by current syntax table.</span>
+<span style="color: #BAE67E;">What char is considered bracket or quote is determined by current syntax table.</span>
 
-<span style="color: #84888b; font-style: italic;">URL `</span><span style="color: #b751b6; font-style: italic;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #84888b; font-style: italic;">'</span>
-<span style="color: #84888b; font-style: italic;">Version 2017-07-02"</span>
+<span style="color: #BAE67E;">URL `</span><span style="color: #FFAE57;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #BAE67E;">'</span>
+<span style="color: #BAE67E;">Version 2017-07-02"</span>
   (interactive)
-  (<span style="color: #e45649;">progn</span>
+  (<span style="color: #FFAE57;">progn</span>
     (forward-sexp -1)
     (mark-sexp)
     (kill-region (region-beginning) (region-end))))
 
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">xah-delete-backward-bracket-pair</span> ()
-  <span style="color: #84888b; font-style: italic;">"Delete the matching brackets/quotes to the left of cursor.</span>
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">xah-delete-backward-bracket-pair</span> ()
+  <span style="color: #BAE67E;">"Delete the matching brackets/quotes to the left of cursor.</span>
 
-<span style="color: #84888b; font-style: italic;">After the command, mark is set at the left matching bracket position, so you can `</span><span style="color: #b751b6; font-style: italic;">exchange-point-and-mark</span><span style="color: #84888b; font-style: italic;">' to select it.</span>
+<span style="color: #BAE67E;">After the command, mark is set at the left matching bracket position, so you can `</span><span style="color: #FFAE57;">exchange-point-and-mark</span><span style="color: #BAE67E;">' to select it.</span>
 
-<span style="color: #84888b; font-style: italic;">This command assumes the left of point is a right bracket, and there's a matching one before it.</span>
+<span style="color: #BAE67E;">This command assumes the left of point is a right bracket, and there's a matching one before it.</span>
 
-<span style="color: #84888b; font-style: italic;">What char is considered bracket or quote is determined by current syntax table.</span>
+<span style="color: #BAE67E;">What char is considered bracket or quote is determined by current syntax table.</span>
 
-<span style="color: #84888b; font-style: italic;">URL `</span><span style="color: #b751b6; font-style: italic;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #84888b; font-style: italic;">'</span>
-<span style="color: #84888b; font-style: italic;">Version 2017-07-02"</span>
+<span style="color: #BAE67E;">URL `</span><span style="color: #FFAE57;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #BAE67E;">'</span>
+<span style="color: #BAE67E;">Version 2017-07-02"</span>
   (interactive)
-  (<span style="color: #e45649;">let</span> (( $p0 (point)) $p1)
+  (<span style="color: #FFAE57;">let</span> (( $p0 (point)) $p1)
     (forward-sexp -1)
     (setq $p1 (point))
     (goto-char $p0)
@@ -328,38 +328,38 @@ Another better way to delete in pair is using what described at <a href="http://
     (push-mark (point) t)
     (goto-char (- $p0 2))))
 
-(<span style="color: #e45649;">defun</span> <span style="color: #a626a4;">xah-delete-forward-bracket-pairs</span> ( <span style="color: #986801;">&amp;optional</span> @delete-inner-text-p)
-  <span style="color: #84888b; font-style: italic;">"Delete the matching brackets/quotes to the right of cursor.</span>
-<span style="color: #84888b; font-style: italic;">If *delete-inner-text-p is true, also delete the inner text.</span>
+(<span style="color: #FFAE57;">defun</span> <span style="color: #FFD580;">xah-delete-forward-bracket-pairs</span> ( <span style="color: #5CCFE6;">&amp;optional</span> @delete-inner-text-p)
+  <span style="color: #BAE67E;">"Delete the matching brackets/quotes to the right of cursor.</span>
+<span style="color: #BAE67E;">If *delete-inner-text-p is true, also delete the inner text.</span>
 
-<span style="color: #84888b; font-style: italic;">After the command, mark is set at the left matching bracket position, so you can `</span><span style="color: #b751b6; font-style: italic;">exchange-point-and-mark</span><span style="color: #84888b; font-style: italic;">' to select it.</span>
+<span style="color: #BAE67E;">After the command, mark is set at the left matching bracket position, so you can `</span><span style="color: #FFAE57;">exchange-point-and-mark</span><span style="color: #BAE67E;">' to select it.</span>
 
-<span style="color: #84888b; font-style: italic;">This command assumes the char to the right of point is a left bracket or quote, and have a matching one after.</span>
+<span style="color: #BAE67E;">This command assumes the char to the right of point is a left bracket or quote, and have a matching one after.</span>
 
-<span style="color: #84888b; font-style: italic;">What char is considered bracket or quote is determined by current syntax table.</span>
+<span style="color: #BAE67E;">What char is considered bracket or quote is determined by current syntax table.</span>
 
-<span style="color: #84888b; font-style: italic;">URL `</span><span style="color: #b751b6; font-style: italic;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #84888b; font-style: italic;">'</span>
-<span style="color: #84888b; font-style: italic;">Version 2017-07-02"</span>
+<span style="color: #BAE67E;">URL `</span><span style="color: #FFAE57;">http://ergoemacs.org/emacs/emacs_delete_backward_char_or_bracket_text.html</span><span style="color: #BAE67E;">'</span>
+<span style="color: #BAE67E;">Version 2017-07-02"</span>
   (interactive)
-  (<span style="color: #e45649;">if</span> @delete-inner-text-p
-      (<span style="color: #e45649;">progn</span>
+  (<span style="color: #FFAE57;">if</span> @delete-inner-text-p
+      (<span style="color: #FFAE57;">progn</span>
         (mark-sexp)
         (kill-region (region-beginning) (region-end)))
-    (<span style="color: #e45649;">let</span> (($pt (point)))
+    (<span style="color: #FFAE57;">let</span> (($pt (point)))
       (forward-sexp)
       (delete-char -1)
       (push-mark (point) t)
       (goto-char $pt)
       (delete-char 1))))
 
-(global-set-key (kbd <span style="color: #50a14f;">"DEL"</span>) 'xah-delete-backward-char-or-bracket-text)
+(global-set-key (kbd <span style="color: #BAE67E;">"DEL"</span>) 'xah-delete-backward-char-or-bracket-text)
 </pre>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-13 Sun 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-22 Tue 17:45</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-27 Sun 21:02 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Notes on deploying Next.js to Heroku</title>
@@ -256,9 +256,9 @@ By default, a <code>Next.js</code> application will be started at port <code>:30
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #50a14f;">"scripts"</span>: {
+<pre class="src src-js"><span style="color: #BAE67E;">"scripts"</span>: {
    ...
-   <span style="color: #50a14f;">"start"</span>: <span style="color: #50a14f;">"next start"</span>
+   <span style="color: #BAE67E;">"start"</span>: <span style="color: #BAE67E;">"next start"</span>
 }
 </pre>
 </div>
@@ -268,9 +268,9 @@ On Heroku, we don't know which port is assigned for the application, we use the 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #50a14f;">"scripts"</span>: {
+<pre class="src src-js"><span style="color: #BAE67E;">"scripts"</span>: {
    ...
-   <span style="color: #50a14f;">"start"</span>: <span style="color: #50a14f;">"next start -p $PORT"</span>
+   <span style="color: #BAE67E;">"start"</span>: <span style="color: #BAE67E;">"next start -p $PORT"</span>
 }
 </pre>
 </div>
@@ -289,16 +289,16 @@ For some people, they don't care about the need of checking for production envir
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">next.config.js</span>
-<span style="color: #e45649;">const</span> <span style="color: #6a1868;">withTypescript</span> = require(<span style="color: #50a14f;">"@zeit/next-typescript"</span>)
-<span style="color: #e45649;">const</span> <span style="color: #6a1868;">ForkTsCheckerWebpackPlugin</span> = require(<span style="color: #50a14f;">'fork-ts-checker-webpack-plugin'</span>);
+<pre class="src src-js"><span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">next.config.js</span>
+<span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">withTypescript</span> = require(<span style="color: #BAE67E;">"@zeit/next-typescript"</span>)
+<span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">ForkTsCheckerWebpackPlugin</span> = require(<span style="color: #BAE67E;">'fork-ts-checker-webpack-plugin'</span>);
 
 module.exports = withTypescript({
   webpack(config, options) {
-    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Add type checking for TS</span>
-    <span style="color: #e45649;">if</span> (options.isServer) config.plugins.push(<span style="color: #e45649;">new</span> <span style="color: #986801;">ForkTsCheckerWebpackPlugin</span>())
+    <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Add type checking for TS</span>
+    <span style="color: #FFAE57;">if</span> (options.isServer) config.plugins.push(<span style="color: #FFAE57;">new</span> <span style="color: #5CCFE6;">ForkTsCheckerWebpackPlugin</span>())
 
-    <span style="color: #e45649;">return</span> config
+    <span style="color: #FFAE57;">return</span> config
   }
 })
 </pre>
@@ -313,25 +313,25 @@ To fix this problem, we'll need to check for production environment and skip the
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> { PHASE_PRODUCTION_SERVER } =
-      process.env.NODE_ENV === <span style="color: #50a14f;">'development'</span>
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> { PHASE_PRODUCTION_SERVER } =
+      process.env.NODE_ENV === <span style="color: #BAE67E;">'development'</span>
       ? {}
       : !process.env.NOW_REGION
-      ? require(<span style="color: #50a14f;">'next/constants'</span>)
-      : require(<span style="color: #50a14f;">'next-server/constants'</span>);
+      ? require(<span style="color: #BAE67E;">'next/constants'</span>)
+      : require(<span style="color: #BAE67E;">'next-server/constants'</span>);
 
 module.exports = (phase, { defaultConfig }) =&gt; {
-    <span style="color: #e45649;">if</span> (phase === PHASE_PRODUCTION_SERVER) {
-        <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Skip development logic on production</span>
-        <span style="color: #e45649;">return</span> {};
+    <span style="color: #FFAE57;">if</span> (phase === PHASE_PRODUCTION_SERVER) {
+        <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Skip development logic on production</span>
+        <span style="color: #FFAE57;">return</span> {};
     }
-    <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Development logic</span>
-    <span style="color: #e45649;">const</span> <span style="color: #6a1868;">withTypescript</span> = require(<span style="color: #50a14f;">'@zeit/next-typescript'</span>);
-    <span style="color: #e45649;">const</span> <span style="color: #6a1868;">ForkTsCheckerWebpackPlugin</span> = require(<span style="color: #50a14f;">'fork-ts-checker-webpack-plugin'</span>);
-    <span style="color: #e45649;">return</span> withTypescript({
+    <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Development logic</span>
+    <span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">withTypescript</span> = require(<span style="color: #BAE67E;">'@zeit/next-typescript'</span>);
+    <span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">ForkTsCheckerWebpackPlugin</span> = require(<span style="color: #BAE67E;">'fork-ts-checker-webpack-plugin'</span>);
+    <span style="color: #FFAE57;">return</span> withTypescript({
         webpack(config, options) {
-            <span style="color: #e45649;">if</span> (options.isServer) config.plugins.push(<span style="color: #e45649;">new</span> <span style="color: #986801;">ForkTsCheckerWebpackPlugin</span>());
-            <span style="color: #e45649;">return</span> config;
+            <span style="color: #FFAE57;">if</span> (options.isServer) config.plugins.push(<span style="color: #FFAE57;">new</span> <span style="color: #5CCFE6;">ForkTsCheckerWebpackPlugin</span>());
+            <span style="color: #FFAE57;">return</span> config;
         }
     });
 }
@@ -343,7 +343,7 @@ module.exports = (phase, { defaultConfig }) =&gt; {
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-27 Sun 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-27 Sun 21:02</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>

@@ -6,7 +6,7 @@
 <!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>SSL for Dokku app with Let's Encrypt</title>
+<title>Bulk edit with multiple cursor</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -234,41 +234,50 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content">
-<h1 class="title">SSL for Dokku app with Let's Encrypt</h1>
+<h1 class="title">Bulk edit with multiple cursor</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org61e2e3b">1. Search and replace in a project with helm-ag</a></li>
+<li><a href="#org2a14fc7">2. Rename multiple files in dired</a></li>
+</ul>
+</div>
+</div>
 <p>
-To add SSL support for your <code>dokku</code> app, first, install Let's Encrypt plugin, this can be done once:
+Some neat editing feature of Emacs when combining with <a href="https://github.com/magnars/multiple-cursors.el">multiple-cursor.el</a>:
 </p>
 
-<pre class="example">
-sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
-</pre>
-
+<div id="outline-container-org61e2e3b" class="outline-2">
+<h2 id="org61e2e3b"><span class="section-number-2">1</span> Search and replace in a project with helm-ag</h2>
+<div class="outline-text-2" id="text-1">
 <p>
-Then, assuming you already have your app setup with the name <code>voz</code>.
-</p>
-
-<p>
-Add Let's Encrypt support to the app:
-</p>
-
-<pre class="example">
-dokku letsencrypt &lt;app-name&gt;
-</pre>
-
-<p>
-Before this step, you might want to add your email first:
-</p>
-
-<pre class="example">
-dokku config:set --no-restart myapp DOKKU_LETSENCRYPT_EMAIL=your@email.tld
-</pre>
-
-<p>
-Your app will be automatically restarted and new cert will be working.
+First, use <code>helm-ag</code> to find for something you want to replace, then press <code>C-c C-e</code>, which will put the search result into an editable buffer, now use <code>M-x mc/mark-all-like-this</code> or <code>M-x mc/mark-all-dwim</code> to highlight and replace it. Commit the change with <code>C-c C-c</code>.
 </p>
 </div>
+</div>
+
+<div id="outline-container-org2a14fc7" class="outline-2">
+<h2 id="org2a14fc7"><span class="section-number-2">2</span> Rename multiple files in dired</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+When you are in a <code>dired-mode</code> buffer, press <code>C-x C-q</code> to turn it into edit mode, then use <code>multiple-cursor</code> to edit the file names, then <code>C-c C-c</code> to commit the change.
+</p>
+
+<p>
+Demo:
+</p>
+
+
+<div class="figure">
+<p><img src="file:///.img/emacs-mc-dired.gif" alt="emacs-mc-dired.gif" />
+</p>
+</div>
+</div>
+</div>
+</div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019-02-04 Mon 00:00</p>
+<p class="date">Date: 2019-04-22 Mon 00:00</p>
 <p class="author">Author: Huy Tran</p>
 <p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>

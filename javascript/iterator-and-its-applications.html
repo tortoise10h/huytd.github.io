@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-01-21 Mon 16:20 -->
+<!-- 2019-04-22 Mon 14:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Iterator and its applications</title>
@@ -250,13 +250,13 @@ A <code>for...of</code> loop in JavaScript will create a loop that iterating ove
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">obj</span> = ...;
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">obj</span> = ...;
 
-<span style="color: #e45649;">for</span> (<span style="color: #e45649;">let</span> <span style="color: #6a1868;">o</span> of obj) { } <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Failed because obj is not iterable</span>
+<span style="color: #FFAE57;">for</span> (<span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">o</span> of obj) { } <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Failed because obj is not iterable</span>
 
 obj[Symbol.iterator] = () =&gt; { ... };
 
-<span style="color: #e45649;">for</span> (<span style="color: #e45649;">let</span> <span style="color: #6a1868;">o</span> of obj) { } <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Iterable now</span>
+<span style="color: #FFAE57;">for</span> (<span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">o</span> of obj) { } <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Iterable now</span>
 </pre>
 </div>
 
@@ -265,18 +265,18 @@ For example, <code>String</code> type <a href="https://developer.mozilla.org/en-
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">str</span> = <span style="color: #50a14f;">"hello"</span>;
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">str</span> = <span style="color: #BAE67E;">"hello"</span>;
 
-<span style="color: #e45649;">for</span> (<span style="color: #e45649;">let</span> <span style="color: #6a1868;">c</span> of str) {
+<span style="color: #FFAE57;">for</span> (<span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">c</span> of str) {
   console.log(c);
 }
 
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Output:</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">h</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">e</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">l</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">l</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">o</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Output:</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">h</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">e</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">l</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">l</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">o</span>
 </pre>
 </div>
 
@@ -285,7 +285,7 @@ So, what is <code>iterator protocol</code> and how does <code>[Symbol.iterator]<
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">{ value: ..., done: <span style="color: #b751b6;">false</span> }
+<pre class="src src-js">{ value: ..., done: <span style="color: #FFAE57;">false</span> }
 </pre>
 </div>
 
@@ -298,11 +298,11 @@ You can create an object that satisfies both <code>iterable</code> and <code>ite
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">let</span> <span style="color: #6a1868;">myIterator</span> = {
-    <span style="color: #a626a4;">next</span>: <span style="color: #e45649;">function</span>() {
-        <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">...</span>
+<pre class="src src-js"><span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">myIterator</span> = {
+    <span style="color: #FFD580;">next</span>: <span style="color: #FFAE57;">function</span>() {
+        <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">...</span>
     },
-    [Symbol.iterator]: <span style="color: #e45649;">function</span>() { <span style="color: #e45649;">return</span> <span style="color: #b751b6;">this</span> }
+    [Symbol.iterator]: <span style="color: #FFAE57;">function</span>() { <span style="color: #FFAE57;">return</span> <span style="color: #FFAE57;">this</span> }
 };
 </pre>
 </div>
@@ -316,9 +316,9 @@ One more thing, instead of iterating over an iterator with <code>for...of</code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">let</span> <span style="color: #6a1868;">iter</span>;
-<span style="color: #e45649;">while</span> (iter = iterator.next(), !iter.done) {
-   <span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">do something with iter.value</span>
+<pre class="src src-js"><span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">iter</span>;
+<span style="color: #FFAE57;">while</span> (iter = iterator.next(), !iter.done) {
+   <span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">do something with iter.value</span>
 }
 </pre>
 </div>
@@ -330,7 +330,7 @@ Let's say, we have an array of strings, and we want to iterate through that arra
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">data</span> = [<span style="color: #50a14f;">"hey"</span>, <span style="color: #50a14f;">"hello"</span>, <span style="color: #50a14f;">"world"</span>];
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">data</span> = [<span style="color: #BAE67E;">"hey"</span>, <span style="color: #BAE67E;">"hello"</span>, <span style="color: #BAE67E;">"world"</span>];
 </pre>
 </div>
 
@@ -339,21 +339,21 @@ First, we will define a new class named <code>LengthIterator</code>, which has a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">class</span> LengthIterator {
+<pre class="src src-js"><span style="color: #FFAE57;">class</span> LengthIterator {
     constructor(array) {
-        <span style="color: #b751b6;">this</span>.data = array;
-        <span style="color: #b751b6;">this</span>.index = -1;
+        <span style="color: #FFAE57;">this</span>.data = array;
+        <span style="color: #FFAE57;">this</span>.index = -1;
     }
 
     next() {
-        <span style="color: #b751b6;">this</span>.index++;
-        <span style="color: #e45649;">if</span> (<span style="color: #b751b6;">this</span>.index &lt; <span style="color: #b751b6;">this</span>.data.length) {
-            <span style="color: #e45649;">return</span> {
-                value: <span style="color: #b751b6;">this</span>.data[<span style="color: #b751b6;">this</span>.index].length,
-                done: <span style="color: #b751b6;">false</span>
+        <span style="color: #FFAE57;">this</span>.index++;
+        <span style="color: #FFAE57;">if</span> (<span style="color: #FFAE57;">this</span>.index &lt; <span style="color: #FFAE57;">this</span>.data.length) {
+            <span style="color: #FFAE57;">return</span> {
+                value: <span style="color: #FFAE57;">this</span>.data[<span style="color: #FFAE57;">this</span>.index].length,
+                done: <span style="color: #FFAE57;">false</span>
             };
         }
-        <span style="color: #e45649;">return</span> { done: <span style="color: #b751b6;">true</span> };
+        <span style="color: #FFAE57;">return</span> { done: <span style="color: #FFAE57;">true</span> };
     }
 }
 </pre>
@@ -364,16 +364,16 @@ Then, we implement a <code>[Symbol.iterator]</code> method for the input array <
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">data[Symbol.iterator] = () =&gt; <span style="color: #e45649;">new</span> <span style="color: #986801;">LengthIterator</span>(data);
+<pre class="src src-js">data[Symbol.iterator] = () =&gt; <span style="color: #FFAE57;">new</span> <span style="color: #5CCFE6;">LengthIterator</span>(data);
 
-<span style="color: #e45649;">for</span> (<span style="color: #e45649;">let</span> <span style="color: #6a1868;">len</span> of data) {
+<span style="color: #FFAE57;">for</span> (<span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">len</span> of data) {
     console.log(len);
 }
 
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Output:</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">3</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">5</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">5</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Output:</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">3</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">5</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">5</span>
 </pre>
 </div>
 
@@ -388,7 +388,7 @@ Now, let's try solving another problem. Use iterator to extend the <code>String<
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">text</span> = <span style="color: #50a14f;">"The quick brown fox jump over a lazy dog"</span>;
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">text</span> = <span style="color: #BAE67E;">"The quick brown fox jump over a lazy dog"</span>;
 </pre>
 </div>
 
@@ -397,21 +397,21 @@ Same as the previous example, this time, we'll implement a <code>WordIterator</c
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">class</span> WordIterator {
+<pre class="src src-js"><span style="color: #FFAE57;">class</span> WordIterator {
     constructor(data) {
-        <span style="color: #b751b6;">this</span>.data = data.split(<span style="color: #50a14f;">/\s/</span>);
-        <span style="color: #b751b6;">this</span>.index = -1;
+        <span style="color: #FFAE57;">this</span>.data = data.split(<span style="color: #BAE67E;">/\s/</span>);
+        <span style="color: #FFAE57;">this</span>.index = -1;
     }
 
     next() {
-        <span style="color: #b751b6;">this</span>.index++;
-        <span style="color: #e45649;">if</span> (<span style="color: #b751b6;">this</span>.index &lt; <span style="color: #b751b6;">this</span>.data.length) {
-            <span style="color: #e45649;">return</span> {
-                value: <span style="color: #b751b6;">this</span>.data[<span style="color: #b751b6;">this</span>.index],
-                done: <span style="color: #b751b6;">false</span>
+        <span style="color: #FFAE57;">this</span>.index++;
+        <span style="color: #FFAE57;">if</span> (<span style="color: #FFAE57;">this</span>.index &lt; <span style="color: #FFAE57;">this</span>.data.length) {
+            <span style="color: #FFAE57;">return</span> {
+                value: <span style="color: #FFAE57;">this</span>.data[<span style="color: #FFAE57;">this</span>.index],
+                done: <span style="color: #FFAE57;">false</span>
             }
         }
-        <span style="color: #e45649;">return</span> { done: <span style="color: #b751b6;">true</span> };
+        <span style="color: #FFAE57;">return</span> { done: <span style="color: #FFAE57;">true</span> };
     }
 }
 </pre>
@@ -422,10 +422,10 @@ By default, if you iterating through a string, you'll get each of its character,
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">String.<span style="color: #b751b6;">prototype</span>.words = <span style="color: #e45649;">function</span>() {
-    <span style="color: #e45649;">const</span> <span style="color: #6a1868;">iterable</span> = <span style="color: #b751b6;">this</span>;
-    iterable[Symbol.iterator] = () =&gt; <span style="color: #e45649;">new</span> <span style="color: #986801;">WordIterator</span>(<span style="color: #b751b6;">this</span>);
-    <span style="color: #e45649;">return</span> iterable;
+<pre class="src src-js">String.<span style="color: #FFAE57;">prototype</span>.words = <span style="color: #FFAE57;">function</span>() {
+    <span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">iterable</span> = <span style="color: #FFAE57;">this</span>;
+    iterable[Symbol.iterator] = () =&gt; <span style="color: #FFAE57;">new</span> <span style="color: #5CCFE6;">WordIterator</span>(<span style="color: #FFAE57;">this</span>);
+    <span style="color: #FFAE57;">return</span> iterable;
 };
 </pre>
 </div>
@@ -435,12 +435,12 @@ From now, whenever we want to iterate through a list of words in a string, we ca
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">for</span> (<span style="color: #e45649;">let</span> <span style="color: #6a1868;">word</span> of text.words()) {
+<pre class="src src-js"><span style="color: #FFAE57;">for</span> (<span style="color: #FFAE57;">let</span> <span style="color: #D9D7CE;">word</span> of text.words()) {
     console.log(word);
 }
 
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">Output:</span>
-<span style="color: #9ca0a4;">// </span><span style="color: #9ca0a4;">"The" "quick" "brown" "fox" "jump" "over" "a" "lazy" "dog"</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">Output:</span>
+<span style="color: #5C6773; font-style: italic;">// </span><span style="color: #5C6773; font-style: italic;">"The" "quick" "brown" "fox" "jump" "over" "a" "lazy" "dog"</span>
 </pre>
 </div>
 
@@ -449,8 +449,8 @@ Oh, and you know what? In this implementation, we ignored the fact that <code>Ar
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">String.<span style="color: #b751b6;">prototype</span>.words = <span style="color: #e45649;">function</span>() {
-    <span style="color: #e45649;">return</span> <span style="color: #b751b6;">this</span>.split(<span style="color: #50a14f;">/\s/</span>);
+<pre class="src src-js">String.<span style="color: #FFAE57;">prototype</span>.words = <span style="color: #FFAE57;">function</span>() {
+    <span style="color: #FFAE57;">return</span> <span style="color: #FFAE57;">this</span>.split(<span style="color: #BAE67E;">/\s/</span>);
 }
 </pre>
 </div>
@@ -466,15 +466,15 @@ Our <code>range()</code> method will have two parameters, <code>from</code> and 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">const</span> <span style="color: #6a1868;">range</span> = (from, to) =&gt; {
-    <span style="color: #e45649;">return</span> {
-        [Symbol.iterator]: <span style="color: #e45649;">function</span>() { <span style="color: #e45649;">return</span> <span style="color: #b751b6;">this</span>; },
-        <span style="color: #a626a4;">next</span>: <span style="color: #e45649;">function</span>() {
-            <span style="color: #e45649;">if</span> (from &lt; to) {
+<pre class="src src-js"><span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">range</span> = (from, to) =&gt; {
+    <span style="color: #FFAE57;">return</span> {
+        [Symbol.iterator]: <span style="color: #FFAE57;">function</span>() { <span style="color: #FFAE57;">return</span> <span style="color: #FFAE57;">this</span>; },
+        <span style="color: #FFD580;">next</span>: <span style="color: #FFAE57;">function</span>() {
+            <span style="color: #FFAE57;">if</span> (from &lt; to) {
                 from++;
-                <span style="color: #e45649;">return</span> { value: from - 1, done: <span style="color: #b751b6;">false</span> };
+                <span style="color: #FFAE57;">return</span> { value: from - 1, done: <span style="color: #FFAE57;">false</span> };
             }
-            <span style="color: #e45649;">return</span> { done: <span style="color: #b751b6;">true</span> };
+            <span style="color: #FFAE57;">return</span> { done: <span style="color: #FFAE57;">true</span> };
         }
     }
 };
@@ -486,7 +486,7 @@ Now, let's iterate:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #e45649;">for</span> (<span style="color: #e45649;">const</span> <span style="color: #6a1868;">i</span> of range(0, 100)) {
+<pre class="src src-js"><span style="color: #FFAE57;">for</span> (<span style="color: #FFAE57;">const</span> <span style="color: #D9D7CE;">i</span> of range(0, 100)) {
     console.log(i);
 }
 </pre>
@@ -501,7 +501,7 @@ As of now, you can't do some asynchronous operation inside iterator's <code>next
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-09 Wed 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-01-21 Mon 16:20</p>
+<p class="date">Created: 2019-04-22 Mon 14:41</p>
 <p class="validation"></p>
 </div>
 </body>
