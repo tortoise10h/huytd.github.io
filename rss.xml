@@ -14,8 +14,8 @@
   <link>/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Fri, 19 Apr 2019 17:57:06 -0700</pubDate>
-  <lastBuildDate>Fri, 19 Apr 2019 17:57:06 -0700</lastBuildDate>
+  <pubDate>Sun, 21 Apr 2019 14:43:35 -0700</pubDate>
+  <lastBuildDate>Sun, 21 Apr 2019 14:43:35 -0700</lastBuildDate>
   <generator>Emacs 26.1 Org-mode 9.1.9</generator>
   <webMaster>huy@USLOPMNLM223026.local (Huy Tran)</webMaster>
   <image>
@@ -25,749 +25,11 @@
   </image>
 
   <item>
-    <title>Button cannot be a flex container</title>
-    <link>/css/button-is-not-flex.html</link>
+    <title>The best To-Do List System</title>
+    <link>/random/the-best-todo-list-method.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/button-is-not-flex.html</guid>
-    <pubDate>Tue, 19 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Font spacing problem in Firefox and Chrome</title>
-    <link>/css/font-size-spacing-problem.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/font-size-spacing-problem.html</guid>
-    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>IE11, flexbox, min-height and align-items</title>
-    <link>/css/ie11-flexbox-min-height-bug.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/ie11-flexbox-min-height-bug.html</guid>
-    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Layout viewport and visual viewport</title>
-    <link>/css/viewports.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/viewports.html</guid>
-    <pubDate>Wed, 13 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>No initial for IE, then what should I use?</title>
-    <link>/css/initial-value-for-IE.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/initial-value-for-IE.html</guid>
-    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Padding and margin are related to element's width</title>
-    <link>/css/padding-and-width.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/padding-and-width.html</guid>
-    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Performance tip: Setting image size in HTML instead of CSS</title>
-    <link>/css/image-size.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/image-size.html</guid>
-    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Position Sticky and its events</title>
-    <link>/css/sticky-events.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/sticky-events.html</guid>
-    <pubDate>Tue, 12 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Re-Implementing Facebook Reaction Animation</title>
-    <link>/css/reimplementing-facebook-animation.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/reimplementing-facebook-animation.html</guid>
+    <guid isPermaLink="false">/random/the-best-todo-list-method.html</guid>
     <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Sentence case in CSS</title>
-    <link>/css/sentence-case.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/css/sentence-case.html</guid>
-    <pubDate>Wed, 27 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>A minimal but useful mode-line</title>
-    <link>/emacs/minimal-mode-line.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/minimal-mode-line.html</guid>
-    <pubDate>Wed, 17 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Create and open an empty buffer in org-mode</title>
-    <link>/emacs/elisp-create-and-open-empty-buffer.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/elisp-create-and-open-empty-buffer.html</guid>
-    <pubDate>Sun, 06 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Define minor mode in Emacs</title>
-    <link>/emacs/define-minor-mode.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/define-minor-mode.html</guid>
-    <pubDate>Wed, 20 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Deft create new file with custom name</title>
-    <link>/emacs/deft-create-file-with-custom-name.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/deft-create-file-with-custom-name.html</guid>
-    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Delete inside pair of bracket or quotes</title>
-    <link>/emacs/delete-in-pair.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/delete-in-pair.html</guid>
-    <pubDate>Sun, 13 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Disable =linum-mode= for =ansi-term=</title>
-    <link>/emacs/disable-linum-for-term.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/disable-linum-for-term.html</guid>
-    <pubDate>Wed, 23 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Don't be evil</title>
-    <link>/emacs/dont-be-evil.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/dont-be-evil.html</guid>
-    <pubDate>Tue, 08 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Dvorak and Emacs</title>
-    <link>/emacs/dvorak.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/dvorak.html</guid>
-    <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Editing with CUA</title>
-    <link>/emacs/cua-mode.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/cua-mode.html</guid>
-    <pubDate>Tue, 19 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Elisp progn keyword</title>
-    <link>/emacs/progn.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/progn.html</guid>
-    <pubDate>Wed, 30 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Emacs close popup buffer</title>
-    <link>/emacs/close-popup-buffer.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/close-popup-buffer.html</guid>
-    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Emacs from scratch</title>
-    <link>/emacs/emacs-from-scratch.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/emacs-from-scratch.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Helm Ag with text at point</title>
-    <link>/emacs/helm-ag-at-point.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/helm-ag-at-point.html</guid>
-    <pubDate>Wed, 27 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Joining lines in Emacs</title>
-    <link>/emacs/join-lines.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/join-lines.html</guid>
-    <pubDate>Wed, 20 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Jump between Helm sections</title>
-    <link>/emacs/jump-between-helm-sections.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/jump-between-helm-sections.html</guid>
-    <pubDate>Tue, 01 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Jump between matching parens</title>
-    <link>/emacs/jump-between-pairs.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/jump-between-pairs.html</guid>
-    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Load light or dark theme based on time of the day</title>
-    <link>/emacs/time-based-theme.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/time-based-theme.html</guid>
-    <pubDate>Fri, 29 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Print org-mode agenda to a file</title>
-    <link>/emacs/print-agenda-to-a-file.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/print-agenda-to-a-file.html</guid>
-    <pubDate>Fri, 04 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Publishing org-mode notes as a website</title>
-    <link>/emacs/orgmode-publishing.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/orgmode-publishing.html</guid>
-    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Recurring tasks in org-mode</title>
-    <link>/emacs/recurring-tasks.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/recurring-tasks.html</guid>
-    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Save current Emacs session without any extra package</title>
-    <link>/emacs/save-emacs-session.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/save-emacs-session.html</guid>
-    <pubDate>Thu, 04 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Textlint for Emacs</title>
-    <link>/emacs/textlint.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/textlint.html</guid>
-    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Use Deft for note searching</title>
-    <link>/emacs/deft.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/deft.html</guid>
-    <pubDate>Fri, 11 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Use Emacs as a reminder</title>
-    <link>/emacs/diary.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/diary.html</guid>
-    <pubDate>Mon, 21 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Use Spacebar as Ctrl</title>
-    <link>/emacs/spacebar-as-ctrl.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/spacebar-as-ctrl.html</guid>
-    <pubDate>Mon, 04 Mar 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Use let for local variable</title>
-    <link>/emacs/elisp-use-let-for-local.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/elisp-use-let-for-local.html</guid>
-    <pubDate>Sun, 06 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Working with Agenda in Org-Mode</title>
-    <link>/emacs/working-with-agenda.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/emacs/working-with-agenda.html</guid>
-    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Algebraic Data Type</title>
-    <link>/functionalprogramming/algebraic-data-type.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/functionalprogramming/algebraic-data-type.html</guid>
-    <pubDate>Thu, 07 Mar 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Create a Cmd Msg from Msg in Elm</title>
-    <link>/functionalprogramming/msg-to-cmd.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/functionalprogramming/msg-to-cmd.html</guid>
-    <pubDate>Thu, 14 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Debug printing in Haskell</title>
-    <link>/functionalprogramming/debug-print-haskell.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/functionalprogramming/debug-print-haskell.html</guid>
-    <pubDate>Tue, 16 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Thermite vs Halogen</title>
-    <link>/functionalprogramming/halogen-vs-thermite.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/functionalprogramming/halogen-vs-thermite.html</guid>
-    <pubDate>Wed, 06 Mar 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Division of Responsibilities</title>
-    <link>/growth/division-of-responsibilities.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/growth/division-of-responsibilities.html</guid>
-    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Fuzz Testing</title>
-    <link>/growth/fuzz-testing.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/growth/fuzz-testing.html</guid>
-    <pubDate>Wed, 27 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Reading Source Code: My thinking process</title>
-    <link>/growth/source-code-reading.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/growth/source-code-reading.html</guid>
-    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Arduino's KEY_3 and space character</title>
-    <link>/hardware/arduino-key-3.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/arduino-key-3.html</guid>
-    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Binary Clock</title>
-    <link>/hardware/binary-clock.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/binary-clock.html</guid>
-    <pubDate>Wed, 13 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Implementing firmware level key lock</title>
-    <link>/hardware/key-lock.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/key-lock.html</guid>
-    <pubDate>Fri, 08 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Keycaps Design Specs</title>
-    <link>/hardware/keycap-specs.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/keycap-specs.html</guid>
-    <pubDate>Sat, 16 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Packing two bytes into an integer</title>
-    <link>/hardware/packing-two-bytes-into-an-int.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/packing-two-bytes-into-an-int.html</guid>
-    <pubDate>Tue, 29 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Setting device name in Teensyduino</title>
-    <link>/hardware/custom-device-name-teensyduino.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/custom-device-name-teensyduino.html</guid>
-    <pubDate>Thu, 07 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Split keyboard firmware design</title>
-    <link>/hardware/split-keyboard-firmware.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/hardware/split-keyboard-firmware.html</guid>
-    <pubDate>Mon, 11 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>A note about writing Node.js application with Webpack</title>
-    <link>/javascript/webpack-and-node.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/webpack-and-node.html</guid>
-    <pubDate>Wed, 23 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Bitwise trick to convert Float to Int</title>
-    <link>/javascript/bitwise-float-int-trick.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/bitwise-float-int-trick.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Emacs and TypeScript</title>
-    <link>/javascript/emacs-and-typescript.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/emacs-and-typescript.html</guid>
-    <pubDate>Sun, 27 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Execute command in interactive mode with Node</title>
-    <link>/javascript/spawn-interactive.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/spawn-interactive.html</guid>
-    <pubDate>Sun, 24 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Explaining var and for loop problem</title>
-    <link>/javascript/scoping-var-loop.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/scoping-var-loop.html</guid>
-    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Integrate WebAssembly in any JavaScript project</title>
-    <link>/javascript/wasm-with-npm.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/wasm-with-npm.html</guid>
-    <pubDate>Wed, 16 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Iterator and its applications</title>
-    <link>/javascript/iterator-and-its-applications.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/iterator-and-its-applications.html</guid>
-    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Mathematics operation with null and undefined</title>
-    <link>/javascript/null-vs-undefined.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/null-vs-undefined.html</guid>
-    <pubDate>Thu, 10 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Merging Emoji in JavaScript</title>
-    <link>/javascript/combine-emoji.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/combine-emoji.html</guid>
-    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Mock testing any front-end projects with Jest</title>
-    <link>/javascript/testing-frontend-with-mock.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/testing-frontend-with-mock.html</guid>
-    <pubDate>Mon, 07 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Notes on deploying Next.js to Heroku</title>
-    <link>/javascript/notes-deploy-next-heroku-now.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/notes-deploy-next-heroku-now.html</guid>
-    <pubDate>Sun, 27 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Print a PDF content automatically</title>
-    <link>/javascript/print-pdf.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/print-pdf.html</guid>
-    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>React's componentDidMount with async</title>
-    <link>/javascript/react-componentDidMount-async.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/react-componentDidMount-async.html</guid>
-    <pubDate>Fri, 25 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>React, TypeScript and scrollInToView</title>
-    <link>/javascript/react-typescript-scrollintoview.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/react-typescript-scrollintoview.html</guid>
-    <pubDate>Thu, 31 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Replace with callback in JavaScript</title>
-    <link>/javascript/replace-with-callback.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/replace-with-callback.html</guid>
-    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Scoping in JavaScript</title>
-    <link>/javascript/scoping.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/scoping.html</guid>
-    <pubDate>Tue, 15 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Thread for WebAssembly</title>
-    <link>/javascript/wasm-pthread.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/wasm-pthread.html</guid>
-    <pubDate>Wed, 16 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>What part of DOM are slow?</title>
-    <link>/javascript/why-dom-slow.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/why-dom-slow.html</guid>
-    <pubDate>Tue, 15 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Why TypeScript?</title>
-    <link>/javascript/why-typescript.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/why-typescript.html</guid>
-    <pubDate>Mon, 28 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>import() function</title>
-    <link>/javascript/import-function.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/javascript/import-function.html</guid>
-    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Change back to previous directory</title>
-    <link>/linux/jump-back.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/linux/jump-back.html</guid>
-    <pubDate>Fri, 22 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Execute command over SSH a quick way</title>
-    <link>/linux/command-over-ssh.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/linux/command-over-ssh.html</guid>
-    <pubDate>Fri, 01 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>How ibus communicate with its engines</title>
-    <link>/linux/how-ibus-communicate-with-its-engines.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/linux/how-ibus-communicate-with-its-engines.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>No dev package needed for OpenBSD</title>
-    <link>/linux/openbsd-no-dev.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/linux/openbsd-no-dev.html</guid>
-    <pubDate>Fri, 01 Mar 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Red Black Tree in Linux kernel</title>
-    <link>/linux/red-black-tree.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/linux/red-black-tree.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>SSL for Dokku app with Let's Encrypt</title>
-    <link>/linux/dokku-ssl.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/linux/dokku-ssl.html</guid>
-    <pubDate>Mon, 04 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>A random mathematics note</title>
-    <link>/random/a-random-math-note.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/a-random-math-note.html</guid>
-    <pubDate>Fri, 25 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>A trick to store PDF file an the internet</title>
-    <link>/random/save-pdf.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/save-pdf.html</guid>
-    <pubDate>Mon, 04 Mar 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Add dictionary for Kindle</title>
-    <link>/random/kindle-custom-dict.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/kindle-custom-dict.html</guid>
-    <pubDate>Mon, 11 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Build a better Bookshelf</title>
-    <link>/random/build-a-better-bookshelf.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/build-a-better-bookshelf.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Color picker in hex on macOS</title>
-    <link>/random/color-picker-in-hex.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/color-picker-in-hex.html</guid>
-    <pubDate>Fri, 01 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Get the source code of an NPM package</title>
-    <link>/random/get-npm-package-source.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/get-npm-package-source.html</guid>
-    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -781,38 +43,11 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>How country flags emojis created</title>
-    <link>/random/how-flag-emoji-created.html</link>
+    <title>Build a better Bookshelf</title>
+    <link>/random/build-a-better-bookshelf.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/how-flag-emoji-created.html</guid>
-    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>How to write an article review</title>
-    <link>/random/how-to-write-summary.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/how-to-write-summary.html</guid>
-    <pubDate>Wed, 13 Mar 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Ink Trap</title>
-    <link>/random/ink-trap.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/ink-trap.html</guid>
-    <pubDate>Sat, 02 Mar 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Making things with Lego</title>
-    <link>/random/lego-designer.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/lego-designer.html</guid>
-    <pubDate>Tue, 26 Feb 2019 00:00:00 -0800</pubDate>
+    <guid isPermaLink="false">/random/build-a-better-bookshelf.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -826,47 +61,11 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>Publishing files or folder starts with dash on Github Page</title>
-    <link>/random/github-page-jekyll-skip-files.html</link>
+    <title>How to write an article review</title>
+    <link>/random/how-to-write-summary.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/github-page-jekyll-skip-files.html</guid>
-    <pubDate>Tue, 22 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Search code change in Git</title>
-    <link>/random/git-log-code-change.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/git-log-code-change.html</guid>
-    <pubDate>Thu, 28 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Search git log in date range</title>
-    <link>/random/git-log-date-range.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/git-log-date-range.html</guid>
-    <pubDate>Thu, 21 Feb 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Some good strategy games for PS4</title>
-    <link>/random/some-good-ps4-games.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/some-good-ps4-games.html</guid>
-    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Some notes on technical writing</title>
-    <link>/random/notes-on-technical-writing.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/notes-on-technical-writing.html</guid>
-    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+    <guid isPermaLink="false">/random/how-to-write-summary.html</guid>
+    <pubDate>Wed, 13 Mar 2019 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -880,11 +79,128 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>The best To-Do List System</title>
-    <link>/random/the-best-todo-list-method.html</link>
+    <title>Add dictionary for Kindle</title>
+    <link>/random/kindle-custom-dict.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/the-best-todo-list-method.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+    <guid isPermaLink="false">/random/kindle-custom-dict.html</guid>
+    <pubDate>Mon, 11 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>A trick to store PDF file an the internet</title>
+    <link>/random/save-pdf.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/save-pdf.html</guid>
+    <pubDate>Mon, 04 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Ink Trap</title>
+    <link>/random/ink-trap.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/ink-trap.html</guid>
+    <pubDate>Sat, 02 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Search code change in Git</title>
+    <link>/random/git-log-code-change.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/git-log-code-change.html</guid>
+    <pubDate>Thu, 28 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Making things with Lego</title>
+    <link>/random/lego-designer.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/lego-designer.html</guid>
+    <pubDate>Tue, 26 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Search git log in date range</title>
+    <link>/random/git-log-date-range.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/git-log-date-range.html</guid>
+    <pubDate>Thu, 21 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>When to double a consonant before ed or ing</title>
+    <link>/random/when-to-double.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/when-to-double.html</guid>
+    <pubDate>Tue, 19 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Color picker in hex on macOS</title>
+    <link>/random/color-picker-in-hex.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/color-picker-in-hex.html</guid>
+    <pubDate>Fri, 01 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>A random mathematics note</title>
+    <link>/random/a-random-math-note.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/a-random-math-note.html</guid>
+    <pubDate>Fri, 25 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Get the source code of an NPM package</title>
+    <link>/random/get-npm-package-source.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/get-npm-package-source.html</guid>
+    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Some notes on technical writing</title>
+    <link>/random/notes-on-technical-writing.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/notes-on-technical-writing.html</guid>
+    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Publishing files or folder starts with dash on Github Page</title>
+    <link>/random/github-page-jekyll-skip-files.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/github-page-jekyll-skip-files.html</guid>
+    <pubDate>Tue, 22 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>How country flags emojis created</title>
+    <link>/random/how-flag-emoji-created.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/how-flag-emoji-created.html</guid>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Some good strategy games for PS4</title>
+    <link>/random/some-good-ps4-games.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/random/some-good-ps4-games.html</guid>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -907,20 +223,605 @@
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>When to double a consonant before ed or ing</title>
-    <link>/random/when-to-double.html</link>
+    <title>Bitwise trick to convert Float to Int</title>
+    <link>/javascript/bitwise-float-int-trick.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/random/when-to-double.html</guid>
+    <guid isPermaLink="false">/javascript/bitwise-float-int-trick.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Execute command in interactive mode with Node</title>
+    <link>/javascript/spawn-interactive.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/spawn-interactive.html</guid>
+    <pubDate>Sun, 24 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>React, TypeScript and scrollInToView</title>
+    <link>/javascript/react-typescript-scrollintoview.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/react-typescript-scrollintoview.html</guid>
+    <pubDate>Thu, 31 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Why TypeScript?</title>
+    <link>/javascript/why-typescript.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/why-typescript.html</guid>
+    <pubDate>Mon, 28 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Notes on deploying Next.js to Heroku</title>
+    <link>/javascript/notes-deploy-next-heroku-now.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/notes-deploy-next-heroku-now.html</guid>
+    <pubDate>Sun, 27 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Emacs and TypeScript</title>
+    <link>/javascript/emacs-and-typescript.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/emacs-and-typescript.html</guid>
+    <pubDate>Sun, 27 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>React's componentDidMount with async</title>
+    <link>/javascript/react-componentDidMount-async.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/react-componentDidMount-async.html</guid>
+    <pubDate>Fri, 25 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>A note about writing Node.js application with Webpack</title>
+    <link>/javascript/webpack-and-node.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/webpack-and-node.html</guid>
+    <pubDate>Wed, 23 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Explaining var and for loop problem</title>
+    <link>/javascript/scoping-var-loop.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/scoping-var-loop.html</guid>
+    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Merging Emoji in JavaScript</title>
+    <link>/javascript/combine-emoji.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/combine-emoji.html</guid>
+    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Print a PDF content automatically</title>
+    <link>/javascript/print-pdf.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/print-pdf.html</guid>
+    <pubDate>Thu, 17 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Integrate WebAssembly in any JavaScript project</title>
+    <link>/javascript/wasm-with-npm.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/wasm-with-npm.html</guid>
+    <pubDate>Wed, 16 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Thread for WebAssembly</title>
+    <link>/javascript/wasm-pthread.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/wasm-pthread.html</guid>
+    <pubDate>Wed, 16 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>What part of DOM are slow?</title>
+    <link>/javascript/why-dom-slow.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/why-dom-slow.html</guid>
+    <pubDate>Tue, 15 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Scoping in JavaScript</title>
+    <link>/javascript/scoping.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/scoping.html</guid>
+    <pubDate>Tue, 15 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Mathematics operation with null and undefined</title>
+    <link>/javascript/null-vs-undefined.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/null-vs-undefined.html</guid>
+    <pubDate>Thu, 10 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Iterator and its applications</title>
+    <link>/javascript/iterator-and-its-applications.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/iterator-and-its-applications.html</guid>
+    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Mock testing any front-end projects with Jest</title>
+    <link>/javascript/testing-frontend-with-mock.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/testing-frontend-with-mock.html</guid>
+    <pubDate>Mon, 07 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Replace with callback in JavaScript</title>
+    <link>/javascript/replace-with-callback.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/replace-with-callback.html</guid>
+    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>import() function</title>
+    <link>/javascript/import-function.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/javascript/import-function.html</guid>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Emacs from scratch</title>
+    <link>/emacs/emacs-from-scratch.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/emacs-from-scratch.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>A minimal but useful mode-line</title>
+    <link>/emacs/minimal-mode-line.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/minimal-mode-line.html</guid>
+    <pubDate>Wed, 17 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Save current Emacs session without any extra package</title>
+    <link>/emacs/save-emacs-session.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/save-emacs-session.html</guid>
+    <pubDate>Thu, 04 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Load light or dark theme based on time of the day</title>
+    <link>/emacs/time-based-theme.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/time-based-theme.html</guid>
+    <pubDate>Fri, 29 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Helm Ag with text at point</title>
+    <link>/emacs/helm-ag-at-point.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/helm-ag-at-point.html</guid>
+    <pubDate>Wed, 27 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Joining lines in Emacs</title>
+    <link>/emacs/join-lines.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/join-lines.html</guid>
+    <pubDate>Wed, 20 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Editing with CUA</title>
+    <link>/emacs/cua-mode.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/cua-mode.html</guid>
+    <pubDate>Tue, 19 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use Spacebar as Ctrl</title>
+    <link>/emacs/spacebar-as-ctrl.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/spacebar-as-ctrl.html</guid>
+    <pubDate>Mon, 04 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Define minor mode in Emacs</title>
+    <link>/emacs/define-minor-mode.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/define-minor-mode.html</guid>
+    <pubDate>Wed, 20 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Dvorak and Emacs</title>
+    <link>/emacs/dvorak.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/dvorak.html</guid>
+    <pubDate>Fri, 15 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Elisp progn keyword</title>
+    <link>/emacs/progn.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/progn.html</guid>
+    <pubDate>Wed, 30 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Disable =linum-mode= for =ansi-term=</title>
+    <link>/emacs/disable-linum-for-term.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/disable-linum-for-term.html</guid>
+    <pubDate>Wed, 23 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use Emacs as a reminder</title>
+    <link>/emacs/diary.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/diary.html</guid>
+    <pubDate>Mon, 21 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Deft create new file with custom name</title>
+    <link>/emacs/deft-create-file-with-custom-name.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/deft-create-file-with-custom-name.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Emacs close popup buffer</title>
+    <link>/emacs/close-popup-buffer.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/close-popup-buffer.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Jump between matching parens</title>
+    <link>/emacs/jump-between-pairs.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/jump-between-pairs.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Publishing org-mode notes as a website</title>
+    <link>/emacs/orgmode-publishing.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/orgmode-publishing.html</guid>
+    <pubDate>Mon, 14 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Delete inside pair of bracket or quotes</title>
+    <link>/emacs/delete-in-pair.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/delete-in-pair.html</guid>
+    <pubDate>Sun, 13 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use Deft for note searching</title>
+    <link>/emacs/deft.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/deft.html</guid>
+    <pubDate>Fri, 11 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Don't be evil</title>
+    <link>/emacs/dont-be-evil.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/dont-be-evil.html</guid>
+    <pubDate>Tue, 08 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Create and open an empty buffer in org-mode</title>
+    <link>/emacs/elisp-create-and-open-empty-buffer.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/elisp-create-and-open-empty-buffer.html</guid>
+    <pubDate>Sun, 06 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Use let for local variable</title>
+    <link>/emacs/elisp-use-let-for-local.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/elisp-use-let-for-local.html</guid>
+    <pubDate>Sun, 06 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Print org-mode agenda to a file</title>
+    <link>/emacs/print-agenda-to-a-file.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/print-agenda-to-a-file.html</guid>
+    <pubDate>Fri, 04 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Recurring tasks in org-mode</title>
+    <link>/emacs/recurring-tasks.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/recurring-tasks.html</guid>
+    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Textlint for Emacs</title>
+    <link>/emacs/textlint.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/textlint.html</guid>
+    <pubDate>Thu, 03 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Working with Agenda in Org-Mode</title>
+    <link>/emacs/working-with-agenda.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/working-with-agenda.html</guid>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Jump between Helm sections</title>
+    <link>/emacs/jump-between-helm-sections.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/emacs/jump-between-helm-sections.html</guid>
+    <pubDate>Tue, 01 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Fuzz Testing</title>
+    <link>/growth/fuzz-testing.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/growth/fuzz-testing.html</guid>
+    <pubDate>Wed, 27 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Division of Responsibilities</title>
+    <link>/growth/division-of-responsibilities.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/growth/division-of-responsibilities.html</guid>
+    <pubDate>Thu, 24 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Reading Source Code: My thinking process</title>
+    <link>/growth/source-code-reading.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/growth/source-code-reading.html</guid>
+    <pubDate>Wed, 02 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Red Black Tree in Linux kernel</title>
+    <link>/linux/red-black-tree.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/linux/red-black-tree.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>How ibus communicate with its engines</title>
+    <link>/linux/how-ibus-communicate-with-its-engines.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/linux/how-ibus-communicate-with-its-engines.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>No dev package needed for OpenBSD</title>
+    <link>/linux/openbsd-no-dev.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/linux/openbsd-no-dev.html</guid>
+    <pubDate>Fri, 01 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Change back to previous directory</title>
+    <link>/linux/jump-back.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/linux/jump-back.html</guid>
+    <pubDate>Fri, 22 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>SSL for Dokku app with Let's Encrypt</title>
+    <link>/linux/dokku-ssl.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/linux/dokku-ssl.html</guid>
+    <pubDate>Mon, 04 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Execute command over SSH a quick way</title>
+    <link>/linux/command-over-ssh.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/linux/command-over-ssh.html</guid>
+    <pubDate>Fri, 01 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Re-Implementing Facebook Reaction Animation</title>
+    <link>/css/reimplementing-facebook-animation.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/reimplementing-facebook-animation.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Sentence case in CSS</title>
+    <link>/css/sentence-case.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/sentence-case.html</guid>
+    <pubDate>Wed, 27 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Button cannot be a flex container</title>
+    <link>/css/button-is-not-flex.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/button-is-not-flex.html</guid>
     <pubDate>Tue, 19 Feb 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
   <item>
-    <title>Making Rust GUI app with HTML/CSS/JavaScript</title>
-    <link>/rust/gui-app.html</link>
+    <title>Padding and margin are related to element's width</title>
+    <link>/css/padding-and-width.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rust/gui-app.html</guid>
-    <pubDate>Sat, 19 Jan 2019 00:00:00 -0800</pubDate>
+    <guid isPermaLink="false">/css/padding-and-width.html</guid>
+    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Performance tip: Setting image size in HTML instead of CSS</title>
+    <link>/css/image-size.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/image-size.html</guid>
+    <pubDate>Thu, 14 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Layout viewport and visual viewport</title>
+    <link>/css/viewports.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/viewports.html</guid>
+    <pubDate>Wed, 13 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Position Sticky and its events</title>
+    <link>/css/sticky-events.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/sticky-events.html</guid>
+    <pubDate>Tue, 12 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>No initial for IE, then what should I use?</title>
+    <link>/css/initial-value-for-IE.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/initial-value-for-IE.html</guid>
+    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>IE11, flexbox, min-height and align-items</title>
+    <link>/css/ie11-flexbox-min-height-bug.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/ie11-flexbox-min-height-bug.html</guid>
+    <pubDate>Fri, 18 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Font spacing problem in Firefox and Chrome</title>
+    <link>/css/font-size-spacing-problem.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/css/font-size-spacing-problem.html</guid>
+    <pubDate>Wed, 09 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Rust for the Web</title>
+    <link>/rust/rust-for-the-web.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rust/rust-for-the-web.html</guid>
+    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
@@ -938,15 +839,6 @@
     <link>/rust/string-ffi-rust.html</link>
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
     <guid isPermaLink="false">/rust/string-ffi-rust.html</guid>
-    <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
-
-    <description><![CDATA[]]></description>
-  </item>
-  <item>
-    <title>Rust for the Web</title>
-    <link>/rust/rust-for-the-web.html</link>
-    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
-    <guid isPermaLink="false">/rust/rust-for-the-web.html</guid>
     <pubDate>Fri, 19 Apr 2019 00:00:00 -0700</pubDate>
 
     <description><![CDATA[]]></description>
@@ -975,6 +867,114 @@
     <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
     <guid isPermaLink="false">/rust/wasm-bindgen.html</guid>
     <pubDate>Tue, 22 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Making Rust GUI app with HTML/CSS/JavaScript</title>
+    <link>/rust/gui-app.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/rust/gui-app.html</guid>
+    <pubDate>Sat, 19 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Binary Clock</title>
+    <link>/hardware/binary-clock.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/binary-clock.html</guid>
+    <pubDate>Wed, 13 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Keycaps Design Specs</title>
+    <link>/hardware/keycap-specs.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/keycap-specs.html</guid>
+    <pubDate>Sat, 16 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Split keyboard firmware design</title>
+    <link>/hardware/split-keyboard-firmware.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/split-keyboard-firmware.html</guid>
+    <pubDate>Mon, 11 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Implementing firmware level key lock</title>
+    <link>/hardware/key-lock.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/key-lock.html</guid>
+    <pubDate>Fri, 08 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Setting device name in Teensyduino</title>
+    <link>/hardware/custom-device-name-teensyduino.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/custom-device-name-teensyduino.html</guid>
+    <pubDate>Thu, 07 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Arduino's KEY_3 and space character</title>
+    <link>/hardware/arduino-key-3.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/arduino-key-3.html</guid>
+    <pubDate>Wed, 06 Feb 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Packing two bytes into an integer</title>
+    <link>/hardware/packing-two-bytes-into-an-int.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/hardware/packing-two-bytes-into-an-int.html</guid>
+    <pubDate>Tue, 29 Jan 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Debug printing in Haskell</title>
+    <link>/functionalprogramming/debug-print-haskell.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/functionalprogramming/debug-print-haskell.html</guid>
+    <pubDate>Tue, 16 Apr 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Create a Cmd Msg from Msg in Elm</title>
+    <link>/functionalprogramming/msg-to-cmd.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/functionalprogramming/msg-to-cmd.html</guid>
+    <pubDate>Thu, 14 Mar 2019 00:00:00 -0700</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Algebraic Data Type</title>
+    <link>/functionalprogramming/algebraic-data-type.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/functionalprogramming/algebraic-data-type.html</guid>
+    <pubDate>Thu, 07 Mar 2019 00:00:00 -0800</pubDate>
+
+    <description><![CDATA[]]></description>
+  </item>
+  <item>
+    <title>Thermite vs Halogen</title>
+    <link>/functionalprogramming/halogen-vs-thermite.html</link>
+    <author>huy@USLOPMNLM223026.local (Huy Tran)</author>
+    <guid isPermaLink="false">/functionalprogramming/halogen-vs-thermite.html</guid>
+    <pubDate>Wed, 06 Mar 2019 00:00:00 -0800</pubDate>
 
     <description><![CDATA[]]></description>
   </item>
