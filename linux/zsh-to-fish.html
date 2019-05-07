@@ -6,7 +6,7 @@
 <!-- 2019-05-07 Tue 13:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>My Dvorak Journal</title>
+<title>Migrating from ZSH to Fish</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -234,41 +234,110 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content">
-<h1 class="title">My Dvorak Journal</h1>
+<h1 class="title">Migrating from ZSH to Fish</h1>
 <p>
-<b>Feb 15, 2019:</b> I started using Dvorak on my main laptop.
+One of the main reason I switched from ZSH to Fish is the ability of highlighting command output and paginating autocomplete.
 </p>
 
 <p>
-<b>Feb 27, 2019:</b> After two weeks, my WPM is at <code>24 WPM / 91.4% accuracy</code>.
+But what I didn't expect is to rewrite my whole <code>.bash_profile</code> in Fish (Fish is not bash, so it doesn't use Bash syntax, that's why you can't <code>source</code> your <code>.bash_profile</code> file), well, that's not a hard thing. Just need to read the documentation and learn some changes, such as:
+</p>
+
+<pre class="example">
+export ABC="abc"
+# now becomes
+set -x ABC abc
+</pre>
+
+<p>
+If you execute a command during setting value, you need to change the syntax as well:
+</p>
+
+<pre class="example">
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+# now becomes
+set -x RUST_SRC_PATH (rustc --print sysroot)/lib/rustlib/src/rust/src
+</pre>
+
+<p>
+For <code>$PATH</code>, I prefer to use <code>export</code> command separately from <code>set -x</code>, for whatever reason, I like it:
+</p>
+
+<pre class="example">
+export PATH=new/path:$PATH
+# now becomes
+set PATH new/path $PATH
+export PATH
+</pre>
+
+<p>
+For aliases, it's a bit complex, because Fish doesn't have aliases, we now need to write a new function:
+</p>
+
+<pre class="example">
+alias vim="emacs"
+# now becomes
+function vim
+  emacs $argv
+end
+</pre>
+
+<p>
+If you use <code>tmux</code>, you probably have this in your <code>.bash_profile</code> or <code>.bashrc</code>:
+</p>
+
+<pre class="example">
+if [ -z "$TMUX" ]; then
+  if [ -z "$EMACS" ] &amp;&amp; [ -z "$VSCODE" ]; then
+    tmux new
+  fi
+fi
+</pre>
+
+<p>
+Then you need to convert it to Fish, mostly remove the brackets <code>[]</code> and add a <code>test</code> command:
+</p>
+
+<pre class="example">
+if test -z "$TMUX"; then
+  if test -z "$EMACS"; and test -z "$VSCODE"; then
+    tmux new
+  end
+end
+</pre>
+
+<p>
+And if you use <code>nvm</code>, you hit the wall, since it's heavily rely on Bash, but there is a solution, you should install <code>bass</code> to execute Bash command in your Fish config.
 </p>
 
 <p>
-<b>Apr 08, 2019:</b> OK, I made some progress, now at <code>53 WPM / 96.15% accuracy</code>.
+First, install <code>bass</code>:
 </p>
 
-<p>
-<b>Mat 02, 2019:</b> Last record, <code>70 WPM / 98.21% accuracy</code>.
-</p>
+<pre class="example">
+$ git clone https://github.com/edc/bass.git
+$ cd bass
+$ make install
+</pre>
 
 <p>
-I'm switching back to QWERTY today, not because I sucks at Dvorak, I really comfortable typing in Dvorak, and my WPM is improving pretty fast. But there is a big problem that nobody tell me when I pick it up, it's <b>the loneliness</b>.
+Then change your <code>nvm</code> config in <code>.bash_profile</code> into something like:
 </p>
 
-<p>
-Fighting loneliness is hard.
-</p>
+<pre class="example">
+function nvm
+   bass source (brew --prefix nvm)/nvm.sh --no-use ';' nvm $argv
+end
+set -x NVM_DIR ~/.nvm
+nvm use default --silent
+</pre>
 
 <p>
-I'm surrouned by QWERTY user, at work, at home. Nobody laugh at me when they learned that I'm using Dvorak. My wife sometimes being a bit annoying when she have to use my keyboard, but she learned how to switch it back, my collegues sometimes asking me if I forget QWERTY already, when seeing me confusing typing two fingers on their laptop. But nobody trying to stop me.
-</p>
-
-<p>
-It's just me feeling
+And that's it. Happy fishing.
 </p>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019-04-08 Mon 00:00</p>
+<p class="date">Date: 2019-05-07 Tue 00:00</p>
 <p class="author">Author: Huy Tran</p>
 <p class="date">Created: 2019-05-07 Tue 13:06</p>
 <p class="validation"></p>

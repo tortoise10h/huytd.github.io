@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-04-22 Mon 14:41 -->
+<!-- 2019-05-07 Tue 13:06 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Making Rust GUI app with HTML/CSS/JavaScript</title>
@@ -235,12 +235,122 @@ for the JavaScript code in this tag.
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content">
 <h1 class="title">Making Rust GUI app with HTML/CSS/JavaScript</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgc8e54cc">1. Ton of choices, but no best choice</a>
+<ul>
+<li><a href="#org8cbea34">1.1. GTK</a></li>
+<li><a href="#orga4518c7">1.2. Cross-platform native GUI&#x2026; wait, what?</a></li>
+<li><a href="#org52c9dcc">1.3. JavaFx</a></li>
+<li><a href="#orgd01d983">1.4. OpenGL based GUI frameworks</a></li>
+<li><a href="#org4014816">1.5. Qt Framework</a></li>
+<li><a href="#orgba27a46">1.6. Web-based UI</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+In early 2000s, when most of the world still using Windows, creating GUI applications is such a piece of cake. Visual Studio from Microsoft is the dominating tool that you can use to build anything you want, from desktop apps to games.
+</p>
 
+<p>
+Almost 20 years later, now people use a lot of platforms, from Linux to macOS, iOS to Android,&#x2026; if you want to acquire more users, you need to support as many platform as you can. And to save up development cost, you have to consider a cross-platform solution to build your applications.
+</p>
+
+<p>
+But when it comes to cross-platform GUI development, its a painful process, let's take a quick look at current GUI development solution we have. Since this is a post about Rust, I'll just talking about Rust related solutions.
+</p>
+
+<div id="outline-container-orgc8e54cc" class="outline-2">
+<h2 id="orgc8e54cc"><span class="section-number-2">1</span> Ton of choices, but no best choice</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8cbea34" class="outline-3">
+<h3 id="org8cbea34"><span class="section-number-3">1.1</span> GTK</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+On top of the list, the first thing come up when thinking about GUI is GTK, a great platform to build cross platform UI, many great applications built with it, for example, Inkscape or GIMP.
+</p>
+
+<p>
+But, building GTK on macOS is not quite easy, since it required X11, which is no longer included in macOS.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga4518c7" class="outline-3">
+<h3 id="orga4518c7"><span class="section-number-3">1.2</span> Cross-platform native GUI&#x2026; wait, what?</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+I'm talking about <a href="https://github.com/andlabs/libui">libui</a>, or any equivalent (dunno, is there any?). It wraps the native API and provide an interface so you can just write your code once, and run everywhere.
+</p>
+
+<p>
+This approach is great until you realized you want to give your app some unique looks, or heavily customized UI. How do you create a fancy UI like Slack or Atom with libui? It's not impossible but it would take a lot of pain.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org52c9dcc" class="outline-3">
+<h3 id="org52c9dcc"><span class="section-number-3">1.3</span> JavaFx</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Speaking of building fancy apps, JavaFx is a good platform for Java developers, with unlimited ability to customize the UI. The deal breaker for me is you have to ship your app with JRE. Not to mention that we are using Rust here.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd01d983" class="outline-3">
+<h3 id="orgd01d983"><span class="section-number-3">1.4</span> OpenGL based GUI frameworks</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Here come OpenGL, you build your app as if it's a game. <a href="https://github.com/jwilm/alacritty">Alacritty</a> is a famous terminal emulator using this approach.
+</p>
+
+<p>
+In Rust, there's <a href="https://github.com/PistonDevelopers/conrod">conrod</a>, a very good library to build OpenGL-based UI. With a lot of widget, and you can easily create your own customized components. Another approach is <a href="https://github.com/ocornut/imgui">ImGui</a>, which is pretty powerful and has been around quite a long time.
+</p>
+
+<p>
+But power consumption is one of the thing you need to consider. Also, since it's a custom rendered UI in a graphical environment, you will feel the pain when you have to deal with stuff like input methods,&#x2026;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4014816" class="outline-3">
+<h3 id="org4014816"><span class="section-number-3">1.5</span> Qt Framework</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Probably the best approach today. Based on C++, and used in many great applications like Tesla's dashboard UI (well, I don't have a Tesla so I did not see it on my own), or <a href="https://github.com/albertlauncher/albert">albert</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgba27a46" class="outline-3">
+<h3 id="orgba27a46"><span class="section-number-3">1.6</span> Web-based UI</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Finally, the least appreciated way, but the easiest, it just works, and very easy to customize the UI using HTML/CSS.
+</p>
+
+<p>
+Without using Electron, you can still use web-based UI for your applications. It's just an old techniques, that you will ship your app with a small portion of code to add a native webview component and load up your frontend code.
+</p>
+
+<p>
+I made a [tiny application using this technique](<a href="https://github.com/huytd/kanban-app">https://github.com/huytd/kanban-app</a>), with Elm for the web UI and Rust for the desktop client, the total bundle size is just 800KB, comparing to 100MB that you will have to ship with Electron.
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-19 Sat 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-04-22 Mon 14:41</p>
+<p class="date">Created: 2019-05-07 Tue 13:06</p>
 <p class="validation"></p>
 </div>
 </body>
