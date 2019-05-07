@@ -1016,6 +1016,10 @@ pre {
     display: inline-block;
 }
 
+p > pre {
+    margin-top: 0;
+}
+
 strong,
 b {
     font-weight: 600;
