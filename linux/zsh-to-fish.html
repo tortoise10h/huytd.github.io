@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-05-07 Tue 13:06 -->
+<!-- 2019-05-07 Tue 22:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Migrating from ZSH to Fish</title>
@@ -236,7 +236,7 @@ for the JavaScript code in this tag.
 </div><div id="content">
 <h1 class="title">Migrating from ZSH to Fish</h1>
 <p>
-One of the main reason I switched from ZSH to Fish is the ability of highlighting command output and paginating autocomplete.
+One of the main reason I switched from ZSH to Fish is the ability of highlighting command output and the relative small autocomplete, which don't lag your computer down when you have a few hundreds results like <code>zsh</code>.
 </p>
 
 <p>
@@ -271,15 +271,13 @@ export PATH
 </pre>
 
 <p>
-For aliases, it's a bit complex, because Fish doesn't have aliases, we now need to write a new function:
+For aliases, it's almost the same:
 </p>
 
 <pre class="example">
 alias vim="emacs"
 # now becomes
-function vim
-  emacs $argv
-end
+alias vim "emacs"
 </pre>
 
 <p>
@@ -299,47 +297,38 @@ Then you need to convert it to Fish, mostly remove the brackets <code>[]</code> 
 </p>
 
 <pre class="example">
-if test -z "$TMUX"; then
-  if test -z "$EMACS"; and test -z "$VSCODE"; then
+if test -z "$TMUX";
+  if test -z "$EMACS"; and test -z "$VSCODE";
     tmux new
   end
 end
 </pre>
 
 <p>
-And if you use <code>nvm</code>, you hit the wall, since it's heavily rely on Bash, but there is a solution, you should install <code>bass</code> to execute Bash command in your Fish config.
+And if you use <code>nvm</code>, you hit the wall, since it's heavily rely on Bash, there are some solutions such as installing <code>bass</code> to be able to run Bash scripts in your Fish config, but even if you go that route, initializing <code>nvm</code> still slowing down your shell startup time.
 </p>
 
 <p>
-First, install <code>bass</code>:
+A better solution is using <a href="https://github.com/brigand/fast-nvm-fish">fash-nvm-fish</a>, it's a wrapper around <code>nvm</code>, which doesn't required to parse the env config everytime you start your shell, so it's fast. The installing process is simple, you can just follow the instruction on the Github repo. I'll not copy it here.
 </p>
 
-<pre class="example">
-$ git clone https://github.com/edc/bass.git
-$ cd bass
-$ make install
-</pre>
-
 <p>
-Then change your <code>nvm</code> config in <code>.bash_profile</code> into something like:
+If your <code>nvm</code> isn't in the default directory, which is <code>/root/.nvm/</code>, you need to set the <code>NVM_DIR</code> variable, before calling <code>nvm</code>, in my case, it is:
 </p>
 
 <pre class="example">
-function nvm
-   bass source (brew --prefix nvm)/nvm.sh --no-use ';' nvm $argv
-end
-set -x NVM_DIR ~/.nvm
-nvm use default --silent
+set -gx NVM_DIR /usr/local/opt/nvm/
+nvm use 9 --default
 </pre>
 
 <p>
-And that's it. Happy fishing.
+That's it, just a few steps. Happy fishing.
 </p>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2019-05-07 Tue 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-05-07 Tue 13:06</p>
+<p class="date">Created: 2019-05-07 Tue 22:57</p>
 <p class="validation"></p>
 </div>
 </body>
