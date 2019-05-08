@@ -1008,16 +1008,21 @@ p {
 pre {
     border: none;
     box-shadow: none;
-    padding: 0 1.5rem;
-    margin: 1.0rem 0.5rem;
+    padding: 10px;
+    margin: 0 0 1.15rem;
     font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     font-size: 0.85rem;
     line-height: 1.15rem;
     display: inline-block;
+    background: #fafafa;
 }
 
-p > pre {
-    margin-top: 0;
+p code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    color: #333;
+    font-size: 0.9em;
+    background: #f6f6f6;
+    padding: 2px 4px;
 }
 
 strong,
