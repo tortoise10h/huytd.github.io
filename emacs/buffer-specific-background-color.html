@@ -6,7 +6,7 @@
 <!-- 2019-05-12 Sun 23:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Unconciously wasting CPU by forgetting tsconfig.json</title>
+<title>Buffer-specific background color</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -234,55 +234,33 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content">
-<h1 class="title">Unconciously wasting CPU by forgetting tsconfig.json</h1>
+<h1 class="title">Buffer-specific background color</h1>
 <p>
-Since the beginning of this week, I configured my Emacs to recognize JS files as TypeScript, and with the help of <code>tide</code>, I'm now able to have my Emacs nagging about returning string for a boolean function when I write my Backbone code.
-</p>
-
-<p>
-But soon enough, I encountered a problem. Everytime I switch to another JS file, Emacs seems to get slower. Curiously, I run <code>M-x tide-list-servers</code> and holy cow, there are a lot of <code>tsserver</code> instance running, each of them has their own project, which is a folder that contains the file I'm openning.
-</p>
-
-<p>
-The main reason for this is because I don't have <code>tsconfig.json</code> added in the root of my project, so <code>tide</code> can't determine where is the project root (which is stupid, why don't you pick the place where we have <code>.git</code>?), so it create a new <code>tsserver</code> instance, assuming I'm openning a new project everytime.
-</p>
-
-<p>
-To fix this problem, just create a <code>tsconfig.json</code> file at the project root, I put something like this for the content, general enough to not depends on anything:
+If you want to set a different background color for a specific buffer, maybe, of a specific mode, you can add a hook for that mode and do something like this:
 </p>
 
 <pre class="example">
-{
-  "compilerOptions": {
-
-    "target": "es5",
-    "module": "commonjs",         
-    "lib": [],                    
-    "allowJs": true,              
-    "checkJs": true,              
-    "declaration": true,          
-    "sourceMap": true,            
-    "outFile": "./",              
-    "outDir": "./",               
-    "rootDir": "./",              
-    "removeComments": true,       
-    "noEmit": true,               
-    "importHelpers": true,        
-    "downlevelIteration": true,   
-    "isolatedModules": true,      
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts"
-  ]
-}
+(add-hook 'neotree-mode-hook (lambda ()
+                                 (setq buffer-face-mode-face `(:background "#211C1C"))
+                                 (buffer-face-mode 1)))
 </pre>
+
+<p>
+You can also toggle <code>linum-mode</code> or set the value for <code>left-fringe-width</code>, <code>right-fringe-width</code>, they're only affects the current buffer.
+</p>
+
+<p>
+The following screenshot is the example of my setup, changing the background color for <code>neotree-mode</code> and <code>term-mode</code> to have a fancy look:
+</p>
+
+
+<div class="figure">
+<p><img src="./img/custom-buffer-color.png" alt="custom-buffer-color.png" class="full-width round" width="800px" />
+</p>
+</div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019-05-03 Fri 00:00</p>
+<p class="date">Date: 2019-05-12 Sun 00:00</p>
 <p class="author">Author: Huy Tran</p>
 <p class="date">Created: 2019-05-12 Sun 23:50</p>
 <p class="validation"></p>

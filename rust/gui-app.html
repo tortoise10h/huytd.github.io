@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-05-07 Tue 13:06 -->
+<!-- 2019-05-12 Sun 23:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Making Rust GUI app with HTML/CSS/JavaScript</title>
@@ -333,7 +333,11 @@ Probably the best approach today. Based on C++, and used in many great applicati
 <h3 id="orgba27a46"><span class="section-number-3">1.6</span> Web-based UI</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
-Finally, the least appreciated way, but the easiest, it just works, and very easy to customize the UI using HTML/CSS.
+Finally, the least appreciated way, but the easiest, it just works, and very easy to customize the UI using HTML/CSS. Sound like Electron huh?
+</p>
+
+<p>
+Apparently, Electron is one of the most popular choice for this approach, it's very easy to use, but it come with so many flaws, from security to memory/battery consumption, to unreasonable large bundle size,&#x2026; but it also come with many helpful features like auto updating,&#x2026; I personally don't like it, mostly because my bad experience with Slack and VSCode, both are very laggy and speed up my computer's fan to a ridiculus loudy state.
 </p>
 
 <p>
@@ -341,7 +345,7 @@ Without using Electron, you can still use web-based UI for your applications. It
 </p>
 
 <p>
-I made a [tiny application using this technique](<a href="https://github.com/huytd/kanban-app">https://github.com/huytd/kanban-app</a>), with Elm for the web UI and Rust for the desktop client, the total bundle size is just 800KB, comparing to 100MB that you will have to ship with Electron.
+I made a <a href="https://github.com/huytd/kanban-app">tiny application using this technique</a>, with Elm for the web UI and Rust for the desktop client, the total bundle size is just 800KB, comparing to 100MB that you will have to ship with Electron.
 </p>
 </div>
 </div>
@@ -350,7 +354,7 @@ I made a [tiny application using this technique](<a href="https://github.com/huy
 <div id="postamble" class="status">
 <p class="date">Date: 2019-01-19 Sat 00:00</p>
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2019-05-07 Tue 13:06</p>
+<p class="date">Created: 2019-05-12 Sun 23:50</p>
 <p class="validation"></p>
 </div>
 </body>
