@@ -6,7 +6,7 @@
 <!-- 2019-06-19 Wed 01:22 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Migrating from ZSH to Fish</title>
+<title>Idea: A tool for work session and timeboxing</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Huy Tran" />
 <style type="text/css">
@@ -234,114 +234,34 @@ for the JavaScript code in this tag.
  |
  <a accesskey="H" href="/"> HOME </a>
 </div><div id="content">
-<h1 class="title">Migrating from ZSH to Fish</h1>
+<h1 class="title">Idea: A tool for work session and timeboxing</h1>
 <p>
-One of the main reason I switched from ZSH to Fish is the ability of
-highlighting command output and the relative small autocomplete, which don't lag
-your computer down when you have a few hundreds results like <code>zsh</code>.
+I've been looking for a tool like this for quite a long time, a tool
+that we could:
 </p>
 
-<p>
-But what I didn't expect is to rewrite my whole <code>.bash_profile</code> in Fish (Fish is
-not bash, so it doesn't use Bash syntax, that's why you can't <code>source</code> your
-<code>.bash_profile</code> file), well, that's not a hard thing. Just need to read the
-documentation and learn some changes, such as:
-</p>
-
-<pre class="example">
-export ABC="abc"
-# now becomes
-set -x ABC abc
-</pre>
-
-<p>
-If you execute a command during setting value, you need to change the syntax as
-well:
-</p>
-
-<pre class="example">
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-# now becomes
-set -x RUST_SRC_PATH (rustc --print sysroot)/lib/rustlib/src/rust/src
-</pre>
+<ol class="org-ol">
+<li><b>Set the working session:</b>
+Because you don't want to overwork and forgot to drink water, or
+talk to your family member (if you are WFH), it's good to set a
+working session for half an hour or maybe 2 hours, after that time
+you can get your ass up and talk to someone.</li>
+<li><b>Timeboxing with notifications:</b>
+None of the tool I found can easily do this, the closest one is
+using Emacs agenda with some extra config to throw a notification
+maybe 5 minutes before the task begin, and 5 mintues before the
+task end (deadline).</li>
+<li><b>Keep track of your work:</b>
+It should have the ability to let you go back, see what you have
+done and maybe produce a diagram/chart to show your productivity.</li>
+</ol>
 
 <p>
-For <code>$PATH</code>, I prefer to use <code>export</code> command separately from <code>set -x</code>, for whatever
-reason, I like it:
-</p>
-
-<pre class="example">
-export PATH=new/path:$PATH
-# now becomes
-set PATH new/path $PATH
-export PATH
-</pre>
-
-<p>
-For aliases, it's almost the same:
-</p>
-
-<pre class="example">
-alias vim="emacs"
-# now becomes
-alias vim "emacs"
-</pre>
-
-<p>
-If you use <code>tmux</code>, you probably have this in your <code>.bash_profile</code> or <code>.bashrc</code>:
-</p>
-
-<pre class="example">
-if [ -z "$TMUX" ]; then
-  if [ -z "$EMACS" ] &amp;&amp; [ -z "$VSCODE" ]; then
-    tmux new
-  fi
-fi
-</pre>
-
-<p>
-Then you need to convert it to Fish, mostly remove the brackets <code>[]</code> and add a
-<code>test</code> command:
-</p>
-
-<pre class="example">
-if test -z "$TMUX";
-  if test -z "$EMACS"; and test -z "$VSCODE";
-    tmux new
-  end
-end
-</pre>
-
-<p>
-And if you use <code>nvm</code>, you hit the wall, since it's heavily rely on Bash, there are
-some solutions such as installing <code>bass</code> to be able to run Bash scripts in your
-Fish config, but even if you go that route, initializing <code>nvm</code> still slowing down
-your shell startup time.
-</p>
-
-<p>
-A better solution is using <a href="https://github.com/brigand/fast-nvm-fish">fash-nvm-fish</a>, it's a wrapper around <code>nvm</code>, which
-doesn't required to parse the env config everytime you start your shell, so it's
-fast. The installing process is simple, you can just follow the instruction on
-the Github repo. I'll not copy it here.
-</p>
-
-<p>
-If your <code>nvm</code> isn't in the default directory, which is <code>/root/.nvm/</code>, you need to
-set the <code>NVM_DIR</code> variable, before calling <code>nvm</code>, in my case, it is:
-</p>
-
-<pre class="example">
-set -gx NVM_DIR /usr/local/opt/nvm/
-nvm use 9 --default
-</pre>
-
-<p>
-That's it, just a few steps. Happy fishing.
+Should I config my Emacs to do so, or roll my own tool?
 </p>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2019-05-07 Tue 00:00</p>
+<p class="date">Date: 2019-06-02 Sun 00:00</p>
 <p class="author">Author: Huy Tran</p>
 <p class="date">Created: 2019-06-19 Wed 01:22</p>
 <p class="validation"></p>
