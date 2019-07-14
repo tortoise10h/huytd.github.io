@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Space+Mono&display=swap');
 
 html {
     font-size: 14px
@@ -13,7 +13,7 @@ body {
     font-size: 1rem;
     line-height: 1.5rem;
     margin: 0;
-    font-family: Verdana, Geneva, sans-serif;
+    font-family: "Open Sans", Verdana, Geneva, sans-serif;
     word-wrap: break-word
 }
 
@@ -1010,7 +1010,7 @@ pre {
     box-shadow: none;
     padding: 10px;
     margin: 0 0 1.15rem;
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-family: "Space Mono", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     font-size: 0.85rem;
     line-height: 1.15rem;
     display: inline-block;
@@ -1018,7 +1018,7 @@ pre {
 }
 
 p code {
-    font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-family: "Space Mono", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     color: #333;
     font-size: 0.9em;
     background: #f6f6f6;
@@ -1036,6 +1036,7 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: "Space Mono", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
     font-weight: 500;
 }
 
