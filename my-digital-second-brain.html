@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2020-02-08 Sat 11:16 -->
+<!-- 2020-02-08 Sat 18:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>My digital second brain</title>
@@ -250,7 +250,8 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orge371e91">1. What kind of information does my system handle?</a></li>
 <li><a href="#org1fc0a58">2. Write and forget</a></li>
-<li><a href="#orgcb56235">3. OrgMode</a></li>
+<li><a href="#org8301ea8">3. Emacs and Dropbox is all you need</a></li>
+<li><a href="#org19be2ad">4. What's my setup?</a></li>
 </ul>
 </div>
 </div>
@@ -318,8 +319,8 @@ once you found it.
 </div>
 </div>
 
-<div id="outline-container-orgcb56235" class="outline-2">
-<h2 id="orgcb56235"><span class="section-number-2">3</span> OrgMode</h2>
+<div id="outline-container-org8301ea8" class="outline-2">
+<h2 id="org8301ea8"><span class="section-number-2">3</span> Emacs and Dropbox is all you need</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 OrgMode is a very powerful document processing mode for Emacs that
@@ -347,12 +348,81 @@ put everything under a synced Dropbox folder, they're quite good at
 data syncing. My current setup including 2 laptops and 1 mobile phone,
 it worked very well and never see any data loss or conflict.
 </p>
+
+<p>
+Next, let's see how the setup look like.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org19be2ad" class="outline-2">
+<h2 id="org19be2ad"><span class="section-number-2">4</span> What's my setup?</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+First, the folder structure:
+</p>
+
+<p>
+I have a folder called <code>notes</code> on my Dropbox, so I synced it to every
+computer I'm using, put it under <code>~/Dropbox/notes/</code>.
+</p>
+
+<p>
+Inside this folder, I keep all the note files at the same level,
+there's no need for any subfolder, because later, you can search
+everything with <code>deft</code>.
+</p>
+
+<pre class="example">
+/root/Dropbox/notes
+  ├── 2015-08-21.journal.org
+  ├── 2015-08-24.journal.org
+  ├── 2015-08-28.journal.org
+  ├── 2015-08-29.journal.org
+  ├── 2015-08-30.journal.org
+  ├── 2015-09-20.journal.org
+  ├── 2015-10-05.journal.org
+  ├── 2015-10-08.journal.org
+  ├── ...
+</pre>
+
+<p>
+Next, this is how I configure Emacs and <code>deft</code> to make it read all the notes from
+<code>~/Dropbox/notes/</code>:
+</p>
+
+<pre class="example">
+(use-package deft
+  :ensure t
+  :config
+  (setq deft-file-naming-rules
+        '((noslash . "-")
+          (nospace . "-")
+          (case-fn . downcase)))
+  (setq deft-directory "/root/Dropbox/notes/"
+        deft-recursive t
+        deft-default-extension "org"
+        deft-text-mode 'org-mode
+        deft-use-filter-string-for-filename t)
+  (global-set-key (kbd "C-c d") 'deft))
+</pre>
+
+<p>
+With the <code>deft-file-naming-rules</code> option like above, <code>deft</code> will create a
+new note file based on what you typed, with all whitespace character
+replaced by a hypen, <code>it-will-look-like-this.org</code>
+</p>
+
+<p>
+On my phone, I installed <code>beorg</code> app and let it sync with the <code>notes</code>
+folder on Dropbox.
+</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Huy Tran</p>
-<p class="date">Created: 2020-02-08 Sat 11:16</p>
+<p class="date">Created: 2020-02-08 Sat 18:59</p>
 </div>
 </body>
 </html>
