@@ -1064,3 +1064,16 @@ h6 {
 h2 { font-size: 1.2rem; }
 h3 { font-size: 1.1rem; }
 h4, h5, h6 { font-size: 1.05rem; }
+
+#content.homepage {
+    max-width: 42rem;
+}
+
+.homepage ul {
+    list-style: none;
+    padding: 0;
+}
+
+.homepage * {
+    font-family: "Space Mono", Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}

@@ -4,7 +4,8 @@ do
   if [[ $file =~ .*index.html.* ]]; then
    echo ""
   else
-    echo "<li><a href='$file'>$file</a></li>"
+    size=$(du -h $file | awk '{ print $1 }')
+    echo "<li>-rw-r--r-- huy $size &nbsp; <a href='$file'>$file</a></li>"
   fi
 done
 echo "</ul></div>"
